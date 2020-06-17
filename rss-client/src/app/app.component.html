@@ -1,1 +1,21 @@
-<header [config] = "headerConfig"></header>
+<header [config]="headerConfig"></header>
+<div class="bg-secondary">
+  <div class="container">
+    <div class="row" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">{{ rootPage }}</a>
+        </li>
+        <li
+          id="breadCrumbNav"
+          class="breadcrumb-item active"
+          *ngFor="let breadCrumb of breadCrumbs"
+          aria-current="page"
+        >
+          <a href="#">{{ breadCrumb }}</a>
+        </li>
+      </ol>
+      <div class="col-1 offset-9">{{ rootConfig.userType }}</div>
+    </div>
+  </div>
+</div>
