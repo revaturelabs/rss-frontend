@@ -11,6 +11,11 @@ import { QuizPageComponent } from './Quiz/components/quiz-page/quiz-page.compone
 import { QuizQuesitonComponent } from './Quiz/components/quiz-quesiton/quiz-quesiton.component';
 import { ProfilePageComponent } from './Account/components/profile-page/profile-page.component';
 import { HeaderComponent } from './Common/header/header.component';
+import { EarnpointsOverviewPageComponent } from './Earnpoints/components/earnpoints-overview-page/earnpoints-overview-page.component';
+import { AccountSettingsPageComponent } from './Account/components/account-settings-page/account-settings-page.component';
+import { QuizInterimPageComponent } from './Quiz/components/quiz-interim-page/quiz-interim-page.component';
+import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
+import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { HeaderComponent } from './Common/header/header.component';
     QuizPageComponent,
     QuizQuesitonComponent,
     ProfilePageComponent,
-    HeaderComponent
+    HeaderComponent,
+    EarnpointsOverviewPageComponent,
+    AccountSettingsPageComponent,
+    QuizInterimPageComponent,
+    LandingPageComponent,
+    IndividualQuizPageComponent
   ],
   imports: [
     BrowserModule,
