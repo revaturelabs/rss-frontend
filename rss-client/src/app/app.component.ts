@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rss-client';
+  headerConfig = {
+    rootPage : "home",
+    breadCrumbs : ["a","b","c"]
+  }
 }
+

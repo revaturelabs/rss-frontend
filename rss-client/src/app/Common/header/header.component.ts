@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'header',
@@ -10,6 +10,8 @@ export class HeaderComponent implements OnInit {
   /*breadcrumbs -------------------------->user-type
     revature user
   */
+ @Input() config;
+ 
   rootPage;
   breadCrumbs = ["a","b","c"];
   constructor() { }
