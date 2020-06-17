@@ -10,6 +10,7 @@ import { AccountPageComponent } from './Account/components/account-page/account-
 import { QuizPageComponent } from './Quiz/components/quiz-page/quiz-page.component';
 import { QuizQuesitonComponent } from './Quiz/components/quiz-quesiton/quiz-quesiton.component';
 import { ProfilePageComponent } from './Account/components/profile-page/profile-page.component';
+import { HeaderComponent } from './Common/header/header.component';
 
 @NgModule({
   declarations: [
@@ -17,15 +18,15 @@ import { ProfilePageComponent } from './Account/components/profile-page/profile-
     AccountPageComponent,
     QuizPageComponent,
     QuizQuesitonComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule,
-    NgModel
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
