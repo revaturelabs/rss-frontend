@@ -1,0 +1,33 @@
+<nav aria-label="breadcrumb">
+  <div class="row">
+    <ol>
+      <li class="nav-item">
+        <a class="nav-link" href="#"
+          ><img src="" alt="Revature Swagg Logo"
+        /></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Shop</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Earn Points</a>
+      </li>
+    </ol>
+  </div>
+
+  <div class="row">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Home</a>
+      </li>
+      <li
+        id="breadCrumbNav"
+        class="breadcrumb-item active"
+        *ngFor="let breadCrumb of breadCrumbs; index as i"
+        aria-current="page"
+      >
+        <a href="#"> {{ breadCrumb }}</a>
+      </li>
+    </ol>
+  </div>
+</nav>
