@@ -1,5 +1,7 @@
 export interface TestQuizPage {
+  creatorEmail: string;
   id: number;
-  quizName: string;
+  subject: string;
+  topic: string;
   description: string;
 }
