@@ -1,5 +1,7 @@
 import { ImageService } from './../../../services/image.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
   selector: 'individual-quiz-page',
@@ -15,7 +17,13 @@ export class IndividualQuizPageComponent implements OnInit {
   updateprogress(status) {
     this.testProgress = status;
   }
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private quizService: QuizService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //this pulls in the id passed from the quiz-page
+    this.config = this.quizService.getSampleQuiz(this.route.snapshot.params.id);
+  }
 }
