@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { QuizPageService } from 'src/app/Test/Quiz/quiz-page.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { ImageService } from 'src/app/services/image.service';
+
 
 @Component({
   selector: 'quiz-page',
@@ -7,6 +9,7 @@ import { QuizPageService } from 'src/app/Test/Quiz/quiz-page.service';
   styleUrls: ['./quiz-page.component.css'],
 })
 export class QuizPageComponent implements OnInit {
+
   constructor(private testservice: QuizPageService) {
     this.quizData = this.testservice.getQuizData();
   }
@@ -16,4 +19,5 @@ export class QuizPageComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.quizData);
   }
+
 }

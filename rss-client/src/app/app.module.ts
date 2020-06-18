@@ -15,6 +15,9 @@ import { EarnpointsOverviewPageComponent } from './Earnpoints/components/earnpoi
 import { AccountSettingsPageComponent } from './Account/components/account-settings-page/account-settings-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
 import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
+import { PreTestComponent } from './Quiz/components/pre-test/pre-test.component';
+import { TestInProgressComponent } from './Quiz/components/test-in-progress/test-in-progress.component';
+import { PostTestComponent } from './Quiz/components/post-test/post-test.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-p
     LandingPageComponent,
     IndividualQuizPageComponent,
     FilterPipe,
+    PreTestComponent,
+    TestInProgressComponent,
+    PostTestComponent,
   ],
   imports: [
     BrowserModule,
