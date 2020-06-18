@@ -1,1 +1,7 @@
-<p>quiz-page works!</p>
+<input [(ngModel)]="searchText" placeholder="search text goes here" />
+<ol>
+  <li *ngFor="let quizdata of quizData | filter: 'quizName':searchText">
+    <a href="#">{{ quizdata.quizName }}</a>
+    : {{ quizdata.description }}
+  </li>
+</ol>
