@@ -1,4 +1,7 @@
+<!-- Below is the search function that you can search through the list of quiz names to limit the ngFor to displaying only what you search for -->
 <input [(ngModel)]="searchText" placeholder="search text goes here" />
+
+<!--This is the list of quizzes -->
 <ol>
   <li *ngFor="let quizdata of quizData | filter: 'quizName':searchText">
     <a href="#">{{ quizdata.quizName }}</a>
