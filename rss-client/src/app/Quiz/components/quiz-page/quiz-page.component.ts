@@ -1,5 +1,7 @@
+import { QuizPageService } from 'src/app/Test/Quiz/quiz-page.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ImageService } from 'src/app/services/image.service';
+
 
 @Component({
   selector: 'quiz-page',
@@ -7,7 +9,15 @@ import { ImageService } from 'src/app/services/image.service';
   styleUrls: ['./quiz-page.component.css'],
 })
 export class QuizPageComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(private testservice: QuizPageService) {
+    this.quizData = this.testservice.getQuizData();
+  }
+  searchText: string;
+  quizData;
+
+  ngOnInit(): void {
+    console.log(this.quizData);
+  }
+
 }
