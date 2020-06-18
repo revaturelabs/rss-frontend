@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
-  selector: 'app-quiz-page',
+  selector: 'quiz-page',
   templateUrl: './quiz-page.component.html',
-  styleUrls: ['./quiz-page.component.css']
+  styleUrls: ['./quiz-page.component.css'],
 })
 export class QuizPageComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

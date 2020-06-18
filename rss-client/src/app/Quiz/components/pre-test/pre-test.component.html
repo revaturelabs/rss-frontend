@@ -1,0 +1,16 @@
+<!-- topic picture -->
+<img [src]="subjectPicture" width="25px" height="25px" alt="subjectPicture" />
+<!-- I believe the topic is the quiz name -->
+{{ config.topic }}
+<!-- Quiz description -->
+{{ config.description }}
+<!-- Quiz Instruction from an array of instructions-->
+<div *ngFor="let item of instructions">
+  {{ item }}
+</div>
+<!-- Possible points available -->
+{{ config.availablePoints }}
+<!-- Quiz Attempt Number -->
+{{ config.quizAttempts }}
+<!-- Start Quiz -->
+<button (click)="onEvent()">Start Quiz</button>

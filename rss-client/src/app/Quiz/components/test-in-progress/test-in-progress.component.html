@@ -1,0 +1,26 @@
+<!-- numbered buttons coorisponding to questions -->
+<div *ngFor="let question of config.questions; let i = index">
+  <button [class.bg-info]="isMarkedOff(i)" (click)="onFocus(i)">
+    {{ i + 1 }}
+  </button>
+</div>
+<!-- Current question -->
+{{ config.questions[index].question }} <br />
+<!-- Current multiple choice question options -->
+<div *ngFor="let item of config.questions[index].options; let i = index">
+  <input
+    (change)="onChange(index, i + 1)"
+    [checked]="isChecked(index, i + 1)"
+    type="radio"
+    [id]="item"
+    [name]="index"
+  />
+  <label [for]="item">{{ item }}</label>
+</div>
+<!-- Navigating buttons between questions -->
+<button (click)="navigate('first')">Fisrt</button>
+<button (click)="navigate('previous')">Previous</button>
+<button (click)="navigate('next')">Next</button>
+<button (click)="navigate('last')">Last</button>
+<!-- Submit buttons -->
+<button (click)="onSubmit()">Submit</button>

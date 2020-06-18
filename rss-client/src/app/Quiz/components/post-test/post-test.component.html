@@ -1,0 +1,10 @@
+<!-- Number correctly answered -->
+{{ config.numberCorrect }}
+<!-- Total questions in test for  correct / possible -->
+{{ config.questions.length }}
+<!-- Points earned from this attempt -->
+{{ config.pointsAwarded }}
+<!-- Back button -->
+<button (click)="onRetake()">Retake Test</button>
+<!-- Incomplete back button, waiting on Router to be set up -->
+<button (click)="onBack()">Back</button>
