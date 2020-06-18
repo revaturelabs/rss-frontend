@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccountPageComponent } from './Account/components/account-page/account-page.component';
 import { QuizPageComponent } from './Quiz/components/quiz-page/quiz-page.component';
-import { ProfilePageComponent } from './Account/components/profile-page/profile-page.component';
 import { HeaderComponent } from './Common/header/header.component';
 import { EarnpointsOverviewPageComponent } from './Earnpoints/components/earnpoints-overview-page/earnpoints-overview-page.component';
 import { AccountSettingsPageComponent } from './Account/components/account-settings-page/account-settings-page.component';
@@ -24,7 +23,6 @@ import { PostTestComponent } from './Quiz/components/post-test/post-test.compone
     AppComponent,
     AccountPageComponent,
     QuizPageComponent,
-    ProfilePageComponent,
     HeaderComponent,
     EarnpointsOverviewPageComponent,
     AccountSettingsPageComponent,
@@ -46,4 +44,4 @@ import { PostTestComponent } from './Quiz/components/post-test/post-test.compone
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
