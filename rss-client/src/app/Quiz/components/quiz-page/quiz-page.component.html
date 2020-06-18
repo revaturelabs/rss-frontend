@@ -3,9 +3,9 @@
 
 <!--This is the list of quizzes -->
 <ol>
-  <li *ngFor="let quizdata of quizData | filter: 'quizName':searchText">
-    <a href="#">{{ quizdata.quizName }}</a>
+  <li *ngFor="let quizdata of quizData | filter: 'topic':searchText">
+    {{ quizdata.subject }}
+    <a routerLink="/quizzes/{{ quizdata.id }}">{{ quizdata.topic }}</a>
     : {{ quizdata.description }}
   </li>
 </ol>
-

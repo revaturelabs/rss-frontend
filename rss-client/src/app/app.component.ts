@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   constructor(private quizService: QuizService) {}
   ngOnInit(): void {
-    this.quizConfig = this.quizService.getSampleQuiz();
+    // this.quizConfig = this.quizService.getSampleQuiz();
   }
   title = 'rss-client';
   headerConfig = {
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   rootConfig = {
     userType: 'Employee', //take this info from a service gathering the user info
   };
+  quizPageConfig;
   quizConfig;
   rootPage = 'Home';
   breadCrumbs = ['a', 'b', 'c']; //bradcrumbs
