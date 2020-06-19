@@ -1,7 +1,44 @@
+/* ...............generics................. */
+
+/* get rid of some default gray lines on table rows from bootstrap */
+.table>tr>td,
+.table>tr,th,
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    border-top: 0
+}
+
+.btn {
+    margin: 2px;
+    margin-bottom: 4px;
+    margin-top: 6px;
+}
+
+/* .................general layout....................... */
+
 .main-cart-container {
     min-height: 100vh;
     /* border: 1px solid red; */
 }
+
+@media screen and (min-width: 770px) {
+    .center-divide {
+        border-right: 2px solid #474C55;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .center-divide {
+        border-bottom: 2px solid #474C55;
+    }
+}
+
+
+
 
 .checkout-div {
 }
@@ -29,12 +66,11 @@
     box-shadow: 2px 2px 8px #474C55;
 }
 
-.btn {
-    margin: 2px;
-}
+
 
 .quantity-button {
     width: 100%;
+    margin-right: 4px;
 }
 
 .quantity-input {
@@ -80,4 +116,13 @@
 
 .user-points {
     border-bottom: 1px solid #474C55;
+}
+
+.points-div {
+    padding: 4px;
+    margin: 4px;
+}
+
+#pointsCard {
+    padding: 6px;
 }
