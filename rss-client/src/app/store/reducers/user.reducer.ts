@@ -2,41 +2,32 @@ import { User } from '../../interfaces/user';
 import * as fromUsers from '../actions/users.actions';
 
 export interface UserState {
-  data: User[];
-  loaded: boolean;
-  loading: boolean;
+  user?: User;
+  isLoggedIn: boolean;
 }
 
-export const initilState: UserState = {
-  data: [],
-  loaded: false,
-  loading: false,
+export const initialState: UserState = {
+  user: null,
+  isLoggedIn: false,
 };
 
 export function reducer(
-  state = initilState,
+  state = initialState,
   action: fromUsers.UserAction
 ): UserState {
   switch (action.type) {
-    case fromUsers.LOAD_USERS: {
+    case fromUsers.LOGIN_USER: {
       return {
         ...state,
-        loading: true,
+        user: action.payload,
+        isLoggedIn: true,
       };
     }
-
-    case fromUsers.LOAD_USERS_SUCCESS: {
+    case fromUsers.LOGOUT_USER: {
       return {
         ...state,
-        loading: false,
-        loaded: true,
-      };
-    }
-    case fromUsers.LOAD_USERS_FAIL: {
-      return {
-        ...state,
-        loading: false,
-        loaded: false,
+        user: null,
+        isLoggedIn: false,
       };
     }
   }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-//import { ACTION_LOGIN } from
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { LOGIN_USER } from 'src/app/store/actions/users.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +22,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: '',
+      email: '',
       password: '',
     });
   }
@@ -33,11 +33,11 @@ export class LoginPageComponent implements OnInit {
     this.userService.login(formValue).subscribe((res) => {
       this.user = res;
       console.log(res);
-      // this.userService.updateState({
-      //   action: ACTION_LOGIN,
-      //   payload: this.user,
-      // });
-      this.router.navigate(['']);
+      this.userService.updateState({
+        action: LOGIN_USER,
+        payload: this.user,
+      });
+      this.router.navigate(['/account/settings']);
     });
   }
 }
