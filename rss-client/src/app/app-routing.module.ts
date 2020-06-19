@@ -7,13 +7,13 @@ import { AccountSettingsPageComponent } from './Account/components/account-setti
 import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
 
-
 const routes: Routes = [
+  { path: '', component: LandingPageComponent },
   { path: 'account/dashboard', component: AccountPageComponent },
   { path: 'earnpoints', component: EarnpointsOverviewPageComponent },
   { path: 'quizzes', component: QuizPageComponent },
   { path: 'quizzes/:id', component: IndividualQuizPageComponent },
-  { path: 'account/settings', component: AccountSettingsPageComponent }
+  { path: 'account/settings', component: AccountSettingsPageComponent },
 ];
 
 @NgModule({
