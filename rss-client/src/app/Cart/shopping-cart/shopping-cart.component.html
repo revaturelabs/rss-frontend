@@ -75,10 +75,10 @@
         <!-- Checkout, on the right or underneath, with small item summary -->
         <div class="col-md-4 col-sm-12">
 
-            <div class="container" style="border: 1px solid yellow;">
+            <div class="container">
 
                 <div class="row">
-                    <table class="table" style="border: 1px solid red;">
+                    <table class="table">
                         <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-bottom small-row">
                             <td class="align-bottom img-frame">
                                 <img class="img-small" src="{{product.src}}"/>
@@ -100,13 +100,13 @@
                         </tr>
                     </table> -->
                     <div class="container">
-                        <div>
+                        <div class="cart-total">
                             <h4>Total: <span>650</span> points</h4>
                         </div>
                     </div>
     
                     <div class="container">
-                        <div>
+                        <div class="user-points">
                             <h4>Your Points: <span>1000</span> points</h4>
                         </div>
                     </div>

@@ -65,7 +65,7 @@
 /* ...................checkout........................ */
 
 .checkout-box {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     width: 100%;
 }
 
@@ -73,3 +73,11 @@
     background-color: #F26925;
     border-color: black;
 } */
+
+.cart-total {
+    border-bottom: 1px solid #474C55;
+}
+
+.user-points {
+    border-bottom: 1px solid #474C55;
+}

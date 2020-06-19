@@ -1,6 +1,6 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 // temporary fake products
-import { TempProducts } from './temp_products';
+import { TempProducts } from '../temp_products';
 
 @Component({
   selector: 'app-shopping-cart',
