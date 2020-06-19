@@ -10,6 +10,7 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 
 const routes: Routes = [
+  { path: '', component: LandingPageComponent },
   { path: 'account/dashboard', component: AccountPageComponent },
   { path: 'earnpoints', component: EarnpointsOverviewPageComponent },
   { path: 'quizzes', component: QuizPageComponent },
