@@ -61,3 +61,15 @@
     display: flex;
     flex-direction: column;
 } */
+
+/* ...................checkout........................ */
+
+.checkout-box {
+    border: 1px solid blue;
+    width: 100%;
+}
+
+/* .btn-revature {
+    background-color: #F26925;
+    border-color: black;
+} */
