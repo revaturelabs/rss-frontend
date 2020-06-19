@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FilterPipe } from './filter.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,9 +16,13 @@ import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-p
 import { PreTestComponent } from './Quiz/components/pre-test/pre-test.component';
 import { TestInProgressComponent } from './Quiz/components/test-in-progress/test-in-progress.component';
 import { PostTestComponent } from './Quiz/components/post-test/post-test.component';
+import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
 import { AdminviewComponent } from './inventory/adminview/adminview.component';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducers/user.reducer';
+import { LoginPageComponent } from './Login/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +38,11 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
     PreTestComponent,
     TestInProgressComponent,
     PostTestComponent,
+    ShoppingCartComponent,
     InventoryViewComponent,
     InventoryItemComponent,
     AdminviewComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,7 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
     ReactiveFormsModule,
     NgbModule,
     FormsModule,
+    StoreModule.forRoot(reducer, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],

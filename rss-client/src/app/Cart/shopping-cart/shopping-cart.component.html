@@ -1,0 +1,125 @@
+<!-- wrap it all in a container, then it can fit under their header no problem -->
+<div class="container main-cart-container">
+
+    <!-- single row layout -->
+    <div class="row">
+        
+        <!-- Cart, on the left, with large item cards -->
+        <div class="col-md-8 col-sm-12">
+
+            <div class="table-responsive-sm">
+
+                <!-- mobile layout -->
+                <ng-container *ngIf="mobile">
+                    <ng-container *ngFor="let product of TempProducts">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td class="d-flex justify-content-between">
+                                        <img class="img-large" src="{{product.src}}"/>
+                                        <div class="d-flex flex-column" style="text-align: right;">
+                                            <h2>{{product.name}}</h2>
+                                            <h3>{{product.points}} points</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <div class="d-flex flex-column item-div-small">
+                                        <label for=""><h5>Quantity</h5></label>
+                                        <input class="form-control quantity-input" id="" type="number" min="1">
+                                        <div class="d-flex item-mobile-check">
+                                            <button class="btn btn-secondary quantity-button">Update</button>
+                                            <button class="btn btn-danger">&#10006;</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+
+                    </ng-container>
+                </ng-container>
+
+                <!-- desktop layout -->
+                <ng-container *ngIf="!mobile">    
+                    <table class="table table-striped">
+                        <tbody> 
+                                <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around">
+                                    <td>
+                                        <img class="img-large" src="{{product.src}}"/>
+                                    </td>
+                                    <td class="align-bottom">
+                                        <h2>{{product.name}}</h2>
+                                        <h3>{{product.points}} points</h3>
+                                    </td>
+        
+                                    <td class="align-bottom quantity-large">
+                                        <div class="d-flex flex-column item-div">
+                                            <label for=""><h5>Quantity</h5></label>
+                                            <input class="form-control quantity-input" id="" type="number" min="1">
+                                            <div class="d-flex item-mobile-check">
+                                                <button class="btn btn-secondary quantity-button">Update</button>
+                                                <button class="btn btn-danger">&#10006;</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </ng-container>
+
+            </div>
+
+        </div>
+        
+        <!-- Checkout, on the right or underneath, with small item summary -->
+        <div class="col-md-4 col-sm-12">
+
+            <div class="container">
+
+                <div class="row">
+                    <table class="table">
+                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-bottom small-row">
+                            <td class="align-bottom img-frame">
+                                <img class="img-small" src="{{product.src}}"/>
+                            </td>
+                            <td class="align-bottom"><b>{{product.name}}</b></td>
+                            <td class="align-bottom">{{product.points}} points</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="row container d-flex checkout-box">
+                    <!-- <table class="table" style="border: 1px solid red;">
+                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-bottom small-row">
+                            <td class="align-bottom img-frame">
+                                <img class="img-small" src="{{product.src}}"/>
+                            </td>
+                            <td class="align-bottom"><b>{{product.name}}</b></td>
+                            <td class="align-bottom">{{product.points}} points</td>
+                        </tr>
+                    </table> -->
+                    <div class="container">
+                        <div class="cart-total">
+                            <h4>Total: <span>650</span> points</h4>
+                        </div>
+                    </div>
+    
+                    <div class="container">
+                        <div class="user-points">
+                            <h4>Your Points: <span>1000</span> points</h4>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div>
+                            <button class="btn btn-primary">Purchase</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
