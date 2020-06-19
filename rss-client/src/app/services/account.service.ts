@@ -10,25 +10,28 @@ export class AccountService {
 
   updatePoints(acc: Account): Observable<Account> {
     return this.httpclient.post<any>(
-      'localhost:9000/account/updatepoints',
+      'http://localhost:9000/account/updatepoints',
       acc
     );
   }
 
   addAccount(acc: Account): Observable<Account> {
-    return this.httpclient.post<any>('localhost:9000/account/addaccount', acc);
+    return this.httpclient.post<any>(
+      'http://localhost:9000/account/addaccount',
+      acc
+    );
   }
 
   getAccountByAccId(acc: Account): Observable<Account> {
     return this.httpclient.post<any>(
-      'localhost:9000/accuont/getaccountbyaccid',
+      'http://localhost:9000/accuont/getaccountbyaccid',
       acc
     );
   }
 
   getAccountByUserId(acc: Account): Observable<Account> {
     return this.httpclient.post<any>(
-      'localhost:9000/account/getaccountbyuserid',
+      'http://localhost:9000/account/getaccountbyuserid',
       acc
     );
   }
