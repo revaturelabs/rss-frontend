@@ -1,0 +1,84 @@
+<!-- wrap it all in a container, then it can fit under their header no problem -->
+<div class="container main-cart-container">
+
+    <!-- single row layout -->
+    <div class="row">
+        
+        <!-- Cart, on the left, with large item cards -->
+        <div class="col-md-8 col-sm-12">
+
+            <div class="table-responsive-sm">
+
+                <table class="table table-striped">
+
+                    <tbody>
+                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around">
+                            <td>
+                                <img class="img-large" src="{{product.src}}"/>
+                            </td>
+                            <td class="align-bottom">
+                                <h2>{{product.name}}</h2>
+                                <h3>{{product.points}} points</h3>
+                            </td>
+                            <td class="align-bottom">
+                                <div class="d-flex flex-column item-div">
+                                    <label for=""><h5>Quantity</h5></label>
+                                    <input class="form-control quantity-input" id="" type="number" min="1">
+                                    <div class="d-flex">
+                                        <button class="btn btn-secondary quantity-button">Update</button>
+                                        <button class="btn btn-danger">X</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    
+                </table>
+            </div>
+
+        </div>
+        
+        <!-- Checkout, on the right, with small item summary -->
+        <div class="col-md-4 col-sm-12">
+
+            <div class="container">
+                <div class="row">
+                    <table class="table">
+                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-bottom small-row">
+                            <td class="align-bottom img-frame">
+                                <img class="img-small" src="{{product.src}}"/>
+                            </td>
+                            <td class="align-bottom"><b>{{product.name}}</b></td>
+                            <td class="align-bottom">{{product.points}} points</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="row container">
+
+                    <div class="container d-flex justify-content-end text-right">
+                        <div>
+                            <h4>Total: 650pts</h4>
+                        </div>
+                    </div>
+    
+                    <div class="container d-flex justify-content-end text-right">
+                        <div>
+                            <h4>Your Points: 1000pts</h4>
+                        </div>
+                    </div>
+
+                    <div class="container d-flex justify-content-end text-right">
+                        <div>
+                            <button class="btn btn-primary">Purchase</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- <div class="row">anything here?</div> -->
+</div>

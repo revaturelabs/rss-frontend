@@ -6,6 +6,7 @@ import { QuizPageComponent } from './Quiz/components/quiz-page/quiz-page.compone
 import { AccountSettingsPageComponent } from './Account/components/account-settings-page/account-settings-page.component';
 import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'earnpoints', component: EarnpointsOverviewPageComponent },
   { path: 'quizzes', component: QuizPageComponent },
   { path: 'quizzes/:id', component: IndividualQuizPageComponent },
-  { path: 'account/settings', component: AccountSettingsPageComponent }
+  { path: 'account/settings', component: AccountSettingsPageComponent },
+  { path: 'cart', component: ShoppingCartComponent}
 ];
 
 @NgModule({

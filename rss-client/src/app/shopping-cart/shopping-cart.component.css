@@ -1,0 +1,46 @@
+.main-cart-container {
+    min-height: 100vh;
+    /* border: 1px solid red; */
+}
+
+.checkout-div {
+}
+
+.img-small {
+    width: 40px;
+    height: 40px;
+}
+
+.img-frame {
+    background-color: #474C55;
+}
+
+.small-row {
+    border-bottom: 1px solid #474C55;
+}
+
+.img-large {
+    width: 100px;
+    height: 100px;
+}
+
+.img-large:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 2px 8px #474C55;
+}
+
+.btn {
+    margin: 2px;
+}
+
+.quantity-button {
+    width: 100%;
+}
+
+.quantity-input {
+    width: 100%;
+}
+
+.item-div {
+    width: 50%;
+}

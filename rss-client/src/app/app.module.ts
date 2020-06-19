@@ -17,6 +17,7 @@ import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-p
 import { PreTestComponent } from './Quiz/components/pre-test/pre-test.component';
 import { TestInProgressComponent } from './Quiz/components/test-in-progress/test-in-progress.component';
 import { PostTestComponent } from './Quiz/components/post-test/post-test.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PostTestComponent } from './Quiz/components/post-test/post-test.compone
     PreTestComponent,
     TestInProgressComponent,
     PostTestComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,
