@@ -6,8 +6,12 @@
         <li class="breadcrumb-item">
           <a href="#">{{ rootPage }}</a>
         </li>
-        <li id="breadCrumbNav" class="breadcrumb-item active" *ngFor="let breadCrumb of breadCrumbs"
-          aria-current="page">
+        <li
+          id="breadCrumbNav"
+          class="breadcrumb-item active"
+          *ngFor="let breadCrumb of breadCrumbs"
+          aria-current="page"
+        >
           <a href="#">{{ breadCrumb }}</a>
         </li>
       </ol>
@@ -20,4 +24,3 @@
 <!-- [config]="quizConfig" -->
 <!--<quiz-page [config] = "quizPageConfig"></quiz-page>-->
 <!-- <individual-quiz-page [config]="quizConfig"></individual-quiz-page> -->
-

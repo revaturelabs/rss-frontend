@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FilterPipe } from './filter.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +20,9 @@ import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.compon
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
 import { AdminviewComponent } from './inventory/adminview/adminview.component';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducers/user.reducer';
+import { LoginPageComponent } from './Login/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
     InventoryViewComponent,
     InventoryItemComponent,
     AdminviewComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
     ReactiveFormsModule,
     NgbModule,
     FormsModule,
+    StoreModule.forRoot(reducer, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
