@@ -6,7 +6,8 @@ import { QuizPageComponent } from './Quiz/components/quiz-page/quiz-page.compone
 import { AccountSettingsPageComponent } from './Account/components/account-settings-page/account-settings-page.component';
 import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
-
+import { AdminviewComponent } from './inventory/adminview/adminview.component';
+import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 
 const routes: Routes = [
   { path: 'account/dashboard', component: AccountPageComponent },
@@ -14,7 +15,9 @@ const routes: Routes = [
   { path: 'quizzes', component: QuizPageComponent },
   { path: 'quizzes/:id', component: IndividualQuizPageComponent },
   { path: 'account/settings', component: AccountSettingsPageComponent },
-  { path: '', component: LandingPageComponent }
+  { path: '', component: LandingPageComponent },
+  { path: 'adminview', component: AdminviewComponent },
+  { path: 'inventoryview', component: InventoryViewComponent },
 ];
 
 @NgModule({

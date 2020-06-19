@@ -17,6 +17,9 @@ import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-p
 import { PreTestComponent } from './Quiz/components/pre-test/pre-test.component';
 import { TestInProgressComponent } from './Quiz/components/test-in-progress/test-in-progress.component';
 import { PostTestComponent } from './Quiz/components/post-test/post-test.component';
+import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
+import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
+import { AdminviewComponent } from './inventory/adminview/adminview.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { PostTestComponent } from './Quiz/components/post-test/post-test.compone
     PreTestComponent,
     TestInProgressComponent,
     PostTestComponent,
+    InventoryViewComponent,
+    InventoryItemComponent,
+    AdminviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,4 +50,4 @@ import { PostTestComponent } from './Quiz/components/post-test/post-test.compone
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
