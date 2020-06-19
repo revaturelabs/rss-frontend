@@ -9,6 +9,7 @@ import { LandingPageComponent } from './LandingPage/components/landing-page/land
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { AdminviewComponent } from './inventory/adminview/adminview.component';
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
+import { LoginPageComponent } from './Login/login-page/login-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'adminview', component: AdminviewComponent },
   { path: 'inventoryview', component: InventoryViewComponent },
-  { path: '', component: LandingPageComponent },
+  { path: 'login', component: LoginPageComponent },
 ];
 
 @NgModule({
