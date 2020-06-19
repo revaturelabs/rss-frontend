@@ -7,15 +7,20 @@ import { AccountSettingsPageComponent } from './Account/components/account-setti
 import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
+import { AdminviewComponent } from './inventory/adminview/adminview.component';
+import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 
 const routes: Routes = [
+  { path: '', component: LandingPageComponent },
   { path: 'account/dashboard', component: AccountPageComponent },
   { path: 'earnpoints', component: EarnpointsOverviewPageComponent },
   { path: 'quizzes', component: QuizPageComponent },
   { path: 'quizzes/:id', component: IndividualQuizPageComponent },
   { path: 'account/settings', component: AccountSettingsPageComponent },
-  { path: 'cart', component: ShoppingCartComponent}
+  { path: 'cart', component: ShoppingCartComponent},
+  { path: '', component: LandingPageComponent },
+  { path: 'adminview', component: AdminviewComponent },
+  { path: 'inventoryview', component: InventoryViewComponent },
 ];
 
 @NgModule({
