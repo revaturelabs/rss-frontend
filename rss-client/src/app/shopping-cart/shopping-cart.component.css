@@ -41,6 +41,23 @@
     width: 100%;
 }
 
-.item-div {
-    width: 50%;
+.quantity-large {
+
 }
+
+.quantity-small {
+
+}
+
+.item-div {
+    width: 70%;
+}
+
+.item-div-small {
+    width: 100%;
+}
+
+/* .item-mobile-check {
+    display: flex;
+    flex-direction: column;
+} */

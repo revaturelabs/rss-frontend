@@ -9,37 +9,70 @@
 
             <div class="table-responsive-sm">
 
-                <table class="table table-striped">
-
-                    <tbody>
-                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around">
-                            <td>
-                                <img class="img-large" src="{{product.src}}"/>
-                            </td>
-                            <td class="align-bottom">
-                                <h2>{{product.name}}</h2>
-                                <h3>{{product.points}} points</h3>
-                            </td>
-                            <td class="align-bottom">
-                                <div class="d-flex flex-column item-div">
-                                    <label for=""><h5>Quantity</h5></label>
-                                    <input class="form-control quantity-input" id="" type="number" min="1">
-                                    <div class="d-flex">
-                                        <button class="btn btn-secondary quantity-button">Update</button>
-                                        <button class="btn btn-danger">X</button>
+                <!-- mobile layout -->
+                <ng-conditional *ngIf="mobile">
+                    <ng-conditional *ngFor="let product of TempProducts">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td class="d-flex justify-content-between">
+                                        <img class="img-large" src="{{product.src}}"/>
+                                        <div class="d-flex flex-column" style="text-align: right;">
+                                            <h2>{{product.name}}</h2>
+                                            <h3>{{product.points}} points</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <div class="d-flex flex-column item-div-small">
+                                        <label for=""><h5>Quantity</h5></label>
+                                        <input class="form-control quantity-input" id="" type="number" min="1">
+                                        <div class="d-flex item-mobile-check">
+                                            <button class="btn btn-secondary quantity-button">Update</button>
+                                            <button class="btn btn-danger">&#10006;</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
 
-                    
-                </table>
+                    </ng-conditional>
+                </ng-conditional>
+
+                <!-- desktop layout -->
+                <ng-conditional *ngIf="!mobile">    
+                    <table class="table table-striped">
+                        <tbody> 
+                                <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around">
+                                    <td>
+                                        <img class="img-large" src="{{product.src}}"/>
+                                    </td>
+                                    <td class="align-bottom">
+                                        <h2>{{product.name}}</h2>
+                                        <h3>{{product.points}} points</h3>
+                                    </td>
+        
+                                    <td class="align-bottom quantity-large">
+                                        <div class="d-flex flex-column item-div">
+                                            <label for=""><h5>Quantity</h5></label>
+                                            <input class="form-control quantity-input" id="" type="number" min="1">
+                                            <div class="d-flex item-mobile-check">
+                                                <button class="btn btn-secondary quantity-button">Update</button>
+                                                <button class="btn btn-danger">&#10006;</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </ng-conditional>
+
             </div>
 
         </div>
         
-        <!-- Checkout, on the right, with small item summary -->
+        <!-- Checkout, on the right or underneath, with small item summary -->
         <div class="col-md-4 col-sm-12">
 
             <div class="container">
