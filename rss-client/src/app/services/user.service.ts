@@ -15,31 +15,31 @@ export class UserService {
     return this.httpclient.get<User[]>('localhost:9000/user/all');
   }
 
-  getUserById(id): Observable<User> {
+  getUserById(id: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/getuserbyid', id);
   }
 
-  getUserByEmail(em): Observable<User> {
+  getUserByEmail(em: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/getuserbyemail', em);
   }
 
-  addUser(user): Observable<User> {
+  addUser(user: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/adduser', user);
   }
 
-  updateInfo(user): Observable<User> {
+  updateInfo(user: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/updateinfo', user);
   }
 
-  updatePassword(u): Observable<User> {
+  updatePassword(u: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/updatepassword', u);
   }
 
-  updateProfilePic(u): Observable<User> {
+  updateProfilePic(u: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/updateprofilepic', u);
   }
 
-  updateIsAdmin(user): Observable<User> {
+  updateIsAdmin(user: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/updateisadmin', user);
   }
 }
