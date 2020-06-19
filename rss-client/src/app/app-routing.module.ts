@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'earnpoints', component: EarnpointsOverviewPageComponent },
   { path: 'quizzes', component: QuizPageComponent },
   { path: 'quizzes/:id', component: IndividualQuizPageComponent },
-  { path: 'account/settings', component: AccountSettingsPageComponent }
+  { path: 'account/settings', component: AccountSettingsPageComponent },
+  { path: '', component: LandingPageComponent }
 ];
 
 @NgModule({
