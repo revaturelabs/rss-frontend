@@ -17,6 +17,7 @@ import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-p
 import { PreTestComponent } from './Quiz/components/pre-test/pre-test.component';
 import { TestInProgressComponent } from './Quiz/components/test-in-progress/test-in-progress.component';
 import { PostTestComponent } from './Quiz/components/post-test/post-test.component';
+import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
 import { AdminviewComponent } from './inventory/adminview/adminview.component';
@@ -35,6 +36,7 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
     PreTestComponent,
     TestInProgressComponent,
     PostTestComponent,
+    ShoppingCartComponent,
     InventoryViewComponent,
     InventoryItemComponent,
     AdminviewComponent,
