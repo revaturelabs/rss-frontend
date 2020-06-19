@@ -1,0 +1,157 @@
+<div class="container row align-items-center">
+  <div class="col-4">
+    <img
+      class="container card-img-top"
+      src="{{ product.image }}"
+      alt="alt bc best practice"
+    />
+  </div>
+  <div class="col-8">
+    <div class="container card-body">
+      <p class="card-title">Name: {{ product.name }}</p>
+      <p class="card-text">Description: {{ product.description }}</p>
+      <p class="card-text">Manufacturer ID: {{ product.manufacturerID }}</p>
+      <p class="card-text">Model: {{ product.model }}</p>
+      <p class="card-text">Category ID: {{ product.categoryID }}</p>
+      <p class="card-text">Quantity: {{ product.quantity }}</p>
+      <p class="card-text">Unit Price: {{ product.unitPrice }}</p>
+      <p class="card-text">Color: {{ product.color }}</p>
+
+      <button class="btn btn-warning btn-block" (click)="open(itemModal)">
+        Update
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger btn-block"
+        (click)="deleteItem()"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #itemModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <p>
+        Name:
+        <input
+          type="text"
+          class="form-control"
+          id="inputName"
+          name="name"
+          [(ngModel)]="product.name"
+        />
+      </p>
+      <p>
+        Description:
+        <input
+          type="text"
+          class="form-control"
+          id="inputDescription"
+          name="description"
+          [(ngModel)]="product.description"
+        />
+      </p>
+      <p>
+        Manufacturer ID:
+        <input
+          type="number"
+          class="form-control"
+          id="inputManufacturerID"
+          name="manufacturerID"
+          [(ngModel)]="product.manufacturerID"
+        />
+      </p>
+      <p>
+        Model:
+        <input
+          type="text"
+          class="form-control"
+          id="inputModel"
+          name="model"
+          [(ngModel)]="product.model"
+        />
+      </p>
+      <p>
+        Category ID:
+        <input
+          type="number"
+          class="form-control"
+          id="inputCategoryID"
+          name="categoryID"
+          [(ngModel)]="product.categoryID"
+        />
+      </p>
+      <p>
+        <img src="{{ product.image }}" width="100%" />
+        <input
+          type="text"
+          class="form-control"
+          id="inputImage"
+          name="image"
+          [(ngModel)]="product.image"
+        />
+      </p>
+      <p>
+        Quantity:
+        <input
+          type="number"
+          class="form-control"
+          id="inputQuantity"
+          name="quantity"
+          [(ngModel)]="product.quantity"
+        />
+      </p>
+      <p>
+        Unit Price:
+        <input
+          type="number"
+          class="form-control"
+          id="inputUnitPrice"
+          name="unitPrice"
+          [(ngModel)]="product.unitPrice"
+        />
+      </p>
+      <p>
+        Color:
+        <input
+          type="text"
+          class="form-control"
+          id="inputColor"
+          name="color"
+          [(ngModel)]="product.color"
+        />
+      </p>
+    </form>
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-danger"
+        (click)="modal.dismiss('Cross click')"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="updateItem(); modal.close()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</ng-template>
