@@ -9,7 +9,9 @@ import { User } from '../interfaces/user';
 export class UserService {
   constructor(private httpclient: HttpClient) {}
 
-  login() {}
+  login(log): Observable<User> {
+    return this.httpclient.post<any>('localhost:9000/user/login', log);
+  }
 
   getAllUsers(): Observable<User[]> {
     return this.httpclient.get<User[]>('localhost:9000/user/all');

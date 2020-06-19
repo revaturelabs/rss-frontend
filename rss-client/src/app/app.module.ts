@@ -20,6 +20,7 @@ import { PostTestComponent } from './Quiz/components/post-test/post-test.compone
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
 import { AdminviewComponent } from './inventory/adminview/adminview.component';
+import { LoginPageComponent } from './Login/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
     InventoryViewComponent,
     InventoryItemComponent,
     AdminviewComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
