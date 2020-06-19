@@ -1,6 +1,25 @@
 <div class="container">
     <div class="row">
         <div class="border-right col-6 p-2">
+			<div class="form-group">
+				<label for="userPicture"></label>
+                <img src="https://lh3.googleusercontent.com/proxy/EMHyp-lhjqI9FTamA5Ek7pYIoPlIIOuKYxl-PqLnGbYLj6jgEZTTXLs5sXn1P28GEuizW1mgr-TbHi3ijnIzjtSuSHPrG8_Kas2kTO68RO7AISg_TwfUvpEB6B2lg3y1iUBJpqolMomxhrM" alt="user pic placeholder" class="img-thumbnail">
+                <div>
+                    <form>
+                      <input
+                        type="file"
+                        id="fileInput"
+                        name="profilePic"
+                        accept="image/*"
+                      />
+                      <input
+                        class="d-block btn btn-outline-light"
+                        type="submit"
+                        id="btn1"
+                      />
+                    </form>
+                  </div>
+			</div>
             <div class="form-group">
                 <label for="firstName">First Name: </label>
                 <input class="form-control" type="text" placeholder="Enter first name..." />
