@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'quizzes', component: QuizPageComponent },
   { path: 'quizzes/:id', component: IndividualQuizPageComponent },
   { path: 'account/settings', component: AccountSettingsPageComponent },
-  { path: 'cart', component: ShoppingCartComponent},
+  { path: 'cart', component: ShoppingCartComponent },
   { path: 'adminview', component: AdminviewComponent },
   { path: 'inventoryview', component: InventoryViewComponent },
   { path: '', component: LandingPageComponent },

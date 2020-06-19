@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private httpclient: HttpClient) {}
+  constructor(
+    private httpclient: HttpClient,
+    private store: Store<any>
+  ) { }
 
-  login() {}
+  login() { }
 
   getAllUsers(): Observable<User[]> {
     return this.httpclient.get<User[]>('localhost:9000/user/all');
@@ -42,4 +46,16 @@ export class UserService {
   updateIsAdmin(user: User): Observable<User> {
     return this.httpclient.post<any>('localhost:9000/user/updateisadmin', user);
   }
+
+  updateState(obj) {
+    this.store.dispatch({
+      type: obj.action,
+      payload: obj.payload
+    })
+  }
+
+  getCurrentUserState() {
+    return this.store.select('user.reducer')
+  }
+
 }
