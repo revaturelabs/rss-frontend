@@ -4,15 +4,15 @@
     <div class="row" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">{{ rootPage }}</a>
+          <a routerLink="" (click)="onHome()">{{ rootPage }}</a>
         </li>
         <li
           id="breadCrumbNav"
           class="breadcrumb-item active"
-          *ngFor="let breadCrumb of breadCrumbs"
+          *ngFor="let breadCrumb of breadcrumbs; index as i"
           aria-current="page"
         >
-          <a href="#">{{ breadCrumb }}</a>
+          <a routerLink="{{ routerCrumbs[i] }}">{{ breadCrumb }}</a>
         </li>
       </ol>
       <div class="col-1 offset-9">{{ rootConfig.userType }}</div>

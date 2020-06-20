@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 
 @Component({
   selector: 'header',
@@ -14,6 +15,4 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  breadCrumbsNav() {}
 }
