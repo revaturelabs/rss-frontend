@@ -13,7 +13,6 @@ export class EarnpointsOverviewPageComponent implements OnInit {
     private parent: AppComponent
   ) {}
 
-  @Input() breadcrumbs: any[] = [];
   ngOnInit(): void {}
 
   ngAfterViewInit() {
@@ -21,6 +20,7 @@ export class EarnpointsOverviewPageComponent implements OnInit {
     // this.breadcrumbservice.sendBreadCrumb(['Earn Points']);
     setTimeout(() => {
       this.parent.breadcrumbs = ['Earn Points'];
+      this.parent.routerCrumbs = ['earnpoints'];
     });
   }
   onClick() {

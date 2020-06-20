@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   breadcrumbs: any[] = [];
+  routerCrumbs: any[] = [];
   subscription: Subscription;
   constructor(
     private quizService: QuizService,
@@ -43,5 +44,8 @@ export class AppComponent implements OnInit {
   quizPageConfig;
   quizConfig;
   rootPage = 'Home';
-  breadCrumbs = ['a', 'b', 'c']; //bradcrumbs
+  onHome() {
+    this.breadcrumbs = [];
+    this.routerCrumbs = [];
+  }
 }
