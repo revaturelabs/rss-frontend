@@ -23,6 +23,12 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers/user.reducer';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
+import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
+import { AdminQuizComponent } from './Admin/admin-quiz/admin-quiz.component';
+import { AdminInventoryComponent } from './Admin/admin-inventory/admin-inventory.component';
+import { AddQuizComponent } from './Quiz/admin/add-quiz/add-quiz.component';
+import { EditQuizComponent } from './Quiz/admin/edit-quiz/edit-quiz.component';
+import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +49,12 @@ import { LoginPageComponent } from './Login/login-page/login-page.component';
     InventoryItemComponent,
     AdminviewComponent,
     LoginPageComponent,
+    AdminPageComponent,
+    AdminQuizComponent,
+    AdminInventoryComponent,
+    AddQuizComponent,
+    EditQuizComponent,
+    QuizFormComponent,
   ],
   imports: [
     BrowserModule,

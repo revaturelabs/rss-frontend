@@ -6,6 +6,9 @@ import { Injectable } from '@angular/core';
 export class QuizService {
   constructor() {}
   quizId: number;
+  getSampleSubjects() {
+    return ['subject 1', 'subject 2', 'subject 3'];
+  }
   getSampleQuiz(id) {
     this.quizId = 1;
     if (this.quizId == id) {
