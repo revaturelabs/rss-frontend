@@ -10,6 +10,7 @@ import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.compon
 import { AdminviewComponent } from './inventory/adminview/adminview.component';
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
+import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'quizzes/:id', component: IndividualQuizPageComponent },
   { path: 'account/settings', component: AccountSettingsPageComponent },
   { path: 'cart', component: ShoppingCartComponent },
+  { path: 'admin', component: AdminPageComponent },
   { path: 'adminview', component: AdminviewComponent },
   { path: 'inventoryview', component: InventoryViewComponent },
   { path: 'login', component: LoginPageComponent },
