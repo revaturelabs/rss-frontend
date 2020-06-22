@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Store } from '@ngrx/store';
 
@@ -8,7 +8,11 @@ import { Store } from '@ngrx/store';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private httpclient: HttpClient, private store: Store<any>) {}
+  constructor(
+    private httpclient: HttpClient,
+    private store: Store<any>,
+  ) { }
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -75,13 +79,17 @@ export class UserService {
   }
 
   updateState(obj) {
+    console.log(obj.action)
+    console.log(obj.payload);
     this.store.dispatch({
       type: obj.action,
-      payload: obj.payload,
-    });
+      payload: obj.payload
+    })
   }
 
-  getCurrentUserState() {
-    return this.store.select('user.reducer');
+  getAllState() {
+    console.log(this.store.select('userReducer'));
+    this.store.select('userReducer').subscribe(state => { console.log(state) })
+    return this.store.select('userReducer')
   }
 }

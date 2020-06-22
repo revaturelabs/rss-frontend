@@ -1,5 +1,6 @@
 import { QuizService } from './services/quiz.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from './interfaces/user';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private quizService: QuizService) {}
+  user: User;
+  isLoggedIn = false;
+
+
+  constructor(private quizService: QuizService) { }
   ngOnInit(): void {
     // this.quizConfig = this.quizService.getSampleQuiz();
   }
@@ -23,4 +28,19 @@ export class AppComponent implements OnInit {
   quizConfig;
   rootPage = 'Home';
   breadCrumbs = ['a', 'b', 'c']; //bradcrumbs
+
+
+  loginEvent(e) {
+    this.user = e;
+    console.log(this.user);
+  }
+
+  changeLoginStatus(user) {
+    if (user != null) {
+      this.isLoggedIn = false;
+    }
+    console.log(this.isLoggedIn)
+  }
 }
+
+
