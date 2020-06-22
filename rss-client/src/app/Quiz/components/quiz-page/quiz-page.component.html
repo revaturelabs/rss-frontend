@@ -1,6 +1,11 @@
 <!-- Below is the search function that you can search through the list of quiz names to limit the ngFor to displaying only what you search for -->
 <input [(ngModel)]="searchText" placeholder="search text goes here" />
-
+<select [(ngModel)]="searchSubject">
+  <option value="">All</option>
+  <option value="Java">Java</option>
+  <option value="SQL">SQL</option>
+  <option value="Angular">Angular</option>
+</select>
 <!--This is the list of quizzes -->
 <ol>
   <li *ngFor="let quizdata of quizData | filter: 'topic':searchText">
