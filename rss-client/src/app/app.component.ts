@@ -1,6 +1,8 @@
 import { QuizService } from './services/quiz.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from './interfaces/user';
+import { BreadcrumbService } from './services/breadcrumb.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +13,10 @@ export class AppComponent implements OnInit {
   user: User;
   isLoggedIn = false;
 
+  breadcrumbs: any[] = [];
+  routerCrumbs: any[] = [];
+  subscription: Subscription;
 
-  constructor(private quizService: QuizService) { }
-  ngOnInit(): void {
-    // this.quizConfig = this.quizService.getSampleQuiz();
-  }
   title = 'rss-client';
   headerConfig = {
     //put stuff in here coming a service/services for user info as well
@@ -27,7 +28,18 @@ export class AppComponent implements OnInit {
   quizPageConfig;
   quizConfig;
   rootPage = 'Home';
-  breadCrumbs = ['a', 'b', 'c']; //bradcrumbs
+
+  constructor(
+    private quizService: QuizService,
+    private breadcrumbservice: BreadcrumbService
+  ) { }
+
+
+  ngOnInit(): void {
+    // this.quizConfig = this.quizService.getSampleQuiz();
+
+  }
+
 
 
   loginEvent(e) {
@@ -41,6 +53,10 @@ export class AppComponent implements OnInit {
     }
     console.log(this.isLoggedIn)
   }
-}
 
+  onHome() {
+    this.breadcrumbs = [];
+    this.routerCrumbs = [];
+  };
+}
 

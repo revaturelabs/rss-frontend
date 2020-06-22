@@ -1,11 +1,75 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Subject } from '../interfaces/subject';
+import { Quiz } from '../interfaces/Quiz';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
-  constructor() {}
+  constructor(private httpclient: HttpClient) {}
+
+  //Subject-Controller
+  addSubject(sub): Observable<Subject> {
+    return this.httpclient.post<any>('http://localhost:8080/subject/add', sub);
+  }
+
+  getAllSubjects(): Observable<Subject[]> {
+    return this.httpclient.get<Subject[]>('http://localhost:8080/subject/all');
+  }
+
+  //Quiz Controller
+  addQuiz(quiz): Observable<Quiz> {
+    return this.httpclient.post<any>(
+      'http://localhost:8080/quiz/addquiz',
+      quiz
+    );
+  }
+
+  findQuizById(id): Observable<Quiz> {
+    return this.httpclient.post<any>('http://localhost:8080/quiz/findbyid', id);
+  }
+
+  findQuizBySubject(id): Observable<Quiz> {
+    return this.httpclient.post<any>(
+      'http://localhost:8080/quiz/findbysubject',
+      id
+    );
+  }
+
+  getAllQuizzes(): Observable<Subject[]> {
+    return this.httpclient.get<Subject[]>(
+      'http://localhost:8080/quiz/getallquizzes'
+    );
+  }
+
+  //Questions Bank Controller
+  addSingularQuestion(question): Observable<Quiz> {
+    return this.httpclient.post<any>(
+      'http://localhost:8080/question/add',
+      question
+    );
+  }
+
+  getQuestionsById(id): Observable<Quiz> {
+    return this.httpclient.post<any>(
+      'http://localhost:8080/question/getquestions',
+      id
+    );
+  }
+
+  addManyQuestions(questions): Observable<Quiz> {
+    return this.httpclient.post<any>(
+      'http://localhost:8080/question/addall',
+      questions
+    );
+  }
+
   quizId: number;
+  getSampleSubjects() {
+    return ['subject 1', 'subject 2', 'subject 3'];
+  }
   getSampleQuiz(id) {
     this.quizId = 1;
     if (this.quizId == id) {

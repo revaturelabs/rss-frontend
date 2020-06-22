@@ -5,7 +5,7 @@
     <div class="row">
         
         <!-- Cart, on the left, with large item cards -->
-        <div class="col-md-8 col-sm-12">
+        <div class="col-md-8 col-sm-12 center-divide">
 
             <div class="table-responsive-sm">
 
@@ -44,7 +44,7 @@
                 <ng-container *ngIf="!mobile">    
                     <table class="table table-striped">
                         <tbody> 
-                                <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around">
+                                <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around align-items-end">
                                     <td>
                                         <img class="img-large" src="{{product.src}}"/>
                                     </td>
@@ -79,7 +79,7 @@
 
                 <div class="row">
                     <table class="table">
-                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-bottom small-row">
+                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-items-end small-row">
                             <td class="align-bottom img-frame">
                                 <img class="img-small" src="{{product.src}}"/>
                             </td>
@@ -89,31 +89,47 @@
                     </table>
                 </div>
 
-                <div class="row container d-flex checkout-box">
-                    <!-- <table class="table" style="border: 1px solid red;">
-                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-bottom small-row">
-                            <td class="align-bottom img-frame">
-                                <img class="img-small" src="{{product.src}}"/>
-                            </td>
-                            <td class="align-bottom"><b>{{product.name}}</b></td>
-                            <td class="align-bottom">{{product.points}} points</td>
-                        </tr>
-                    </table> -->
+                <div class="row card d-flex checkout-box">
+
+                    <div class="card-title cart-total text-center">
+                        <h2>Order Summary</h2>
+                    </div>
+
                     <div class="container">
-                        <div class="cart-total">
-                            <h4>Total: <span>650</span> points</h4>
+                        <div class="card-text cart-total d-flex align-bottom justify-content-between align-items-end">
+                            <h4>Total:</h4>
+                            <h6><span>650</span> points</h6>
                         </div>
                     </div>
     
                     <div class="container">
-                        <div class="user-points">
-                            <h4>Your Points: <span>1000</span> points</h4>
+                        <div class="user-points card-text d-flex justify-content-between align-items-end">
+                                <h4>Your Points:</h4>
+                                <h6><span>1000</span> points</h6>
                         </div>
                     </div>
 
                     <div class="container">
+                        <button class="btn btn-secondary btn-lg btn-block" href="#pointSource" data-toggle="collapse">
+                            Pick Points
+                        </button>
+                        <div class="collapse points-div" id="pointSource">
+                            <div class="card d-flex flex-column" id="pointsCard">
+                                <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose Sources</h3>
+                                <div class="card-text d-flex justify-content-between align-items-end">
+                                    <h5 href="#">Total Quiz Points:</h5>
+                                    <h6><span>500</span></h6>    
+                                </div>
+                                <input class="form-control" type="number" min="0" step="50" placeholder="Quiz Points">
+                                <div class="card-text d-flex justify-content-between align-items-end">
+                                    <h5 href="#">Total Bug Bounty Points:</h5>
+                                    <h6><span>500</span></h6>    
+                                </div>
+                                <input class="form-control" type="number" min="0" step="50" placeholder="Bug Bounty Points">
+                            </div>
+                        </div>
                         <div>
-                            <button class="btn btn-primary">Purchase</button>
+                            <button class="btn btn-lg btn-block btn-primary">Purchase</button>
                         </div>
                     </div>
                 </div>

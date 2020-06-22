@@ -1,0 +1,259 @@
+<div *ngIf="view == 'select'">
+  <ul>
+    <h1>Select a quiz subject</h1>
+    <li>
+      <!-- TODO: fix this error -->
+      <button [disabled]="!subject.valid" (click)="addSubject(subject)">
+        +
+      </button>
+      <input
+        ngModel
+        #subject="ngModel"
+        required
+        type="text"
+        placeholder="Add a subject"
+      />
+      <div *ngFor="let item of subjects">
+        <li>
+          <button (click)="setSubject(item)">{{ item }}</button>
+        </li>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- Second stage: choose/make questions -->
+<div *ngIf="view != 'select'">
+  <div class="row">
+    <div class="col-8">
+      <h1 class="">
+        {{ focusedQuiz.subject }}
+      </h1>
+    </div>
+    <div class="col-4 row">
+      <div class="col-6">
+        <button class="btn btn-block btn-outline-danger" (click)="onBack()">
+          Cancel
+        </button>
+      </div>
+      <div class="col-6">
+        <button
+          (click)="submitChanges()"
+          class="btn btn-block btn-outline-success"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="topic">Topic</label>
+    <input
+      type="text"
+      class="form-control"
+      id="topic"
+      name="name"
+      [(ngModel)]="focusedQuiz.topic"
+    />
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      name="name"
+      [(ngModel)]="focusedQuiz.description"
+    />
+  </div>
+
+  <div class="border">
+    <div class="bg-secondary">
+      <div class="text-white form-group">
+        <h2>Questions</h2>
+      </div>
+
+      <div style="margin: 0 0 1rem 0;" class="form-group row">
+        <div class="col-6 text-white">
+          Total questions: {{ focusedQuiz.questions.length }}
+        </div>
+        <div class="col-6 text-white">
+          Total points: {{ focusedQuiz.availablePoints }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group border">
+      <button
+        (click)="open(content, 'new')"
+        class="btn btn-block btn-outline-primary"
+      >
+        Add New Question
+      </button>
+      <div
+        class="container"
+        *ngFor="let item of focusedQuiz.questions; let i = index"
+      >
+        <div class="row border">
+          <button
+            (click)="open(content, item)"
+            class="btn btn-outline-success col-2"
+          >
+            edit
+          </button>
+          <button
+            (click)="open(content2, item)"
+            class="btn btn-outline-danger col-2"
+          >
+            rem
+          </button>
+          <div class="col-6">{{ item.question | slice: 0:50 }}...</div>
+          <div class="col-2 text-right">{{ item.pointValue }} pts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Question -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Question Update</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #questionForm="ngForm">
+      <div class="form-group">
+        <div class="input-group">
+          <label for="question">Question</label>
+          <div class="input-group">
+            <input
+              id="question"
+              class="form-control"
+              placeholder="Question Text"
+              name="question"
+              [ngModel]="focusedQuestion.question"
+              #question="ngModel"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="pointValue">Point value</label>
+          <div class="input-group">
+            <input
+              id="pointValue"
+              class="form-control"
+              type="number"
+              name="pointValue"
+              [ngModel]="focusedQuestion.pointValue"
+              #pointValue="ngModel"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="option1">Options</label>
+        <div class="input-group">
+          <input
+            id="option1"
+            class="form-control"
+            placeholder="Enter new option here"
+            name="option1"
+            [ngModel]="focusedQuestion.options[0]"
+            #option1="ngModel"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input
+            id="option2"
+            class="form-control"
+            placeholder="Enter new option here"
+            name="option2"
+            [ngModel]="focusedQuestion.options[1]"
+            #option2="ngModel"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input
+            id="option3"
+            class="form-control"
+            placeholder="Enter new option here"
+            name="option3"
+            [ngModel]="focusedQuestion.options[2]"
+            #option3="ngModel"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input
+            id="option4"
+            class="form-control"
+            placeholder="Enter new option here"
+            name="option4"
+            [ngModel]="focusedQuestion.options[3]"
+            #option4="ngModel"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input
+            id="option5"
+            class="form-control"
+            placeholder="Enter new option here"
+            name="option5"
+            [ngModel]="focusedQuestion.options[4]"
+            #option5="ngModel"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close({ type: 'update', value: questionForm.value })"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h3>Are you sure you want to remove this question?</h3>
+    <div>
+      {{ focusedQuestion.question }}
+    </div>
+    <button (click)="modal.close({ type: 'delete', value: focusedQuestion })">
+      Confim
+    </button>
+
+    <button (click)="modal.dismiss('Cross click')">Cancel</button>
+  </div>
+</ng-template>
