@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz.service';
 import { AppComponent } from 'src/app/app.component';
+import { LowerCasePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'individual-quiz-page',
@@ -42,9 +43,9 @@ export class IndividualQuizPageComponent implements OnInit {
       this.parent.breadcrumbs = [
         'Earn Points',
         'Quiz Overview',
-        this.config.subject.subjectName +
+        new TitleCasePipe().transform(this.config.subject.subjectName) +
           ': ' +
-          this.config.quizTopic +
+          new TitleCasePipe().transform(this.config.quizTopic) +
           ' Quiz',
       ];
       this.parent.routerCrumbs = [
