@@ -1,9 +1,9 @@
 <!-- wrap it all in a container, then it can fit under their header no problem -->
 <div class="container main-cart-container">
-
+<!-- I am DAVE -->
     <!-- single row layout -->
     <div class="row">
-        
+
         <!-- Cart, on the left, with large item cards -->
         <div class="col-md-8 col-sm-12 center-divide">
 
@@ -33,7 +33,7 @@
                                         </div>
                                     </div>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
 
@@ -41,9 +41,9 @@
                 </ng-container>
 
                 <!-- desktop layout -->
-                <ng-container *ngIf="!mobile">    
+                <ng-container *ngIf="!mobile">
                     <table class="table table-striped">
-                        <tbody> 
+                        <tbody>
                                 <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around align-items-end">
                                     <td>
                                         <img class="img-large" src="{{product.src}}"/>
@@ -52,7 +52,7 @@
                                         <h2>{{product.name}}</h2>
                                         <h3>{{product.points}} points</h3>
                                     </td>
-        
+
                                     <td class="align-bottom quantity-large">
                                         <div class="d-flex flex-column item-div">
                                             <label for=""><h5>Quantity</h5></label>
@@ -71,7 +71,7 @@
             </div>
 
         </div>
-        
+
         <!-- Checkout, on the right or underneath, with small item summary -->
         <div class="col-md-4 col-sm-12">
 
@@ -101,7 +101,7 @@
                             <h6><span>650</span> points</h6>
                         </div>
                     </div>
-    
+
                     <div class="container">
                         <div class="user-points card-text d-flex justify-content-between align-items-end">
                                 <h4>Your Points:</h4>
@@ -118,12 +118,12 @@
                                 <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose Sources</h3>
                                 <div class="card-text d-flex justify-content-between align-items-end">
                                     <h5 href="#">Total Quiz Points:</h5>
-                                    <h6><span>500</span></h6>    
+                                    <h6><span>500</span></h6>
                                 </div>
                                 <input class="form-control" type="number" min="0" step="50" placeholder="Quiz Points">
                                 <div class="card-text d-flex justify-content-between align-items-end">
                                     <h5 href="#">Total Bug Bounty Points:</h5>
-                                    <h6><span>500</span></h6>    
+                                    <h6><span>500</span></h6>
                                 </div>
                                 <input class="form-control" type="number" min="0" step="50" placeholder="Bug Bounty Points">
                             </div>
@@ -135,7 +135,7 @@
                 </div>
 
             </div>
-            
+
         </div>
     </div>
 </div>
