@@ -12,6 +12,7 @@ import { AppComponent } from 'src/app/app.component';
 export class QuizPageComponent implements OnInit {
   @Input() config;
   searchText: string;
+  searchSubject: string;
   quizData;
 
   constructor(
