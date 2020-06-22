@@ -1,13 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../interfaces/subject';
 import { Quiz } from '../interfaces/Quiz';
+import { Questions } from '../interfaces/questions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
+  quiz: Quiz = {
+    quizId: 0,
+    quizTopic: '',
+    quizDescription: '',
+    creatorEmail: '',
+    subjectId: 0,
+    subject: {
+      subjectId: 0,
+      subjectName: '',
+    },
+  };
+  questions: Questions = {
+    questionId: 0,
+    questionValue: 0,
+    question: '',
+    option1: '',
+    option2: '',
+    option3: '',
+    option4: '',
+    option5: '',
+    correctAnswer: '',
+    quizId: 0,
+    quiz: {
+      quizId: 0,
+      quizTopic: '',
+      quizDescription: '',
+      creatorEmail: '',
+      subjectId: 0,
+      subject: {
+        subjectId: 0,
+        subjectName: '',
+      },
+    },
+  };
+
   constructor(private httpclient: HttpClient) {}
 
   //Subject-Controller
@@ -28,7 +64,11 @@ export class QuizService {
   }
 
   findQuizById(id): Observable<Quiz> {
-    return this.httpclient.post<any>('http://localhost:8080/quiz/findbyid', id);
+    this.quiz.quizId = id;
+    return this.httpclient.post<any>(
+      'http://localhost:8080/quiz/findbyid',
+      this.quiz
+    );
   }
 
   findQuizBySubject(id): Observable<Quiz> {
@@ -38,28 +78,29 @@ export class QuizService {
     );
   }
 
-  getAllQuizzes(): Observable<Subject[]> {
-    return this.httpclient.get<Subject[]>(
+  getAllQuizzes(): Observable<Quiz[]> {
+    return this.httpclient.get<Quiz[]>(
       'http://localhost:8080/quiz/getallquizzes'
     );
   }
 
   //Questions Bank Controller
-  addSingularQuestion(question): Observable<Quiz> {
+  addSingularQuestion(question): Observable<Questions> {
     return this.httpclient.post<any>(
       'http://localhost:8080/question/add',
       question
     );
   }
 
-  getQuestionsById(id): Observable<Quiz> {
+  getQuestionsById(id): Observable<Questions> {
+    this.questions.quizId = id;
     return this.httpclient.post<any>(
       'http://localhost:8080/question/getquestions',
-      id
+      this.questions
     );
   }
 
-  addManyQuestions(questions): Observable<Quiz> {
+  addManyQuestions(questions): Observable<Questions> {
     return this.httpclient.post<any>(
       'http://localhost:8080/question/addall',
       questions
