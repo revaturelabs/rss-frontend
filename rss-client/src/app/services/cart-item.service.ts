@@ -1,11 +1,11 @@
-import { CartItem } from '../Interfaces/cart-item.model';
 import { Injectable } from '@angular/core';
+import { CartItem } from '../interfaces/cart-item.model';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
-import { Observable } from 'rxjs';
+import { Cart } from '../interfaces/cart.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartItemService {
   baseUrl: string = 'http://localhost:8989/';
@@ -14,25 +14,24 @@ export class CartItemService {
 
   // CREATE
   addCartItem(cartItem: CartItem): Observable<CartItem> {
-    return this.http.post<CartItem>(this.baseUrl + 'CartItem', cartItem); // http://localhost:8989/CartItem
+    return of(cartItem);
+    // return this.http.post<CartItem>(this.baseURL, cartItem);
   }
-
   // READ
-  getAllCartItemsFromCart(): Observable<CartItem[]> {
-    return this.http.get<CartItem[]>(this.baseUrl + 'CartItem'); // http://localhost:8989/CartItem
-  }
-
   getCartItemById(id: number): Observable<CartItem> {
-    return this.http.get<CartItem>(this.baseUrl + 'CartItem/' + id); // http://localhost:8989/CartItem/{id}
+    return this.http.get<CartItem>(this.baseURL + id);
   }
-
+  getAllCartItemsFromCart_post(cart: Cart): Observable<CartItem[]> {
+    return of([new CartItem(0, cart, 0, 1)]);
+    // return this.http.post<CartItem[]>(this.baseURL, cart);
+  }
   // UPDATE
-  public updateCartItem(cartItem: CartItem) {
-    return this.http.put<CartItem>(this.baseUrl + 'CartItem', cartItem); // http://localhost:8989/CartItem
+  updateCartItem(cartItem: CartItem): Observable<CartItem> {
+    return of(cartItem);
+    // return this.http.put<CartItem>(this.baseURL, cartItem);
   }
-
   // DELETE
-  deleteCartItemById(id: number): Observable<CartItem> {
-    return this.http.delete<CartItem>(this.baseUrl + 'CartItem/' + id); // http://localhost:8989/CartItem/{id}
+  deleteCartItem(cartItem: CartItem): void {
+    // this.http.delete(this.baseURL+cartItem.cartItemId);
   }
 }
