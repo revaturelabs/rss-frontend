@@ -9,6 +9,7 @@ export class LandingPageComponent implements OnInit {
 
   constructor() { }
 
+  //testing push
   ngOnInit(): void {
   }
 
