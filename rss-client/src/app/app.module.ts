@@ -68,4 +68,4 @@ import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
