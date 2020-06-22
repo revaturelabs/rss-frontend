@@ -24,8 +24,8 @@ export class PreTestComponent implements OnInit {
       this.config.subjectPicture
     );
     //Adds instructions about quiz
-    this.config.instructions.forEach((item) => {
-      this.instructions.push(item);
-    });
+    // this.config.instructions.forEach((item) => {
+    //   this.instructions.push(item);
+    // });
   }
 }

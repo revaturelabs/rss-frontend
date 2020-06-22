@@ -27,7 +27,13 @@ export class IndividualQuizPageComponent implements OnInit {
 
   ngOnInit(): void {
     //this pulls in the id passed from the quiz-page
-    this.config = this.quizService.getSampleQuiz(this.route.snapshot.params.id);
+    console.log(this.route.snapshot.params.id);
+    this.quizService
+      .findQuizById(this.route.snapshot.params.id)
+      .subscribe((res) => (this.config = res));
+    this.quizService
+      .getQuestionsById(this.route.snapshot.params.id)
+      .subscribe((res) => (this.config.questions = res));
   }
 
   id = this.route.snapshot.params.id;
@@ -36,7 +42,10 @@ export class IndividualQuizPageComponent implements OnInit {
       this.parent.breadcrumbs = [
         'Earn Points',
         'Quiz Overview',
-        this.config.subject + ': ' + this.config.topic + ' Quiz',
+        this.config.subject.subjectName +
+          ': ' +
+          this.config.quizTopic +
+          ' Quiz',
       ];
       this.parent.routerCrumbs = [
         'earnpoints',

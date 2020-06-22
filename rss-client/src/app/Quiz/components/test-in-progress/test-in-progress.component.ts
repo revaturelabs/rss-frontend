@@ -1,6 +1,5 @@
 import { ImageService } from './../../../services/image.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { config } from 'process';
 
 @Component({
   selector: 'test-in-progress',
@@ -14,13 +13,25 @@ export class TestInProgressComponent implements OnInit {
   index;
   max;
   answers = {};
+
   //Submits the form and
   onSubmit() {
     //TODO: send to quiz services to check answers
     //TODO:change this alert to a modal
-    window.alert('aer you sure');
+    window.alert('are you sure');
     this.pushProgress.emit('post-test');
-    console.log(this.answers);
+    //loop through answers to create question[]
+    let answersArr = [];
+    for (let [key, value] of Object.entries(this.answers)) {
+      let obj = {
+        questionId: key,
+        selectedAnswer: value,
+        userEmail: null,
+        quizId: this.config.quizId,
+      };
+      answersArr.push(obj);
+    }
+    console.log(answersArr);
   }
   //Focus question by clicking on it's number square
   onFocus(input) {
@@ -29,7 +40,7 @@ export class TestInProgressComponent implements OnInit {
   //Sets answer whenever a selection is made
   onChange(index, input) {
     let question = this.config.questions[index].questionId;
-    console.log(`Question: ${question}, input: ${input}`);
+    // console.log(`Question: ${question}, input: ${input}`);
     this.answers[question] = input;
   }
   //Saves the state of the radio button between questions
@@ -79,6 +90,5 @@ export class TestInProgressComponent implements OnInit {
   ngOnInit(): void {
     this.index = 0;
     this.max = this.config.questions.length - 1;
-    this.answers['quizId'] = this.config.quizId;
   }
 }
