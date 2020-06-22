@@ -33,7 +33,11 @@ export class IndividualQuizPageComponent implements OnInit {
   id = this.route.snapshot.params.id;
   ngAfterViewInit() {
     setTimeout(() => {
-      this.parent.breadcrumbs = ['Earn Points', 'Quiz Overview', 'hi'];
+      this.parent.breadcrumbs = [
+        'Earn Points',
+        'Quiz Overview',
+        this.config.subject + ': ' + this.config.topic + ' Quiz',
+      ];
       this.parent.routerCrumbs = [
         'earnpoints',
         'quizzes',
