@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Subject } from '../interfaces/subject';
 import { Quiz } from '../interfaces/Quiz';
 import { Questions } from '../interfaces/questions';
+import { QuizSubmit } from '../interfaces/quizSubmit';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,24 @@ export class QuizService {
     },
   };
 
+  quizSubmit: QuizSubmit = {
+    userScoreId: 0,
+    userEmail: '',
+    userScore: 0,
+    submitDate: '',
+    quizId: 0,
+    quiz: {
+      quizId: 0,
+      quizTopic: '',
+      quizDescription: '',
+      creatorEmail: '',
+      subject: {
+        subjectId: 0,
+        subjectName: '',
+      },
+    },
+  };
+
   constructor(private httpclient: HttpClient) {}
 
   //Subject-Controller
@@ -63,6 +82,14 @@ export class QuizService {
     );
   }
 
+  submitQuiz(id): Observable<Quiz> {
+    this.quiz.quizId = id;
+    return this.httpclient.post<any>(
+      'http://localhost:8080/quiz/findbyid',
+      this.quiz
+    );
+  }
+
   findQuizById(id): Observable<Quiz> {
     this.quiz.quizId = id;
     return this.httpclient.post<any>(
@@ -72,9 +99,10 @@ export class QuizService {
   }
 
   findQuizBySubject(id): Observable<Quiz> {
+    this.quiz.subjectId = id;
     return this.httpclient.post<any>(
       'http://localhost:8080/quiz/findbysubject',
-      id
+      this.quiz.subjectId
     );
   }
 
@@ -106,55 +134,63 @@ export class QuizService {
       questions
     );
   }
+  //User Quiz Score Controller
+  getUserScores(email): Observable<QuizSubmit> {
+    this.quizSubmit.userEmail = email;
+    return this.httpclient.post<any>(
+      'http://localhost:8080/userscore/takenquiz',
+      this.quizSubmit
+    );
+  }
+  // quizId: number;
+  // getSampleSubjects() {
+  //   return ['subject 1', 'subject 2', 'subject 3'];
+  // }
 
-  quizId: number;
-  getSampleSubjects() {
-    return ['subject 1', 'subject 2', 'subject 3'];
-  }
-  getSampleQuiz(id) {
-    this.quizId = 1;
-    if (this.quizId == id) {
-      return {
-        quizId: 1,
-        creatorEmail: 'email@email.com',
-        subject: 'Java',
-        topic: 'Spring',
-        subjectPicture: null,
-        description: 'A quiz about Java Spring',
-        instructions: [
-          'When taking the quiz you will be able to see how much time you have remaining ',
-          '	When you have completed the quiz click finish button to record your answers',
-          'You will receive marks on completion of the quiz',
-        ],
-        availablePoints: 10,
-        quizAttempts: 1,
-        questions: [
-          {
-            questionId: 1,
-            question: 'here is the first question',
-            options: ['option 1', 'option 2', 'option 3', 'option 4'],
-          },
-          {
-            questionId: 2,
-            question: 'here is the second question',
-            options: ['option 5', 'option 6', 'option 7', 'option 8'],
-          },
-          {
-            questionId: 3,
-            question: 'here is the third question',
-            options: ['option 9', 'option 10', 'option 11', 'option 12'],
-          },
-          {
-            questionId: 5,
-            question: 'here is the fourth question',
-            options: ['option 13', 'option 14', 'option 15', 'option 16'],
-          },
-        ],
-        numberCorrect: 3,
-        pointsAwarded: 2,
-      };
-    }
-  }
+  // getSampleQuiz(id) {
+  //   this.quizId = 1;
+  //   if (this.quizId == id) {
+  //     return {
+  //       quizId: 1,
+  //       creatorEmail: 'email@email.com',
+  //       subject: 'Java',
+  //       topic: 'Spring',
+  //       subjectPicture: null,
+  //       description: 'A quiz about Java Spring',
+  //       instructions: [
+  //         'When taking the quiz you will be able to see how much time you have remaining ',
+  //         '	When you have completed the quiz click finish button to record your answers',
+  //         'You will receive marks on completion of the quiz',
+  //       ],
+  //       availablePoints: 10,
+  //       quizAttempts: 1,
+  //       questions: [
+  //         {
+  //           questionId: 1,
+  //           question: 'here is the first question',
+  //           options: ['option 1', 'option 2', 'option 3', 'option 4'],
+  //         },
+  //         {
+  //           questionId: 2,
+  //           question: 'here is the second question',
+  //           options: ['option 5', 'option 6', 'option 7', 'option 8'],
+  //         },
+  //         {
+  //           questionId: 3,
+  //           question: 'here is the third question',
+  //           options: ['option 9', 'option 10', 'option 11', 'option 12'],
+  //         },
+  //         {
+  //           questionId: 5,
+  //           question: 'here is the fourth question',
+  //           options: ['option 13', 'option 14', 'option 15', 'option 16'],
+  //         },
+  //       ],
+  //       numberCorrect: 3,
+  //       pointsAwarded: 2,
+  //     };
+  //   }
+  // }
 }
 
 //Eval team
