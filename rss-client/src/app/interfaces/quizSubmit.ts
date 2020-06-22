@@ -1,6 +1,7 @@
 export interface QuizSubmit {
   userScoreId: number;
   userEmail: string;
+  userId: number;
   userScore: 0;
   submitDate: string;
   quizId: number;

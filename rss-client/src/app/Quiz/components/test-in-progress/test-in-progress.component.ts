@@ -1,5 +1,7 @@
 import { ImageService } from './../../../services/image.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { QuizService } from 'src/app/services/quiz.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'test-in-progress',
@@ -16,9 +18,6 @@ export class TestInProgressComponent implements OnInit {
 
   //Submits the form and
   onSubmit() {
-    //TODO: send to quiz services to check answers
-    //TODO:change this alert to a modal
-    window.alert('are you sure');
     this.pushProgress.emit('post-test');
     //loop through answers to create question[]
     let answersArr = [];
@@ -27,12 +26,38 @@ export class TestInProgressComponent implements OnInit {
         questionId: key,
         selectedAnswer: value,
         userEmail: null,
+        userId: null,
         quizId: this.config.quizId,
       };
       answersArr.push(obj);
     }
     console.log(answersArr);
+    this.quizservice.submitQuiz(answersArr);
   }
+
+  closeResult: string;
+  //Modal!
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {},
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   //Focus question by clicking on it's number square
   onFocus(input) {
     this.index = input;
@@ -84,7 +109,10 @@ export class TestInProgressComponent implements OnInit {
         break;
     }
   }
-  constructor() {}
+  constructor(
+    private quizservice: QuizService,
+    private modalService: NgbModal
+  ) {}
 
   //sets up answer form and test layout
   ngOnInit(): void {

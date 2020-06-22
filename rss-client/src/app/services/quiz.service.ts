@@ -48,6 +48,7 @@ export class QuizService {
   quizSubmit: QuizSubmit = {
     userScoreId: 0,
     userEmail: '',
+    userId: 0,
     userScore: 0,
     submitDate: '',
     quizId: 0,
@@ -82,11 +83,10 @@ export class QuizService {
     );
   }
 
-  submitQuiz(id): Observable<Quiz> {
-    this.quiz.quizId = id;
+  submitQuiz(quiz): Observable<Quiz> {
     return this.httpclient.post<any>(
       'http://localhost:8080/quiz/findbyid',
-      this.quiz
+      quiz
     );
   }
 

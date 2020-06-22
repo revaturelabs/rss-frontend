@@ -9,8 +9,10 @@
 <!--This is the list of quizzes -->
 <ol>
   <li *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
-    {{ quizdata.subject.subjectName }}
-    <a routerLink="/quizzes/{{ quizdata.quizId }}">{{ quizdata.quizTopic }}</a>
+    {{ quizdata.subject.subjectName | titlecase }}
+    <a routerLink="/quizzes/{{ quizdata.quizId }}">{{
+      quizdata.quizTopic | titlecase
+    }}</a>
     : {{ quizdata.quizDescription }}
   </li>
 </ol>
