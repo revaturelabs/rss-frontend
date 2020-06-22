@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginPageComponent implements OnInit {
 
   @Output() userLogin = new EventEmitter();
+  @Output() isLoggedIn = new EventEmitter();
 
 
   loginForm: FormGroup;
@@ -38,6 +39,7 @@ export class LoginPageComponent implements OnInit {
       this.user = res;
       console.log(res);
       this.userLogin.emit(res);
+      this.isLoggedIn.emit(true);
     });
   }
 }

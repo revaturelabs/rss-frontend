@@ -22,9 +22,8 @@ export class AppComponent implements OnInit {
     //put stuff in here coming a service/services for user info as well
     username: 'Brad Nelson Bingham',
   };
-  rootConfig = {
-    userType: 'Employee', //take this info from a service gathering the user info
-  };
+
+
   quizPageConfig;
   quizConfig;
   rootPage = 'Home';
@@ -47,10 +46,8 @@ export class AppComponent implements OnInit {
     console.log(this.user);
   }
 
-  changeLoginStatus(user) {
-    if (user != null) {
-      this.isLoggedIn = false;
-    }
+  changeLoginStatus(status) {
+    this.isLoggedIn = status;
     console.log(this.isLoggedIn)
   }
 
