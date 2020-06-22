@@ -1,5 +1,6 @@
 import { QuizService } from './services/quiz.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from './interfaces/user';
 import { BreadcrumbService } from './services/breadcrumb.service';
 import { Subscription } from 'rxjs';
 
@@ -9,43 +10,50 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  user: User;
+  isLoggedIn = false;
+
   breadcrumbs: any[] = [];
   routerCrumbs: any[] = [];
   subscription: Subscription;
-  constructor(
-    private quizService: QuizService,
-    private breadcrumbservice: BreadcrumbService
-  ) {}
-  ngOnInit(): void {
-    // this.quizConfig = this.quizService.getSampleQuiz();
 
-    this.subscription = this.breadcrumbservice
-      .getBreadCrumb()
-      .subscribe((breadcrumb) => {
-        if (breadcrumb) {
-          console.log(breadcrumb);
-          breadcrumb.breadcrumb.forEach((x) => {
-            this.breadcrumbs.push(x);
-          });
-          console.log(this.breadcrumbs);
-        } else {
-          this.breadcrumbs = [];
-        }
-      });
-  }
   title = 'rss-client';
   headerConfig = {
     //put stuff in here coming a service/services for user info as well
     username: 'Brad Nelson Bingham',
   };
-  rootConfig = {
-    userType: 'Employee', //take this info from a service gathering the user info
-  };
+
+
   quizPageConfig;
   quizConfig;
   rootPage = 'Home';
+
+  constructor(
+    private quizService: QuizService,
+    private breadcrumbservice: BreadcrumbService
+  ) { }
+
+
+  ngOnInit(): void {
+    // this.quizConfig = this.quizService.getSampleQuiz();
+
+  }
+
+
+
+  loginEvent(e) {
+    this.user = e;
+    console.log(this.user);
+  }
+
+  changeLoginStatus(status) {
+    this.isLoggedIn = status;
+    console.log(this.isLoggedIn)
+  }
+
   onHome() {
     this.breadcrumbs = [];
     this.routerCrumbs = [];
-  }
+  };
 }
+

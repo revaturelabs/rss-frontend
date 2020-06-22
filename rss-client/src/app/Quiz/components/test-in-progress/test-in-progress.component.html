@@ -23,4 +23,32 @@
 <button (click)="navigate('next')">Next</button>
 <button (click)="navigate('last')">Last</button>
 <!-- Submit buttons -->
-<button (click)="onSubmit()">Submit</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Are you sure?!</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <button (click)="onSubmit()">Submit</button>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      NO!
+    </button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+  Submit
+</button>

@@ -30,6 +30,7 @@ export class EditQuizComponent implements OnInit {
   }
   submitChanges() {
     //TODO: save focused quiz to the database
+    console.log(this.focusedQuiz);
   }
   closeResult = '';
   open(content, question) {

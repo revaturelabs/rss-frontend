@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from 'src/app/services/quiz.service';
 import { AppComponent } from 'src/app/app.component';
+import { LowerCasePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'individual-quiz-page',
@@ -27,13 +28,26 @@ export class IndividualQuizPageComponent implements OnInit {
 
   ngOnInit(): void {
     //this pulls in the id passed from the quiz-page
-    this.config = this.quizService.getSampleQuiz(this.route.snapshot.params.id);
+    console.log(this.route.snapshot.params.id);
+    this.quizService
+      .findQuizById(this.route.snapshot.params.id)
+      .subscribe((res) => (this.config = res));
+    this.quizService
+      .getQuestionsById(this.route.snapshot.params.id)
+      .subscribe((res) => (this.config.questions = res));
   }
 
   id = this.route.snapshot.params.id;
   ngAfterViewInit() {
     setTimeout(() => {
-      this.parent.breadcrumbs = ['Earn Points', 'Quiz Overview', 'hi'];
+      this.parent.breadcrumbs = [
+        'Earn Points',
+        'Quiz Overview',
+        new TitleCasePipe().transform(this.config.subject.subjectName) +
+          ': ' +
+          new TitleCasePipe().transform(this.config.quizTopic) +
+          ' Quiz',
+      ];
       this.parent.routerCrumbs = [
         'earnpoints',
         'quizzes',

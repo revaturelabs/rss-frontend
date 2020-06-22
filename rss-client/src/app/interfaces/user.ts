@@ -5,5 +5,5 @@ export interface User {
     profilePic: Blob,
     firstName: string,
     lastName: string,
-    isAdmin: boolean
+    admin: boolean
 }

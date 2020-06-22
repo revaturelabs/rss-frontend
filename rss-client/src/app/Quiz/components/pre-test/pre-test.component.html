@@ -1,9 +1,9 @@
 <!-- topic picture -->
 <img [src]="subjectPicture" width="25px" height="25px" alt="subjectPicture" />
 <!-- I believe the topic is the quiz name -->
-{{ config.topic }}
+{{ config.quizTopic | titlecase }}
 <!-- Quiz description -->
-{{ config.description }}
+{{ config.quizDescription }}
 <!-- Quiz Instruction from an array of instructions-->
 <div *ngFor="let item of instructions">
   {{ item }}
