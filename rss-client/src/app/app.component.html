@@ -1,6 +1,9 @@
 <header [config]="headerConfig" [currentUser]="user"></header>
-<div *ngIf="isLoggedIn==false">
-  <login-page (userLogin)="loginEvent($event)" (isLoggedIn)="changeLoginStatus(true)"></login-page>
+<div *ngIf="isLoggedIn == false">
+  <login-page
+    (userLogin)="loginEvent($event)"
+    (isLoggedIn)="changeLoginStatus(true)"
+  ></login-page>
 </div>
 <div *ngIf="isLoggedIn == true">
   <div class="">
@@ -11,18 +14,20 @@
             <li class="breadcrumb-item">
               <a routerLink="" (click)="onHome()">{{ rootPage }}</a>
             </li>
-            <li id="breadCrumbNav" class="breadcrumb-item active" *ngFor="let breadCrumb of breadcrumbs; index as i"
-              aria-current="page">
+            <li
+              id="breadCrumbNav"
+              class="breadcrumb-item active"
+              *ngFor="let breadCrumb of breadcrumbs; index as i"
+              aria-current="page"
+            >
               <a routerLink="{{ routerCrumbs[i] }}">{{ breadCrumb }}</a>
             </li>
           </ol>
         </div>
         <div *ngIf="user.admin == true" class="offset-5 col-1">Admin</div>
+        <div *ngIf="user.admin == false" class="offset-5 col-1">Employee</div>
       </div>
     </div>
     <router-outlet></router-outlet>
   </div>
 </div>
-
-<router-outlet></router-outlet>
-

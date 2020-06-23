@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     username: 'Brad Nelson Bingham',
   };
 
-
   quizPageConfig;
   quizConfig;
   rootPage = 'Home';
@@ -31,15 +30,11 @@ export class AppComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private breadcrumbservice: BreadcrumbService
-  ) { }
-
+  ) {}
 
   ngOnInit(): void {
     // this.quizConfig = this.quizService.getSampleQuiz();
-
   }
-
-
 
   loginEvent(e) {
     this.user = e;
@@ -48,12 +43,11 @@ export class AppComponent implements OnInit {
 
   changeLoginStatus(status) {
     this.isLoggedIn = status;
-    console.log(this.isLoggedIn)
+    console.log(this.isLoggedIn);
   }
 
   onHome() {
     this.breadcrumbs = [];
     this.routerCrumbs = [];
-  };
+  }
 }
-
