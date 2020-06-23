@@ -8,10 +8,7 @@ import { Store } from '@ngrx/store';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(
-    private httpclient: HttpClient,
-    private store: Store<any>,
-  ) { }
+  constructor(private httpclient: HttpClient, private store: Store<any>) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -78,18 +75,24 @@ export class UserService {
     );
   }
 
-  updateState(obj) {
-    console.log(obj.action)
-    console.log(obj.payload);
-    this.store.dispatch({
-      type: obj.action,
-      payload: obj.payload
-    })
+  isLoggedIn = false;
+  user: User = {
+    userId: 0,
+    email: '',
+    password: '',
+    profilePic: null,
+    firstName: '',
+    lastName: '',
+    admin: false,
+  };
+  changeUser(user: User) {
+    this.isLoggedIn = true;
+    this.user = user;
   }
-
-  getAllState() {
-    console.log(this.store.select('userReducer'));
-    this.store.select('userReducer').subscribe(state => { console.log(state) })
-    return this.store.select('userReducer')
+  getCurrentUser() {
+    return this.user;
+  }
+  loggedIn() {
+    return this.isLoggedIn;
   }
 }
