@@ -11,6 +11,8 @@ import { AdminviewComponent } from './inventory/adminview/adminview.component';
 import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
+import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
+
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: 'adminview', component: AdminviewComponent },
   { path: 'inventoryview', component: InventoryViewComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'selectcart', component: SelectCartComponent }
 ];
 
 @NgModule({
