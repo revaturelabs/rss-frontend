@@ -5,6 +5,8 @@ import { CartItem } from 'src/app/interfaces/cart-item.model';
 import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
+import { FakeProductsService } from '../fake-products.service';
+import { TempProduct } from '../temp-product';
 
 
 @Component({
@@ -18,10 +20,12 @@ export class ShoppingCartComponent implements OnInit {
 
   cart: Cart;
   cartItemArray: CartItem[];
+  prArray : TempProduct[];
 
   constructor(
     private cartService: CartService,
-    private ciService: CartItemService
+    private ciService: CartItemService,
+    private fps: FakeProductsService
   ) {
     this.cartService
       .getCartByUser_post(JSON.parse(window.sessionStorage.getItem('user')))
@@ -29,9 +33,13 @@ export class ShoppingCartComponent implements OnInit {
         (carts) =>
           (this.cart = carts[parseInt(window.sessionStorage.getItem('index'))])
       );
-  //   this.ciService
-  //     .getCartItemByCart(this.cart)
-  //     .subscribe((items) => (this.cartItemArray = items));
+    this.ciService
+      .listCartItemsByCart(this.cart)
+      .subscribe((items) => (this.cartItemArray = items));
+    for(let cartItem of this.cartItemArray){
+      this.fps.getProductById(cartItem.productId).subscribe(product =>  this.prArray.push(product));
+     
+    }
   }
 
   ngOnInit(): void {
