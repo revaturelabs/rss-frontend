@@ -2,7 +2,7 @@ node {
 
     /* The first stage clones our code repository */
     stage('Clone repository') {
-        checkout rss-frontend
+        checkout scm rss-frontend
     }
 
     /* The second stage runs Maven to package the app */
