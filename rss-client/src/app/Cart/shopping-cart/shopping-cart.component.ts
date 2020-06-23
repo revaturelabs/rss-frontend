@@ -3,7 +3,7 @@ import { HostListener, Component, OnInit } from '@angular/core';
 // temporary fake products
 import { TempProducts } from '../temp_products';
 import { CartItem } from 'src/app/interfaces/cart-item.model';
-import { CartItemService } from 'src/app/services/cart-item.service';
+
 import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -23,15 +23,15 @@ export class ShoppingCartComponent implements OnInit {
     private cartService: CartService,
     private ciService: CartItemService
   ) {
-    this.cartService
-      .getCartByUser_post(JSON.parse(window.sessionStorage.getItem('user')))
-      .subscribe(
-        (carts) =>
-          (this.cart = carts[parseInt(window.sessionStorage.getItem('index'))])
-      );
-    this.ciService
-      .getCartItemByCart_post(this.cart)
-      .subscribe((items) => (this.cartItemArray = items));
+    // this.cartService
+    //   .getCartByUser_post(JSON.parse(window.sessionStorage.getItem('user')))
+    //   .subscribe(
+    //     (carts) =>
+    //       (this.cart = carts[parseInt(window.sessionStorage.getItem('index'))])
+    //   );
+    // this.ciService
+    //   .getCartItemByCart_post(this.cart)
+    //   .subscribe((items) => (this.cartItemArray = items));
   }
 
   ngOnInit(): void {
