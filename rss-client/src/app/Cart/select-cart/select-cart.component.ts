@@ -4,6 +4,7 @@ import { User } from 'src/app/interfaces/user';
 import { Cart } from 'src/app/interfaces/cart.model';
 import { FakeProductsService } from '../fake-products.service';
 import { UserService } from 'src/app/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-select-cart',
@@ -14,6 +15,7 @@ export class SelectCartComponent implements OnInit {
 
   currentUser: User;
   userCarts: Cart[];
+  private cartsub: Subscription;
   /**
    * Constructing SelectCart. Need the user information so if it doesn't exist, make fake user.
    * @param cartService 
@@ -37,10 +39,20 @@ export class SelectCartComponent implements OnInit {
     //   };
     // }
     // This gets a list of carts that the user has and stores it
+    if(!this.currentUser.userCartIds){
     this.cartService.listCartsByUser(this.currentUser)
-      .subscribe(carts => this.userCarts = carts);
+      .subscribe(carts => {this.userCarts = carts
+          this.currentUser.userCartIds = [];
+        if(carts){
+          for(let cart of carts){
+            this.currentUser.userCartIds.push(cart.cartId); 
+          }
+        }
+        else{
+            this.currentUser.userCartIds.push(0);
+      }})
   }
-
+}
   // This is just a proxy for the service function
   // getProductById(id:number) {
   //   return this.productService.getProductById(id);
@@ -48,5 +60,11 @@ export class SelectCartComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
+  setActiveCart(cart: Cart){
+    this.cartService.setActiveCart(cart);
+    }
+  getActiveCart(){
+    this.cartsub= this.cartService.getActiveCart().subscribe((cart: Cart) => console.log(cart));
+  }
 }

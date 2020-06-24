@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cart } from '../interfaces/cart.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -9,7 +9,8 @@ import { User } from '../interfaces/user';
 })
 export class CartService {
   private baseURL = 'http://localhost:9000/api/cart/';
-
+  private ActiveCart = new Subject<Cart>();
+  
   constructor(private http: HttpClient) { }
 
   // CREATE
@@ -33,5 +34,12 @@ export class CartService {
   // DELETE
   deleteCart(cart: Cart): void {
     // this.http.delete(this.baseURL+cart.cartId);
+  }
+
+  setActiveCart(cart: Cart): void{
+    this.ActiveCart.next(cart);
+  }
+  getActiveCart(){
+    return this.ActiveCart;
   }
 }
