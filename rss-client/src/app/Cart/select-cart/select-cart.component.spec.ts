@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectCartComponent } from './select-cart.component';
 import { HttpClientModule } from '@angular/common/http';
 
-describe('SelectCartComponent', () => {
+fdescribe('SelectCartComponent', () => {
   let component: SelectCartComponent;
   let fixture: ComponentFixture<SelectCartComponent>;
 

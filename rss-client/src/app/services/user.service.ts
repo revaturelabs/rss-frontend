@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { User } from '../interfaces/user';
-import { Store } from '@ngrx/store';
+// import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private httpclient: HttpClient, private store: Store<any>) {}
+  constructor(private httpclient: HttpClient) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   login(log): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/login',
-      log,
-      this.httpOptions
-    );
+    // return this.httpclient.post<any>(
+    //   'http://localhost:9000/user/login',
+    //   log,
+    //   this.httpOptions
+    // );
+    return of(this.user)
   }
 
   getAllUsers(): Observable<User[]> {
@@ -84,6 +85,7 @@ export class UserService {
     firstName: '',
     lastName: '',
     admin: false,
+    userCartIds: [1, 2, 3]
   };
   changeUser(user: User) {
     this.isLoggedIn = true;
