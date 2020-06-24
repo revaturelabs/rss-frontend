@@ -29,6 +29,8 @@ import { AdminInventoryComponent } from './Admin/admin-inventory/admin-inventory
 import { AddQuizComponent } from './Quiz/admin/add-quiz/add-quiz.component';
 import { EditQuizComponent } from './Quiz/admin/edit-quiz/edit-quiz.component';
 import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
+import { SESSION_STORAGE } from 'ngx-webstorage-service';
+import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,10 @@ import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
     FormsModule,
     StoreModule.forRoot(reducer, {}),
   ],
-  providers: [],
+  providers: [
+    { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
+    UserService,
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
