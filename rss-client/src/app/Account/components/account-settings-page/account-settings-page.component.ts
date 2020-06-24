@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-account-settings-page',
@@ -11,7 +12,12 @@ export class AccountSettingsPageComponent implements OnInit {
 
   user: User;
   isLoggedIn;
-  constructor(private userservice: UserService) { }
+  userProfileForm: FormGroup
+  constructor(
+    private userservice: UserService,
+    private fb: FormBuilder
+    ) { }
+
 
 
   ngOnInit(): void {
@@ -19,5 +25,9 @@ export class AccountSettingsPageComponent implements OnInit {
       this.isLoggedIn = state.isLoggedIn;
     })
 
+    
+
   }
+  
+
 }
