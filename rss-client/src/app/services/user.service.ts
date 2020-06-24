@@ -1,8 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Store } from '@ngrx/store';
+import {
+  SESSION_STORAGE,
+  WebStorageService,
+  StorageService,
+} from 'ngx-webstorage-service';
+import { ThrowStmt } from '@angular/compiler';
+
+const STORAGE_KEY = 'currentUser';
+
+export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
+  'USER_SERVICE_STORAGE'
+);
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +23,8 @@ export class UserService {
   constructor(
     private httpclient: HttpClient,
     private store: Store<any>,
-  ) { }
+    @Inject(SESSION_STORAGE) private storage: WebStorageService
+  ) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -78,18 +91,37 @@ export class UserService {
     );
   }
 
-  updateState(obj) {
-    console.log(obj.action)
-    console.log(obj.payload);
-    this.store.dispatch({
-      type: obj.action,
-      payload: obj.payload
-    })
+  isLoggedIn = false;
+  user: User = {
+    userId: 0,
+    email: '',
+    password: '',
+    profilePic: null,
+    firstName: '',
+    lastName: '',
+    admin: false,
+  };
+  changeUser(user: User) {
+    this.isLoggedIn = true;
+    this.user = user;
+    const cUser: User = this.storage.get(STORAGE_KEY) || user;
+    this.storage.set(STORAGE_KEY, cUser);
+    console.log(this.storage.get(STORAGE_KEY));
   }
 
-  getAllState() {
-    console.log(this.store.select('userReducer'));
-    this.store.select('userReducer').subscribe(state => { console.log(state) })
-    return this.store.select('userReducer')
+  logout() {
+    this.isLoggedIn = false;
+    this.storage.set(STORAGE_KEY, undefined);
+    window.location.reload();
+  }
+
+  userPersistance() {
+    return this.storage.get(STORAGE_KEY);
+  }
+  getCurrentUser() {
+    return this.user;
+  }
+  loggedIn() {
+    return this.isLoggedIn;
   }
 }

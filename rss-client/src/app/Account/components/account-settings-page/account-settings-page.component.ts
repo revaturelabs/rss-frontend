@@ -9,25 +9,23 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./account-settings-page.component.css'],
 })
 export class AccountSettingsPageComponent implements OnInit {
-
   user: User;
   isLoggedIn;
   userProfileForm: FormGroup
   constructor(
     private userservice: UserService,
     private fb: FormBuilder
-    ) { }
+  ) { }
 
 
 
   ngOnInit(): void {
-    this.userservice.getAllState().subscribe(state => {
-      this.isLoggedIn = state.isLoggedIn;
-    })
 
-    
 
   }
-  
+
+
+
+
 
 }

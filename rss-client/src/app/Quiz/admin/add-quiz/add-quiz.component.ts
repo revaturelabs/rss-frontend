@@ -110,6 +110,6 @@ export class AddQuizComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.subjects = this.quizService.getSampleSubjects();
+    // this.subjects = this.quizService.getSampleSubjects();
   }
 }

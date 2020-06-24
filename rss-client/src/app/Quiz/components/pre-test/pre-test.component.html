@@ -1,7 +1,7 @@
 <!-- topic picture -->
 <img [src]="subjectPicture" width="25px" height="25px" alt="subjectPicture" />
 <!-- I believe the topic is the quiz name -->
-{{ config.quizTopic }}
+{{ config.quizTopic | titlecase }}
 <!-- Quiz description -->
 {{ config.quizDescription }}
 <!-- Quiz Instruction from an array of instructions-->

@@ -21,7 +21,7 @@ export class EditQuizComponent implements OnInit {
     this.focusedQuiz.availablePoints = total;
   }
   focusQuiz(event) {
-    this.focusedQuiz = this.quizService.getSampleQuiz(event.id);
+    // this.focusedQuiz = this.quizService.getSampleQuiz(event.id);
     this.updateTotal();
     this.view = 'focus';
   }
