@@ -20,6 +20,7 @@ export class TestInProgressComponent implements OnInit {
   onSubmit() {
     this.pushProgress.emit('post-test');
     //loop through answers to create question[]
+    let questionss = [];
     let answersArr = [];
     for (let [key, value] of Object.entries(this.answers)) {
       let obj = {
