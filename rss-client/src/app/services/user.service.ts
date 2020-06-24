@@ -1,14 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Store } from '@ngrx/store';
+import {
+  SESSION_STORAGE,
+  WebStorageService,
+  StorageService,
+} from 'ngx-webstorage-service';
+
+const STORAGE_KEY = 'currentUser';
+
+export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
+  'USER_SERVICE_STORAGE'
+);
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private httpclient: HttpClient, private store: Store<any>) {}
+  constructor(
+    private httpclient: HttpClient,
+    private store: Store<any>,
+    @Inject(SESSION_STORAGE) private storage: WebStorageService
+  ) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -88,6 +103,13 @@ export class UserService {
   changeUser(user: User) {
     this.isLoggedIn = true;
     this.user = user;
+    const cUser: User = this.storage.get(STORAGE_KEY) || user;
+    this.storage.set(STORAGE_KEY, cUser);
+    console.log(this.storage.get(STORAGE_KEY));
+  }
+
+  userPersistance() {
+    return this.storage.get(STORAGE_KEY);
   }
   getCurrentUser() {
     return this.user;
