@@ -8,6 +8,7 @@ import {
   WebStorageService,
   StorageService,
 } from 'ngx-webstorage-service';
+import { ThrowStmt } from '@angular/compiler';
 
 const STORAGE_KEY = 'currentUser';
 
@@ -106,6 +107,12 @@ export class UserService {
     const cUser: User = this.storage.get(STORAGE_KEY) || user;
     this.storage.set(STORAGE_KEY, cUser);
     console.log(this.storage.get(STORAGE_KEY));
+  }
+
+  logout() {
+    this.isLoggedIn = false;
+    this.storage.set(STORAGE_KEY, undefined);
+    window.location.reload();
   }
 
   userPersistance() {

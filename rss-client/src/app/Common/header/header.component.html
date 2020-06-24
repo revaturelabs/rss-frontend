@@ -47,7 +47,7 @@
             <div *ngIf="currentUser.admin == true">
               <a class="dropdown-item" routerLink="/admin">Admin Settings</a>
             </div>
-            <a class="dropdown-item" routerLink="#">Logout</a>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
           </div>
         </div>
       </div>
