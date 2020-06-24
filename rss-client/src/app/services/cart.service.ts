@@ -10,7 +10,7 @@ import { User } from '../interfaces/user';
 export class CartService {
   private baseURL = 'http://localhost:9000/api/cart/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // CREATE
   addCart(cart: Cart): Observable<Cart> {
@@ -21,7 +21,7 @@ export class CartService {
   getCartById(id: number): Observable<Cart> {
     return this.http.get<Cart>(this.baseURL + id);
   }
-  getCartByUser_post(user: User): Observable<Cart[]> {
+  listCartsByUser(user: User): Observable<Cart[]> {
     return of([new Cart(0, 0)]);
     // return this.http.post<Cart[]>(this.baseURL, user);
   }

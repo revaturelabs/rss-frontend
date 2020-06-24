@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectCartComponent } from './select-cart.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('SelectCartComponent', () => {
   let component: SelectCartComponent;
@@ -8,9 +9,10 @@ describe('SelectCartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectCartComponent ]
+      imports: [HttpClientModule],
+      declarations: [SelectCartComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

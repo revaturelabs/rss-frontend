@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { User } from 'src/app/interfaces/user';
+import { Cart } from 'src/app/interfaces/cart.model';
+import { FakeProductsService } from '../fake-products.service';
 
 @Component({
   selector: 'app-select-cart',
@@ -7,7 +11,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectCartComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+  userCarts: Cart[];
+  /**
+   * Constructing SelectCart. Need the user information so if it doesn't exist, make fake user.
+   * @param cartService 
+   */
+  constructor(private cartService: CartService, private productService: FakeProductsService) {
+    // making a fake user if one doesn't exist
+    if (!this.currentUser) {
+      this.currentUser = {
+        userId: 0,
+        email: "test@test.net",
+        password: "password",
+        profilePic: new Blob(),
+        firstName: "Test",
+        lastName: "Testerson",
+        admin: false
+      };
+    }
+    // This gets a list of carts that the user has and stores it
+    this.cartService.listCartsByUser(this.currentUser)
+      .subscribe(carts => this.userCarts = carts);
+  }
+
+  // This is just a proxy for the service function
+  // getProductById(id:number) {
+  //   return this.productService.getProductById(id);
+  // }
 
   ngOnInit(): void {
   }

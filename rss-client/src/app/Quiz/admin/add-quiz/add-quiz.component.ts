@@ -107,9 +107,9 @@ export class AddQuizComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private quizService: QuizService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.subjects = this.quizService.getSampleSubjects();
+    // this.subjects = this.quizService.getSampleSubjects();
   }
 }
