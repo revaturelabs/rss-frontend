@@ -5,5 +5,6 @@ export interface User {
     profilePic: Blob,
     firstName: string,
     lastName: string,
-    admin: boolean
+    admin: boolean,
+    userCartIds: number[]
 }

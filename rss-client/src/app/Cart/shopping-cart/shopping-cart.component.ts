@@ -2,12 +2,14 @@ import { HostListener, Component, OnInit, Input } from '@angular/core';
 // temporary fake products
 import { TempProducts } from '../temp_products';
 import { CartItem } from 'src/app/interfaces/cart-item.model';
+
 import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
 import { FakeProductsService } from '../fake-products.service';
 import { TempProduct } from '../temp-product';
 import { User } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -28,20 +30,25 @@ export class ShoppingCartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private ciService: CartItemService,
-    private fps: FakeProductsService
+    private fps: FakeProductsService,
+    private userService: UserService
   ) {
+    // access hardcoded user temporarily
+    this.currentUser = this.userService.getCurrentUser();
+
+
     // make a fake user if one doesn't exist
-    if (!this.currentUser) {
-      this.currentUser = {
-        userId: 0,
-        email: "test@test.net",
-        password: "password",
-        profilePic: new Blob(),
-        firstName: "Test",
-        lastName: "Testerson",
-        admin: false
-      };
-    }
+    // if (!this.currentUser) {
+    //   this.currentUser = {
+    //     userId: 0,
+    //     email: "test@test.net",
+    //     password: "password",
+    //     profilePic: new Blob(),
+    //     firstName: "Test",
+    //     lastName: "Testerson",
+    //     admin: false
+    //   };
+    // }
     // Get all the carts for this user from the endpoint (will probably change later)
     // And store the selected cart
     this.cartService
