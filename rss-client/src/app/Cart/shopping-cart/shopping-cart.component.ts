@@ -2,6 +2,7 @@ import { HostListener, Component, OnInit, Input } from '@angular/core';
 // temporary fake products
 import { TempProducts } from '../temp_products';
 import { CartItem } from 'src/app/interfaces/cart-item.model';
+
 import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
