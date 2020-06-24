@@ -1,13 +1,16 @@
 <h1>Select which cart you'd like to use</h1>
 
 <section>
-    <!-- <div *ngFor="let cart of usercarts">
-        {{ cart.name }} -->
-        <!-- List out contents of cart items with associated product name -->
-        <!-- <ul>
-            <li *ngFor="let item of cart.cartItems">
-                {{ productService.getProductById(item.productId), item.quantity }}
+    <div *ngFor="let cart of userCarts">
+        {{ cart.name }}
+        <h6>out contents of cart items with associated product name</h6>
+        <ul>
+            <!-- looping through cart items, fetching the actual product
+            that it references by using the id for each cart-item -->
+            <li *ngFor="let item of cart.cartItems; getProductById(item.productId)">
+                {{ product.name }}
+                {{ item.quantity }}
             </li>
-        </ul> -->
-    <!-- </div> -->
+        </ul>
+    </div>
 </section>

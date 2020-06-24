@@ -5,6 +5,7 @@ import { Cart } from 'src/app/interfaces/cart.model';
 import { FakeProductsService } from '../fake-products.service';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
+import { TempProduct } from '../temp-product';
 
 @Component({
   selector: 'app-select-cart',
@@ -14,7 +15,8 @@ import { Subscription } from 'rxjs';
 export class SelectCartComponent implements OnInit {
 
   currentUser: User;
-  userCarts: Cart[];
+  userCarts: Cart[];    
+  product: TempProduct;
   private cartsub: Subscription;
   /**
    * Constructing SelectCart. Need the user information so if it doesn't exist, make fake user.
@@ -41,7 +43,8 @@ export class SelectCartComponent implements OnInit {
     // This gets a list of carts that the user has and stores it
     if(!this.currentUser.userCartIds){
     this.cartService.listCartsByUser(this.currentUser)
-      .subscribe(carts => {this.userCarts = carts
+      .subscribe(carts => {
+          this.userCarts = carts;
           this.currentUser.userCartIds = [];
         if(carts){
           for(let cart of carts){
@@ -59,6 +62,12 @@ export class SelectCartComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+  }
+
+  getProductById(id: number) {
+    this.productService.getProductById(id).subscribe(fetchedProduct => {
+      this.product = fetchedProduct;
+    })
   }
   
   setActiveCart(cart: Cart){

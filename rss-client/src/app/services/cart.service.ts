@@ -22,6 +22,7 @@ export class CartService {
   getCartById(id: number): Observable<Cart> {
     return this.http.get<Cart>(this.baseURL + id);
   }
+  
   listCartsByUser(user: User): Observable<Cart[]> {
     return of([new Cart(0, 0)]);
     // return this.http.post<Cart[]>(this.baseURL, user);
