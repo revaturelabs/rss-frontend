@@ -1,8 +1,8 @@
 import { QuizService } from './services/quiz.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from './interfaces/user';
-import { BreadcrumbService } from './services/breadcrumb.service';
 import { Subscription } from 'rxjs';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -18,22 +18,19 @@ export class AppComponent implements OnInit {
   subscription: Subscription;
 
   title = 'rss-client';
-  headerConfig = {
-    //put stuff in here coming a service/services for user info as well
-    username: 'Brad Nelson Bingham',
-  };
+  headerConfig = {};
 
-  quizPageConfig;
-  quizConfig;
+  // quizPageConfig;
+  // quizConfig;
   rootPage = 'Home';
 
   constructor(
     private quizService: QuizService,
-    private breadcrumbservice: BreadcrumbService
+    private userservice: UserService
   ) {}
 
   ngOnInit(): void {
-    // this.quizConfig = this.quizService.getSampleQuiz();
+    this.user = this.userservice.getCurrentUser();
   }
 
   loginEvent(e) {

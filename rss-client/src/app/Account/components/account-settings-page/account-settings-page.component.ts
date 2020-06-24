@@ -8,16 +8,9 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./account-settings-page.component.css'],
 })
 export class AccountSettingsPageComponent implements OnInit {
-
   user: User;
   isLoggedIn;
-  constructor(private userservice: UserService) { }
+  constructor(private userservice: UserService) {}
 
-
-  ngOnInit(): void {
-    this.userservice.getAllState().subscribe(state => {
-      this.isLoggedIn = state.isLoggedIn;
-    })
-
-  }
+  ngOnInit(): void {}
 }
