@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../interfaces/subject';
-import { Quiz } from '../interfaces/Quiz';
+import { Quiz } from '../interfaces/quiz';
 import { Questions } from '../interfaces/questions';
 import { QuizSubmit } from '../interfaces/quizSubmit';
 
