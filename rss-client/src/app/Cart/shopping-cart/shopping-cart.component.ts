@@ -24,10 +24,12 @@ export class ShoppingCartComponent implements OnInit {
   currentUser: User;
 
   activeCart: Cart;
-  cartItemArray: CartItem[] = [];
+  // cartItemArray: CartItem[] = [];
   prArray: TempProduct[] = [];
   prIdArray: number[] = [];
   product: TempProduct;
+
+
 
   constructor(
     private cartService: CartService,
@@ -74,6 +76,35 @@ export class ShoppingCartComponent implements OnInit {
       }
     }
     return this.product;
+  }
+
+  updateQuantity(itemId) {
+
+    let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
+
+    if (newQuantity > 0) {
+      // console.log(newQuantity);
+      for (let cItem of this.activeCart.cartItems) {
+        if (cItem.cartItemId == itemId) {
+          cItem.quantity = newQuantity;
+          console.log(cItem.quantity);
+        }
+      } 
+    } else {
+      // later, give user feedback
+    }
+  }
+
+  deleteItem(cartItem) {
+
+    const index = this.activeCart.cartItems.indexOf(cartItem);
+    if (index > -1) {
+      this.activeCart.cartItems.splice(index, 1);
+      console.log(index);
+    }
+    
+
+
   }
   
   // listen for screen sizes
