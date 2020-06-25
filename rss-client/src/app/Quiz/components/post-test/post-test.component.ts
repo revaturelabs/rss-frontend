@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'post-test',

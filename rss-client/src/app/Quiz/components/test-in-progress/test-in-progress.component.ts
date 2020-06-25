@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user.service';
 import { ImageService } from './../../../services/image.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizService } from 'src/app/services/quiz.service';
@@ -18,6 +19,7 @@ export class TestInProgressComponent implements OnInit {
 
   //Submits the form and
   onSubmit() {
+    //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
     //loop through answers to create question[]
     let questionss = [];
@@ -26,8 +28,8 @@ export class TestInProgressComponent implements OnInit {
       let obj = {
         questionId: key,
         selectedAnswer: value,
-        userEmail: null,
-        userId: null,
+        userEmail: this.userService.user.email,
+        userId: this.userService.user.userId,
         quizId: this.config.quizId,
       };
       answersArr.push(obj);
@@ -42,7 +44,9 @@ export class TestInProgressComponent implements OnInit {
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
-        (result) => {},
+        (result) => {
+          this.onSubmit();
+        },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
@@ -112,7 +116,8 @@ export class TestInProgressComponent implements OnInit {
   }
   constructor(
     private quizservice: QuizService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userService: UserService
   ) {}
 
   //sets up answer form and test layout
