@@ -24,7 +24,7 @@ export class ShoppingCartComponent implements OnInit {
   currentUser: User;
 
   activeCart: Cart;
-  cartItemArray: CartItem[];
+  cartItemArray: CartItem[] = [];
   prArray: TempProduct[] = [];
   prIdArray: number[] = [];
   product: TempProduct;
@@ -67,7 +67,7 @@ export class ShoppingCartComponent implements OnInit {
     // }
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
-    if (actCartId) {
+    if (actCartId || actCartId == 0) {
       this.cartService.getCartById(actCartId).subscribe(cart => this.activeCart = cart);
     } else {
       this.activeCart = null;
