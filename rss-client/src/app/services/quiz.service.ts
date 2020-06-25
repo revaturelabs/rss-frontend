@@ -10,6 +10,11 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   quiz: Quiz = {
     quizId: 0,
     quizTopic: '',
@@ -64,7 +69,7 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
@@ -134,6 +139,14 @@ export class QuizService {
     );
   }
 
+  getQuestionsByIdAdmin(id): Observable<Questions[]> {
+    this.questions.quizId = id;
+    return this.httpclient.post<any[]>(
+      'http://localhost:8080/question/getquestionsadmin',
+      this.questions
+    );
+  }
+
   addManyQuestions(questions): Observable<Questions> {
     this.questions = questions;
     console.log(this.questions);
@@ -150,6 +163,12 @@ export class QuizService {
       'http://localhost:8080/userscore/takenquiz',
       this.quizSubmit
     );
+  }
+
+  deleteQuestion(id) {
+    console.log(id);
+    return this.httpclient.post<any[]>(
+      'http://localhost:8080/question/delete', JSON.stringify(id), this.httpOptions)
   }
   // quizId: number;
   // getSampleSubjects() {

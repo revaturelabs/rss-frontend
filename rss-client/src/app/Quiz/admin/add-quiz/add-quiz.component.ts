@@ -18,7 +18,7 @@ export class AddQuizComponent implements OnInit {
     quizTopic: null,
     quizDescription: null,
     subjectId: 0,
-    creatorEmail: this.userservice.user.email,
+    creatorEmail: this.userservice.userPersistance().email,
     questions: [],
     availablePoints: null,
   };
@@ -49,10 +49,10 @@ export class AddQuizComponent implements OnInit {
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
-      console.log(this.focusedQuiz.quizId);
       this.focusedQuiz.questions.forEach((x) => {
         x.quizId = this.focusedQuiz.quizId;
       });
+      console.log(this.focusedQuiz);
       this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
     });
   }
@@ -69,7 +69,7 @@ export class AddQuizComponent implements OnInit {
         option4: null,
         option5: null,
         quiz: {
-          creatorEmail: this.userservice.user.email,
+
         },
       };
     } else {
@@ -142,7 +142,7 @@ export class AddQuizComponent implements OnInit {
     private modalService: NgbModal,
     private quizService: QuizService,
     private userservice: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.quizService.getAllSubjects().subscribe((res) => (this.subjects = res));

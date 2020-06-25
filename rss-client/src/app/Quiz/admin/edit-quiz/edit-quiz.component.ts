@@ -3,6 +3,7 @@ import { QuizPageService } from './../../../Test/Quiz/quiz-page.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'edit-quiz',
@@ -24,7 +25,7 @@ export class EditQuizComponent implements OnInit {
   focusQuiz(event) {
     this.focusedQuiz = event;
     this.focusedQuiz.questions = [];
-    this.quizService.getQuestionsById(event.quizId).subscribe((res) => {
+    this.quizService.getQuestionsByIdAdmin(event.quizId).subscribe((res) => {
       res.forEach((x) => this.focusedQuiz.questions.push(x));
     });
     this.updateTotal();
@@ -35,12 +36,25 @@ export class EditQuizComponent implements OnInit {
   }
   submitChanges() {
     //TODO: finish this method in add-quiz and copy here.
+    this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
+    this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
+      this.focusedQuiz.quizId = res.quizId;
+
+      this.focusedQuiz.questions.forEach((x) => {
+        x.quizId = this.focusedQuiz.quizId;
+        x.quiz = {};
+        delete x.userEmail;
+        delete x.selectedAnswer
+      });
+      this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
+    });
     console.log(this.focusedQuiz);
   }
   closeResult = '';
   open(content, question) {
     if (question == 'new') {
       this.focusedQuestion = {
+        quesionId: null,
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
@@ -50,7 +64,6 @@ export class EditQuizComponent implements OnInit {
         option4: null,
         option5: null,
         quiz: {
-          creatorEmail: this.userservice.user.email,
         },
       };
     } else {
@@ -97,6 +110,7 @@ export class EditQuizComponent implements OnInit {
             this.updateTotal();
           } else if (result.type == 'delete') {
             //TODO:remove question from database here
+            this.quizService.deleteQuestion(result.value).subscribe();
             this.focusedQuiz.questions = this.focusedQuiz.questions.filter(
               (x) => x.questionId != result.value.questionId
             );
@@ -124,11 +138,12 @@ export class EditQuizComponent implements OnInit {
     private testservice: QuizPageService,
     private modalService: NgbModal,
     private userservice: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.quizService.getAllQuizzes().subscribe((x) => {
       this.quizData = x;
     });
+    console.log(this.userservice.userPersistance().email)
   }
 }

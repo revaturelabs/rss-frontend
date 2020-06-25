@@ -9,6 +9,7 @@ import {
   StorageService,
 } from 'ngx-webstorage-service';
 import { ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 const STORAGE_KEY = 'currentUser';
 
@@ -22,9 +23,9 @@ export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
 export class UserService {
   constructor(
     private httpclient: HttpClient,
-    private store: Store<any>,
+    private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
-  ) {}
+  ) { }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -113,6 +114,7 @@ export class UserService {
     this.isLoggedIn = false;
     this.storage.set(STORAGE_KEY, undefined);
     window.location.reload();
+    this.router.navigate(['/']);
   }
 
   userPersistance() {
