@@ -35,7 +35,7 @@
                             </div>
                             <div class="collapse" id="cartDetails-{{cart.cartId}}">
                                 <div class="d-flex justify-content-around cart-button-holder">
-                                    <button class="btn btn-primary">Select Cart</button>
+                                    <button class="btn btn-primary" (click)="setActiveCart(cart)">Select Cart</button>
                                     <!-- <button class="btn btn-success">Rename Cart</button> -->
                                     <button class="btn btn-danger">Delete Cart</button>
                                 </div>
