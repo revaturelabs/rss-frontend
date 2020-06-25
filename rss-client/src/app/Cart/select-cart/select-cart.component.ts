@@ -23,6 +23,8 @@ export class SelectCartComponent implements OnInit {
   TempProducts = TempProducts;
   tempCart = Cart;
   tempCarts: Cart[] = [];
+  selected: boolean;
+  activeCartId: number;
   // currentCart: Cart;
 
   /**
@@ -32,6 +34,17 @@ export class SelectCartComponent implements OnInit {
   constructor(private cartService: CartService, private productService: FakeProductsService, private userService: UserService) {
     // access hardcoded user
     this.currentUser = this.userService.getCurrentUser();
+
+    // set the default cart to be selected
+    console.log(this.cartService.isCartSelected());
+    
+    try {
+      
+      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
+      // this.activeCartId = this.getActiveCart().cartId;  
+    } catch (error) {
+      console.log(error);
+    }
 
     // hardcoded carts
     // this.tempCart = {cartId: 0, 0, [], "firstcart"};
@@ -82,8 +95,12 @@ export class SelectCartComponent implements OnInit {
     return this.product;
   }
 
-  setActiveCart(cart: Cart) {
+  setActiveCart(cart: Cart) {  
+    //   
     this.cartService.setActiveCart(cart);
+    // active cart id is determined by which you click on to send the id forward
+    this.activeCartId = cart.cartId;
+    sessionStorage.setItem('activecartId',JSON.stringify(this.activeCartId) );
   }
 
   getActiveCart() {
