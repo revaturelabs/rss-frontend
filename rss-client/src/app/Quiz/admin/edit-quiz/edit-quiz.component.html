@@ -1,15 +1,28 @@
 <div *ngIf="view == 'select'">
-  <input [(ngModel)]="searchText" placeholder="search text goes here" />
+  <input [(ngModel)]="searchText" placeholder="search for a quiz" />
 
   <!--This is the list of quizzes -->
-  <ol>
+  <!-- <ol>
     <li *ngFor="let quizdata of quizData">
       {{ quizdata.subject }}
       <button (click)="focusQuiz(quizdata)">{{ quizdata.topic }}</button>
       : {{ quizdata.description }}
     </li>
-  </ol>
+  </ol> -->
 </div>
+<br>
+<br>
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" style="background-color: #F26925;">
+    Select a Quiz to Edit
+  </a>
+  <a href="#" class="list-group-item list-group-item-action" *ngFor="let quizdata of quizData">
+    <h3>{{ quizdata.subject }}</h3>
+    <h3 style="font-size: large;">{{ quizdata.topic }}</h3>
+    {{ quizdata.description }}
+  </a>
+</div>
+
 <!-- Focused quiz form -->
 <div *ngIf="view != 'select'">
   <div class="row">
