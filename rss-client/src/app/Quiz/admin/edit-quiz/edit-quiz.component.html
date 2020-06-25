@@ -1,26 +1,22 @@
 <div *ngIf="view == 'select'">
   <input [(ngModel)]="searchText" placeholder="search for a quiz" />
-
-  <!--This is the list of quizzes -->
-  <!-- <ol>
-    <li *ngFor="let quizdata of quizData">
-      {{ quizdata.subject }}
-      <button (click)="focusQuiz(quizdata)">{{ quizdata.topic }}</button>
-      : {{ quizdata.description }}
-    </li>
-  </ol> -->
-</div>
-<br>
-<br>
-<div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active" style="background-color: #F26925;">
-    Select a Quiz to Edit
-  </a>
-  <a href="#" class="list-group-item list-group-item-action" *ngFor="let quizdata of quizData">
-    <h3>{{ quizdata.subject }}</h3>
-    <h3 style="font-size: large;">{{ quizdata.topic }}</h3>
-    {{ quizdata.description }}
-  </a>
+  <div class="list-group">
+    <a
+      class="list-group-item list-group-item-action active"
+      style="background-color: #f26925;"
+    >
+      Select a Quiz to Edit
+    </a>
+    <a
+      class="list-group-item list-group-item-action"
+      *ngFor="let quizdata of quizData"
+      (click)="focusQuiz(quizdata)"
+    >
+      <h3>{{ quizdata.subject.subjectName }}</h3>
+      <h3 style="font-size: large;">{{ quizdata.quizTopic }}</h3>
+      {{ quizdata.quizDescription }}
+    </a>
+  </div>
 </div>
 
 <!-- Focused quiz form -->
@@ -28,7 +24,7 @@
   <div class="row">
     <div class="col-8">
       <h1 class="">
-        {{ focusedQuiz.subject }}
+        {{ focusedQuiz.subject.subjectName | titlecase }}
       </h1>
     </div>
     <div class="col-4 row">
@@ -55,7 +51,7 @@
       class="form-control"
       id="topic"
       name="name"
-      [(ngModel)]="focusedQuiz.topic"
+      [(ngModel)]="focusedQuiz.quizTopic"
     />
   </div>
   <div class="form-group">
@@ -65,7 +61,7 @@
       class="form-control"
       id="description"
       name="name"
-      [(ngModel)]="focusedQuiz.description"
+      [(ngModel)]="focusedQuiz.quizDescription"
     />
   </div>
 
@@ -110,7 +106,7 @@
             rem
           </button>
           <div class="col-6">{{ item.question | slice: 0:50 }}...</div>
-          <div class="col-2 text-right">{{ item.pointValue }} pts</div>
+          <div class="col-2 text-right">{{ item.questionValue }} pts</div>
         </div>
       </div>
     </div>
@@ -148,15 +144,32 @@
       </div>
       <div class="form-group">
         <div class="input-group">
-          <label for="pointValue">Point value</label>
+          <label for="questionValue">Point value</label>
           <div class="input-group">
             <input
-              id="pointValue"
+              id="questionValue"
               class="form-control"
               type="number"
-              name="pointValue"
-              [ngModel]="focusedQuestion.pointValue"
-              #pointValue="ngModel"
+              name="questionValue"
+              [ngModel]="focusedQuestion.questionValue"
+              #questionValue="ngModel"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="correctAnswer">Correct Option</label>
+          <div class="input-group">
+            <input
+              id="correctAnswer"
+              class="form-control"
+              min="1"
+              max="4"
+              type="number"
+              name="correctAnswer"
+              [ngModel]="focusedQuestion.correctAnswer"
+              #correctAnswer="ngModel"
             />
           </div>
         </div>
@@ -169,7 +182,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option1"
-            [ngModel]="focusedQuestion.options[0]"
+            [ngModel]="focusedQuestion.option1"
             #option1="ngModel"
           />
         </div>
@@ -181,7 +194,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option2"
-            [ngModel]="focusedQuestion.options[1]"
+            [ngModel]="focusedQuestion.option2"
             #option2="ngModel"
           />
         </div>
@@ -193,7 +206,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option3"
-            [ngModel]="focusedQuestion.options[2]"
+            [ngModel]="focusedQuestion.option3"
             #option3="ngModel"
           />
         </div>
@@ -205,7 +218,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option4"
-            [ngModel]="focusedQuestion.options[3]"
+            [ngModel]="focusedQuestion.option4"
             #option4="ngModel"
           />
         </div>
@@ -217,7 +230,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option5"
-            [ngModel]="focusedQuestion.options[4]"
+            [ngModel]="focusedQuestion.option5"
             #option5="ngModel"
           />
         </div>
