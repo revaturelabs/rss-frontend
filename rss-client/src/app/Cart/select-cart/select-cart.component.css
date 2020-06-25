@@ -1,0 +1,70 @@
+/* ...............generics................. */
+
+/* get rid of some default gray lines on table rows from bootstrap */
+.table>tr>td,
+.table>tr,th,
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    border-top: 0
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.btn {
+    margin: 2px;
+    margin-bottom: 4px;
+    margin-top: 6px;
+}
+
+/* .................general layout....................... */
+
+.main-container {
+    min-height: 100vh;
+    /* border: 1px solid red; */
+}
+
+.cart-card {
+    /* width: 100%; */
+}
+
+.cart-title {
+    border-bottom: 2px solid #474C55;
+    padding: 6px;
+    margin: 6px;
+}
+
+.dropdown-img {
+    height: 40px;
+    width: 40px;
+}
+
+.dropdown-img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.cart-button-holder {
+    background-color: #aab1bd;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.img-small {
+    width: 40px;
+    height: 40px;
+}
+
+.img-frame {
+    background-color: #474C55;
+}
+
+.small-row {
+    border-bottom: 1px solid #474C55;
+    margin-top: 4px;
+}

@@ -6,6 +6,7 @@ import { FakeProductsService } from '../fake-products.service';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { TempProduct } from '../temp-product';
+import { TempProducts } from '../temp_products';
 
 @Component({
   selector: 'app-select-cart',
@@ -18,6 +19,11 @@ export class SelectCartComponent implements OnInit {
   userCarts: Cart[];    
   product: TempProduct;
   private cartsub: Subscription;
+  down: boolean = true;
+  TempProducts = TempProducts;
+  tempCart = Cart;
+  tempCarts: Cart[] = [];
+
   /**
    * Constructing SelectCart. Need the user information so if it doesn't exist, make fake user.
    * @param cartService 
@@ -25,7 +31,9 @@ export class SelectCartComponent implements OnInit {
   constructor(private cartService: CartService, private productService: FakeProductsService, private userService: UserService) {
     // access hardcoded user
     this.currentUser = this.userService.getCurrentUser();
-
+    
+    // hardcoded carts
+    // this.tempCart = {cartId: 0, 0, [], "firstcart"};
 
     // making a fake user if one doesn't exist
     // if (!this.currentUser) {
@@ -75,5 +83,17 @@ export class SelectCartComponent implements OnInit {
     }
   getActiveCart(){
     this.cartsub= this.cartService.getActiveCart().subscribe((cart: Cart) => console.log(cart));
+  }
+
+  toggle() {
+    // this.down = !this.down;
+    
+    // if (this.down) {
+    //   document.getElementById("dropdown-img").style.transform = "rotate(0deg)";  
+    // } else if (!this.down) {
+    //   document.getElementById("dropdown-img").style.transform = "rotate(180deg)";  
+    // }
+    // console.log("again");
+      
   }
 }
