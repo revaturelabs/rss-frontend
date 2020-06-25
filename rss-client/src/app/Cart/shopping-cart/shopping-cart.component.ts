@@ -67,7 +67,6 @@ export class ShoppingCartComponent implements OnInit {
     // }
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
-    console.log(actCartId);
     if (actCartId || actCartId == 0) {
       this.cartService.getCartById(actCartId).subscribe(cart => this.activeCart = cart);
     } else {
@@ -128,7 +127,7 @@ export class ShoppingCartComponent implements OnInit {
     }
     return this.product;
   }
-
+  
   // listen for screen sizes
   @HostListener('window:resize', ['$event'])
   onResize(event) {
