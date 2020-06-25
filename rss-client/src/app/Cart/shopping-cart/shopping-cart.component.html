@@ -1,6 +1,6 @@
 <!-- wrap it all in a container, then it can fit under their header no problem -->
 <div class="container main-cart-container">
-<!--AHHHHHHHH I am DAVE This is another change row layout -->
+    <!--AHHHHHHHH I am DAVE This is another change row layout -->
     <div class="row">
 
         <!-- Cart, on the left, with large item cards -->
@@ -10,23 +10,25 @@
 
                 <!-- mobile layout -->
                 <ng-container *ngIf="mobile">
-                    <ng-container *ngFor="let product of TempProducts">
+                    <ng-container *ngFor="let cItem of activeCart.cartItems">
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
                                     <td class="d-flex justify-content-between">
-                                        <img class="img-large" src="{{product.src}}"/>
+                                        <img class="img-large" src="{{getProductById(cItem.productId).src}}" />
                                         <div class="d-flex flex-column" style="text-align: right;">
-                                            <h2>{{product.name}}</h2>
-                                            <h3>{{product.points}} points</h3>
+                                            <h2>{{getProductById(cItem.productId).name}}</h2>
+                                            <h3>{{getProductById(cItem.productId).points}} points</h3>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <div class="d-flex flex-column item-div-small">
-                                        <label for=""><h5>Quantity</h5></label>
+                                        <label for="">
+                                            <h5>Quantity: x{{cItem.quantity}}</h5>
+                                        </label>
                                         <input class="form-control quantity-input" id="" type="number" min="1">
-                                        <div class="d-flex">
+                                        <div class="d-flex item-mobile-check">
                                             <button class="btn btn-secondary quantity-button">Update</button>
                                             <button class="btn btn-danger">&#10006;</button>
                                         </div>
@@ -43,28 +45,31 @@
                 <ng-container *ngIf="!mobile">
                     <table class="table table-striped">
                         <tbody>
-                                <tr *ngFor="let product of TempProducts" class="d-flex justify-content-around align-items-end">
-                                    <td>
-                                        <img class="img-large" src="{{product.src}}"/>
-                                    </td>
-                                    <td class="align-bottom">
-                                        <h2>{{product.name}}</h2>
-                                        <h3>{{product.points}} points</h3>
-                                    </td>
+                            <tr *ngFor="let product of TempProducts"
+                                class="d-flex justify-content-around align-items-end">
+                                <td>
+                                    <img class="img-large" src="{{product.src}}" />
+                                </td>
+                                <td class="align-bottom">
+                                    <h2>{{product.name}}</h2>
+                                    <h3>{{product.points}} points</h3>
+                                </td>
 
-                                    <td class="align-bottom quantity-large">
-                                        <div class="d-flex flex-column item-div">
-                                            <label for=""><h5>Quantity</h5></label>
-                                            <input class="form-control quantity-input" id="" type="number" min="1">
-                                            <div class="d-flex">
-                                                <button class="btn btn-secondary quantity-button">Update</button>
-                                                <button class="btn btn-danger">&#10006;</button>
-                                            </div>
+                                <td class="align-bottom quantity-large">
+                                    <div class="d-flex flex-column item-div">
+                                        <label for="">
+                                            <h5>Quantity</h5>
+                                        </label>
+                                        <input class="form-control quantity-input" id="" type="number" min="1">
+                                        <div class="d-flex item-mobile-check">
+                                            <button class="btn btn-secondary quantity-button">Update</button>
+                                            <button class="btn btn-danger">&#10006;</button>
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </ng-container>
 
             </div>
@@ -78,9 +83,10 @@
 
                 <div class="row">
                     <table class="table">
-                        <tr *ngFor="let product of TempProducts" class="d-flex justify-content-between align-items-end small-row">
+                        <tr *ngFor="let product of TempProducts"
+                            class="d-flex justify-content-between align-items-end small-row">
                             <td class="align-bottom img-frame">
-                                <img class="img-small" src="{{product.src}}"/>
+                                <img class="img-small" src="{{product.src}}" />
                             </td>
                             <td class="align-bottom"><b>{{product.name}}</b></td>
                             <td class="align-bottom">{{product.points}} points</td>
@@ -91,7 +97,7 @@
                 <div class="row card d-flex checkout-box">
 
                     <div class="card-title cart-total text-center">
-                        <h2 class="card-header">Order Summary</h2>
+                        <h2>Order Summary</h2>
                     </div>
 
                     <div class="container">
@@ -103,8 +109,8 @@
 
                     <div class="container">
                         <div class="user-points card-text d-flex justify-content-between align-items-end">
-                                <h4>Your Points:</h4>
-                                <h6><span>1000</span> points</h6>
+                            <h4>Your Points:</h4>
+                            <h6><span>1000</span> points</h6>
                         </div>
                     </div>
 
@@ -114,7 +120,8 @@
                         </button>
                         <div class="collapse points-div" id="pointSource">
                             <div class="card d-flex flex-column" id="pointsCard">
-                                <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose Sources</h3>
+                                <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose
+                                    Sources</h3>
                                 <div class="card-text d-flex justify-content-between align-items-end">
                                     <h5 href="#">Total Quiz Points:</h5>
                                     <h6><span>500</span></h6>
@@ -124,15 +131,12 @@
                                     <h5 href="#">Total Bug Bounty Points:</h5>
                                     <h6><span>500</span></h6>
                                 </div>
-                                <input class="form-control" type="number" min="0" step="50" placeholder="Bug Bounty Points">
+                                <input class="form-control" type="number" min="0" step="50"
+                                    placeholder="Bug Bounty Points">
                             </div>
                         </div>
                         <div>
                             <button class="btn btn-lg btn-block btn-primary">Purchase</button>
-                        </div>
-                        <div class="d-flex save-delete">
-                            <button class="btn btn-sm btn-block btn-success">Save Cart</button>
-                            <button class="btn btn-sm btn-block btn-danger">Delete Cart</button>
                         </div>
                     </div>
                 </div>

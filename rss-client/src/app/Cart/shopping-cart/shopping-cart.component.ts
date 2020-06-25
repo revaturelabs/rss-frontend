@@ -23,14 +23,16 @@ export class ShoppingCartComponent implements OnInit {
 
   currentUser: User;
 
-  cart: Cart;
+  activeCart: Cart;
   cartItemArray: CartItem[];
   prArray: TempProduct[] = [];
+  prIdArray: number[] = [];
+  product: TempProduct;
 
   constructor(
     private cartService: CartService,
     private ciService: CartItemService,
-    private fps: FakeProductsService,
+    private productService: FakeProductsService,
     private userService: UserService
   ) {
     // access hardcoded user temporarily
@@ -51,20 +53,45 @@ export class ShoppingCartComponent implements OnInit {
     // }
     // Get all the carts for this user from the endpoint (will probably change later)
     // And store the selected cart
-    this.cartService
-      .listCartsByUser(this.currentUser)
-      .subscribe(
-        carts =>
-          this.cart = carts[parseInt(window.sessionStorage.getItem('index'))]
-      );
+    // if (!this.currentUser.userCartIds) {
+    //   this.cartService
+    //     .listCartsByUser(this.currentUser)
+    //     .subscribe(
+    //       carts => {
+    //         this.currentUser.userCartIds = [];
+    //         for (let cart of carts) {
+    //           this.currentUser.userCartIds.push(cart.cartId);
+    //         }
+    //       }
+    //     );
+    // }
+
+    let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
+    if (actCartId) {
+      this.cartService.getCartById(actCartId).subscribe(cart => this.activeCart = cart);
+    } else {
+      this.activeCart = null;
+    }
+
+    // Insert Subject magic here
+
+    // this.cartService
+    //   .listCartsByUser(this.currentUser)
+    //   .subscribe(
+    //     carts =>
+    //       this.cart = carts[parseInt(window.sessionStorage.getItem('index'))]
+    //   );
     // Get all the cart items from the selected cart
-    this.ciService
-      .listCartItemsByCart(this.cart)
-      .subscribe(items => this.cartItemArray = items);
+    // this.ciService
+    //   .listCartItemsByCart(this.activeCart)
+    //   .subscribe(items => this.cartItemArray = items);
     // Loop through cart items and pull product information from endpoint to use later
     for (let cartItem of this.cartItemArray) {
-      this.fps.getProductById(cartItem.productId)
-        .subscribe(product => this.prArray.push(product));
+      this.productService.getProductById(cartItem.productId)
+        .subscribe(product => {
+          this.prArray.push(product);
+          this.prIdArray.push(product.id);
+        });
     }
   }
 
@@ -73,14 +100,14 @@ export class ShoppingCartComponent implements OnInit {
    * the product array filled in the constructor.
    * @param cartItem 
    */
-  getProductFromCartItem(cartItem: CartItem) {
-    for (let product of this.prArray) {
-      if (cartItem.productId = product.id) {
-        return product;
-      }
-    }
-    return null;
-  }
+  // getProductFromCartItem(cartItem: CartItem) {
+  //   for (let product of this.prArray) {
+  //     if (cartItem.productId = product.id) {
+  //       return product;
+  //     }
+  //   }
+  //   return null;
+  // }
 
   ngOnInit(): void {
     // responsive conditional
@@ -91,7 +118,18 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  // listen for screen sizes for responsive design
+  getProductById(id: number) {
+    if (this.prIdArray.includes(id)) {
+      this.productService.getProductById(id).subscribe(fetchedProduct => {
+        this.product = fetchedProduct;
+      });
+    } else {
+
+    }
+    return this.product;
+  }
+
+  // listen for screen sizes
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     // responsive conditional
