@@ -9,7 +9,6 @@
       <input
         ngModel
         #subject="ngModel"
-        required
         type="text"
         placeholder="Add a subject"
       />
@@ -110,7 +109,7 @@
             rem
           </button>
           <div class="col-6">{{ item.question | slice: 0:50 }}...</div>
-          <div class="col-2 text-right">{{ item.pointValue }} pts</div>
+          <div class="col-2 text-right">{{ item.questionValue }} pts</div>
         </div>
       </div>
     </div>
@@ -148,15 +147,32 @@
       </div>
       <div class="form-group">
         <div class="input-group">
-          <label for="pointValue">Point value</label>
+          <label for="questionValue">Point value</label>
           <div class="input-group">
             <input
-              id="pointValue"
+              id="questionValue"
               class="form-control"
               type="number"
-              name="pointValue"
-              [ngModel]="focusedQuestion.pointValue"
-              #pointValue="ngModel"
+              name="questionValue"
+              [ngModel]="focusedQuestion.questionValue"
+              #questionValue="ngModel"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="correctAnswer">Correct Option</label>
+          <div class="input-group">
+            <input
+              id="correctAnswer"
+              class="form-control"
+              min="1"
+              max="4"
+              type="number"
+              name="correctAnswer"
+              [ngModel]="focusedQuestion.correctAnswer"
+              #correctAnswer="ngModel"
             />
           </div>
         </div>
@@ -169,7 +185,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option1"
-            [ngModel]="focusedQuestion.options[0]"
+            [ngModel]="focusedQuestion.option1"
             #option1="ngModel"
           />
         </div>
@@ -181,7 +197,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option2"
-            [ngModel]="focusedQuestion.options[1]"
+            [ngModel]="focusedQuestion.option2"
             #option2="ngModel"
           />
         </div>
@@ -193,7 +209,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option3"
-            [ngModel]="focusedQuestion.options[2]"
+            [ngModel]="focusedQuestion.option3"
             #option3="ngModel"
           />
         </div>
@@ -205,7 +221,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option4"
-            [ngModel]="focusedQuestion.options[3]"
+            [ngModel]="focusedQuestion.option4"
             #option4="ngModel"
           />
         </div>
@@ -217,7 +233,7 @@
             class="form-control"
             placeholder="Enter new option here"
             name="option5"
-            [ngModel]="focusedQuestion.options[4]"
+            [ngModel]="focusedQuestion.option5"
             #option5="ngModel"
           />
         </div>
