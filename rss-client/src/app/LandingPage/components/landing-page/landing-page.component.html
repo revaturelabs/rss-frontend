@@ -1,11 +1,11 @@
 <div class="container">
-  <div>
+  <div class="row justify-content-center">
     <h1>Welcome to the Revature Swagg Shop!</h1>
   </div>
   <br />
   <br />
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <h3 style="font-size: larger; text-align: center;">
         Here at Revature, we know our associates work hard, and want to look
         good doing it. <br />Reward yourself for all that hard work with some
@@ -17,6 +17,7 @@
       id="carouselExampleSlidesOnly"
       class="carousel slide"
       data-ride="carousel"
+      style="margin-left: 300px;"
     >
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -48,6 +49,11 @@
           />
         </div>
       </div>
+      <br>
+      <!--change this button routing to the store once we have it-->
+      <div>
+        <button class="btn btn-lg" style="color: white; background-color: #F26925;" routerLink="/cart">Swagg Shop</button>
+      </div>
     </div>
     <br />
     <br />
@@ -66,7 +72,7 @@
       <br />
       <p>See all available quizzes here</p>
       <p class="lead">
-        <a class="btn btn-primary btn-lg" routerLink="/quizzes" role="button"
+        <a class="btn btn-lg" style="color: white; background-color: #F26925;" routerLink="/quizzes" role="button"
           >Quizzes</a
         >
       </p>
@@ -84,14 +90,15 @@
         <img
           src="https://www.securitymagazine.com/ext/resources/Issues/2018/September/SEC0918-cyber-feature-slide1_900px.jpg"
           alt="temp bug bounty image"
-          style="width: 512px; height: 256px;"
+          style="width: 512px; height: 256px; margin-left: 15px;"
         />
       </div>
       <br />
       <p>Go to your account settings to link your Bug Bounty account</p>
       <p class="lead">
         <a
-          class="btn btn-primary btn-lg"
+          class="btn btn-lg" 
+          style="color: white; background-color: #F26925;"
           routerLink="/account/settings"
           role="button"
           >Account Settings</a
