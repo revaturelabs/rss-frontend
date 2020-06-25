@@ -68,3 +68,18 @@ a:hover {
     border-bottom: 1px solid #474C55;
     margin-top: 4px;
 }
+
+/* determine what cart is selected */
+
+.selectedCart {
+    color: white;
+    background-color: #474C55;
+}
+
+.selectedCart td {
+    color: white
+}
+
+.selectedCart img-frame {
+    background-color: white;
+}

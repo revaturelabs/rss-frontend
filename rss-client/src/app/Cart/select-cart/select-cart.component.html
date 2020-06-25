@@ -23,9 +23,8 @@
                     <h1 class="text-center">{{currentUser.firstName | titlecase}}'s Carts</h1>
                     <!-- ngFor, one row per  -->
                     <!-- <div class="row" style="border: 1px solid yellow;"> -->
-                    <div class="card cart-card" *ngFor="let cart of userCarts">
-                        <!-- <div class="card cart-card" *ngFor="let cart of userCarts"> -->
-                        <div class="card-header">
+                    <div class="card cart-card" [ngClass]="activeCartId == cart.cartId ? 'selectedCart' : null" *ngFor="let cart of userCarts">
+                        <div class="card-header" id="cartBody-{{cart.cartId}}">
                             <div class="d-flex align-items-end justify-content-between cart-title">
                                 <h3><a>{{cart.name}}</a></h3>
                                 <a href='#cartDetails-{{cart.cartId}}' data-toggle="collapse">
@@ -35,9 +34,9 @@
                             </div>
                             <div class="collapse" id="cartDetails-{{cart.cartId}}">
                                 <div class="d-flex justify-content-around cart-button-holder">
-                                    <button class="btn btn-primary" (click)="setActiveCart(cart)">Select Cart</button>
+                                    <button class="btn btn-primary btn-block" (click)="setActiveCart(cart)">Select Cart</button>
                                     <!-- <button class="btn btn-success">Rename Cart</button> -->
-                                    <button class="btn btn-danger">Delete Cart</button>
+                                    <button class="btn btn-danger btn-block">Delete Cart</button>
                                 </div>
                                 <div>
                                     <table class="table">
@@ -61,7 +60,6 @@
                                 <div class="card-text">Your card</div>
                             </div> -->
                     </div>
-                    <!-- </div> -->
                 </div>
             </div>
             <div class="col-sm-2" style="border-left: 4px solid #474C55"></div>

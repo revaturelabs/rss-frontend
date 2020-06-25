@@ -58,7 +58,9 @@ export class CartService {
 
   isCartSelected(): boolean {
     let selected: boolean;
-    this.ActiveCart.pipe(isEmpty()).subscribe(x => selected = !x);
+    this.ActiveCart.pipe(isEmpty()).subscribe(x => {selected = !x; console.log(!x);
+    });
+    
     return selected;
   }
 }
