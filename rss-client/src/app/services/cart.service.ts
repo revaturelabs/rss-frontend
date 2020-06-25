@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cart } from '../interfaces/cart.model';
 import { Observable, of, Subject } from 'rxjs';
+import { isEmpty } from 'rxjs/operators';
 import { User } from '../interfaces/user';
+import { TempProducts } from '../Cart/temp_products';
+import { CartItem } from '../interfaces/cart-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +13,7 @@ import { User } from '../interfaces/user';
 export class CartService {
   private baseURL = 'http://localhost:9000/api/cart/';
   private ActiveCart = new Subject<Cart>();
-  
+
   constructor(private http: HttpClient) { }
 
   // CREATE
@@ -22,9 +25,17 @@ export class CartService {
   getCartById(id: number): Observable<Cart> {
     return this.http.get<Cart>(this.baseURL + id);
   }
-  
   listCartsByUser(user: User): Observable<Cart[]> {
-    return of([new Cart(0, 0)]);
+    let bdayCart: Cart = new Cart(0, 0, [], "Birthday");
+    let bdayCartItem: CartItem = new CartItem(1, bdayCart, TempProducts[0].id, 5);
+    bdayCart.cartItems.push(bdayCartItem);
+    let xmasCart: Cart = new Cart(1, 0, [], "Christmas");
+    let xmasCartItem: CartItem = new CartItem(2, xmasCart, TempProducts[1].id, 10);
+    xmasCart.cartItems.push(xmasCartItem);
+    let hnkaCart: Cart = new Cart(2, 0, [], "Hanukkah");
+    let hnkaCartItem: CartItem = new CartItem(3, hnkaCart, TempProducts[2].id, 1);
+    hnkaCart.cartItems.push(hnkaCartItem);
+    return of([bdayCart, xmasCart, hnkaCart]);
     // return this.http.post<Cart[]>(this.baseURL, user);
   }
   // UPDATE
@@ -37,10 +48,17 @@ export class CartService {
     // this.http.delete(this.baseURL+cart.cartId);
   }
 
-  setActiveCart(cart: Cart): void{
+  setActiveCart(cart: Cart): void {
     this.ActiveCart.next(cart);
   }
-  getActiveCart(){
+
+  getActiveCart(): Subject<Cart> {
     return this.ActiveCart;
+  }
+
+  isCartSelected(): boolean {
+    let selected: boolean;
+    this.ActiveCart.pipe(isEmpty()).subscribe(x => selected = !x);
+    return selected;
   }
 }
