@@ -17,8 +17,8 @@
                                     <td class="d-flex justify-content-between">
                                         <img class="img-large" src="{{getProductById(cItem.productId).src}}" />
                                         <div class="d-flex flex-column" style="text-align: right;">
-                                            <h2>{{getProductById(cItem.productId).name}}</h2>
-                                            <h3>{{getProductById(cItem.productId).points}} points</h3>
+                                            <h2>{{product.name}}</h2>
+                                            <h3>{{product.points}} points</h3>
                                         </div>
                                     </td>
                                 </tr>
@@ -45,20 +45,20 @@
                 <ng-container *ngIf="!mobile">
                     <table class="table table-striped">
                         <tbody>
-                            <tr *ngFor="let product of TempProducts"
+                            <tr *ngFor="let cItem of activeCart.cartItems"
                                 class="d-flex justify-content-around align-items-end">
                                 <td>
-                                    <img class="img-large" src="{{product.src}}" />
+                                    <img class="img-large" src="{{getProductById(cItem.productId).src}}" />
                                 </td>
                                 <td class="align-bottom">
-                                    <h2>{{product.name}}</h2>
-                                    <h3>{{product.points}} points</h3>
+                                    <h2>{{getProductById(cItem.productId).name}}</h2>
+                                    <h3>{{getProductById(cItem.productId).points}} points</h3>
                                 </td>
 
                                 <td class="align-bottom quantity-large">
                                     <div class="d-flex flex-column item-div">
                                         <label for="">
-                                            <h5>Quantity</h5>
+                                            <h5>Quantity: x{{cItem.quantity}}</h5>
                                         </label>
                                         <input class="form-control quantity-input" id="" type="number" min="1">
                                         <div class="d-flex item-mobile-check">
@@ -83,13 +83,13 @@
 
                 <div class="row">
                     <table class="table">
-                        <tr *ngFor="let product of TempProducts"
+                        <tr *ngFor="let cItem of activeCart.cartItems"
                             class="d-flex justify-content-between align-items-end small-row">
                             <td class="align-bottom img-frame">
-                                <img class="img-small" src="{{product.src}}" />
+                                <img class="img-small" src="{{getProductById(cItem.productId).src}}" />
                             </td>
-                            <td class="align-bottom"><b>{{product.name}}</b></td>
-                            <td class="align-bottom">{{product.points}} points</td>
+                            <td class="align-bottom"><b>{{getProductById(cItem.productId).name}}</b></td>
+                            <td class="align-bottom">{{getProductById(cItem.productId).points}} points</td>
                         </tr>
                     </table>
                 </div>

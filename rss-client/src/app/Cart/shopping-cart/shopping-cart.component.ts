@@ -118,17 +118,16 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  getProductById(id: number) {
-    if (this.prIdArray.includes(id)) {
-      this.productService.getProductById(id).subscribe(fetchedProduct => {
-        this.product = fetchedProduct;
-      });
-    } else {
-
+  getProductById(id: number) : TempProduct {
+    this.product=null;
+    for(let product of this.prArray){
+      if(product.id == id){
+        this.product = product;
+      }
     }
     return this.product;
   }
-
+  
   // listen for screen sizes
   @HostListener('window:resize', ['$event'])
   onResize(event) {
