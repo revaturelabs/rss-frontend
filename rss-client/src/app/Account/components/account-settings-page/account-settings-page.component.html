@@ -1,42 +1,39 @@
 <div class="container">
     <div class="row">
         <div class="border-right col-6 p-2">
-			<div class="form-group">
-				<label for="userPicture"></label>
-                <img src="https://lh3.googleusercontent.com/proxy/EMHyp-lhjqI9FTamA5Ek7pYIoPlIIOuKYxl-PqLnGbYLj6jgEZTTXLs5sXn1P28GEuizW1mgr-TbHi3ijnIzjtSuSHPrG8_Kas2kTO68RO7AISg_TwfUvpEB6B2lg3y1iUBJpqolMomxhrM" alt="user pic placeholder" class="img-thumbnail">
+            <div class="form-group">
+                <label for="userPicture"></label>
+                <img src="https://lh3.googleusercontent.com/proxy/EMHyp-lhjqI9FTamA5Ek7pYIoPlIIOuKYxl-PqLnGbYLj6jgEZTTXLs5sXn1P28GEuizW1mgr-TbHi3ijnIzjtSuSHPrG8_Kas2kTO68RO7AISg_TwfUvpEB6B2lg3y1iUBJpqolMomxhrM"
+                    alt="user pic placeholder" class="img-thumbnail">
                 <div>
                     <form>
-                      <input
-                        type="file"
-                        id="fileInput"
-                        name="profilePic"
-                        accept="image/*"
-                      />
-                      <input
-                        class="d-block btn btn-outline-light"
-                        type="submit"
-                        id="btn1"
-                        style="background-color: #F26925;"
-                      />
+                        <input type="file" id="fileInput" name="profilePic" accept="image/*" />
+                        <input class="d-block btn btn-outline-light" type="submit" id="btn1"
+                            style="background-color: #F26925;" />
                     </form>
-                  </div>
-			</div>
-            <div class="form-group">
-                <label for="firstName">First Name: </label>
-                <input class="form-control" type="text" placeholder="Enter first name..." />
+                </div>
             </div>
-            <div class="form-group">
-                <label for=""> Last Name: </label>
-                <input class="form-control" type="text" placeholder="Enter last name..." />
-            </div>
-            <div class="form-group">
-                <label for="">Email: </label>
-                <input class="form-control" type="text" placeholder="Enter email..." />
-            </div>
-            <div class="form-group">
-                <label for="">Password: </label>
-                <input class="form-control" type="text" placeholder="Enter password..." />
-            </div>
+            <form [formGroup]="userProfileForm">
+                <div class="form-group">
+                    <label for="firstName">First Name: </label>
+                    <input class="form-control" type="text" formControlName="firstName"
+                        placeholder="Enter first name..." />
+                </div>
+                <div class="form-group">
+                    <label for=""> Last Name: </label>
+                    <input class="form-control" type="text" formControlName="lastName"
+                        placeholder="Enter last name..." />
+                </div>
+                <div class="form-group">
+                    <label for="">Email: </label>
+                    <input class="form-control" type="text" formControlName="email" placeholder="Enter email..." />
+                </div>
+                <div class="form-group">
+                    <label for="">Password: </label>
+                    <input class="form-control" type="text" formControlName="password"
+                        placeholder="Enter password..." />
+                </div>
+            </form>
             <br />
             <button type="submit" class="btn btn-primary" style="background-color: #F26925;">Update Changes</button>
         </div>
@@ -45,8 +42,10 @@
             <hr />
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="m-2 btn btn-success" style="background-color: #F26925;">Link To Your Eval</button>
-                    <button type="submit" class="m-2 btn btn-success" style="background-color: #F26925;">Link To Your Bug Bounty</button>
+                    <button type="submit" class="m-2 btn btn-success" style="background-color: #F26925;">Link To Your
+                        Eval</button>
+                    <button type="submit" class="m-2 btn btn-success" style="background-color: #F26925;">Link To Your
+                        Bug Bounty</button>
                 </div>
             </div>
         </div>

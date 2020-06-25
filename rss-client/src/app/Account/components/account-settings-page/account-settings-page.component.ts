@@ -9,9 +9,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./account-settings-page.component.css'],
 })
 export class AccountSettingsPageComponent implements OnInit {
+
   user: User;
   isLoggedIn;
-  userProfileForm: FormGroup
+  userProfileForm: FormGroup;
+
+
   constructor(
     private userservice: UserService,
     private fb: FormBuilder
@@ -20,8 +23,26 @@ export class AccountSettingsPageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getUser();
+    this.userProfileForm = this.fb.group({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    })
+  }
 
-
+  getUser() {
+    this.user = this.userservice.getCurrentUser()
+    this.editForm(this.user);
+  }
+  editForm(user: User) {
+    this.userProfileForm.patchValue({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password
+    })
   }
 
 
