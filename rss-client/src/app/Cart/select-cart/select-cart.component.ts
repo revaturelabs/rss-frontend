@@ -46,22 +46,6 @@ export class SelectCartComponent implements OnInit {
       console.log(error);
     }
 
-    // hardcoded carts
-    // this.tempCart = {cartId: 0, 0, [], "firstcart"};
-
-    // making a fake user if one doesn't exist
-    // if (!this.currentUser) {
-    //   this.currentUser = {
-    //     userId: 0,
-    //     email: "test@test.net",
-    //     password: "password",
-    //     profilePic: new Blob(),
-    //     firstName: "Test",
-    //     lastName: "Testerson",
-    //     admin: false,
-
-    //   };
-    // }
     // This gets a list of carts that the user has and stores it
     // console.log(this.currentUser.userCartIds);
     if (!this.currentUser.userCartIds || !this.userCarts) {
@@ -119,18 +103,6 @@ export class SelectCartComponent implements OnInit {
     }
     return activeCart;
   }
-
-  // makeCartCardId(cart: Cart) {
-  //   return `cartDetails${cart.cartId}`;
-  // }
-
-  // makeCartCardIdWithHashtag(cart: Cart) {
-  //   return `#cartDetails${cart.cartId}`;
-  // }
-
-  // setCurrentCart(cart: Cart) {
-  //   this.currentCart = cart;
-  // }
 
   // this creates a Record (like an object or map with key/value pairs)
   // so we can track whether each individual arrow is point up or down
