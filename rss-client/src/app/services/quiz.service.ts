@@ -126,9 +126,9 @@ export class QuizService {
     );
   }
 
-  getQuestionsById(id): Observable<Questions> {
+  getQuestionsById(id): Observable<Questions[]> {
     this.questions.quizId = id;
-    return this.httpclient.post<any>(
+    return this.httpclient.post<any[]>(
       'http://localhost:8080/question/getquestions',
       this.questions
     );
