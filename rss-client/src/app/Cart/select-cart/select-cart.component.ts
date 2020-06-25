@@ -39,7 +39,9 @@ export class SelectCartComponent implements OnInit {
     console.log(this.cartService.isCartSelected());
     
     try {
-      this.activeCartId = this.getActiveCart().cartId;  
+      
+      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
+      // this.activeCartId = this.getActiveCart().cartId;  
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +100,7 @@ export class SelectCartComponent implements OnInit {
     this.cartService.setActiveCart(cart);
     // active cart id is determined by which you click on to send the id forward
     this.activeCartId = cart.cartId;
-
+    sessionStorage.setItem('activecartId',JSON.stringify(this.activeCartId) );
   }
 
   getActiveCart() {
