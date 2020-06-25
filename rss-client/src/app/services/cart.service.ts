@@ -23,7 +23,22 @@ export class CartService {
   }
   // READ
   getCartById(id: number): Observable<Cart> {
-    return this.http.get<Cart>(this.baseURL + id);
+    let cart: Cart;
+    if (id == 0) {
+      cart = new Cart(0, 0, [], "Birthday");
+      let cartItem: CartItem = new CartItem(1, cart, TempProducts[0].id, 5);
+      cart.cartItems.push(cartItem);
+    } else if (id == 1) {
+      cart = new Cart(1, 0, [], "Christmas");
+      let cartItem: CartItem = new CartItem(2, cart, TempProducts[1].id, 10);
+      cart.cartItems.push(cartItem);
+    } else if (id == 2) {
+      cart = new Cart(2, 0, [], "Hanukkah");
+      let cartItem: CartItem = new CartItem(3, cart, TempProducts[2].id, 1);
+      cart.cartItems.push(cartItem);
+    }
+    return of(cart);
+    // return this.http.get<Cart>(this.baseURL + id);
   }
   listCartsByUser(user: User): Observable<Cart[]> {
     let bdayCart: Cart = new Cart(0, 0, [], "Birthday");
@@ -58,9 +73,10 @@ export class CartService {
 
   isCartSelected(): boolean {
     let selected: boolean;
-    this.ActiveCart.pipe(isEmpty()).subscribe(x => {selected = !x; console.log(!x);
+    this.ActiveCart.pipe(isEmpty()).subscribe(x => {
+      selected = !x; console.log(!x);
     });
-    
+
     return selected;
   }
 }

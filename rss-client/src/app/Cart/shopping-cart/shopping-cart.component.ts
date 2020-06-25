@@ -24,7 +24,7 @@ export class ShoppingCartComponent implements OnInit {
   currentUser: User;
 
   activeCart: Cart;
-  cartItemArray: CartItem[];
+  cartItemArray: CartItem[] = [];
   prArray: TempProduct[] = [];
   prIdArray: number[] = [];
   product: TempProduct;
@@ -67,7 +67,8 @@ export class ShoppingCartComponent implements OnInit {
     // }
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
-    if (actCartId) {
+    console.log(actCartId);
+    if (actCartId || actCartId == 0) {
       this.cartService.getCartById(actCartId).subscribe(cart => this.activeCart = cart);
     } else {
       this.activeCart = null;
@@ -86,7 +87,7 @@ export class ShoppingCartComponent implements OnInit {
     //   .listCartItemsByCart(this.activeCart)
     //   .subscribe(items => this.cartItemArray = items);
     // Loop through cart items and pull product information from endpoint to use later
-    for (let cartItem of this.cartItemArray) {
+    for (let cartItem of this.activeCart.cartItems) {
       this.productService.getProductById(cartItem.productId)
         .subscribe(product => {
           this.prArray.push(product);
@@ -119,12 +120,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getProductById(id: number) {
-    if (this.prIdArray.includes(id)) {
-      this.productService.getProductById(id).subscribe(fetchedProduct => {
-        this.product = fetchedProduct;
-      });
-    } else {
-
+    this.product = null;
+    for (let product of this.prArray) {
+      if (product.id == id) {
+        this.product = product;
+      }
     }
     return this.product;
   }

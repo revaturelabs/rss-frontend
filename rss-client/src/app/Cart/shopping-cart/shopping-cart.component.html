@@ -45,14 +45,14 @@
                 <ng-container *ngIf="!mobile">
                     <table class="table table-striped">
                         <tbody>
-                            <tr *ngFor="let product of TempProducts"
+                            <tr *ngFor="let cItem of activeCart.cartItems"
                                 class="d-flex justify-content-around align-items-end">
                                 <td>
-                                    <img class="img-large" src="{{product.src}}" />
+                                    <img class="img-large" src="{{getProductById(cItem.productId).src}}" />
                                 </td>
                                 <td class="align-bottom">
-                                    <h2>{{product.name}}</h2>
-                                    <h3>{{product.points}} points</h3>
+                                    <h2>{{getProductById(cItem.productId).name}}</h2>
+                                    <h3>{{getProductById(cItem.productId).points}} points</h3>
                                 </td>
 
                                 <td class="align-bottom quantity-large">
