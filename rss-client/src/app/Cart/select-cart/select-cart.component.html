@@ -1,99 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <p *ngFor="let cart of userCarts">{{ cart.name }}</p> -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="select-cart.component.css">
-    <title>Document</title>
-</head>
+<div class="container main-container">
 
-<body>
-
-    <!-- <p *ngFor="let cart of userCarts">{{ cart.name }}</p> -->
-
-    <div class="container main-container">
-
-        <div class="row">
-            <div class="col-sm-2" style="border-right: 4px solid #474C55"></div>
-            <div class="col-sm-8">
-                <div class="container">
-                    <h1 class="text-center">{{currentUser.firstName | titlecase}}'s Carts</h1>
-                    <!-- ngFor, one row per  -->
-                    <!-- <div class="row" style="border: 1px solid yellow;"> -->
-                    <div class="card cart-card" [ngClass]="activeCartId == cart.cartId ? 'selectedCart' : null" *ngFor="let cart of userCarts">
-                        <div class="card-header" id="cartBody-{{cart.cartId}}">
-                            <div class="d-flex align-items-end justify-content-between cart-title">
-                                <h3><a>{{cart.name}}</a></h3>
-                                <a href='#cartDetails-{{cart.cartId}}' data-toggle="collapse">
-                                    <img src="assets/Images/dropdown.png" class="dropdown-img" type="button"
-                                        id="dropdown-img" alt="details">
-                                </a>
+    <div class="row">
+        <div class="col-sm-2" style="border-right: 4px solid #474C55"></div>
+        <div class="col-sm-8">
+            <div class="container">
+                <h1 class="text-center">{{currentUser.firstName | titlecase}}'s Carts</h1>
+                <!-- ngFor, one row per  -->
+                <!-- <div class="row" style="border: 1px solid yellow;"> -->
+                <div class="card cart-card" [ngClass]="activeCartId == cart.cartId ? 'selectedCart' : null" *ngFor="let cart of userCarts">
+                    <div class="card-header" id="cartBody-{{cart.cartId}}">
+                        <div class="d-flex align-items-end justify-content-between cart-title">
+                            <h3><a>{{cart.name}}</a></h3>
+                            <a href='#cartDetails-{{cart.cartId}}' (click)="toggleArrow($event)" data-toggle="collapse">
+                                <img src="assets/Images/dropdown.png" id="arrow-{{cart.cartId}}" class="downarrow"
+                                type="button"
+                                    alt="details">
+                            </a>
+                        </div>
+                        <div class="collapse" id="cartDetails-{{cart.cartId}}">
+                            <div class="d-flex justify-content-around cart-button-holder">
+                                <button class="btn btn-primary btn-block" (click)="setActiveCart(cart)">Select Cart</button>
+                                <!-- <button class="btn btn-success">Rename Cart</button> -->
+                                <button class="btn btn-danger btn-block">Delete Cart</button>
                             </div>
-                            <div class="collapse" id="cartDetails-{{cart.cartId}}">
-                                <div class="d-flex justify-content-around cart-button-holder">
-                                    <button class="btn btn-primary btn-block" (click)="setActiveCart(cart)">Select Cart</button>
-                                    <!-- <button class="btn btn-success">Rename Cart</button> -->
-                                    <button class="btn btn-danger btn-block">Delete Cart</button>
-                                </div>
-                                <div>
-                                    <table class="table">
-                                        <tr *ngFor="let cItem of cart.cartItems"
-                                            class="d-flex justify-content-between align-items-end small-row">
-                                            <td class="align-bottom img-frame">
-                                                <img class="img-small" src="{{getProductById(cItem.productId).src}}" />
-                                            </td>
-                                            <td class="align-bottom"><b>{{getProductById(cItem.productId).name}}</b>
-                                            </td>
-                                            <td class="align-bottom">{{getProductById(cItem.productId).points}} points
-                                            </td>
-                                            <td class="align-bottom">x{{cItem.quantity}}</td>
-                                            <!-- td for quantity in cart -->
-                                        </tr>
-                                    </table>
-                                </div>
+                            <div>
+                                <table class="table">
+                                    <tr *ngFor="let cItem of cart.cartItems"
+                                        class="d-flex justify-content-between align-items-end small-row">
+                                        <td class="align-bottom img-frame">
+                                            <img class="img-small" src="{{getProductById(cItem.productId).src}}" />
+                                        </td>
+                                        <td class="align-bottom"><b>{{getProductById(cItem.productId).name}}</b>
+                                        </td>
+                                        <td class="align-bottom">{{getProductById(cItem.productId).points}} points
+                                        </td>
+                                        <td class="align-bottom">x{{cItem.quantity}}</td>
+                                        <!-- td for quantity in cart -->
+                                    </tr>
+                                </table>
                             </div>
                         </div>
-                        <!-- <div class="card-body">
-                                <div class="card-text">Your card</div>
-                            </div> -->
                     </div>
+                    <!-- <div class="card-body">
+                            <div class="card-text">Your card</div>
+                        </div> -->
                 </div>
             </div>
-            <div class="col-sm-2" style="border-left: 4px solid #474C55"></div>
         </div>
-
-        <!-- <section>
-            <div *ngFor="let cart of userCarts">
-                {{ cart.name }}
-                <h6>out contents of cart items with associated product name</h6>
-                <ul> -->
-
-        <!-- looping through cart items, fetching the actual product
-                    that it references by using the id for each cart-item -->
-
-        <!-- <li *ngFor="let item of cart.cartItems; getProductById(item.productId)">
-                        {{ product.name }}
-                        {{ item.quantity }}
-                    </li>
-                </ul>
-            </div>
-        </section> -->
-
+        <div class="col-sm-2" style="border-left: 4px solid #474C55"></div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+</div>

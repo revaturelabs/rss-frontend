@@ -39,13 +39,24 @@ a:hover {
     margin: 6px;
 }
 
-.dropdown-img {
+.downarrow {
     height: 40px;
     width: 40px;
 }
 
-.dropdown-img:hover {
+.downarrow:hover {
     transform: scale(1.05);
+    cursor: pointer;
+}
+
+.uparrow {
+    transform: rotate(180deg);
+    height: 40px;
+    width: 40px;
+}
+
+.uparrow:hover {
+    transform: scale(1.05) rotate(180deg);
     cursor: pointer;
 }
 
