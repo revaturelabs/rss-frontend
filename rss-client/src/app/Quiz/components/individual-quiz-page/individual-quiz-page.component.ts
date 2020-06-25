@@ -28,13 +28,19 @@ export class IndividualQuizPageComponent implements OnInit {
 
   ngOnInit(): void {
     //this pulls in the id passed from the quiz-page
-    console.log(this.route.snapshot.params.id);
     this.quizService
       .findQuizById(this.route.snapshot.params.id)
-      .subscribe((res) => (this.config = res));
+      .subscribe((res) => {
+        this.config = res;
+        console.log(res);
+      });
     this.quizService
       .getQuestionsById(this.route.snapshot.params.id)
-      .subscribe((res) => (this.config.questions = res));
+      .subscribe((res) => {
+        this.config.questions = res;
+        console.log(res);
+        console.log(this.config);
+      });
   }
 
   id = this.route.snapshot.params.id;

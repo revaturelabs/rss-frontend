@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../interfaces/subject';
-import { Quiz } from '../interfaces/Quiz';
+import { Quiz } from '../interfaces/quiz';
 import { Questions } from '../interfaces/questions';
 import { QuizSubmit } from '../interfaces/quizSubmit';
 
@@ -68,7 +68,12 @@ export class QuizService {
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
-    return this.httpclient.post<any>('http://localhost:8080/subject/add', sub);
+    this.quiz.subject.subjectName = sub;
+    console.log(this.quiz.subject);
+    return this.httpclient.post<any>(
+      'http://localhost:8080/subject/add',
+      this.quiz.subject
+    );
   }
 
   getAllSubjects(): Observable<Subject[]> {
@@ -77,6 +82,7 @@ export class QuizService {
 
   //Quiz Controller
   addQuiz(quiz): Observable<Quiz> {
+    console.log(quiz);
     return this.httpclient.post<any>(
       'http://localhost:8080/quiz/addquiz',
       quiz
@@ -120,18 +126,20 @@ export class QuizService {
     );
   }
 
-  getQuestionsById(id): Observable<Questions> {
+  getQuestionsById(id): Observable<Questions[]> {
     this.questions.quizId = id;
-    return this.httpclient.post<any>(
+    return this.httpclient.post<any[]>(
       'http://localhost:8080/question/getquestions',
       this.questions
     );
   }
 
   addManyQuestions(questions): Observable<Questions> {
+    this.questions = questions;
+    console.log(this.questions);
     return this.httpclient.post<any>(
       'http://localhost:8080/question/addall',
-      questions
+      this.questions
     );
   }
 
