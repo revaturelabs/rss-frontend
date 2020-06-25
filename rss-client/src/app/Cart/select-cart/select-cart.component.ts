@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { User } from 'src/app/interfaces/user';
 import { Cart } from 'src/app/interfaces/cart.model';
 import { FakeProductsService } from '../fake-products.service';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
+import { TempProduct } from '../temp-product';
+import { TempProducts } from '../temp_products';
 
 @Component({
   selector: 'app-select-cart',
@@ -15,7 +17,14 @@ export class SelectCartComponent implements OnInit {
 
   currentUser: User;
   userCarts: Cart[];
+  product: TempProduct;
   private cartsub: Subscription;
+  down: boolean = true;
+  TempProducts = TempProducts;
+  tempCart = Cart;
+  tempCarts: Cart[] = [];
+  // currentCart: Cart;
+
   /**
    * Constructing SelectCart. Need the user information so if it doesn't exist, make fake user.
    * @param cartService 
@@ -24,6 +33,8 @@ export class SelectCartComponent implements OnInit {
     // access hardcoded user
     this.currentUser = this.userService.getCurrentUser();
 
+    // hardcoded carts
+    // this.tempCart = {cartId: 0, 0, [], "firstcart"};
 
     // making a fake user if one doesn't exist
     // if (!this.currentUser) {
@@ -39,32 +50,77 @@ export class SelectCartComponent implements OnInit {
     //   };
     // }
     // This gets a list of carts that the user has and stores it
-    if(!this.currentUser.userCartIds){
-    this.cartService.listCartsByUser(this.currentUser)
-      .subscribe(carts => {this.userCarts = carts
+    // console.log(this.currentUser.userCartIds);
+    if (!this.currentUser.userCartIds || !this.userCarts) {
+      this.cartService.listCartsByUser(this.currentUser)
+        .subscribe(carts => {
+          this.userCarts = carts;
+          console.log(carts);
           this.currentUser.userCartIds = [];
-        if(carts){
-          for(let cart of carts){
-            this.currentUser.userCartIds.push(cart.cartId); 
+          if (carts) {
+            for (let cart of carts) {
+              this.currentUser.userCartIds.push(cart.cartId);
+            }
           }
-        }
-        else{
+          else {
             this.currentUser.userCartIds.push(0);
-      }})
+          }
+        })
+    }
   }
-}
-  // This is just a proxy for the service function
-  // getProductById(id:number) {
-  //   return this.productService.getProductById(id);
-  // }
 
   ngOnInit(): void {
+    // this.currentUser = this.userService.getCurrentUser();
   }
-  
-  setActiveCart(cart: Cart){
-    this.cartService.setActiveCart(cart);
+
+  getProductById(id: number) {
+    if (!this.product || this.product.id != id) {
+      this.productService.getProductById(id).subscribe(fetchedProduct => {
+        this.product = fetchedProduct;
+      });
     }
-  getActiveCart(){
-    this.cartsub= this.cartService.getActiveCart().subscribe((cart: Cart) => console.log(cart));
+    return this.product;
+  }
+
+  setActiveCart(cart: Cart) {
+    this.cartService.setActiveCart(cart);
+  }
+
+  getActiveCart() {
+    let activeCart: Cart;
+    if (this.cartService.isCartSelected()) {
+      this.cartsub = this.cartService.getActiveCart()
+        .subscribe((cart: Cart) => {
+          console.log(cart);
+          activeCart = cart;
+        });
+    } else {
+      activeCart = null;
+    }
+    return activeCart;
+  }
+
+  // makeCartCardId(cart: Cart) {
+  //   return `cartDetails${cart.cartId}`;
+  // }
+
+  // makeCartCardIdWithHashtag(cart: Cart) {
+  //   return `#cartDetails${cart.cartId}`;
+  // }
+
+  // setCurrentCart(cart: Cart) {
+  //   this.currentCart = cart;
+  // }
+
+  toggle() {
+    // this.down = !this.down;
+
+    // if (this.down) {
+    //   document.getElementById("dropdown-img").style.transform = "rotate(0deg)";  
+    // } else if (!this.down) {
+    //   document.getElementById("dropdown-img").style.transform = "rotate(180deg)";  
+    // }
+    // console.log("again");
+
   }
 }

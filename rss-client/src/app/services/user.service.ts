@@ -8,7 +8,7 @@ import { User } from '../interfaces/user';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -82,8 +82,8 @@ export class UserService {
     email: '',
     password: '',
     profilePic: null,
-    firstName: '',
-    lastName: '',
+    firstName: 'test',
+    lastName: 'testerson',
     admin: false,
     userCartIds: [1, 2, 3]
   };

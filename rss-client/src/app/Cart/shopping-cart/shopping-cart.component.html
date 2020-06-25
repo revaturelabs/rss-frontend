@@ -26,7 +26,7 @@
                                     <div class="d-flex flex-column item-div-small">
                                         <label for=""><h5>Quantity</h5></label>
                                         <input class="form-control quantity-input" id="" type="number" min="1">
-                                        <div class="d-flex item-mobile-check">
+                                        <div class="d-flex">
                                             <button class="btn btn-secondary quantity-button">Update</button>
                                             <button class="btn btn-danger">&#10006;</button>
                                         </div>
@@ -56,7 +56,7 @@
                                         <div class="d-flex flex-column item-div">
                                             <label for=""><h5>Quantity</h5></label>
                                             <input class="form-control quantity-input" id="" type="number" min="1">
-                                            <div class="d-flex item-mobile-check">
+                                            <div class="d-flex">
                                                 <button class="btn btn-secondary quantity-button">Update</button>
                                                 <button class="btn btn-danger">&#10006;</button>
                                             </div>
@@ -91,7 +91,7 @@
                 <div class="row card d-flex checkout-box">
 
                     <div class="card-title cart-total text-center">
-                        <h2>Order Summary</h2>
+                        <h2 class="card-header">Order Summary</h2>
                     </div>
 
                     <div class="container">
@@ -129,6 +129,10 @@
                         </div>
                         <div>
                             <button class="btn btn-lg btn-block btn-primary">Purchase</button>
+                        </div>
+                        <div class="d-flex save-delete">
+                            <button class="btn btn-sm btn-block btn-success">Save Cart</button>
+                            <button class="btn btn-sm btn-block btn-danger">Delete Cart</button>
                         </div>
                     </div>
                 </div>

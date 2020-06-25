@@ -91,7 +91,7 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  // listen for screen sizes
+  // listen for screen sizes for responsive design
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     // responsive conditional
