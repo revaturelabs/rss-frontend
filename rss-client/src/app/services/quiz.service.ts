@@ -10,6 +10,10 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
   quiz: Quiz = {
     quizId: 0,
     quizTopic: '',
@@ -89,13 +93,6 @@ export class QuizService {
     );
   }
 
-  submitQuiz(quiz): Observable<Quiz> {
-    return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/findbyid',
-      quiz
-    );
-  }
-
   findQuizById(id): Observable<Quiz> {
     this.quiz.quizId = id;
     return this.httpclient.post<any>(
@@ -126,11 +123,25 @@ export class QuizService {
       question
     );
   }
+  submitQuiz(quiz): Observable<any> {
+    return this.httpclient.post<any>(
+      'http://localhost:8080/question/submitquiz',
+      quiz
+    );
+  }
 
   getQuestionsById(id): Observable<Questions[]> {
     this.questions.quizId = id;
     return this.httpclient.post<any[]>(
       'http://localhost:8080/question/getquestions',
+      this.questions
+    );
+  }
+
+  getQuestionsByIdAdmin(id): Observable<Questions[]> {
+    this.questions.quizId = id;
+    return this.httpclient.post<any[]>(
+      'http://localhost:8080/question/getquestionsadmin',
       this.questions
     );
   }
@@ -152,19 +163,13 @@ export class QuizService {
       this.quizSubmit
     );
   }
+
+  deleteQuestion(id) {
+    console.log(id);
+    return this.httpclient.post<any[]>(
+      'http://localhost:8080/question/delete',
+      JSON.stringify(id),
+      this.httpOptions
+    );
+  }
 }
-
-//Eval team
-//How are we storing picture data?
-
-//Things that the backend should provide
-//subjectPicture
-//AvailablePoints from a specific quiz
-//quizAttempts from userId and quizId
-
-// What information would they like when we submit a test for eval?
-
-//What we want
-//what we need back
-//numberCorrect
-//pointsAwarded

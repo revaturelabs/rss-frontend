@@ -1,0 +1,63 @@
+<div class="container col-6 shadow my-4 p-4">
+	<form #f="ngForm" (submit)="addItem()">
+
+		<br>
+		<br>
+
+		<!-- INPUT FIELDS -->
+		<p class="display-4 text-center addItemTitle">Add to Inventory</p>
+
+		<br>
+		<br>
+
+		<div class="form-group">
+			<label for="inputName">Name</label>
+			<input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name" #name="ngModel" required minlength="3">
+			<p class="text-danger small-text" [hidden]="name.valid || name.pristine">Name is required</p>
+		</div>
+		<div class="form-group">
+			<label for="inputDescription">Description</label>
+			<input type="text" class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description">
+		</div>
+		<div class="form-group">
+			<label for="brand">Brand</label>
+			<input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="product.brand">
+		</div>
+		<div class="form-group">
+			<label for="inputModel">Model</label>
+			<input type="text" class="form-control" id="inputModel" name="model" [(ngModel)]="product.model">
+		</div>
+		<div class="form-group">
+			<label for="category">Category</label>
+			<input type="text" class="form-control" id="category" name="category" [(ngModel)]="product.category">
+		</div>
+		<div class="form-group">
+			<label for="inputImage">Image</label>
+			<input type="text" class="form-control" id="inputImage" name="image" [(ngModel)]="product.image">
+		</div>
+		<div class="form-group">
+			<label for="inputQuantity">Quantity</label>
+			<input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="product.quantity" #quantity="ngModel" required min="0" pattern="([0-9]+)">
+			<p class="text-danger small-text" [hidden]="quantity.valid || quantity.pristine">Quantity is required</p>
+		</div>
+		<div class="form-group">
+			<label for="inputUnitPrice">Unit Price</label>
+			<input type="number" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice" required min="0" #unitPrice="ngModel" pattern="([0-9]+)">
+			<p class="text-danger small-text" [hidden]="unitPrice.valid || unitPrice.pristine">Unit price is required</p>
+		</div>
+		<div class="form-group">
+			<label for="inputColor">Color</label>
+			<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
+		</div>
+
+		<br>
+		<br>
+
+		<!-- BUTTONS -->
+		<div class="container mx-auto">
+			<button type="submit" class="btn btn-success btn-block" [disabled]="!f.form.valid">Submit</button>
+			<button type="reset" class="btn btn-warning btn-block">Reset</button>
+		</div>
+
+	</form>
+</div>
