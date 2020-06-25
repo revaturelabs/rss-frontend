@@ -55,14 +55,15 @@
                                 </td>
 
                                 <td class="align-bottom quantity-large">
-                                    <div class="d-flex flex-column item-div">
-                                        <label for="">
-                                            <h5>Quantity: x{{cItem.quantity}}</h5>
+                                    <div class="d-flex flex-column justify-content-between item-div">
+                                        <label for="quantity-{{cItem.cartItemId}}" class="d-flex justify-content-around align-items-end"  style="border-bottom: 2px solid #474C55;">
+                                            <h3>Quantity:</h3>
+                                            <h4>x{{cItem.quantity}}</h4>
                                         </label>
-                                        <input class="form-control quantity-input" id="" type="number" min="1">
+                                        <input class="form-control quantity-input" id="quantity-{{cItem.cartItemId}}" type="number" min="1">
                                         <div class="d-flex item-mobile-check">
-                                            <button class="btn btn-secondary quantity-button">Update</button>
-                                            <button class="btn btn-danger">&#10006;</button>
+                                            <button class="btn btn-secondary quantity-button" (click)="updateQuantity(cItem.cartItemId)">Update</button>
+                                            <button class="btn btn-danger" (click)="deleteItem(cItem)">&#10006;</button>
                                         </div>
                                     </div>
                                 </td>
