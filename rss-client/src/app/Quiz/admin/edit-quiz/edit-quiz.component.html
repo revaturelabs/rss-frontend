@@ -12,8 +12,8 @@
       *ngFor="let quizdata of quizData"
       (click)="focusQuiz(quizdata)"
     >
-      <h3>{{ quizdata.subject.subjectName }}</h3>
-      <h3 style="font-size: large;">{{ quizdata.quizTopic }}</h3>
+      <h3>{{ quizdata.subject.subjectName | titlecase }}</h3>
+      <h3 style="font-size: large;">{{ quizdata.quizTopic | titlecase }}</h3>
       {{ quizdata.quizDescription }}
     </a>
   </div>
