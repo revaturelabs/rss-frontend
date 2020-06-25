@@ -17,9 +17,6 @@ import { PreTestComponent } from './Quiz/components/pre-test/pre-test.component'
 import { TestInProgressComponent } from './Quiz/components/test-in-progress/test-in-progress.component';
 import { PostTestComponent } from './Quiz/components/post-test/post-test.component';
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
-import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
-import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
-import { AdminviewComponent } from './inventory/adminview/adminview.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers/user.reducer';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
@@ -31,6 +28,10 @@ import { EditQuizComponent } from './Quiz/admin/edit-quiz/edit-quiz.component';
 import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
 import { SESSION_STORAGE } from 'ngx-webstorage-service';
 import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
+
+import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
+import { AddItemComponent } from "../app/app-inventory/components/add-item/add-item.component";
+import { InventoryListComponent } from "../app/app-inventory/components/inventory-list/inventory-list.component";
 
 @NgModule({
   declarations: [
@@ -47,9 +48,6 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
     TestInProgressComponent,
     PostTestComponent,
     ShoppingCartComponent,
-    InventoryViewComponent,
-    InventoryItemComponent,
-    AdminviewComponent,
     LoginPageComponent,
     AdminPageComponent,
     AdminQuizComponent,
@@ -66,6 +64,7 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
     NgbModule,
     FormsModule,
     StoreModule.forRoot(reducer, {}),
+    AppInventoryModule,
   ],
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
@@ -73,4 +72,4 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
