@@ -39,33 +39,6 @@ export class ShoppingCartComponent implements OnInit {
     this.currentUser = this.userService.getCurrentUser();
 
 
-    // make a fake user if one doesn't exist
-    // if (!this.currentUser) {
-    //   this.currentUser = {
-    //     userId: 0,
-    //     email: "test@test.net",
-    //     password: "password",
-    //     profilePic: new Blob(),
-    //     firstName: "Test",
-    //     lastName: "Testerson",
-    //     admin: false
-    //   };
-    // }
-    // Get all the carts for this user from the endpoint (will probably change later)
-    // And store the selected cart
-    // if (!this.currentUser.userCartIds) {
-    //   this.cartService
-    //     .listCartsByUser(this.currentUser)
-    //     .subscribe(
-    //       carts => {
-    //         this.currentUser.userCartIds = [];
-    //         for (let cart of carts) {
-    //           this.currentUser.userCartIds.push(cart.cartId);
-    //         }
-    //       }
-    //     );
-    // }
-
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
     if (actCartId || actCartId == 0) {
       this.cartService.getCartById(actCartId).subscribe(cart => this.activeCart = cart);
@@ -73,18 +46,7 @@ export class ShoppingCartComponent implements OnInit {
       this.activeCart = null;
     }
 
-    // Insert Subject magic here
 
-    // this.cartService
-    //   .listCartsByUser(this.currentUser)
-    //   .subscribe(
-    //     carts =>
-    //       this.cart = carts[parseInt(window.sessionStorage.getItem('index'))]
-    //   );
-    // Get all the cart items from the selected cart
-    // this.ciService
-    //   .listCartItemsByCart(this.activeCart)
-    //   .subscribe(items => this.cartItemArray = items);
     // Loop through cart items and pull product information from endpoint to use later
     for (let cartItem of this.activeCart.cartItems) {
       this.productService.getProductById(cartItem.productId)
@@ -94,20 +56,6 @@ export class ShoppingCartComponent implements OnInit {
         });
     }
   }
-
-  /**
-   * Given a cart item will get the product information associated with it based on
-   * the product array filled in the constructor.
-   * @param cartItem 
-   */
-  // getProductFromCartItem(cartItem: CartItem) {
-  //   for (let product of this.prArray) {
-  //     if (cartItem.productId = product.id) {
-  //       return product;
-  //     }
-  //   }
-  //   return null;
-  // }
 
   ngOnInit(): void {
     // responsive conditional

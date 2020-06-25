@@ -8,7 +8,6 @@
             <div class="container">
                 <h1 class="text-center">{{currentUser.firstName | titlecase}}'s Carts</h1>
                 <!-- ngFor, one row per  -->
-                <!-- <div class="row" style="border: 1px solid yellow;"> -->
                 <div class="card cart-card" [ngClass]="activeCartId == cart.cartId ? 'selectedCart' : null" *ngFor="let cart of userCarts">
                     <div class="card-header" id="cartBody-{{cart.cartId}}">
                         <div class="d-flex align-items-end justify-content-between cart-title">
@@ -22,6 +21,7 @@
                         <div class="collapse" id="cartDetails-{{cart.cartId}}">
                             <div class="d-flex justify-content-around cart-button-holder">
                                 <button class="btn btn-primary btn-block" (click)="setActiveCart(cart)">Select Cart</button>
+                                <!-- maybe add rename button if we have time or future batches want to implement -->
                                 <!-- <button class="btn btn-success">Rename Cart</button> -->
                                 <button class="btn btn-danger btn-block">Delete Cart</button>
                             </div>
@@ -37,15 +37,11 @@
                                         <td class="align-bottom">{{getProductById(cItem.productId).points}} points
                                         </td>
                                         <td class="align-bottom">x{{cItem.quantity}}</td>
-                                        <!-- td for quantity in cart -->
                                     </tr>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="card-body">
-                            <div class="card-text">Your card</div>
-                        </div> -->
                 </div>
             </div>
         </div>
