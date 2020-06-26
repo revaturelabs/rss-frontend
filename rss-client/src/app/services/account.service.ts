@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user';
-<<<<<<< HEAD
-=======
 import { Account } from '../interfaces/account';
->>>>>>> 79c6b676054bef133058f1d8e730e47ae2ca3867
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +42,7 @@ export class AccountService {
       'http://localhost:9000/account/account/ui',
       user
     )
-  }
+  };
 
   getAllAccountUsers(account: Account): Observable<Account> {
     return this.httpclient.post<any>(
