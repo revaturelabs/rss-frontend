@@ -1,9 +1,9 @@
 export interface User {
-    userId: number,
-    email: string,
-    password: string,
-    profilePic: Blob,
-    firstName: string,
-    lastName: string,
-    admin: boolean
+  userId: number;
+  email: string;
+  password: string;
+  profilePic: any;
+  firstName: string;
+  lastName: string;
+  admin: boolean;
 }
