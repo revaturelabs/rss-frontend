@@ -8,7 +8,7 @@ import { Account } from '../interfaces/account';
   providedIn: 'root',
 })
 export class AccountService {
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   //Account controller
 
@@ -28,6 +28,22 @@ export class AccountService {
       this.user
     );
   }
+
+
+  getAccountByAccId(acc: Account): Observable<Account> {
+    return this.httpclient.post<any>(
+      'http://localhost:9000/account/account/ai',
+      acc
+    );
+  }
+
+  getAccountByUserId(user: User): Observable<Account> {
+    return this.httpclient.post<any>(
+      'http://localhost:9000/account/account/ui',
+      user
+    )
+  };
+
   getAllAccountUsers(account: Account): Observable<Account> {
     return this.httpclient.post<any>(
       'http://localhost:9000/account/account/ai',
