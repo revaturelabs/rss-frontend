@@ -11,13 +11,11 @@
 
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="" (click)="onHome()"
-            >Home <span class="sr-only">(current)</span></a
-          >
+          <a class="nav-link" routerLink="" (click)="onHome()">Home <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="#">Store</a>
+          <a class="nav-link" routerLink="/inventory-list">Store</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/earnpoints">Earn Points</a>
@@ -27,9 +25,10 @@
       <!-- Access to User Options.-->
       <div class="justify-content-end">
         <div class="btn-group dropleft">
-            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white; background-color: #F26925;">
-              {{ currentUser.firstName }}
-            </button>
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" style="color: white; background-color: #F26925;">
+            {{ currentUser.firstName }}
+          </button>
           <!-- <a
             class="btn dropdown-toggle"
             href="#"
@@ -45,9 +44,7 @@
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" routerLink="#">My Profile</a>
-            <a class="dropdown-item" routerLink="/account/settings"
-              >Account Settings</a
-            >
+            <a class="dropdown-item" routerLink="/account/settings">Account Settings</a>
             <div *ngIf="currentUser.admin == true">
               <a class="dropdown-item" routerLink="/admin">Admin Settings</a>
             </div>

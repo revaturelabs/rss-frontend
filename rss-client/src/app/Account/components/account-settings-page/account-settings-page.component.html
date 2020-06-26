@@ -27,14 +27,10 @@
                     <label for="">Email: </label>
                     <input class="form-control" type="text" formControlName="email" placeholder="Enter email..." />
                 </div>
-                <div class="form-group">
-                    <label for="">Password: </label>
-                    <input class="form-control" type="text" formControlName="password"
-                        placeholder="Enter password..." />
-                </div>
             </form>
             <br />
-            <button type="submit" class="btn btn-primary" style="background-color: #F26925;">Update Changes</button>
+            <button type="submit" (click)="submitForm()" class="btn btn-primary"
+                style="background-color: #F26925;">Update Changes</button>
         </div>
         <div class="col-6">
             <h2>Make updates to your account here.</h2>
