@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestInProgressComponent } from './test-in-progress.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { QuizService } from 'src/app/services/quiz.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TestInProgressComponent', () => {
   let component: TestInProgressComponent;
@@ -8,9 +11,10 @@ describe('TestInProgressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestInProgressComponent ]
-    })
-    .compileComponents();
+      declarations: [TestInProgressComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [QuizService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
