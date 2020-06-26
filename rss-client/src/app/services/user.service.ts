@@ -25,12 +25,13 @@ export class UserService {
     private httpclient: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
-  ) { }
+  ) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
+  //user controller
   login(log): Observable<User> {
     return this.httpclient.post<any>(
       'http://localhost:9000/user/login',
