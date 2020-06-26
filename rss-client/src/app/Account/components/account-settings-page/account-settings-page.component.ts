@@ -2,7 +2,9 @@ import { ImageService } from './../../../services/image.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
+import { Account } from 'src/app/interfaces/account';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-account-settings-page',
@@ -13,12 +15,16 @@ export class AccountSettingsPageComponent implements OnInit {
   user: User;
   isLoggedIn;
   userProfileForm: FormGroup;
+  evalAccount: Account;
 
   constructor(
     private imageservice: ImageService,
     private userservice: UserService,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private accountService: AccountService
+  ) { }
+
+
 
   selectedFile: string;
   imagePreview: any;
@@ -52,6 +58,11 @@ export class AccountSettingsPageComponent implements OnInit {
       email: '',
     });
     this.getUser();
+    this.accountService.getAccountByUserId(this.user).subscribe(res => {
+      console.log(res[0]);
+      this.evalAccount = res[0];
+      console.log(this.evalAccount)
+    })
   }
 
   getUser() {

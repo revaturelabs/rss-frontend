@@ -16,11 +16,5 @@ export class PreTestComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    //Set the subject image
-    //Adds instructions about quiz
-    // this.config.instructions.forEach((item) => {
-    //   this.instructions.push(item);
-    // });
-  }
+  ngOnInit(): void {}
 }

@@ -40,6 +40,7 @@ export class TestInProgressComponent implements OnInit {
       this.account.accId = this.accId;
       this.account.points = res.totalPoints;
       this.accountservice.updatePoints(this.account).subscribe();
+      console.log(this.account)
     });
   }
 
@@ -124,7 +125,7 @@ export class TestInProgressComponent implements OnInit {
     private modalService: NgbModal,
     private userService: UserService,
     private accountservice: AccountService
-  ) {}
+  ) { }
 
   accId;
   account = {
