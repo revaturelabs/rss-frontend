@@ -21,6 +21,8 @@ export class AccountService {
     lastName: '',
     admin: false,
   };
+
+  account: Account;
   getAllUserAccounts(id): Observable<any> {
     this.user.userId = id;
     return this.httpclient.post<any>(
@@ -55,6 +57,17 @@ export class AccountService {
       'http://localhost:9000/account/account',
       account
     );
+  }
+
+  getAllAccounts(): Observable<any> {
+    return this.httpclient.get<any>('http://localhost:9000/acctype/all');
+  }
+
+  createAccount(account: Account): Observable<Account> {
+    return this.httpclient.post<any>(
+      'http://localhost:9000/account/new',
+      account
+    )
   }
   updatePoints(account: Account): Observable<Account> {
     return this.httpclient.post<any>(
