@@ -67,7 +67,7 @@ export class UserService {
 
   updateInfo(user: User): Observable<User> {
     return this.httpclient.post<any>(
-      'http://localhost:9000/user/updateinfo',
+      'http://localhost:9000/user/update/i',
       user
     );
   }

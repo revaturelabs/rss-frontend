@@ -23,29 +23,37 @@ export class AccountSettingsPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getUser();
     this.userProfileForm = this.fb.group({
+      userId: '',
       firstName: '',
       lastName: '',
-      email: '',
-      password: ''
+      email: ''
     })
+    this.getUser();
+
   }
 
   getUser() {
-    this.user = this.userservice.getCurrentUser()
+    this.user = this.userservice.userPersistance();
+    console.log(this.user.password)
     this.editForm(this.user);
   }
   editForm(user: User) {
     this.userProfileForm.patchValue({
+      userId: user.userId,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.email,
-      password: user.password
+      email: user.email
     })
   }
 
-
+  async submitForm() {
+    const formValue = this.userProfileForm.value;
+    console.log(formValue);
+    this.userservice.updateInfo(formValue).subscribe(res => {
+      console.log(`User has updated their info`)
+    });
+  }
 
 
 
