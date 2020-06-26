@@ -24,7 +24,7 @@ export class AccountService {
   getAllUserAccounts(id): Observable<any> {
     this.user.userId = id;
     return this.httpclient.post<any>(
-      'http://localhost:9000/account/account/ui',
+      'http://localhost:9000/account/accounts',
       this.user
     );
   }
