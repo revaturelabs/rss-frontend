@@ -85,7 +85,7 @@ export class UserService {
     firstName: 'test',
     lastName: 'testerson',
     admin: false,
-    userCartIds: [1, 2, 3]
+    userCartIds: [0, 1, 2, 3]
   };
   changeUser(user: User) {
     this.isLoggedIn = true;

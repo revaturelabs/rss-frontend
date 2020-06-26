@@ -93,7 +93,7 @@ export class ShoppingCartComponent implements OnInit {
           cItem.quantity = newQuantity;
           console.log(cItem.quantity);
         }
-      } 
+      }
     } else {
       // later, give user feedback
     }
@@ -107,6 +107,14 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  async getAndDelete(cartId: number) {
+    let testcart: Cart;
+    this.cartService.getCartById(cartId).subscribe(
+      cart => testcart = cart
+    )
+    console.log(testcart);
+  }
+
   deleteCart() {
     this.cartService.listCartsByUser(this.currentUser).subscribe(res => {
       for (let r of res) {
@@ -116,37 +124,44 @@ export class ShoppingCartComponent implements OnInit {
     console.log(this.currentUser.userCartIds + " front before");
     console.log(sessionStorage.getItem("activecartId") === null);
     console.log(this.activeCart);
-    
 
-    
+
+
     // delete the cart on backend
-    this.cartService.getTestCartById(115).subscribe(cart => {
+    this.cartService.getCartById(127).subscribe(cart => {
       console.log(cart);
       this.testcart = cart;
+      console.log(this.cartService.deleteCart(cart));
     });
     console.log(this.testcart);
-    
-    if (this.cartService.deleteCart(this.testcart)) {
-      console.log(this.cartService.listCartsByUser(this.currentUser) + " backend after");
-      
-          // delete the active cart on frontend
-            // find the id of the cart to be deleted
-          let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
-            // splice out this cart from the user's cart array
-          if (index > -1) {
-            this.currentUser.userCartIds.splice(index, 1);
-            console.log(this.currentUser.userCartIds + " front after");
 
-          }
-          sessionStorage.removeItem("activecartId");
-          console.log(sessionStorage.getItem("activecartId") === null);
-          
-          this.router.navigate(["selectcart"]);
+    // if (this.cartService.deleteCart(this.testcart)) {
+    if (this.cartService.deleteCart(this.testcart)) {
+      let userCarts: Cart[];
+      this.cartService.listCartsByUser(this.currentUser).subscribe(
+        carts => userCarts = carts
+      );
+      console.log(userCarts);
+      // console.log(this.cartService.listCartsByUser(this.currentUser) + " backend after");
+
+      // delete the active cart on frontend
+      // find the id of the cart to be deleted
+      let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
+      // splice out this cart from the user's cart array
+      if (index > -1) {
+        this.currentUser.userCartIds.splice(index, 1);
+        console.log(this.currentUser.userCartIds + " front after");
+
+      }
+      sessionStorage.removeItem("activecartId");
+      console.log(sessionStorage.getItem("activecartId") === null);
+
+      this.router.navigate(["selectcart"]);
     } else {
 
-    }    
+    }
   }
-  
+
   // listen for screen sizes
   @HostListener('window:resize', ['$event'])
   onResize(event) {

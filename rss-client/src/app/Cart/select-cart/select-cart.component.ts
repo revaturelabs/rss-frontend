@@ -17,7 +17,7 @@ import { TempProducts } from '../temp_products';
 export class SelectCartComponent implements OnInit {
 
   currentUser: User;
-  userCarts: Cart[];
+  userCarts: Cart[] = [];
   product: TempProduct;
   private cartsub: Subscription;
   TempProducts = TempProducts;
@@ -36,10 +36,9 @@ export class SelectCartComponent implements OnInit {
     this.currentUser = this.userService.getCurrentUser();
 
     // set the default cart to be selected
-    console.log(this.cartService.isCartSelected());
-    
+    // console.log(this.cartService.isCartSelected());
+
     try {
-      
       this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
       // this.activeCartId = this.getActiveCart().cartId;  
     } catch (error) {
@@ -48,15 +47,55 @@ export class SelectCartComponent implements OnInit {
 
     // This gets a list of carts that the user has and stores it
     // console.log(this.currentUser.userCartIds);
-    if (!this.currentUser.userCartIds || !this.userCarts) {
+    console.log("Right before the if on line 51")
+    console.log(!!this.currentUser.userCartIds);
+    console.log(this.userCarts.length);
+    console.log(!this.userCarts.length);
+    // if (this.currentUser.userCartIds && !this.userCarts.length) {
+    //   console.log("Right before the if on line 56");
+    //   for (let id of this.currentUser.userCartIds) {
+    //     if (id == 0) {
+    //       console.log(JSON.parse(sessionStorage.getItem('defaultCart')));
+    //       this.userCarts.push(JSON.parse(sessionStorage.getItem('defaultCart')));
+    //     } else {
+    //       this.cartService.getCartById(id).subscribe(
+    //         cart => this.userCarts.push(cart)
+    //       )
+    //     }
+    //   }
+    // } else if (!this.currentUser.userCartIds) {
+    //   console.log("I am in line 62!")
+    //   this.cartService.listCartsByUser(this.currentUser)
+    //     .subscribe(carts => {
+    //       this.userCarts = carts;
+    //       // console.log(carts);
+    //       this.currentUser.userCartIds = [];
+    //       this.fillToggleRecord(carts);
+    //       console.log(this.toggleRecord);
+
+    //       if (carts) {
+    //         for (let cart of carts) {
+    //           this.currentUser.userCartIds.push(cart.cartId);
+    //         }
+    //       }
+    //       else {
+    //         this.currentUser.userCartIds.push(0);
+    //       }
+    //     })
+    // }
+    // console.log(this.userCarts.length);
+    if (this.userCarts.length == 0) {
+      console.log("HIIIII!!!");
       this.cartService.listCartsByUser(this.currentUser)
         .subscribe(carts => {
           this.userCarts = carts;
           console.log(carts);
-          this.currentUser.userCartIds = [];
+          // if (sessionStorage.getItem('defaultCart')) {
+          //   this.currentUser.userCartIds = [JSON.parse(sessionStorage.getItem('defaultCart'))];
+          // }
           this.fillToggleRecord(carts);
-          console.log(this.toggleRecord);
-          
+          // console.log(this.toggleRecord);
+          this.currentUser.userCartIds = [];
           if (carts) {
             for (let cart of carts) {
               this.currentUser.userCartIds.push(cart.cartId);
@@ -67,6 +106,7 @@ export class SelectCartComponent implements OnInit {
           }
         })
     }
+    console.log(this.userCarts);
   }
 
   ngOnInit(): void {
@@ -82,22 +122,23 @@ export class SelectCartComponent implements OnInit {
     return this.product;
   }
 
-  setActiveCart(cart: Cart) {  
+  setActiveCart(cart: Cart) {
     //   
     this.cartService.setActiveCart(cart);
     // active cart id is determined by which you click on to send the id forward
     this.activeCartId = cart.cartId;
-    sessionStorage.setItem('activecartId',JSON.stringify(this.activeCartId) );
+    sessionStorage.setItem('activecartId', JSON.stringify(this.activeCartId));
   }
 
   getActiveCart() {
     let activeCart: Cart;
     if (this.cartService.isCartSelected()) {
-      this.cartsub = this.cartService.getActiveCart()
-        .subscribe((cart: Cart) => {
-          console.log(cart);
-          activeCart = cart;
-        });
+      activeCart = this.cartService.getActiveCart();
+      // this.cartsub = this.cartService.getActiveCart()
+      //   .subscribe((cart: Cart) => {
+      //     console.log(cart);
+      //     activeCart = cart;
+      //   });
     } else {
       activeCart = null;
     }
