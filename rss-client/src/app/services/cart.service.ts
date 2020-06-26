@@ -11,10 +11,27 @@ import { CartItem } from '../interfaces/cart-item.model';
   providedIn: 'root',
 })
 export class CartService {
-  private baseURL = 'http://localhost:9000/api/cart/';
+  private baseURL = 'http://localhost:9999/cart/';
   private ActiveCart = new Subject<Cart>();
+  private mockData: Cart[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.generateMockData();
+  }
+
+  // temporary data until we get endpoints
+  generateMockData(): void {
+    let bdayCart: Cart = new Cart(0, 0, [], "Birthday");
+    let bdayCartItem: CartItem = new CartItem(1, TempProducts[0].id, 5);
+    bdayCart.cartItems.push(bdayCartItem);
+    let xmasCart: Cart = new Cart(1, 0, [], "Christmas");
+    let xmasCartItem: CartItem = new CartItem(2, TempProducts[1].id, 10);
+    xmasCart.cartItems.push(xmasCartItem);
+    let hnkaCart: Cart = new Cart(2, 0, [], "Hanukkah");
+    let hnkaCartItem: CartItem = new CartItem(3, TempProducts[2].id, 1);
+    hnkaCart.cartItems.push(hnkaCartItem);
+    this.mockData = [bdayCart, xmasCart, hnkaCart];
+  }
 
   // CREATE
   addCart(cart: Cart): Observable<Cart> {
@@ -25,32 +42,23 @@ export class CartService {
   getCartById(id: number): Observable<Cart> {
     let cart: Cart;
     if (id == 0) {
-      cart = new Cart(0, 0, [], "Birthday");
-      let cartItem: CartItem = new CartItem(1, cart, TempProducts[0].id, 5);
+      cart = new Cart(107, 0, [], "Birthday");
+      let cartItem: CartItem = new CartItem(1, TempProducts[0].id, 5);
       cart.cartItems.push(cartItem);
     } else if (id == 1) {
       cart = new Cart(1, 0, [], "Christmas");
-      let cartItem: CartItem = new CartItem(2, cart, TempProducts[1].id, 10);
+      let cartItem: CartItem = new CartItem(2, TempProducts[1].id, 10);
       cart.cartItems.push(cartItem);
     } else if (id == 2) {
       cart = new Cart(2, 0, [], "Hanukkah");
-      let cartItem: CartItem = new CartItem(3, cart, TempProducts[2].id, 1);
+      let cartItem: CartItem = new CartItem(3, TempProducts[2].id, 1);
       cart.cartItems.push(cartItem);
     }
     return of(cart);
     // return this.http.get<Cart>(this.baseURL + id);
   }
   listCartsByUser(user: User): Observable<Cart[]> {
-    let bdayCart: Cart = new Cart(0, 0, [], "Birthday");
-    let bdayCartItem: CartItem = new CartItem(1, bdayCart, TempProducts[0].id, 5);
-    bdayCart.cartItems.push(bdayCartItem);
-    let xmasCart: Cart = new Cart(1, 0, [], "Christmas");
-    let xmasCartItem: CartItem = new CartItem(2, xmasCart, TempProducts[1].id, 10);
-    xmasCart.cartItems.push(xmasCartItem);
-    let hnkaCart: Cart = new Cart(2, 0, [], "Hanukkah");
-    let hnkaCartItem: CartItem = new CartItem(3, hnkaCart, TempProducts[2].id, 1);
-    hnkaCart.cartItems.push(hnkaCartItem);
-    return of([bdayCart, xmasCart, hnkaCart]);
+    return of(this.mockData);
     // return this.http.post<Cart[]>(this.baseURL, user);
   }
   // UPDATE
@@ -59,8 +67,24 @@ export class CartService {
     // return this.http.put<Cart>(this.baseURL, cart);
   }
   // DELETE
-  deleteCart(cart: Cart): void {
-    // this.http.delete(this.baseURL+cart.cartId);
+  deleteCart(cart: Cart): boolean {
+    this.http.delete(this.baseURL+cart.cartId, {observe: 'response'})
+      .subscribe(response => {
+        console.log(response.status);
+      })
+      return true;
+
+    
+
+
+    // let index = this.mockData.indexOf(cart);
+    // // splice out this cart from the user's cart array
+    // if (index > -1) {
+    //   this.mockData.splice(index, 1);
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   setActiveCart(cart: Cart): void {
