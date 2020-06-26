@@ -32,17 +32,17 @@ export class AccountService {
 
   getAccountByAccId(acc: Account): Observable<Account> {
     return this.httpclient.post<any>(
-      'http://localhost:9000/account/account/ai',
+      'http://localhost:9000/account/account',
       acc
     );
   }
 
   getAccountByUserId(user: User): Observable<Account> {
     return this.httpclient.post<any>(
-      'http://localhost:9000/account/account/ui',
+      'http://localhost:9000/account/accounts',
       user
     )
-  };
+  }
 
   getAllAccountUsers(account: Account): Observable<Account> {
     return this.httpclient.post<any>(

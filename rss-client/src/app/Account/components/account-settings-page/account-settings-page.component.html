@@ -3,7 +3,7 @@
         <div class="border-right col-6 p-2">
             <div class="form-group">
                 <label for="userPicture"></label>
-                <img src="assets/Images/user_image.png" alt="user pic placeholder" class="img-thumbnail">
+                <img src="../../../../assets/Images/user_image.png" alt="user pic placeholder" class="img-thumbnail">
                 <div>
                     <form>
                         <input type="file" id="fileInput" name="profilePic" accept="image/*" />
@@ -38,7 +38,10 @@
             <div class="row">
                 <div class="col-12">
                     <button type="submit" class="m-2 btn btn-success" style="background-color: #F26925;">Link To Your
-                        Eval</button>
+                        Eval </button>
+                    <h3>You have <span class="rev_orange">{{evalAccount.points}}</span> points from your quizzes taken.
+                    </h3>
+
                     <button type="submit" class="m-2 btn btn-success" style="background-color: #F26925;">Link To Your
                         Bug Bounty</button>
                 </div>
