@@ -29,6 +29,8 @@ export class ShoppingCartComponent implements OnInit {
   prArray: TempProduct[] = [];
   prIdArray: number[] = [];
   product: TempProduct;
+  testcart: Cart;
+
 
 
 
@@ -117,10 +119,14 @@ export class ShoppingCartComponent implements OnInit {
     
 
     
-    
     // delete the cart on backend
-    let testcart = this.cartService.getCartById(107)
-    if (this.cartService.deleteCart(this.activeCart)) {
+    this.cartService.getTestCartById(115).subscribe(cart => {
+      console.log(cart);
+      this.testcart = cart;
+    });
+    console.log(this.testcart);
+    
+    if (this.cartService.deleteCart(this.testcart)) {
       console.log(this.cartService.listCartsByUser(this.currentUser) + " backend after");
       
           // delete the active cart on frontend

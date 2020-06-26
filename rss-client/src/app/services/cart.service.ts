@@ -21,13 +21,13 @@ export class CartService {
 
   // temporary data until we get endpoints
   generateMockData(): void {
-    let bdayCart: Cart = new Cart(0, 0, [], "Birthday");
+    let bdayCart: Cart = new Cart(0, 0,  "Birthday", []);
     let bdayCartItem: CartItem = new CartItem(1, TempProducts[0].id, 5);
     bdayCart.cartItems.push(bdayCartItem);
-    let xmasCart: Cart = new Cart(1, 0, [], "Christmas");
+    let xmasCart: Cart = new Cart(1, 0, "Christmas", []);
     let xmasCartItem: CartItem = new CartItem(2, TempProducts[1].id, 10);
     xmasCart.cartItems.push(xmasCartItem);
-    let hnkaCart: Cart = new Cart(2, 0, [], "Hanukkah");
+    let hnkaCart: Cart = new Cart(2, 0, "Hanukkah", []);
     let hnkaCartItem: CartItem = new CartItem(3, TempProducts[2].id, 1);
     hnkaCart.cartItems.push(hnkaCartItem);
     this.mockData = [bdayCart, xmasCart, hnkaCart];
@@ -42,21 +42,25 @@ export class CartService {
   getCartById(id: number): Observable<Cart> {
     let cart: Cart;
     if (id == 0) {
-      cart = new Cart(107, 0, [], "Birthday");
+      cart = new Cart(0, 0, "Birthday", []);
       let cartItem: CartItem = new CartItem(1, TempProducts[0].id, 5);
       cart.cartItems.push(cartItem);
     } else if (id == 1) {
-      cart = new Cart(1, 0, [], "Christmas");
+      cart = new Cart(1, 0, "Christmas", []);
       let cartItem: CartItem = new CartItem(2, TempProducts[1].id, 10);
       cart.cartItems.push(cartItem);
     } else if (id == 2) {
-      cart = new Cart(2, 0, [], "Hanukkah");
+      cart = new Cart(2, 0, "Hanukkah", []);
       let cartItem: CartItem = new CartItem(3, TempProducts[2].id, 1);
       cart.cartItems.push(cartItem);
     }
     return of(cart);
-    // return this.http.get<Cart>(this.baseURL + id);
   }
+
+  getTestCartById(id: number): Observable<any> {
+    return this.http.get(this.baseURL + id);
+  }
+
   listCartsByUser(user: User): Observable<Cart[]> {
     return of(this.mockData);
     // return this.http.post<Cart[]>(this.baseURL, user);
@@ -68,14 +72,11 @@ export class CartService {
   }
   // DELETE
   deleteCart(cart: Cart): boolean {
-    this.http.delete(this.baseURL+cart.cartId, {observe: 'response'})
+    this.http.delete(this.baseURL+115, {observe: 'response'})
       .subscribe(response => {
         console.log(response.status);
       })
       return true;
-
-    
-
 
     // let index = this.mockData.indexOf(cart);
     // // splice out this cart from the user's cart array
