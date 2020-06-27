@@ -78,14 +78,14 @@ export class UserService {
 
   isLoggedIn = false;
   user: User = {
-    userId: 0,
+    userId: 2021,
     email: '',
     password: '',
     profilePic: null,
     firstName: 'test',
     lastName: 'testerson',
     admin: false,
-    userCartIds: [1, 2, 3]
+    userCartIds: [0, 147, 148, 149]
   };
   changeUser(user: User) {
     this.isLoggedIn = true;

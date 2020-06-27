@@ -22,7 +22,7 @@ export class CartItemService {
     return this.http.get<CartItem>(this.baseUrl + id);
   }
   listCartItemsByCart(cart: Cart): Observable<CartItem[]> {
-    return of([new CartItem(0, cart, 0, 1)]);
+    return of([new CartItem(0, 0, 1)]);
     // return this.http.post<CartItem[]>(this.baseURL, cart);
   }
   // UPDATE

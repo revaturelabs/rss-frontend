@@ -1,27 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { User } from 'src/app/interfaces/user';
 import { Cart } from 'src/app/interfaces/cart.model';
-import { FakeProductsService } from '../fake-products.service';
 import { UserService } from 'src/app/services/user.service';
-import { Subscription } from 'rxjs';
-import { TempProduct } from '../temp-product';
-import { TempProducts } from '../temp_products';
-// import { parse } from 'path';
+import { Observable, Subject } from 'rxjs';
+import { take, takeUntil, first } from 'rxjs/operators';
+import { Product } from 'src/app/interfaces/product.model';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-select-cart',
   templateUrl: './select-cart.component.html',
   styleUrls: ['./select-cart.component.css']
 })
-export class SelectCartComponent implements OnInit {
+export class SelectCartComponent implements OnInit, OnDestroy {
 
   currentUser: User;
-  userCarts: Cart[];
-  product: TempProduct;
-  private cartsub: Subscription;
-  TempProducts = TempProducts;
-  tempCart = Cart;
+  userCarts: Cart[] = [];
+  product: Product;
+  products: Product[];
+  noProduct: Product = {
+    id: 0,
+    name: "No Name",
+    description: "No product found",
+    brand: "No brand",
+    model: "No model",
+    category: "No category",
+    image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
+    quantity: NaN,
+    unitPrice: NaN,
+    color: "N/A"
+  }
+  private ngUnsubscribe: Subject<any> = new Subject();
   tempCarts: Cart[] = [];
   activeCartId: number;
   eventId: string;
@@ -31,32 +41,26 @@ export class SelectCartComponent implements OnInit {
    * Constructing SelectCart. Need the user information so if it doesn't exist, make fake user.
    * @param cartService 
    */
-  constructor(private cartService: CartService, private productService: FakeProductsService, private userService: UserService) {
+  constructor(private cartService: CartService, private productService: ProductService, private userService: UserService) {
     // access hardcoded user
     this.currentUser = this.userService.getCurrentUser();
 
     // set the default cart to be selected
-    console.log(this.cartService.isCartSelected());
-    
+    // console.log(this.cartService.isCartSelected());
+
     try {
-      
-      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
-      // this.activeCartId = this.getActiveCart().cartId;  
+      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId')); 
     } catch (error) {
       console.log(error);
     }
 
     // This gets a list of carts that the user has and stores it
-    // console.log(this.currentUser.userCartIds);
-    if (!this.currentUser.userCartIds || !this.userCarts) {
+    if (this.userCarts.length == 0) {
       this.cartService.listCartsByUser(this.currentUser)
         .subscribe(carts => {
           this.userCarts = carts;
-          console.log(carts);
-          this.currentUser.userCartIds = [];
           this.fillToggleRecord(carts);
-          console.log(this.toggleRecord);
-          
+          this.currentUser.userCartIds = [];
           if (carts) {
             for (let cart of carts) {
               this.currentUser.userCartIds.push(cart.cartId);
@@ -67,37 +71,43 @@ export class SelectCartComponent implements OnInit {
           }
         })
     }
+    this.productService.getAllProducts().subscribe(
+      products => {
+        this.products = products;
+      }
+    )
   }
 
   ngOnInit(): void {
-    // this.currentUser = this.userService.getCurrentUser();
   }
 
-  getProductById(id: number) {
-    if (!this.product || this.product.id != id) {
-      this.productService.getProductById(id).subscribe(fetchedProduct => {
-        this.product = fetchedProduct;
-      });
+  ngOnDestroy(): void {
+    // this.ngUnsubscribe.next();
+    // this.ngUnsubscribe.complete();
+  }
+
+  getProductById(id: number): Product {
+    this.product = this.noProduct;
+    for (let product of this.products) {
+      if (product.id == id) {
+        this.product = product;
+      }
     }
     return this.product;
   }
 
-  setActiveCart(cart: Cart) {  
+  setActiveCart(cart: Cart) {
     //   
     this.cartService.setActiveCart(cart);
     // active cart id is determined by which you click on to send the id forward
     this.activeCartId = cart.cartId;
-    sessionStorage.setItem('activecartId',JSON.stringify(this.activeCartId) );
+    sessionStorage.setItem('activecartId', JSON.stringify(this.activeCartId));
   }
 
   getActiveCart() {
     let activeCart: Cart;
     if (this.cartService.isCartSelected()) {
-      this.cartsub = this.cartService.getActiveCart()
-        .subscribe((cart: Cart) => {
-          console.log(cart);
-          activeCart = cart;
-        });
+      activeCart = this.cartService.getActiveCart();
     } else {
       activeCart = null;
     }

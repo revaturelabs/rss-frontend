@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class InventoryService {
   baseUrl: string = 'http://localhost:8989/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // CREATE
   addProduct(product: Product): Observable<Product> {
