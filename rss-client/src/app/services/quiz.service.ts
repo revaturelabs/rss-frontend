@@ -77,13 +77,13 @@ export class QuizService {
     this.quiz.subject.subjectName = sub;
     console.log(this.quiz.subject);
     return this.httpclient.post<any>(
-      this.url + '/subject/admin/add',
+      this.url + '/subject/add',
       this.quiz.subject
     );
   }
 
   getAllSubjects(): Observable<Subject[]> {
-    return this.httpclient.get<Subject[]>(this.url + '/subject/obtain/all');
+    return this.httpclient.get<Subject[]>(this.url + '/subject/all');
   }
 
   //Quiz Controller
