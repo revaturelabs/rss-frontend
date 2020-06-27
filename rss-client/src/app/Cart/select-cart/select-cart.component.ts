@@ -128,6 +128,8 @@ export class SelectCartComponent implements OnInit {
     // active cart id is determined by which you click on to send the id forward
     this.activeCartId = cart.cartId;
     sessionStorage.setItem('activecartId', JSON.stringify(this.activeCartId));
+    sessionStorage.setItem('myactivecart', JSON.stringify(cart));
+
   }
 
   getActiveCart() {
@@ -141,7 +143,7 @@ export class SelectCartComponent implements OnInit {
       //   });
     } else {
       activeCart = null;
-    }
+    }    
     return activeCart;
   }
 

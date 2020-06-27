@@ -11,6 +11,7 @@ import { TempProduct } from '../temp-product';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { SelectCartComponent } from '../select-cart/select-cart.component';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class ShoppingCartComponent implements OnInit {
     private ciService: CartItemService,
     private productService: FakeProductsService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private selectcart : SelectCartComponent
   ) {
     // access hardcoded user temporarily
     this.currentUser = this.userService.getCurrentUser();
@@ -52,15 +54,19 @@ export class ShoppingCartComponent implements OnInit {
       this.activeCart = null;
     }
 
+  
+    var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
+    this.testcart = cartobj;
+    
 
     // Loop through cart items and pull product information from endpoint to use later
-    for (let cartItem of this.activeCart.cartItems) {
-      this.productService.getProductById(cartItem.productId)
-        .subscribe(product => {
-          this.prArray.push(product);
-          this.prIdArray.push(product.id);
-        });
-    }
+    // for (let cartItem of this.activeCart.cartItems) {
+    //   this.productService.getProductById(cartItem.productId)
+    //     .subscribe(product => {
+    //       this.prArray.push(product);
+    //       this.prIdArray.push(product.id);
+    //     });
+    // }
   }
 
   ngOnInit(): void {
@@ -172,4 +178,12 @@ export class ShoppingCartComponent implements OnInit {
       this.mobile = false;
     }
   }
+
+saveCart(){
+  this.testcart.userId = this.currentUser.userId;
+  this.cartService.addCart(this.testcart).subscribe(res => this.router.navigate(["selectcart"]));
+}
+
+
+
 }
