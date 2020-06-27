@@ -23,10 +23,22 @@ export class AddQuizComponent implements OnInit {
     availablePoints: null,
   };
   focusedQuestion;
+
+  subjectText = '';
   addSubject(event) {
     delete event.value.subjectId;
-    this.quizService.addSubject(event.value).subscribe();
-    this.quizService.getAllSubjects().subscribe((res) => (this.subjects = res));
+    this.quizService.addSubject(event.value).subscribe(
+      (res) => {},
+      (error) => {
+        if (error.status == 500) {
+          window.alert('Error adding subject');
+        } else {
+          this.quizService
+            .getAllSubjects()
+            .subscribe((res) => (this.subjects = res));
+        }
+      }
+    );
   }
   setSubject(event) {
     this.focusedQuiz.subject = event;
@@ -57,7 +69,7 @@ export class AddQuizComponent implements OnInit {
     });
   }
   closeResult = '';
-  open(content, question) {
+  open(content, question, subject) {
     if (question == 'new') {
       this.focusedQuestion = {
         question: null,
@@ -68,9 +80,7 @@ export class AddQuizComponent implements OnInit {
         option3: null,
         option4: null,
         option5: null,
-        quiz: {
-
-        },
+        quiz: {},
       };
     } else {
       this.focusedQuestion = question;
@@ -120,6 +130,8 @@ export class AddQuizComponent implements OnInit {
               (x) => x.questionId != result.value.questionId
             );
             this.updateTotal();
+          } else if (result.type == 'subject') {
+            this.addSubject(subject);
           }
         },
         (reason) => {
@@ -142,7 +154,7 @@ export class AddQuizComponent implements OnInit {
     private modalService: NgbModal,
     private quizService: QuizService,
     private userservice: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.quizService.getAllSubjects().subscribe((res) => (this.subjects = res));

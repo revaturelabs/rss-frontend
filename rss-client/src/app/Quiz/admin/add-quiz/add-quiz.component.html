@@ -3,11 +3,14 @@
     <h1>Select a quiz subject</h1>
     <li>
       <!-- TODO: fix this error -->
-      <button [disabled]="!subject.valid" (click)="addSubject(subject)">
+      <button
+        (click)="open(content3, 'new', subject)"
+        [disabled]="subjectText == ''"
+      >
         +
       </button>
       <input
-        ngModel
+        [(ngModel)]="subjectText"
         #subject="ngModel"
         type="text"
         placeholder="Add a subject"
@@ -269,6 +272,31 @@
       {{ focusedQuestion.question }}
     </div>
     <button (click)="modal.close({ type: 'delete', value: focusedQuestion })">
+      Confim
+    </button>
+
+    <button (click)="modal.dismiss('Cross click')">Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h3>Add new Subject?</h3>
+    <div>
+      {{ subjectText }}
+    </div>
+    <button (click)="modal.close({ type: 'subject', value: focusedQuestion })">
       Confim
     </button>
 
