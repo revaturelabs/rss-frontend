@@ -110,14 +110,14 @@
                     <div class="container">
                         <div class="card-text cart-total d-flex align-bottom justify-content-between align-items-end">
                             <h4>Total:</h4>
-                            <h6><span>650</span> points</h6>
+                            <h6><span>{{totalPointCost}}</span> points</h6>
                         </div>
                     </div>
 
                     <div class="container">
                         <div class="user-points card-text d-flex justify-content-between align-items-end">
                             <h4>Your Points:</h4>
-                            <h6><span>1000</span> points</h6>
+                            <h6><span>{{getYourPoints()}}</span> points</h6>
                         </div>
                     </div>
 
@@ -126,24 +126,25 @@
                             Pick Points
                         </button>
                         <div class="collapse points-div" id="pointSource">
-                            <div class="card d-flex flex-column" id="pointsCard">
+                            <div *ngIf="pointPicker" class="card d-flex flex-column" id="pointsCard">
                                 <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose
                                     Sources</h3>
-                                <div class="card-text d-flex justify-content-between align-items-end">
-                                    <h5 href="#">Total Quiz Points:</h5>
-                                    <h6><span>500</span></h6>
+                                <div *ngFor="let account of userAccounts">
+                                    <div class="card-text d-flex justify-content-between align-items-end">
+                                        <h5 href="#">Total {{displayName(account)}} Points:</h5>
+                                        <h6><span>{{account.points}}</span></h6>
+                                    </div>
+                                    <input id="points-{{account.accId}}" class="form-control" type="number" min="0"
+                                        [(ngModel)]="pointPicker[account.accId]" max={{account.points}} step="1"
+                                        placeholder="Quiz Points">
                                 </div>
-                                <input class="form-control" type="number" min="0" step="50" placeholder="Quiz Points">
-                                <div class="card-text d-flex justify-content-between align-items-end">
-                                    <h5 href="#">Total Bug Bounty Points:</h5>
-                                    <h6><span>500</span></h6>
-                                </div>
-                                <input class="form-control" type="number" min="0" step="50"
-                                    placeholder="Bug Bounty Points">
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-lg btn-block btn-primary">Purchase</button>
+                            <button *ngIf="successfulPurchase" class="btn btn-lg btn-block btn-primary"
+                                (click)="purchaseCart()">Purchase</button>
+                            <button *ngIf="!successfulPurchase" class="btn btn-lg btn-block btn-primary" disabled>
+                                Need {{totalPointCost}} Total Points</button>
                         </div>
                         <div>
                             <button class="btn btn-block btn-success" href="#savingcart" data-toggle="collapse">
@@ -166,7 +167,8 @@
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-block btn-danger" (click)="deleteCart()">Delete Cart</button>
+                            <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete
+                                Cart</button>
 
                         </div>
                     </div>

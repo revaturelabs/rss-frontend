@@ -31,7 +31,7 @@ export class CartItemService {
     return this.http.put<CartItem>(this.baseURL, cartItem);
   }
   // DELETE
-  deleteCartItem(cartItem: CartItem): void {
-    this.http.delete(this.baseURL + cartItem.cartItemId);
+  deleteCartItem(cartItem: CartItem): Observable<any> {
+    return this.http.delete(this.baseURL + cartItem.cartItemId);
   }
 }
