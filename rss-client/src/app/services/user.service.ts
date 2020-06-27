@@ -30,7 +30,7 @@ export class UserService {
   ) {}
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': '/application/json' }),
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   //user controller
