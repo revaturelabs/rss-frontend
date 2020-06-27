@@ -37,6 +37,7 @@ export class CartService {
   // CREATE
   addCart(cart: Cart): Observable<Cart> {
     // return of(cart);
+    cart.cartItems = [];
     return this.http.post<Cart>(this.baseURL, cart);
   }
   // READ
@@ -59,7 +60,15 @@ export class CartService {
   // }
 
   getCartById(id: number): Observable<any> {
-    return this.http.get(this.baseURL + id);
+    if (id == 0 && sessionStorage.getItem("defaultCart")) {
+      return of(JSON.parse(sessionStorage.getItem("defaultCart")))
+      // } else if (id == 0) {
+      //   let defaultCart = new Cart(0, userId, "(default)", []);
+      //   sessionStorage.setItem("defaultcart", JSON.stringify(defaultCart));
+      //   return of(defaultCart);
+    } else {
+      return this.http.get(this.baseURL + id);
+    }
   }
 
   listCartsByUser(user: User): Observable<Cart[]> {
@@ -69,11 +78,11 @@ export class CartService {
       userCarts = [JSON.parse(sessionStorage.getItem("defaultCart"))];
     } else {
       userCarts = [new Cart(0, user.userId, "(default)", [])];
+      sessionStorage.setItem("defaultcart", JSON.stringify(userCarts[0]));
     }
     if (!JSON.parse(sessionStorage.getItem("activecartId"))) {
       sessionStorage.setItem("activecartId", `${userCarts[0].cartId}`);
-      sessionStorage.setItem("myactivecart",  JSON.stringify(userCarts[0]) );
-
+      sessionStorage.setItem("myactivecart", JSON.stringify(userCarts[0]));
     }
     this.http.get<Cart[]>(this.baseURLplural + user.userId).subscribe(
       carts => {
@@ -96,12 +105,32 @@ export class CartService {
   // DELETE
   deleteCart(cart: Cart): boolean {
     // return this.http.delete(this.baseURL + 127);
-    this.http.delete(this.baseURL + 127).subscribe();
-    // this.http.delete(this.baseURL+115, {observe: 'response'})
-    //   .subscribe(response => {
-    //     console.log(response.status);
-    //   })
-    return true;
+    // this.http.delete(this.baseURL + cart.cartId).subscribe();
+    let deleted: boolean = false;
+    this.http.delete(this.baseURL + cart.cartId, { observe: 'response' })
+      .subscribe(response => {
+        console.log(response.status);
+        if ([200, 201, 202].includes(response.status)) {
+          deleted = true;
+        }
+      })
+    return deleted;
+  }
+
+  // deleteCartWithId(cartId: number): boolean {
+  //   let deleted: boolean = false;
+  //   this.http.delete(this.baseURL + cartId, { observe: 'response' })
+  //     .subscribe(response => {
+  //       console.log(response.status);
+  //       if ([200, 201, 202].includes(response.status)) {
+  //         deleted = true;
+  //       }
+  //     })
+  //   return deleted;
+  // }
+
+  deleteCartWithId(cartId: number): Observable<any> {
+    return this.http.delete(this.baseURL + cartId, { observe: 'response' })
   }
 
   setActiveCart(cart: Cart): void {
