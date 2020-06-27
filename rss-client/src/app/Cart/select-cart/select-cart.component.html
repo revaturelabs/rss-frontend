@@ -8,19 +8,20 @@
             <div class="container">
                 <h1 class="text-center">{{currentUser.firstName | titlecase}}'s Carts</h1>
                 <!-- ngFor, one row per  -->
-                <div class="card cart-card" [ngClass]="activeCartId == cart.cartId ? 'selectedCart' : null" *ngFor="let cart of userCarts">
+                <div class="card cart-card" [ngClass]="activeCartId == cart.cartId ? 'selectedCart' : null"
+                    *ngFor="let cart of userCarts">
                     <div class="card-header" id="cartBody-{{cart.cartId}}">
                         <div class="d-flex align-items-end justify-content-between cart-title">
                             <h3><a>{{cart.name}}</a></h3>
                             <a href='#cartDetails-{{cart.cartId}}' (click)="toggleArrow($event)" data-toggle="collapse">
                                 <img src="assets/Images/dropdown.png" id="arrow-{{cart.cartId}}" class="downarrow"
-                                type="button"
-                                    alt="details">
+                                    type="button" alt="details">
                             </a>
                         </div>
                         <div class="collapse" id="cartDetails-{{cart.cartId}}">
                             <div class="d-flex justify-content-around cart-button-holder">
-                                <button class="btn btn-primary btn-block" (click)="setActiveCart(cart)">Select Cart</button>
+                                <button class="btn btn-primary btn-block" (click)="setActiveCart(cart)">Select
+                                    Cart</button>
                                 <!-- maybe add rename button if we have time or future batches want to implement -->
                                 <!-- <button class="btn btn-success">Rename Cart</button> -->
                                 <button class="btn btn-danger btn-block">Delete Cart</button>
@@ -30,11 +31,14 @@
                                     <tr *ngFor="let cItem of cart.cartItems"
                                         class="d-flex justify-content-between align-items-end small-row">
                                         <td class="align-bottom img-frame">
-                                            <img class="img-small" src="{{getProductById(cItem.productId).src}}" />
+                                            <img class="img-small" src="{{getProductById(cItem.productId) ? product.image : noProduct.image}}" />
                                         </td>
-                                        <td class="align-bottom"><b>{{getProductById(cItem.productId).name}}</b>
+                                        <td class="align-bottom">
+                                            <!-- <b>{{getProductById(cItem.productId) ? product.name : noProduct.name}}</b> -->
+                                            <b>{{product ? product.name : noProduct.name | titlecase}}</b>
                                         </td>
-                                        <td class="align-bottom">{{getProductById(cItem.productId).points}} points
+                                        <td class="align-bottom">
+                                            {{product ? product.unitPrice : noProduct.unitPrice}} points
                                         </td>
                                         <td class="align-bottom">x{{cItem.quantity}}</td>
                                     </tr>
