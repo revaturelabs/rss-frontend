@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { Statement } from '@angular/compiler';
 
 @Component({
   selector: 'login-page',
@@ -33,13 +34,17 @@ export class LoginPageComponent implements OnInit {
     const formValue = this.loginForm.value;
     console.log(formValue);
     this.userService.login(formValue).subscribe((res) => {
-      this.user = res;
       console.log(res);
-      this.userLogin.emit(res);
-      this.isLoggedIn.emit(true);
-      this.userService.changeUser(res);
-      // this.userService.isLoggedIn = true;
-      // this.userService.user = res;
+      if (res == null) {
+        window.alert('Invalid login credentials');
+      } else {
+        console.log('what');
+        this.user = res;
+        console.log(res);
+        this.userLogin.emit(res);
+        this.isLoggedIn.emit(true);
+        this.userService.changeUser(res);
+      }
     });
   }
 
