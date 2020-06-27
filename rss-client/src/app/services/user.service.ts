@@ -21,6 +21,8 @@ export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
   providedIn: 'root',
 })
 export class UserService {
+  url = 'http://localhost:9000/user';
+  // url = "http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/user"
   constructor(
     private httpclient: HttpClient,
     private router: Router,
@@ -34,63 +36,42 @@ export class UserService {
   //user controller
   login(log): Observable<User> {
     return this.httpclient.post<any>(
-      'http://localhost:9000/user/login',
+      this.url + '/login',
       log,
       this.httpOptions
     );
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.httpclient.get<User[]>('http://localhost:9000/user/all');
+    return this.httpclient.get<User[]>(this.url + '/all');
   }
 
   getUserById(id: User): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/getuserbyid',
-      id
-    );
+    return this.httpclient.post<any>(this.url + '/getuserbyid', id);
   }
 
   getUserByEmail(em: User): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/getuserbyemail',
-      em
-    );
+    return this.httpclient.post<any>(this.url + '/getuserbyemail', em);
   }
 
   addUser(user: User): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/adduser',
-      user
-    );
+    return this.httpclient.post<any>(this.url + '/adduser', user);
   }
 
   updateInfo(user: User): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/update/i',
-      user
-    );
+    return this.httpclient.post<any>(this.url + '/update/i', user);
   }
 
   updatePassword(u: User): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/updatepassword',
-      u
-    );
+    return this.httpclient.post<any>(this.url + '/updatepassword', u);
   }
 
   updateProfilePic(u: User): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/updateprofilepic',
-      u
-    );
+    return this.httpclient.post<any>(this.url + '/updateprofilepic', u);
   }
 
   updateIsAdmin(user: User): Observable<User> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/user/updateisadmin',
-      user
-    );
+    return this.httpclient.post<any>(this.url + '/updateisadmin', user);
   }
 
   isLoggedIn = false;

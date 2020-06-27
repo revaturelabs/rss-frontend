@@ -10,6 +10,8 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
+  url = 'http://localhost:8080';
+  // url="http://ec2-34-203-75-254.compute-1.amazonaws.com:10000/"
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -68,72 +70,61 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) { }
+  constructor(private httpclient: HttpClient) {}
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
     this.quiz.subject.subjectName = sub;
     console.log(this.quiz.subject);
     return this.httpclient.post<any>(
-      'http://localhost:8080/subject/admin/add',
+      this.url + '/subject/admin/add',
       this.quiz.subject
     );
   }
 
   getAllSubjects(): Observable<Subject[]> {
-    return this.httpclient.get<Subject[]>('http://localhost:8080/subject/obtain/all');
+    return this.httpclient.get<Subject[]>(this.url + '/subject/obtain/all');
   }
 
   //Quiz Controller
   addQuiz(quiz): Observable<Quiz> {
     console.log(quiz);
-    return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/admin/add',
-      quiz
-    );
+    return this.httpclient.post<any>(this.url + '/quiz/admin/add', quiz);
   }
 
   findQuizById(id): Observable<Quiz> {
     this.quiz.quizId = id;
-    return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/obtain/id',
-      this.quiz
-    );
+    return this.httpclient.post<any>(this.url + '/quiz/obtain/id', this.quiz);
   }
 
   findQuizBySubject(id): Observable<Quiz> {
     this.quiz.subjectId = id;
     return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/obtain/subject',
+      this.url + '/quiz/obtain/subject',
       this.quiz.subjectId
     );
   }
 
   getAllQuizzes(): Observable<Quiz[]> {
-    return this.httpclient.get<Quiz[]>(
-      'http://localhost:8080/quiz/obtain/all'
-    );
+    return this.httpclient.get<Quiz[]>(this.url + '/quiz/obtain/all');
   }
 
   //Questions Bank Controller
   //this method is also going to be used to update questions aswell
   addSingularQuestion(question): Observable<Questions> {
     return this.httpclient.post<any>(
-      'http://localhost:8080/question/admin/add',
+      this.url + '/question/admin/add',
       question
     );
   }
   submitQuiz(quiz): Observable<any> {
-    return this.httpclient.post<any>(
-      'http://localhost:8080/question/forward',
-      quiz
-    );
+    return this.httpclient.post<any>(this.url + '/question/forward', quiz);
   }
 
   getQuestionsById(id): Observable<Questions[]> {
     this.questions.quizId = id;
     return this.httpclient.post<any[]>(
-      'http://localhost:8080/question/questions',
+      this.url + '/question/questions',
       this.questions
     );
   }
@@ -141,7 +132,7 @@ export class QuizService {
   getQuestionsByIdAdmin(id): Observable<Questions[]> {
     this.questions.quizId = id;
     return this.httpclient.post<any[]>(
-      'http://localhost:8080/question/admin/questions',
+      this.url + '/question/admin/questions',
       this.questions
     );
   }
@@ -150,7 +141,7 @@ export class QuizService {
     this.questions = questions;
     console.log(this.questions);
     return this.httpclient.post<any>(
-      'http://localhost:8080/question/admin/addall',
+      this.url + '/question/admin/addall',
       this.questions
     );
   }
@@ -159,7 +150,7 @@ export class QuizService {
   getUserScores(email): Observable<QuizSubmit> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
-      'http://localhost:8080/userscore/takenquiz',
+      this.url + '/userscore/takenquiz',
       this.quizSubmit
     );
   }
@@ -167,7 +158,7 @@ export class QuizService {
   deleteQuestion(id) {
     console.log(id);
     return this.httpclient.post<any[]>(
-      'http://localhost:8080/question/admin/delete',
+      this.url + '/question/admin/delete',
       JSON.stringify(id),
       this.httpOptions
     );
