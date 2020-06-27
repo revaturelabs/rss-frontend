@@ -1,5 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
@@ -25,9 +30,18 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: '',
-      password: '',
+      email: new FormControl('', [
+        Validators.required,
+        // Validators.minLength(4),
+      ]),
+      password: new FormControl('', Validators.required),
     });
+  }
+  get email() {
+    return this.loginForm.get('email');
+  }
+  get password() {
+    return this.loginForm.get('password');
   }
 
   async submitForm() {

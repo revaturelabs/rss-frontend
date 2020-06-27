@@ -30,13 +30,13 @@ export class UserService {
   ) {}
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': '/application/json' }),
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   //user controller
   login(log): Observable<User> {
     return this.httpclient.post<any>(
-      this.url + '/login',
+      'http://localhost:9000/user/login',
       log,
       this.httpOptions
     );

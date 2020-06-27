@@ -3,7 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
 import { Account } from 'src/app/interfaces/account';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -20,7 +25,7 @@ export class AccountSettingsPageComponent implements OnInit {
     accId: 0,
     accTypeId: 0,
     userId: 0,
-    points: 0
+    points: 0,
   };
   accounts: Account[];
 
@@ -29,9 +34,7 @@ export class AccountSettingsPageComponent implements OnInit {
     private userservice: UserService,
     private fb: FormBuilder,
     private accountService: AccountService
-  ) { }
-
-
+  ) {}
 
   selectedFile: string;
   imagePreview: any;
@@ -59,17 +62,17 @@ export class AccountSettingsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userProfileForm = this.fb.group({
-      userId: '',
-      firstName: '',
-      lastName: '',
-      email: '',
+      userId: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
     });
     this.getUser();
-    this.accountService.getAccountByUserId(this.user).subscribe(res => {
+    this.accountService.getAccountByUserId(this.user).subscribe((res) => {
       console.log(res[0]);
       this.evalAccount = res[0];
-      console.log(this.evalAccount)
-    })
+      console.log(this.evalAccount);
+    });
     this.grabAccounts();
   }
 
@@ -87,6 +90,18 @@ export class AccountSettingsPageComponent implements OnInit {
       email: user.email,
     });
   }
+  get userId() {
+    return this.userProfileForm.get('userId');
+  }
+  get firstName() {
+    return this.userProfileForm.get('firstName');
+  }
+  get lastName() {
+    return this.userProfileForm.get('lastName');
+  }
+  get email() {
+    return this.userProfileForm.get('email');
+  }
 
   async submitForm() {
     const formValue = this.userProfileForm.value;
@@ -97,25 +112,25 @@ export class AccountSettingsPageComponent implements OnInit {
   }
 
   createAccount(event) {
-    if (event == "Eval") {
-      let num = this.accounts[1].accTypeId
+    if (event == 'Eval') {
+      let num = this.accounts[1].accTypeId;
       this.myAccount.accTypeId = num;
-      this.myAccount.userId = this.userservice.userPersistance().userId
-    } else if (event == "Bug") {
+      this.myAccount.userId = this.userservice.userPersistance().userId;
+    } else if (event == 'Bug') {
       console.log(this.accounts[0].accTypeId);
-      this.myAccount.accTypeId = this.accounts[0].accTypeId
-      this.myAccount.userId = this.userservice.userPersistance().userId
+      this.myAccount.accTypeId = this.accounts[0].accTypeId;
+      this.myAccount.userId = this.userservice.userPersistance().userId;
     }
-    console.log(this.myAccount)
-    this.accountService.createAccount(this.myAccount).subscribe(
-      res => { console.log(res) }
-    );
+    console.log(this.myAccount);
+    this.accountService.createAccount(this.myAccount).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   grabAccounts() {
-    return this.accountService.getAllAccounts().subscribe(res => {
+    return this.accountService.getAllAccounts().subscribe((res) => {
       this.accounts = res;
       console.log(this.accounts);
-    })
+    });
   }
 }
