@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { take, takeUntil, first } from 'rxjs/operators';
 import { Product } from 'src/app/interfaces/product.model';
 import { ProductService } from 'src/app/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-cart',
@@ -31,7 +32,7 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     unitPrice: NaN,
     color: "N/A"
   }
-  private ngUnsubscribe: Subject<any> = new Subject();
+  // private ngUnsubscribe: Subject<any> = new Subject();
   tempCarts: Cart[] = [];
   activeCartId: number;
   eventId: string;
@@ -41,7 +42,11 @@ export class SelectCartComponent implements OnInit, OnDestroy {
    * Constructing SelectCart. Need the user information so if it doesn't exist, make fake user.
    * @param cartService 
    */
-  constructor(private cartService: CartService, private productService: ProductService, private userService: UserService) {
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService,
+    private userService: UserService,
+    private router: Router) {
     // access hardcoded user
     this.currentUser = this.userService.getCurrentUser();
 
@@ -49,27 +54,14 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     // console.log(this.cartService.isCartSelected());
 
     try {
-      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId')); 
+      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
     } catch (error) {
       console.log(error);
     }
 
     // This gets a list of carts that the user has and stores it
     if (this.userCarts.length == 0) {
-      this.cartService.listCartsByUser(this.currentUser)
-        .subscribe(carts => {
-          this.userCarts = carts;
-          this.fillToggleRecord(carts);
-          this.currentUser.userCartIds = [];
-          if (carts) {
-            for (let cart of carts) {
-              this.currentUser.userCartIds.push(cart.cartId);
-            }
-          }
-          else {
-            this.currentUser.userCartIds.push(0);
-          }
-        })
+      this.updateSelectCartView();
     }
     this.productService.getAllProducts().subscribe(
       products => {
@@ -82,8 +74,6 @@ export class SelectCartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.ngUnsubscribe.next();
-    // this.ngUnsubscribe.complete();
   }
 
   getProductById(id: number): Product {
@@ -112,8 +102,50 @@ export class SelectCartComponent implements OnInit, OnDestroy {
       activeCart = this.cartService.getActiveCart();
     } else {
       activeCart = null;
-    }    
+    }
     return activeCart;
+  }
+
+  updateSelectCartView() {
+    this.cartService.listCartsByUser(this.currentUser)
+      .subscribe(carts => {
+        this.userCarts = carts;
+        this.fillToggleRecord(carts);
+        this.currentUser.userCartIds = [];
+        if (carts) {
+          for (let cart of carts) {
+            this.currentUser.userCartIds.push(cart.cartId);
+          }
+        }
+        else {
+          this.currentUser.userCartIds.push(0);
+        }
+      })
+  }
+
+  deleteCart(cart: Cart) {
+    if (cart.cartId == 0) {
+      cart.cartItems = [];
+      sessionStorage.setItem('defaultcart', JSON.stringify(cart));
+      this.updateSelectCartView()
+    } else {
+      this.cartService.deleteCartWithId(cart.cartId).subscribe(
+        resp => {
+          console.log(resp);
+          if ([200, 201, 202].includes(resp.status)) {
+            let index = this.currentUser.userCartIds.indexOf(cart.cartId);
+            // splice out this cart from the user's cart array
+            if (index > -1) {
+              this.currentUser.userCartIds.splice(index, 1);
+              console.log(this.currentUser.userCartIds + " front after");
+            }
+            sessionStorage.removeItem("activecartId");
+            console.log(sessionStorage.getItem("activecartId") === null);
+            this.updateSelectCartView()
+          }
+        }
+      )
+    }
   }
 
   // this creates a Record (like an object or map with key/value pairs)

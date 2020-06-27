@@ -8,30 +8,30 @@ import { Cart } from '../interfaces/cart.model';
   providedIn: 'root',
 })
 export class CartItemService {
-  baseUrl: string = 'http://localhost:8989/';
+  baseURL: string = 'http://localhost:9999/cartitem/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // CREATE
   addCartItem(cartItem: CartItem): Observable<CartItem> {
-    return of(cartItem);
-    // return this.http.post<CartItem>(this.baseURL, cartItem);
+    // return of(cartItem);
+    return this.http.post<CartItem>(this.baseURL, cartItem);
   }
   // READ
   getCartItemById(id: number): Observable<CartItem> {
-    return this.http.get<CartItem>(this.baseUrl + id);
+    return this.http.get<CartItem>(this.baseURL + id);
   }
   listCartItemsByCart(cart: Cart): Observable<CartItem[]> {
-    return of([new CartItem(0, 0, 1)]);
-    // return this.http.post<CartItem[]>(this.baseURL, cart);
+    // return of([new CartItem(0, 0, 1)]);
+    return this.http.post<CartItem[]>(this.baseURL, cart);
   }
   // UPDATE
   updateCartItem(cartItem: CartItem): Observable<CartItem> {
-    return of(cartItem);
-    // return this.http.put<CartItem>(this.baseURL, cartItem);
+    // return of(cartItem);
+    return this.http.put<CartItem>(this.baseURL, cartItem);
   }
   // DELETE
   deleteCartItem(cartItem: CartItem): void {
-    // this.http.delete(this.baseURL+cartItem.cartItemId);
+    this.http.delete(this.baseURL + cartItem.cartItemId);
   }
 }

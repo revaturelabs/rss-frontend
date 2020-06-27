@@ -1,17 +1,17 @@
 import { HostListener, Component, OnInit, Input } from '@angular/core';
 // temporary fake products
-import { TempProducts } from '../temp_products';
+import { Product } from '../../interfaces/product.model';
 import { CartItem } from 'src/app/interfaces/cart-item.model';
 
 import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
-import { FakeProductsService } from '../fake-products.service';
-import { TempProduct } from '../temp-product';
+import { ProductService } from '../../services/product.service';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { SelectCartComponent } from '../select-cart/select-cart.component';
+import { generate } from 'rxjs';
 
 
 @Component({
@@ -20,16 +20,16 @@ import { SelectCartComponent } from '../select-cart/select-cart.component';
   styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-  TempProducts = TempProducts;
+  // TempProducts = TempProducts;
   mobile: boolean = false;
 
   currentUser: User;
 
   activeCart: Cart;
   // cartItemArray: CartItem[] = [];
-  prArray: TempProduct[] = [];
+  products: Product[];
   prIdArray: number[] = [];
-  product: TempProduct;
+  product: Product;
   testcart: Cart;
 
 
@@ -38,35 +38,37 @@ export class ShoppingCartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private ciService: CartItemService,
-    private productService: FakeProductsService,
+    private productService: ProductService,
     private userService: UserService,
     private router: Router,
-    private selectcart : SelectCartComponent
+    private selectcart: SelectCartComponent
   ) {
     // access hardcoded user temporarily
     this.currentUser = this.userService.getCurrentUser();
 
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
-    if (actCartId || actCartId == 0) {
+    if (actCartId) {
       this.cartService.getCartById(actCartId).subscribe(cart => this.activeCart = cart);
+    } else if (actCartId == 0 && sessionStorage.getItem('defaultcart')) {
+      this.activeCart = JSON.parse(sessionStorage.getItem('defaultcart'));
+    } else if (actCartId == 0) {
+      this.activeCart = new Cart(0, this.currentUser.userId, "(default)", []);
+      sessionStorage.setItem("defaultcart", JSON.stringify(this.activeCart));
     } else {
       this.activeCart = null;
     }
+    console.log(this.activeCart);
 
-  
+
     var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
     this.testcart = cartobj;
-    
 
-    // Loop through cart items and pull product information from endpoint to use later
-    // for (let cartItem of this.activeCart.cartItems) {
-    //   this.productService.getProductById(cartItem.productId)
-    //     .subscribe(product => {
-    //       this.prArray.push(product);
-    //       this.prIdArray.push(product.id);
-    //     });
-    // }
+    this.productService.getAllProducts().subscribe(
+      products => {
+        this.products = products;
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -80,7 +82,7 @@ export class ShoppingCartComponent implements OnInit {
 
   getProductById(id: number) {
     this.product = null;
-    for (let product of this.prArray) {
+    for (let product of this.products) {
       if (product.id == id) {
         this.product = product;
       }
@@ -122,50 +124,28 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteCart() {
-    this.cartService.listCartsByUser(this.currentUser).subscribe(res => {
-      for (let r of res) {
-        console.log(JSON.stringify(r.cartItems));
-      }
-    })
-    console.log(this.currentUser.userCartIds + " front before");
-    console.log(sessionStorage.getItem("activecartId") === null);
-    console.log(this.activeCart);
-
-
-
-    // delete the cart on backend
-    this.cartService.getCartById(127).subscribe(cart => {
-      console.log(cart);
-      this.testcart = cart;
-      console.log(this.cartService.deleteCart(cart));
-    });
-    console.log(this.testcart);
-
-    // if (this.cartService.deleteCart(this.testcart)) {
-    if (this.cartService.deleteCart(this.testcart)) {
-      let userCarts: Cart[];
-      this.cartService.listCartsByUser(this.currentUser).subscribe(
-        carts => userCarts = carts
-      );
-      console.log(userCarts);
-      // console.log(this.cartService.listCartsByUser(this.currentUser) + " backend after");
-
-      // delete the active cart on frontend
-      // find the id of the cart to be deleted
-      let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
-      // splice out this cart from the user's cart array
-      if (index > -1) {
-        this.currentUser.userCartIds.splice(index, 1);
-        console.log(this.currentUser.userCartIds + " front after");
-
-      }
-      sessionStorage.removeItem("activecartId");
-      console.log(sessionStorage.getItem("activecartId") === null);
-
-      this.router.navigate(["selectcart"]);
-    } else {
-
-    }
+    // if (this.activeCart.cartId == 0) {
+    //   this.activeCart.cartItems = [];
+    //   sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+    //   this.router.navigate(["selectcart"]);
+    // } else {
+    //   this.cartService.deleteCartWithId(this.activeCart.cartId).subscribe(
+    //     resp => {
+    //       console.log(resp);
+    //       if ([200, 201, 202].includes(resp.status)) {
+    //         let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
+    //         // splice out this cart from the user's cart array
+    //         if (index > -1) {
+    //           this.currentUser.userCartIds.splice(index, 1);
+    //           console.log(this.currentUser.userCartIds + " front after");
+    //         }
+    //         sessionStorage.removeItem("activecartId");
+    //         console.log(sessionStorage.getItem("activecartId") === null);
+    //         this.router.navigate(["selectcart"]);
+    //       }
+    //     }
+    //   )
+    // }
   }
 
   // listen for screen sizes
@@ -179,10 +159,33 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-saveCart(){
-  this.testcart.userId = this.currentUser.userId;
-  this.cartService.addCart(this.testcart).subscribe(res => this.router.navigate(["selectcart"]));
-}
+  saveCart() {
+    if (this.activeCart.name != '(default)') {
+      let cartToSave: Cart = {
+        cartId: -1,
+        userId: this.activeCart.userId,
+        name: this.activeCart.name,
+        cartItems: []
+      };
+      this.cartService.addCart(cartToSave).subscribe(
+        (generatedCart) => {
+          console.log(generatedCart);
+          console.log(this.activeCart.cartItems);
+          for (let cItem of this.activeCart.cartItems) {
+            let tempCartItem = {
+              cartItemId: -1,
+              cart: generatedCart,
+              productId: cItem.productId,
+              quantity: cItem.quantity
+            }
+            console.log(tempCartItem);
+            this.ciService.addCartItem(tempCartItem).subscribe(
+              resp => this.router.navigate(["selectcart"]));
+          }
+        }
+      );
+    }
+  }
 
 
 
