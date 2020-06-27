@@ -16,6 +16,13 @@ export class AccountSettingsPageComponent implements OnInit {
   isLoggedIn;
   userProfileForm: FormGroup;
   evalAccount: Account;
+  myAccount: Account = {
+    accId: 0,
+    accTypeId: 0,
+    userId: 0,
+    points: 0
+  };
+  accounts: Account[];
 
   constructor(
     private imageservice: ImageService,
@@ -63,6 +70,7 @@ export class AccountSettingsPageComponent implements OnInit {
       this.evalAccount = res[0];
       console.log(this.evalAccount)
     })
+    this.grabAccounts();
   }
 
   getUser() {
@@ -86,5 +94,28 @@ export class AccountSettingsPageComponent implements OnInit {
     this.userservice.updateInfo(formValue).subscribe((res) => {
       console.log(`User has updated their info`);
     });
+  }
+
+  createAccount(event) {
+    if (event == "Eval") {
+      let num = this.accounts[1].accTypeId
+      this.myAccount.accTypeId = num;
+      this.myAccount.userId = this.userservice.userPersistance().userId
+    } else if (event == "Bug") {
+      console.log(this.accounts[0].accTypeId);
+      this.myAccount.accTypeId = this.accounts[0].accTypeId
+      this.myAccount.userId = this.userservice.userPersistance().userId
+    }
+    console.log(this.myAccount)
+    this.accountService.createAccount(this.myAccount).subscribe(
+      res => { console.log(res) }
+    );
+  }
+
+  grabAccounts() {
+    return this.accountService.getAllAccounts().subscribe(res => {
+      this.accounts = res;
+      console.log(this.accounts);
+    })
   }
 }
