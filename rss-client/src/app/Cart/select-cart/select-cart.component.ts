@@ -2,15 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { User } from 'src/app/interfaces/user';
 import { Cart } from 'src/app/interfaces/cart.model';
-// import { FakeProductsService } from '../fake-products.service';
 import { UserService } from 'src/app/services/user.service';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil, first } from 'rxjs/operators';
-// import { TempProduct } from '../temp-product';
-// import { TempProducts } from '../temp_products';
 import { Product } from 'src/app/interfaces/product.model';
 import { ProductService } from 'src/app/services/product.service';
-// import { parse } from 'path';
 
 @Component({
   selector: 'app-select-cart',
@@ -35,10 +31,7 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     unitPrice: NaN,
     color: "N/A"
   }
-  // private cartsub: Subscription;
   private ngUnsubscribe: Subject<any> = new Subject();
-  // TempProducts = TempProducts;
-  tempCart = Cart;
   tempCarts: Cart[] = [];
   activeCartId: number;
   eventId: string;
@@ -56,62 +49,17 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     // console.log(this.cartService.isCartSelected());
 
     try {
-      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
-      // this.activeCartId = this.getActiveCart().cartId;  
+      this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId')); 
     } catch (error) {
       console.log(error);
     }
 
     // This gets a list of carts that the user has and stores it
-    // console.log(this.currentUser.userCartIds);
-    // console.log("Right before the if on line 51")
-    // console.log(!!this.currentUser.userCartIds);
-    // console.log(this.userCarts.length);
-    // console.log(!this.userCarts.length);
-    // if (this.currentUser.userCartIds && !this.userCarts.length) {
-    //   console.log("Right before the if on line 56");
-    //   for (let id of this.currentUser.userCartIds) {
-    //     if (id == 0) {
-    //       console.log(JSON.parse(sessionStorage.getItem('defaultCart')));
-    //       this.userCarts.push(JSON.parse(sessionStorage.getItem('defaultCart')));
-    //     } else {
-    //       this.cartService.getCartById(id).subscribe(
-    //         cart => this.userCarts.push(cart)
-    //       )
-    //     }
-    //   }
-    // } else if (!this.currentUser.userCartIds) {
-    //   console.log("I am in line 62!")
-    //   this.cartService.listCartsByUser(this.currentUser)
-    //     .subscribe(carts => {
-    //       this.userCarts = carts;
-    //       // console.log(carts);
-    //       this.currentUser.userCartIds = [];
-    //       this.fillToggleRecord(carts);
-    //       console.log(this.toggleRecord);
-
-    //       if (carts) {
-    //         for (let cart of carts) {
-    //           this.currentUser.userCartIds.push(cart.cartId);
-    //         }
-    //       }
-    //       else {
-    //         this.currentUser.userCartIds.push(0);
-    //       }
-    //     })
-    // }
-    // console.log(this.userCarts.length);
     if (this.userCarts.length == 0) {
-      console.log("HIIIII!!!");
       this.cartService.listCartsByUser(this.currentUser)
         .subscribe(carts => {
           this.userCarts = carts;
-          console.log(carts);
-          // if (sessionStorage.getItem('defaultCart')) {
-          //   this.currentUser.userCartIds = [JSON.parse(sessionStorage.getItem('defaultCart'))];
-          // }
           this.fillToggleRecord(carts);
-          // console.log(this.toggleRecord);
           this.currentUser.userCartIds = [];
           if (carts) {
             for (let cart of carts) {
@@ -123,7 +71,6 @@ export class SelectCartComponent implements OnInit, OnDestroy {
           }
         })
     }
-    console.log(this.userCarts);
     this.productService.getAllProducts().subscribe(
       products => {
         this.products = products;
@@ -132,32 +79,12 @@ export class SelectCartComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.currentUser = this.userService.getCurrentUser();
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    // this.ngUnsubscribe.next();
+    // this.ngUnsubscribe.complete();
   }
-
-  // getProductById(id: number) {
-  //   console.log(this.product);
-  //   console.log(id);
-  //   if (!this.product || this.product.id != id) {
-  //     // this.product = this.noProduct;\
-  //     // let sub: Subscription;
-  //     // this.product = null;
-  //     this.productService.getProductById(id)
-  //       .pipe(first())
-  //       .subscribe(
-  //         fetchedProduct => this.product = fetchedProduct
-  //     );
-  //     // if (this.product) {
-  //     //   this.cartsub.unsubscribe();
-  //     // }
-  //   }
-  //   return this.product;
-  // }
 
   getProductById(id: number): Product {
     this.product = this.noProduct;
@@ -167,10 +94,6 @@ export class SelectCartComponent implements OnInit, OnDestroy {
       }
     }
     return this.product;
-  }
-
-  getProductByIdService(id: number): Observable<Product> {
-    return this.productService.getProductById(id);
   }
 
   setActiveCart(cart: Cart) {
@@ -185,11 +108,6 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     let activeCart: Cart;
     if (this.cartService.isCartSelected()) {
       activeCart = this.cartService.getActiveCart();
-      // this.cartsub = this.cartService.getActiveCart()
-      //   .subscribe((cart: Cart) => {
-      //     console.log(cart);
-      //     activeCart = cart;
-      //   });
     } else {
       activeCart = null;
     }

@@ -73,13 +73,6 @@ export class CartService {
     if (!JSON.parse(sessionStorage.getItem("activecartId"))) {
       sessionStorage.setItem("activecartId", `${userCarts[0].cartId}`);
     }
-    // if (!sessionStorage.getItem("activecartId")) {
-    //   this.setActiveCart(userCarts[0]);
-    // }
-    // console.log(sessionStorage.getItem('defaultCart'))
-    // if (!sessionStorage.getItem("defaultCart")) {
-    //   sessionStorage.setItem('defaultCart', JSON.stringify(userCarts[0]));
-    // }
     this.http.get<Cart[]>(this.baseURLplural + user.userId).subscribe(
       carts => {
         console.log(carts);
@@ -89,11 +82,6 @@ export class CartService {
           }
         }
       })
-
-    // user.userCartIds = [];
-    // for (let cart of userCarts) {
-    //   user.userCartIds.push(cart.cartId);
-    // }
 
     return of(userCarts);
   }
@@ -112,15 +100,6 @@ export class CartService {
     //     console.log(response.status);
     //   })
     return true;
-
-    // let index = this.mockData.indexOf(cart);
-    // // splice out this cart from the user's cart array
-    // if (index > -1) {
-    //   this.mockData.splice(index, 1);
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   }
 
   setActiveCart(cart: Cart): void {
