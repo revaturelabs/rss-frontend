@@ -102,6 +102,8 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     // active cart id is determined by which you click on to send the id forward
     this.activeCartId = cart.cartId;
     sessionStorage.setItem('activecartId', JSON.stringify(this.activeCartId));
+    sessionStorage.setItem('myactivecart', JSON.stringify(cart));
+
   }
 
   getActiveCart() {
@@ -110,7 +112,7 @@ export class SelectCartComponent implements OnInit, OnDestroy {
       activeCart = this.cartService.getActiveCart();
     } else {
       activeCart = null;
-    }
+    }    
     return activeCart;
   }
 

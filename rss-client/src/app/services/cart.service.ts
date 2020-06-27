@@ -36,8 +36,8 @@ export class CartService {
 
   // CREATE
   addCart(cart: Cart): Observable<Cart> {
-    return of(cart);
-    // return this.http.post<Cart>(this.baseURL, cart);
+    // return of(cart);
+    return this.http.post<Cart>(this.baseURL, cart);
   }
   // READ
   // getCartById(id: number): Observable<Cart> {
@@ -72,6 +72,8 @@ export class CartService {
     }
     if (!JSON.parse(sessionStorage.getItem("activecartId"))) {
       sessionStorage.setItem("activecartId", `${userCarts[0].cartId}`);
+      sessionStorage.setItem("myactivecart",  JSON.stringify(userCarts[0]) );
+
     }
     this.http.get<Cart[]>(this.baseURLplural + user.userId).subscribe(
       carts => {

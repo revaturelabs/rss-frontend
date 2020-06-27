@@ -67,7 +67,9 @@ import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
     FormsModule,
     StoreModule.forRoot(reducer, {}),
   ],
-  providers: [],
+  providers: [
+    SelectCartComponent
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
