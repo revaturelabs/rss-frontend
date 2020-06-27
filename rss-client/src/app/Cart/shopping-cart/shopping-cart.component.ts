@@ -124,28 +124,28 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteCart() {
-    // if (this.activeCart.cartId == 0) {
-    //   this.activeCart.cartItems = [];
-    //   sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
-    //   this.router.navigate(["selectcart"]);
-    // } else {
-    //   this.cartService.deleteCartWithId(this.activeCart.cartId).subscribe(
-    //     resp => {
-    //       console.log(resp);
-    //       if ([200, 201, 202].includes(resp.status)) {
-    //         let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
-    //         // splice out this cart from the user's cart array
-    //         if (index > -1) {
-    //           this.currentUser.userCartIds.splice(index, 1);
-    //           console.log(this.currentUser.userCartIds + " front after");
-    //         }
-    //         sessionStorage.removeItem("activecartId");
-    //         console.log(sessionStorage.getItem("activecartId") === null);
-    //         this.router.navigate(["selectcart"]);
-    //       }
-    //     }
-    //   )
-    // }
+    if (this.activeCart.cartId == 0) {
+      this.activeCart.cartItems = [];
+      sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+      this.router.navigate(["selectcart"]);
+    } else {
+      this.cartService.deleteCartWithId(this.activeCart.cartId).subscribe(
+        resp => {
+          console.log(resp);
+          if ([200, 201, 202].includes(resp.status)) {
+            let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
+            // splice out this cart from the user's cart array
+            if (index > -1) {
+              this.currentUser.userCartIds.splice(index, 1);
+              console.log(this.currentUser.userCartIds + " front after");
+            }
+            sessionStorage.removeItem("activecartId");
+            console.log(sessionStorage.getItem("activecartId") === null);
+            this.router.navigate(["selectcart"]);
+          }
+        }
+      )
+    }
   }
 
   // listen for screen sizes
