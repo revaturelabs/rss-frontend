@@ -77,15 +77,25 @@ export class UserService {
   }
 
   isLoggedIn = false;
+  // user: User = {
+  //   userId: 2021,
+  //   email: '',
+  //   password: '',
+  //   profilePic: null,
+  //   firstName: 'test',
+  //   lastName: 'testerson',
+  //   admin: false,
+  //   userCartIds: [0]
+  // };
   user: User = {
-    userId: 2021,
-    email: '',
-    password: '',
+    userId: 2022,
+    email: 'admin',
+    password: 'admin',
     profilePic: null,
-    firstName: 'test',
-    lastName: 'testerson',
-    admin: false,
-    userCartIds: [0]
+    firstName: 'admin',
+    lastName: 'admin',
+    admin: true,
+    userCartIds: []
   };
   changeUser(user: User) {
     this.isLoggedIn = true;

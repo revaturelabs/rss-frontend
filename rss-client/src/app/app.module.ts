@@ -30,6 +30,7 @@ import { AddQuizComponent } from './Quiz/admin/add-quiz/add-quiz.component';
 import { EditQuizComponent } from './Quiz/admin/edit-quiz/edit-quiz.component';
 import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
 import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
+import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
     NgbModule,
     FormsModule,
     StoreModule.forRoot(reducer, {}),
+    AppInventoryModule
   ],
   providers: [
     SelectCartComponent

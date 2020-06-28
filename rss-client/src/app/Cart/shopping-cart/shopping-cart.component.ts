@@ -1,18 +1,17 @@
-import { HostListener, Component, OnInit, Input } from '@angular/core';
+import { HostListener, Component, OnInit } from '@angular/core';
 // temporary fake products
-import { Product } from '../../interfaces/product.model';
+import { Product } from '../../app-inventory/class/product/product';
+import { InventoryService } from '../../app-inventory/service/inventory.service';
 
 import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
-import { ProductService } from '../../services/product.service';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
-import { Router, provideRoutes } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from '../../interfaces/account'
 import { CartItem } from 'src/app/interfaces/cart-item.model';
-import { threadId } from 'worker_threads';
 
 
 @Component({
@@ -30,7 +29,7 @@ export class ShoppingCartComponent implements OnInit {
   // cartItemArray: CartItem[] = [];
   products: Product[];
   product: Product;
-  testcart: Cart;
+  // testcart: Cart;
   userAccounts: Account[];
   pointPicker: Record<number, number> = {};
   userAccountRecord: Record<number, Account> = {};
@@ -41,7 +40,7 @@ export class ShoppingCartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private ciService: CartItemService,
-    private productService: ProductService,
+    private productService: InventoryService,
     private userService: UserService,
     private router: Router,
     private accountService: AccountService
@@ -52,12 +51,17 @@ export class ShoppingCartComponent implements OnInit {
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
     if (actCartId) {
-      this.cartService.getCartById(actCartId).subscribe(
-        cart => {
-          this.activeCart = cart;
-          this.getTotalPointCost();
-        }
-      );
+      let potActCart: Cart = JSON.parse(sessionStorage.getItem('myactivecart'));
+      if (potActCart && actCartId == potActCart.cartId) {
+        this.activeCart = potActCart;
+      } else {
+        this.cartService.getCartById(actCartId).subscribe(
+          cart => {
+            this.activeCart = cart;
+            this.getTotalPointCost();
+          }
+        );
+      }
     } else if (actCartId == 0 && sessionStorage.getItem('defaultcart')) {
       this.activeCart = JSON.parse(sessionStorage.getItem('defaultcart'));
     } else if (actCartId == 0) {
@@ -69,8 +73,8 @@ export class ShoppingCartComponent implements OnInit {
     console.log(this.activeCart);
 
 
-    var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
-    this.testcart = cartobj;
+    // var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
+    // this.testcart = cartobj;
 
     this.productService.getAllProducts().subscribe(
       products => {
@@ -124,9 +128,10 @@ export class ShoppingCartComponent implements OnInit {
         name: this.activeCart.name,
         cartItems: []
       }
-      for (let cItem of this.activeCart.cartItems) {
+      for (let i = 0; i < this.activeCart.cartItems.length; i++) {
+        let cItem = this.activeCart.cartItems[i];
         if (cItem.cartItemId == itemId) {
-          cItem.quantity = newQuantity;
+          this.activeCart.cartItems[i].quantity = newQuantity;
           ciToUpdate = {
             cartItemId: cItem.cartItemId,
             cart: emptyCartCopy,
@@ -139,31 +144,35 @@ export class ShoppingCartComponent implements OnInit {
       }
       this.getTotalPointCost();
       this.ciService.updateCartItem(ciToUpdate).subscribe();
+      sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
     } else {
       alert("Can't have 0 or negative quantity")
     }
   }
 
   deleteItem(cartItem: CartItem) {
+    console.log(cartItem);
     this.ciService.deleteCartItem(cartItem).subscribe(
       result => {
         const index = this.activeCart.cartItems.indexOf(cartItem);
         if (index > -1) {
           this.activeCart.cartItems.splice(index, 1);
           // console.log(index);
+          sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
+          console.log(sessionStorage);
           this.getTotalPointCost();
         }
       }
     );
   }
 
-  async getAndDelete(cartId: number) {
-    let testcart: Cart;
-    this.cartService.getCartById(cartId).subscribe(
-      cart => testcart = cart
-    )
-    console.log(testcart);
-  }
+  // async getAndDelete(cartId: number) {
+  //   let testcart: Cart;
+  //   this.cartService.getCartById(cartId).subscribe(
+  //     cart => testcart = cart
+  //   )
+  //   console.log(testcart);
+  // }
 
   deleteCart(path: string) {
     if (this.activeCart.cartId == 0) {
@@ -331,10 +340,10 @@ export class ShoppingCartComponent implements OnInit {
     // this.router.navigate([detailsURL]);
   }
 
-    // UPDATE
-    // updateCart(cart: Cart): Observable<Cart> {
-    //   return of(cart);
-      // return this.http.put<Cart>(this.baseURL, cart);
-    // }
+  // UPDATE
+  // updateCart(cart: Cart): Observable<Cart> {
+  //   return of(cart);
+  // return this.http.put<Cart>(this.baseURL, cart);
+  // }
 
 }

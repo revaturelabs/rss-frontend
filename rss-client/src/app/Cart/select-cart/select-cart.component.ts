@@ -3,10 +3,8 @@ import { CartService } from 'src/app/services/cart.service';
 import { User } from 'src/app/interfaces/user';
 import { Cart } from 'src/app/interfaces/cart.model';
 import { UserService } from 'src/app/services/user.service';
-import { Observable, Subject } from 'rxjs';
-import { take, takeUntil, first } from 'rxjs/operators';
-import { Product } from 'src/app/interfaces/product.model';
-import { ProductService } from 'src/app/services/product.service';
+import { Product } from '../../app-inventory/class/product/product';
+import { InventoryService } from '../../app-inventory/service/inventory.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,7 +30,6 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     unitPrice: NaN,
     color: "N/A"
   }
-  // private ngUnsubscribe: Subject<any> = new Subject();
   tempCarts: Cart[] = [];
   activeCartId: number;
   eventId: string;
@@ -44,7 +41,7 @@ export class SelectCartComponent implements OnInit, OnDestroy {
    */
   constructor(
     private cartService: CartService,
-    private productService: ProductService,
+    private productService: InventoryService,
     private userService: UserService,
     private router: Router) {
     // access hardcoded user
