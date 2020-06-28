@@ -1,5 +1,6 @@
 <!-- wrap it all in a container, then it can fit under their header no problem -->
-<div class="container main-cart-container">
+<p class="card-text" *ngIf="currentUser.admin">Admin users cannot buy items.</p>
+<div class="container main-cart-container" *ngIf="!currentUser.admin">
     <div class="row">
 
         <!-- Cart, on the left, with large item cards -->
@@ -9,15 +10,16 @@
 
                 <!-- mobile layout -->
                 <ng-container *ngIf="mobile">
-                    <!-- <div *ngIf="activeCart.cartItems.length==0">
+                    <p class=card-text *ngIf="activeCart.cartItems.length==0">
                         No items present in cart.
-                    </div> -->
+                    </p>
                     <ng-container *ngFor="let cItem of activeCart.cartItems">
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
                                     <td class="d-flex justify-content-between">
-                                        <img class="img-large" src="{{getProductById(cItem.productId).image}}" (click)="productDetails(cItem.productId)"/>
+                                        <img class="img-large" src="{{getProductById(cItem.productId).image}}"
+                                            (click)="productDetails(cItem.productId)" />
                                         <div class="d-flex flex-column" style="text-align: right;">
                                             <h2>{{product.name}}</h2>
                                             <h3>{{product.unitPrice}} Points</h3>
@@ -46,11 +48,15 @@
                 <!-- desktop layout -->
                 <ng-container *ngIf="!mobile">
                     <table *ngIf="activeCart" class="table table-striped">
+                        <p class=card-text *ngIf="activeCart.cartItems.length==0">
+                            No items present in cart.
+                        </p>
                         <tbody>
                             <tr *ngFor="let cItem of activeCart.cartItems"
                                 class="d-flex justify-content-around align-items-end">
                                 <td>
-                                    <img class="img-large" src="{{getProductById(cItem.productId).image}}" (click)="productDetails(cItem.productId)" />
+                                    <img class="img-large" src="{{getProductById(cItem.productId).image}}"
+                                        (click)="productDetails(cItem.productId)" />
                                 </td>
                                 <td class="align-bottom">
                                     <h2>{{getProductById(cItem.productId).name}}</h2>
@@ -167,7 +173,8 @@
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete Cart</button>
+                            <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete
+                                Cart</button>
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,8 @@ import { InventoryViewComponent } from './inventory/inventory-view/inventory-vie
 import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
 import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
+import { AddItemComponent } from './app-inventory/components/add-item/add-item.component';
+import { InventoryListComponent } from './app-inventory/components/inventory-list/inventory-list.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,9 @@ const routes: Routes = [
   { path: 'adminview', component: AdminviewComponent },
   { path: 'inventoryview', component: InventoryViewComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'selectcart', component: SelectCartComponent }
+  { path: 'selectcart', component: SelectCartComponent },
+  { path: 'add-item', component: AddItemComponent },
+  { path: 'inventory-list', component: InventoryListComponent }
 ];
 
 @NgModule({
