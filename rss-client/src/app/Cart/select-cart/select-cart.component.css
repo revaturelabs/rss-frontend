@@ -31,6 +31,8 @@ a:hover {
 
 .cart-card {
     /* width: 100%; */
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 4px black;
 }
 
 .cart-title {
@@ -87,10 +89,23 @@ a:hover {
     background-color: #474C55;
 }
 
-.selectedCart td {
-    color: white
+.selectedCart tr {
+    background-color: white;
 }
 
-.selectedCart img-frame {
+.selectedCart .img-frame {
     background-color: white;
+    border: 1px solid black;
+}
+
+.selectedCart .cart-button-holder {
+    background-color: white;
+}
+
+.selectedCart .small-row {
+    border-bottom: 1px solid black;
+}
+
+.selectedCart .cart-title {
+    border-bottom: 2px solid white;
 }

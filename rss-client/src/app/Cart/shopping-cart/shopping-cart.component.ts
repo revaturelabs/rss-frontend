@@ -322,6 +322,19 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  productDetails(id: number): any {
+    // ask max for url to product details
 
+    // let detailsURL: string = "http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/product/" + id;
+
+    console.log(id);
+    // this.router.navigate([detailsURL]);
+  }
+
+    // UPDATE
+    // updateCart(cart: Cart): Observable<Cart> {
+    //   return of(cart);
+      // return this.http.put<Cart>(this.baseURL, cart);
+    // }
 
 }

@@ -12,7 +12,7 @@
                     *ngFor="let cart of userCarts">
                     <div class="card-header" id="cartBody-{{cart.cartId}}">
                         <div class="d-flex align-items-end justify-content-between cart-title">
-                            <h3><a>{{cart.name}}</a></h3>
+                            <h3>{{cart.name}}</h3>
                             <a href='#cartDetails-{{cart.cartId}}' (click)="toggleArrow($event)" data-toggle="collapse">
                                 <img src="assets/Images/dropdown.png" id="arrow-{{cart.cartId}}" class="downarrow"
                                     type="button" alt="details">
@@ -39,7 +39,7 @@
                                             <b>{{product ? product.name : noProduct.name | titlecase}}</b>
                                         </td>
                                         <td class="align-bottom">
-                                            {{product ? product.unitPrice : noProduct.unitPrice}} points
+                                            {{product ? product.unitPrice : noProduct.unitPrice}} Points
                                         </td>
                                         <td class="align-bottom">x{{cItem.quantity}}</td>
                                     </tr>
