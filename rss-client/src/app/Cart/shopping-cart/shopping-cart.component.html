@@ -17,10 +17,10 @@
                             <tbody>
                                 <tr>
                                     <td class="d-flex justify-content-between">
-                                        <img class="img-large" src="{{getProductById(cItem.productId).image}}" />
+                                        <img class="img-large" src="{{getProductById(cItem.productId).image}}" (click)="productDetails(cItem.productId)"/>
                                         <div class="d-flex flex-column" style="text-align: right;">
                                             <h2>{{product.name}}</h2>
-                                            <h3>{{product.unitPrice}} points</h3>
+                                            <h3>{{product.unitPrice}} Points</h3>
                                         </div>
                                     </td>
                                 </tr>
@@ -50,11 +50,11 @@
                             <tr *ngFor="let cItem of activeCart.cartItems"
                                 class="d-flex justify-content-around align-items-end">
                                 <td>
-                                    <img class="img-large" src="{{getProductById(cItem.productId).image}}" />
+                                    <img class="img-large" src="{{getProductById(cItem.productId).image}}" (click)="productDetails(cItem.productId)" />
                                 </td>
                                 <td class="align-bottom">
                                     <h2>{{getProductById(cItem.productId).name}}</h2>
-                                    <h3>{{getProductById(cItem.productId).unitPrice}} points</h3>
+                                    <h3>{{getProductById(cItem.productId).unitPrice}} Points</h3>
                                 </td>
 
                                 <td class="align-bottom quantity-large">
@@ -96,7 +96,7 @@
                                 <img class="img-small" src="{{getProductById(cItem.productId).image}}" />
                             </td>
                             <td class="align-bottom"><b>{{getProductById(cItem.productId).name}}</b></td>
-                            <td class="align-bottom">{{getProductById(cItem.productId).unitPrice}} points</td>
+                            <td class="align-bottom">{{getProductById(cItem.productId).unitPrice}} Points</td>
                         </tr>
                     </table>
                 </div>
@@ -110,14 +110,14 @@
                     <div class="container">
                         <div class="card-text cart-total d-flex align-bottom justify-content-between align-items-end">
                             <h4>Total:</h4>
-                            <h6><span>{{totalPointCost}}</span> points</h6>
+                            <h6><span>{{totalPointCost}}</span> Points</h6>
                         </div>
                     </div>
 
                     <div class="container">
                         <div class="user-points card-text d-flex justify-content-between align-items-end">
                             <h4>Your Points:</h4>
-                            <h6><span>{{getYourPoints()}}</span> points</h6>
+                            <h6><span>{{getYourPoints()}}</span> Points</h6>
                         </div>
                     </div>
 
@@ -147,19 +147,19 @@
                                 Need {{totalPointCost}} Total Points</button>
                         </div>
                         <div>
-                            <button class="btn btn-block btn-success" href="#savingcart" data-toggle="collapse">
-                                Save Cart
+                            <button class="btn btn-block btn-outline-success" href="#savingcart" data-toggle="collapse">
+                                Save For Later
                             </button>
                             <div class="collapse points-div" id="savingcart">
                                 <div class="card d-flex flex-column" id="pointsCard" *ngIf="activeCart">
-                                    <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">
-                                        Enter Cart Name
-                                    </h3>
-                                    <p class="card-text">Name your cart to save it for later!</p>
+                                    <!-- <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">
+                                        Name Your Cart
+                                    </h3> -->
+                                    <h4 class="card-text">Name your cart to save it for later!</h4>
                                     <input class="form-control" [(ngModel)]="activeCart.name" type="text"
                                         placeholder="Enter Cart Name">
                                     <div *ngIf="activeCart.name=='(default)'">Cannot save cart with name (default).
-                                        Please change the name.</div>
+                                        Please try another name.</div>
                                 </div>
                                 <div>
                                     <button class="btn btn-block btn-success" (click)="saveCart()">Save Cart</button>
@@ -167,9 +167,7 @@
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete
-                                Cart</button>
-
+                            <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete Cart</button>
                         </div>
                     </div>
                 </div>
