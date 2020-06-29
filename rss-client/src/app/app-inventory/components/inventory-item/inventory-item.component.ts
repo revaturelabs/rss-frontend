@@ -89,29 +89,43 @@ export class InventoryItemComponent implements OnInit {
 				productId: this.product.id,
 				quantity: this.quantity.value
 			}
+			
 			let addedCartItem: CartItem;
-			this.cartItemService.addCartItem(cartItemToAdd).subscribe(
-				cartItem => {
-					addedCartItem = cartItem;
-					let cartItemsInCart = this.activeCart.cartItems;
-					let exists = false;
-					for (let existingCartItem of cartItemsInCart) {
-						if (existingCartItem.productId == addedCartItem.productId) {
-							existingCartItem.quantity += addedCartItem.quantity;
-							exists = true;
+			let cartItemsInCart = this.activeCart.cartItems;
+			let exists = false;
+			for (let existingCartItem of cartItemsInCart) {
+				if (existingCartItem.productId == cartItemToAdd.productId) {
+					existingCartItem.quantity += cartItemToAdd.quantity;
+					addedCartItem = existingCartItem;
+					exists = true;
+					break;
+				}
+			}
+			if (exists) {
+				this.cartItemService.updateCartItem(addedCartItem).subscribe(
+					() => {
+						if (this.activeCart.cartId == 0) {
+							sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+						} else {
+							sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+							sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
 						}
 					}
-					if (!exists) {
+				)
+			} else {
+				this.cartItemService.addCartItem(cartItemToAdd).subscribe(
+					cartItem => {
+						addedCartItem = cartItem;
 						this.activeCart.cartItems.push(addedCartItem);
+						if (this.activeCart.cartId == 0) {
+							sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+						} else {
+							sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+							sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
+						}
 					}
-					if (this.activeCart.cartId == 0) {
-						sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
-					} else {
-						sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
-						sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
-					}
-				}
-			)
+				)
+			}
 		} else {
 			this.modalService.dismissAll();
 			this.product.quantity = this.localQuantity;
