@@ -82,7 +82,7 @@ export class QuizService {
   }
 
   getAllSubjects(): Observable<Subject[]> {
-    return this.httpclient.get<Subject[]>(this.url + '/subject/all');
+    return this.httpclient.get<Subject[]>(this.url + '/subject/obtain/all');
   }
 
   //Quiz Controller
@@ -104,7 +104,7 @@ export class QuizService {
   }
 
   getAllQuizzes(): Observable<Quiz[]> {
-    return this.httpclient.get<Quiz[]>(this.url + '/quiz/getallquizzes');
+    return this.httpclient.get<Quiz[]>(this.url + '/quiz/obtain/all');
   }
 
   //Questions Bank Controller
@@ -154,7 +154,7 @@ export class QuizService {
   getUserScores(email): Observable<QuizSubmit> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
-      this.url + '/userscore/takenquiz',
+      this.url + '/userscore/obtain/taken',
       this.quizSubmit
     );
   }
