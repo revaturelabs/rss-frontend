@@ -8,9 +8,9 @@ import { Account } from '../interfaces/account';
   providedIn: 'root',
 })
 export class AccountService {
-  // url = 'http://localhost:9000';
+  //url = 'http://localhost:9000/account';
   url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/account';
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   //Account controller
 
