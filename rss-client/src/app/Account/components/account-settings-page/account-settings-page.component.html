@@ -133,9 +133,16 @@
             <span class="rev_orange">{{ evalAccount.points }}</span> points from
             the quizzes you have taken
           </h3>
+          <h3 *ngIf="bugAccount">
+            You have
+            <span class="rev_orange">{{ bugAccount.points }}</span> points from
+            the bugs you have squashed
+          </h3>
           <button
+            *ngIf="!bugAccount"
             type="submit"
             class="m-2 btn btn-success"
+            (click)="createAccount('Bug')"
             style="background-color: #f26925;"
           >
             Link To Your Bug Bounty
