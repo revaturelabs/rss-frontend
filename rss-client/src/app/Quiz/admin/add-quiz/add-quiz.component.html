@@ -41,6 +41,7 @@
       </div>
       <div class="col-6">
         <button
+          [disabled]="!isValid"
           (click)="submitChanges()"
           class="btn btn-block btn-outline-success"
         >
@@ -57,6 +58,7 @@
       class="form-control"
       id="topic"
       name="name"
+      (change)="validate()"
       [(ngModel)]="focusedQuiz.quizTopic"
     />
   </div>
@@ -142,6 +144,7 @@
               class="form-control"
               placeholder="Question Text"
               name="question"
+              required
               [ngModel]="focusedQuestion.question"
               #question="ngModel"
             />
@@ -156,6 +159,7 @@
               id="questionValue"
               class="form-control"
               type="number"
+              required
               name="questionValue"
               [ngModel]="focusedQuestion.questionValue"
               #questionValue="ngModel"
@@ -186,6 +190,7 @@
           <input
             id="option1"
             class="form-control"
+            required
             placeholder="Enter new option here"
             name="option1"
             [ngModel]="focusedQuestion.option1"
@@ -197,6 +202,7 @@
         <div class="input-group">
           <input
             id="option2"
+            required
             class="form-control"
             placeholder="Enter new option here"
             name="option2"
@@ -246,6 +252,7 @@
   <div class="modal-footer">
     <button
       type="button"
+      [disabled]="!questionForm.valid"
       class="btn btn-outline-dark"
       (click)="modal.close({ type: 'update', value: questionForm.value })"
     >
