@@ -1,20 +1,24 @@
 <!-- Below is the search function that you can search through the list of quiz names to limit the ngFor to displaying only what you search for -->
 <div *ngIf="evalAccount">
-  <input [(ngModel)]="searchText" placeholder="search text goes here" />
-  <select [(ngModel)]="searchSubject">
-    <option value="">All</option>
-    <option value="Java">Java</option>
-    <option value="SQL">SQL</option>
-    <option value="Angular">Angular</option>
-  </select>
+  <h3 class="text-center ml-2">Search a Subject</h3>
+  <div class="input-group ml-2 justify-content-center">
+    <input id="search-box" class="col-3 my-2 form-control" [(ngModel)]="searchText"
+      placeholder="Type in the subject..." />
+    <!-- <select [(ngModel)]="searchSubject">
+      <option value="">All</option>
+      <option value="Java">Java</option>
+      <option value="SQL">SQL</option>
+      <option value="Angular">Angular</option>
+    </select> -->
+  </div>
   <!--This is the list of quizzes -->
-  <ol>
-    <li *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
-      {{ quizdata.subject.subjectName | titlecase }}
-      <a routerLink="/quizzes/{{ quizdata.quizId }}">{{
-      quizdata.quizTopic | titlecase
-    }}</a>
-      : {{ quizdata.quizDescription }}
+  <ol class="col-6 offset-3">
+    <li class="border p-2 my-2" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
+      <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
+      <br />
+      <b><em>Topic: </em></b><a routerLink="/quizzes/{{ quizdata.quizId }}">{{ quizdata.quizTopic | titlecase }}</a>
+      <br />
+      <b><em> Description: </em></b> {{ quizdata.quizDescription }}
     </li>
   </ol>
 </div>

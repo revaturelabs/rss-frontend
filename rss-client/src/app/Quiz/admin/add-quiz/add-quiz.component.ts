@@ -28,7 +28,7 @@ export class AddQuizComponent implements OnInit {
   addSubject(event) {
     delete event.value.subjectId;
     this.quizService.addSubject(event.value).subscribe(
-      (res) => {},
+      (res) => { },
       (error) => {
         if (error.status == 500) {
           window.alert('Error adding subject');
@@ -154,7 +154,7 @@ export class AddQuizComponent implements OnInit {
     private modalService: NgbModal,
     private quizService: QuizService,
     private userservice: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.quizService.getAllSubjects().subscribe((res) => (this.subjects = res));
