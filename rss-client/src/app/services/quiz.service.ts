@@ -10,8 +10,8 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
-  url = 'http://localhost:8080';
-  // url="http://ec2-34-203-75-254.compute-1.amazonaws.com:10000/"
+  // url = 'http://localhost:8080';
+  url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10000/';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -142,6 +142,13 @@ export class QuizService {
       this.questions
     );
   }
+  deleteQuestion(id) {
+    return this.httpclient.post<any[]>(
+      this.url + '/question/admin/delete',
+      JSON.stringify(id),
+      this.httpOptions
+    );
+  }
 
   //User Quiz Score Controller
   getUserScores(email): Observable<QuizSubmit> {
@@ -149,14 +156,6 @@ export class QuizService {
     return this.httpclient.post<any>(
       this.url + '/userscore/takenquiz',
       this.quizSubmit
-    );
-  }
-
-  deleteQuestion(id) {
-    return this.httpclient.post<any[]>(
-      this.url + '/question/admin/delete',
-      JSON.stringify(id),
-      this.httpOptions
     );
   }
 }
