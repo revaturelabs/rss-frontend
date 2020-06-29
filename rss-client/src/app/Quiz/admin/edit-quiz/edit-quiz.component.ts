@@ -34,6 +34,7 @@ export class EditQuizComponent implements OnInit {
   }
   focusQuiz(event) {
     this.focusedQuiz = event;
+    console.log(event.quizId);
     this.focusedQuiz.questions = [];
     this.quizService.getQuestionsByIdAdmin(event.quizId).subscribe((res) => {
       res.forEach((x) => this.focusedQuiz.questions.push(x));
@@ -61,7 +62,6 @@ export class EditQuizComponent implements OnInit {
     });
 
     this.view = 'select';
-
   }
   closeResult = '';
   open(content, question) {
