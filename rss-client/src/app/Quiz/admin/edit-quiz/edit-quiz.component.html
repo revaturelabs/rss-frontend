@@ -12,8 +12,8 @@
       *ngFor="let quizdata of quizData"
       (click)="focusQuiz(quizdata)"
     >
-      <h3>{{ quizdata.subject.subjectName }}</h3>
-      <h3 style="font-size: large;">{{ quizdata.quizTopic }}</h3>
+      <h3>{{ quizdata.subject.subjectName | titlecase }}</h3>
+      <h3 style="font-size: large;">{{ quizdata.quizTopic | titlecase }}</h3>
       {{ quizdata.quizDescription }}
     </a>
   </div>
@@ -35,6 +35,7 @@
       </div>
       <div class="col-6">
         <button
+          [disabled]="!isValid"
           (click)="submitChanges()"
           class="btn btn-block btn-outline-success"
         >
@@ -51,6 +52,7 @@
       class="form-control"
       id="topic"
       name="name"
+      (change)="validate()"
       [(ngModel)]="focusedQuiz.quizTopic"
     />
   </div>
@@ -133,6 +135,7 @@
           <div class="input-group">
             <input
               id="question"
+              required
               class="form-control"
               placeholder="Question Text"
               name="question"
@@ -148,6 +151,7 @@
           <div class="input-group">
             <input
               id="questionValue"
+              required
               class="form-control"
               type="number"
               name="questionValue"
@@ -163,11 +167,13 @@
           <div class="input-group">
             <input
               id="correctAnswer"
+              required
               class="form-control"
               min="1"
               max="4"
               type="number"
               name="correctAnswer"
+              value="1"
               [ngModel]="focusedQuestion.correctAnswer"
               #correctAnswer="ngModel"
             />
@@ -179,6 +185,7 @@
         <div class="input-group">
           <input
             id="option1"
+            required
             class="form-control"
             placeholder="Enter new option here"
             name="option1"
@@ -191,6 +198,7 @@
         <div class="input-group">
           <input
             id="option2"
+            required
             class="form-control"
             placeholder="Enter new option here"
             name="option2"

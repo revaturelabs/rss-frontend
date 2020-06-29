@@ -3,6 +3,7 @@ import { QuizPageService } from './../../../Test/Quiz/quiz-page.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'edit-quiz',
@@ -15,6 +16,16 @@ export class EditQuizComponent implements OnInit {
   quizData: any;
   focusedQuiz;
   focusedQuestion;
+
+  isValid = false;
+  validate() {
+    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+  }
+
   reducer = (accumulator, currentValue) =>
     accumulator + currentValue.questionValue;
   updateTotal() {
@@ -24,10 +35,11 @@ export class EditQuizComponent implements OnInit {
   focusQuiz(event) {
     this.focusedQuiz = event;
     this.focusedQuiz.questions = [];
-    this.quizService.getQuestionsById(event.quizId).subscribe((res) => {
+    this.quizService.getQuestionsByIdAdmin(event.quizId).subscribe((res) => {
       res.forEach((x) => this.focusedQuiz.questions.push(x));
     });
     this.updateTotal();
+    this.validate();
     this.view = 'focus';
   }
   onBack() {
@@ -35,12 +47,27 @@ export class EditQuizComponent implements OnInit {
   }
   submitChanges() {
     //TODO: finish this method in add-quiz and copy here.
-    console.log(this.focusedQuiz);
+    this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
+    this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
+      this.focusedQuiz.quizId = res.quizId;
+
+      this.focusedQuiz.questions.forEach((x) => {
+        x.quizId = this.focusedQuiz.quizId;
+        x.quiz = {};
+        delete x.userEmail;
+        delete x.selectedAnswer;
+      });
+      this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
+    });
+
+    this.view = 'select';
+
   }
   closeResult = '';
   open(content, question) {
     if (question == 'new') {
       this.focusedQuestion = {
+        quesionId: null,
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
@@ -49,9 +76,7 @@ export class EditQuizComponent implements OnInit {
         option3: null,
         option4: null,
         option5: null,
-        quiz: {
-          creatorEmail: this.userservice.user.email,
-        },
+        quiz: {},
       };
     } else {
       this.focusedQuestion = question;
@@ -82,7 +107,6 @@ export class EditQuizComponent implements OnInit {
               }
             }
             // Searches question array to see if this question exists
-            console.log(newQuestion);
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion
             );
@@ -95,12 +119,15 @@ export class EditQuizComponent implements OnInit {
             }
             // updates the total points available in this quiz
             this.updateTotal();
+            this.validate();
           } else if (result.type == 'delete') {
             //TODO:remove question from database here
+            this.quizService.deleteQuestion(result.value).subscribe();
             this.focusedQuiz.questions = this.focusedQuiz.questions.filter(
               (x) => x.questionId != result.value.questionId
             );
             this.updateTotal();
+            this.validate();
           }
         },
         (reason) => {

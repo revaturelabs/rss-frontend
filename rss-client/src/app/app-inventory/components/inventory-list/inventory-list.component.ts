@@ -3,7 +3,10 @@ import { Product } from '../../class/product/product';
 import { InventoryService } from '../../service/inventory.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SortableDirective, SortEvent } from '../../directives/sortable.directive';
+import {
+  SortableDirective,
+  SortEvent,
+} from '../../directives/sortable.directive';
 import { SortService } from '../../service/sort.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,9 +16,9 @@ import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-	selector: 'app-inventory-list',
-	templateUrl: './inventory-list.component.html',
-	styleUrls: ['./inventory-list.component.css'],
+  selector: 'app-inventory-list',
+  templateUrl: './inventory-list.component.html',
+  styleUrls: ['./inventory-list.component.css'],
 })
 export class InventoryListComponent implements OnInit {
 

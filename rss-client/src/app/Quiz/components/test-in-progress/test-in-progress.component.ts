@@ -3,6 +3,7 @@ import { ImageService } from './../../../services/image.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizService } from 'src/app/services/quiz.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'test-in-progress',
@@ -28,14 +29,17 @@ export class TestInProgressComponent implements OnInit {
       let obj = {
         questionId: key,
         selectedAnswer: value,
-        userEmail: this.userService.user.email,
-        userId: this.userService.user.userId,
+        userEmail: this.userService.userPersistance().email,
+        userId: this.userService.userPersistance().userId,
         quizId: this.config.quizId,
       };
       answersArr.push(obj);
     }
-    console.log(answersArr);
-    this.quizservice.submitQuiz(answersArr);
+    this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+      this.account.points = res.totalPoints;
+      console.log(this.account);
+      this.accountservice.updatePoints(this.account).subscribe();
+    });
   }
 
   closeResult: string;
@@ -70,7 +74,6 @@ export class TestInProgressComponent implements OnInit {
   //Sets answer whenever a selection is made
   onChange(index, input) {
     let question = this.config.questions[index].questionId;
-    // console.log(`Question: ${question}, input: ${input}`);
     this.answers[question] = input;
   }
   //Saves the state of the radio button between questions
@@ -117,12 +120,29 @@ export class TestInProgressComponent implements OnInit {
   constructor(
     private quizservice: QuizService,
     private modalService: NgbModal,
-    private userService: UserService
+    private userService: UserService,
+    private accountservice: AccountService
   ) {}
 
+  accId;
+  account = {
+    accId: 0,
+    userId: 0,
+    accTypeId: 0,
+    points: 0,
+  };
   //sets up answer form and test layout
   ngOnInit(): void {
     this.index = 0;
     this.max = this.config.questions.length - 1;
+    this.accountservice
+      .getAllUserAccounts(this.userService.userPersistance().userId)
+      .subscribe((res1) =>
+        res1.forEach((x) => {
+          if (x.accTypeId == 2) {
+            this.account = x;
+          }
+        })
+      );
   }
 }

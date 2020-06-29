@@ -32,14 +32,11 @@ export class IndividualQuizPageComponent implements OnInit {
       .findQuizById(this.route.snapshot.params.id)
       .subscribe((res) => {
         this.config = res;
-        console.log(res);
       });
     this.quizService
       .getQuestionsById(this.route.snapshot.params.id)
       .subscribe((res) => {
         this.config.questions = res;
-        console.log(res);
-        console.log(this.config);
       });
   }
 
