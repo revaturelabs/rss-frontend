@@ -22,13 +22,21 @@ export class AddQuizComponent implements OnInit {
     questions: [],
     availablePoints: null,
   };
+  isValid = false;
+  validate() {
+    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+  }
   focusedQuestion;
 
   subjectText = '';
   addSubject(event) {
     delete event.value.subjectId;
     this.quizService.addSubject(event.value).subscribe(
-      (res) => { },
+      (res) => {},
       (error) => {
         if (error.status == 500) {
           window.alert('Error adding subject');
@@ -57,16 +65,15 @@ export class AddQuizComponent implements OnInit {
   }
   submitChanges() {
     //TODO: save focused quiz to the database
-    console.log(this.focusedQuiz);
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
       this.focusedQuiz.questions.forEach((x) => {
         x.quizId = this.focusedQuiz.quizId;
       });
-      console.log(this.focusedQuiz);
       this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
     });
+    this.view = 'select';
   }
   closeResult = '';
   open(content, question, subject?) {
@@ -111,7 +118,6 @@ export class AddQuizComponent implements OnInit {
               }
             }
             // Searches question array to see if this question exists
-            console.log(newQuestion);
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion
             );
@@ -124,12 +130,14 @@ export class AddQuizComponent implements OnInit {
             }
             // updates the total points available in this quiz
             this.updateTotal();
+            this.validate();
           } else if (result.type == 'delete') {
             //TODO:remove question from database here
             this.focusedQuiz.questions = this.focusedQuiz.questions.filter(
               (x) => x.questionId != result.value.questionId
             );
             this.updateTotal();
+            this.validate();
           } else if (result.type == 'subject') {
             this.addSubject(subject);
           }
@@ -154,7 +162,7 @@ export class AddQuizComponent implements OnInit {
     private modalService: NgbModal,
     private quizService: QuizService,
     private userservice: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.quizService.getAllSubjects().subscribe((res) => (this.subjects = res));

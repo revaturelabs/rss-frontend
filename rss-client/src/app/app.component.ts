@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
     this.user = this.userservice.getCurrentUser();
     this.fakeUser = this.userservice.userPersistance();
     if (this.fakeUser != undefined) {
-      console.log(this.fakeUser);
       this.user = this.fakeUser;
       this.isLoggedIn = true;
     }
@@ -42,12 +41,10 @@ export class AppComponent implements OnInit {
 
   loginEvent(e) {
     this.user = e;
-    console.log(this.user);
   }
 
   changeLoginStatus(status) {
     this.isLoggedIn = status;
-    console.log(this.isLoggedIn);
   }
 
   onHome() {

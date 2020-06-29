@@ -35,12 +35,10 @@ export class TestInProgressComponent implements OnInit {
       };
       answersArr.push(obj);
     }
-    console.log(answersArr);
     this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-      this.account.accId = this.accId;
       this.account.points = res.totalPoints;
+      console.log(this.account);
       this.accountservice.updatePoints(this.account).subscribe();
-      console.log(this.account)
     });
   }
 
@@ -76,7 +74,6 @@ export class TestInProgressComponent implements OnInit {
   //Sets answer whenever a selection is made
   onChange(index, input) {
     let question = this.config.questions[index].questionId;
-    // console.log(`Question: ${question}, input: ${input}`);
     this.answers[question] = input;
   }
   //Saves the state of the radio button between questions
@@ -125,7 +122,7 @@ export class TestInProgressComponent implements OnInit {
     private modalService: NgbModal,
     private userService: UserService,
     private accountservice: AccountService
-  ) { }
+  ) {}
 
   accId;
   account = {
@@ -140,6 +137,12 @@ export class TestInProgressComponent implements OnInit {
     this.max = this.config.questions.length - 1;
     this.accountservice
       .getAllUserAccounts(this.userService.userPersistance().userId)
-      .subscribe((res1) => (this.accId = res1[0].accId));
+      .subscribe((res1) =>
+        res1.forEach((x) => {
+          if (x.accTypeId == 2) {
+            this.account = x;
+          }
+        })
+      );
   }
 }

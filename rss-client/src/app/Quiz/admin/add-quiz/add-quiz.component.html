@@ -51,7 +51,14 @@
         </button>
       </div>
       <div class="col-6">
-        <button (click)="submitChanges()" class="btn btn-block" style="background-color: #f26925; color: white;">
+
+
+        <button
+          [disabled]="!isValid"
+          (click)="submitChanges()"
+          class="btn btn-block" style="background-color: #f26925; color: white;"
+        >
+
           Save
         </button>
       </div>
@@ -60,7 +67,16 @@
 
   <div class="form-group">
     <label for="topic">Topic</label>
-    <input type="text" class="form-control" id="topic" name="name" [(ngModel)]="focusedQuiz.quizTopic" />
+
+    <input
+      type="text"
+      class="form-control"
+      id="topic"
+      name="name"
+      (change)="validate()"
+      [(ngModel)]="focusedQuiz.quizTopic"
+    />
+
   </div>
   <div class="form-group">
     <label for="description">Description</label>
@@ -116,8 +132,17 @@
         <div class="input-group">
           <label for="question">Question</label>
           <div class="input-group">
-            <input id="question" class="form-control" placeholder="Question Text" name="question"
-              [ngModel]="focusedQuestion.question" #question="ngModel" />
+
+            <input
+              id="question"
+              class="form-control"
+              placeholder="Question Text"
+              name="question"
+              required
+              [ngModel]="focusedQuestion.question"
+              #question="ngModel"
+            />
+
           </div>
         </div>
       </div>
@@ -125,8 +150,17 @@
         <div class="input-group">
           <label for="questionValue">Point value</label>
           <div class="input-group">
-            <input id="questionValue" class="form-control" type="number" name="questionValue"
-              [ngModel]="focusedQuestion.questionValue" #questionValue="ngModel" />
+
+            <input
+              id="questionValue"
+              class="form-control"
+              type="number"
+              required
+              name="questionValue"
+              [ngModel]="focusedQuestion.questionValue"
+              #questionValue="ngModel"
+            />
+
           </div>
         </div>
       </div>
@@ -142,14 +176,32 @@
       <div class="form-group">
         <label for="option1">Options</label>
         <div class="input-group">
-          <input id="option1" class="form-control" placeholder="Enter new option here" name="option1"
-            [ngModel]="focusedQuestion.option1" #option1="ngModel" />
+
+          <input
+            id="option1"
+            class="form-control"
+            required
+            placeholder="Enter new option here"
+            name="option1"
+            [ngModel]="focusedQuestion.option1"
+            #option1="ngModel"
+          />
+
         </div>
       </div>
       <div class="form-group">
         <div class="input-group">
-          <input id="option2" class="form-control" placeholder="Enter new option here" name="option2"
-            [ngModel]="focusedQuestion.option2" #option2="ngModel" />
+
+          <input
+            id="option2"
+            required
+            class="form-control"
+            placeholder="Enter new option here"
+            name="option2"
+            [ngModel]="focusedQuestion.option2"
+            #option2="ngModel"
+          />
+
         </div>
       </div>
       <div class="form-group">
@@ -173,8 +225,14 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark"
-      (click)="modal.close({ type: 'update', value: questionForm.value })">
+
+    <button
+      type="button"
+      [disabled]="!questionForm.valid"
+      class="btn btn-outline-dark"
+      (click)="modal.close({ type: 'update', value: questionForm.value })"
+    >
+
       Save
     </button>
   </div>

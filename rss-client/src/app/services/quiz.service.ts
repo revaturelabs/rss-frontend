@@ -10,8 +10,8 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
-  url = 'http://localhost:8080';
-  // url="http://ec2-34-203-75-254.compute-1.amazonaws.com:10000/"
+  // url = 'http://localhost:8080';
+  url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10000';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -70,12 +70,11 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) { }
+  constructor(private httpclient: HttpClient) {}
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
     this.quiz.subject.subjectName = sub;
-    console.log(this.quiz.subject);
     return this.httpclient.post<any>(
       this.url + '/subject/admin/add',
       this.quiz.subject
@@ -88,7 +87,6 @@ export class QuizService {
 
   //Quiz Controller
   addQuiz(quiz): Observable<Quiz> {
-    console.log(quiz);
     return this.httpclient.post<any>(this.url + '/quiz/admin/add', quiz);
   }
 
@@ -131,6 +129,7 @@ export class QuizService {
 
   getQuestionsByIdAdmin(id): Observable<Questions[]> {
     this.questions.quizId = id;
+    console.log(this.questions.quizId);
     return this.httpclient.post<any[]>(
       this.url + '/question/admin/questions',
       this.questions
@@ -139,10 +138,16 @@ export class QuizService {
 
   addManyQuestions(questions): Observable<Questions> {
     this.questions = questions;
-    console.log(this.questions);
     return this.httpclient.post<any>(
       this.url + '/question/admin/addall',
       this.questions
+    );
+  }
+  deleteQuestion(id) {
+    return this.httpclient.post<any[]>(
+      this.url + '/question/admin/delete',
+      JSON.stringify(id),
+      this.httpOptions
     );
   }
 
@@ -150,17 +155,8 @@ export class QuizService {
   getUserScores(email): Observable<QuizSubmit> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
-      this.url + '/userscore/takenquiz',
+      this.url + '/userscore/obtain/taken',
       this.quizSubmit
-    );
-  }
-
-  deleteQuestion(id) {
-    console.log(id);
-    return this.httpclient.post<any[]>(
-      this.url + '/question/admin/delete',
-      JSON.stringify(id),
-      this.httpOptions
     );
   }
 }

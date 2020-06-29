@@ -21,8 +21,8 @@ export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
   providedIn: 'root',
 })
 export class UserService {
-  url = 'http://localhost:9000/user';
-  // url = "http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/user"
+  // url = 'http://localhost:9000/user';
+  url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/user';
   constructor(
     private httpclient: HttpClient,
     private router: Router,
@@ -36,7 +36,7 @@ export class UserService {
   //user controller
   login(log): Observable<User> {
     return this.httpclient.post<any>(
-      'http://localhost:9000/user/login',
+      this.url + '/login',
       log,
       this.httpOptions
     );
@@ -47,11 +47,7 @@ export class UserService {
   }
 
   getUserById(id: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/getuserbyid', id);
-  }
-
-  getUserByEmail(em: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/getuserbyemail', em);
+    return this.httpclient.post<any>(this.url + '/user', id);
   }
 
   addUser(user: User): Observable<User> {
@@ -59,19 +55,21 @@ export class UserService {
   }
 
   updateInfo(user: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/update/i', user);
+    return this.httpclient.post<any>(this.url + '/info', user);
   }
 
-  updatePassword(u: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/updatepassword', u);
+  updatePassword(u): Observable<User> {
+    this.user.password = u;
+    this.user.userId = this.userPersistance().userId;
+    return this.httpclient.post<any>(this.url + '/cred', this.user);
   }
 
   updateProfilePic(u: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/updateprofilepic', u);
+    return this.httpclient.post<any>(this.url + '/pic', u);
   }
 
   updateIsAdmin(user: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/updateisadmin', user);
+    return this.httpclient.post<any>(this.url + '/master', user);
   }
 
   isLoggedIn = false;
@@ -89,14 +87,13 @@ export class UserService {
     this.user = user;
     const cUser: User = this.storage.get(STORAGE_KEY) || user;
     this.storage.set(STORAGE_KEY, cUser);
-    console.log(this.storage.get(STORAGE_KEY));
   }
 
   logout() {
     this.isLoggedIn = false;
     this.storage.set(STORAGE_KEY, undefined);
+
     window.location.reload();
-    this.router.navigate(['/']);
   }
 
   userPersistance() {
