@@ -129,6 +129,7 @@ export class QuizService {
 
   getQuestionsByIdAdmin(id): Observable<Questions[]> {
     this.questions.quizId = id;
+    console.log(this.questions.quizId);
     return this.httpclient.post<any[]>(
       this.url + '/question/admin/questions',
       this.questions

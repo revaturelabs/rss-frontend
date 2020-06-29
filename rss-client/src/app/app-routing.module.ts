@@ -11,7 +11,8 @@ import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
+  { path: 'landing', component: LandingPageComponent },
   { path: 'account/dashboard', component: AccountPageComponent },
   { path: 'earnpoints', component: EarnpointsOverviewPageComponent },
   { path: 'quizzes', component: QuizPageComponent },
