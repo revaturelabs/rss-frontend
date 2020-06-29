@@ -59,7 +59,7 @@ export class EditQuizComponent implements OnInit {
       });
       this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
     });
-    console.log(this.focusedQuiz);
+    this.view = 'select';
   }
   closeResult = '';
   open(content, question) {
