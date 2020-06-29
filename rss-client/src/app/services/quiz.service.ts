@@ -75,7 +75,6 @@ export class QuizService {
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
     this.quiz.subject.subjectName = sub;
-    console.log(this.quiz.subject);
     return this.httpclient.post<any>(
       this.url + '/subject/admin/add',
       this.quiz.subject
@@ -88,7 +87,6 @@ export class QuizService {
 
   //Quiz Controller
   addQuiz(quiz): Observable<Quiz> {
-    console.log(quiz);
     return this.httpclient.post<any>(this.url + '/quiz/admin/add', quiz);
   }
 
@@ -139,7 +137,6 @@ export class QuizService {
 
   addManyQuestions(questions): Observable<Questions> {
     this.questions = questions;
-    console.log(this.questions);
     return this.httpclient.post<any>(
       this.url + '/question/admin/addall',
       this.questions
@@ -156,7 +153,6 @@ export class QuizService {
   }
 
   deleteQuestion(id) {
-    console.log(id);
     return this.httpclient.post<any[]>(
       this.url + '/question/admin/delete',
       JSON.stringify(id),

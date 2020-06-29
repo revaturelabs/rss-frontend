@@ -59,7 +59,9 @@ export class EditQuizComponent implements OnInit {
       });
       this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
     });
+
     this.view = 'select';
+
   }
   closeResult = '';
   open(content, question) {
@@ -105,7 +107,6 @@ export class EditQuizComponent implements OnInit {
               }
             }
             // Searches question array to see if this question exists
-            console.log(newQuestion);
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion
             );
@@ -156,6 +157,5 @@ export class EditQuizComponent implements OnInit {
     this.quizService.getAllQuizzes().subscribe((x) => {
       this.quizData = x;
     });
-    console.log(this.userservice.userPersistance().email);
   }
 }

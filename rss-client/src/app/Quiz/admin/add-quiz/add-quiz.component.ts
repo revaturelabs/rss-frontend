@@ -65,14 +65,12 @@ export class AddQuizComponent implements OnInit {
   }
   submitChanges() {
     //TODO: save focused quiz to the database
-    console.log(this.focusedQuiz);
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
       this.focusedQuiz.questions.forEach((x) => {
         x.quizId = this.focusedQuiz.quizId;
       });
-      console.log(this.focusedQuiz);
       this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
     });
     this.view = 'select';
@@ -120,7 +118,6 @@ export class AddQuizComponent implements OnInit {
               }
             }
             // Searches question array to see if this question exists
-            console.log(newQuestion);
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion
             );

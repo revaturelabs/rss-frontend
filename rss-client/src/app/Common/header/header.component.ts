@@ -3,6 +3,8 @@ import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { User } from 'src/app/interfaces/user';
 import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'header',
@@ -16,11 +18,13 @@ export class HeaderComponent implements OnInit {
   @Input() config;
   @Input() currentUser: User;
 
-  constructor(private parent: AppComponent, private userservice: UserService) {}
+  constructor(
+    private parent: AppComponent,
+    private userservice: UserService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    console.log(this.currentUser);
-  }
+  ngOnInit(): void {}
 
   onHome() {
     this.parent.breadcrumbs = [];

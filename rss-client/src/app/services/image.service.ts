@@ -21,7 +21,6 @@ export class ImageService {
       userId,
       profilePic: picData,
     };
-    console.log(update);
     return this.httpClient.post(this.url + '/user/pic', update);
   }
 }

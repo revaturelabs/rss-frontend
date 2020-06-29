@@ -14,7 +14,6 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userservice.userPersistance();
-    console.log(this.user);
   }
 
   navigateTo(subPage) {
