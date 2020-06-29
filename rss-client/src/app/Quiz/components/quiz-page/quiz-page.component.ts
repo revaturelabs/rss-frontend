@@ -7,6 +7,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
 import { AccountService } from 'src/app/services/account.service';
+import { Account } from 'src/app/interfaces/account';
 
 @Component({
   selector: 'quiz-page',
@@ -14,7 +15,6 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./quiz-page.component.css'],
 })
 export class QuizPageComponent implements OnInit {
-
   evalAccount: Account;
   user: User = this.userservice.userPersistance();
 
@@ -29,17 +29,19 @@ export class QuizPageComponent implements OnInit {
     private parent: AppComponent,
     private userservice: UserService,
     private accountService: AccountService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.accountService.getAccountByUserId(this.user).subscribe(res => {
-      console.log(res[0]);
-      this.evalAccount = res[0];
-      console.log(this.evalAccount)
-    })
+    this.accountService.getAccountByUserId(this.user).subscribe((res) => {
+      res.forEach((x) => {
+        if (x.accTypeId == 2) {
+          this.evalAccount = x;
+          console.log(this.evalAccount);
+        }
+      });
+    });
     this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
     console.log(this.quizData);
-    console.log(this.userservice.getCurrentUser());
   }
   ngAfterViewInit() {
     setTimeout(() => {
@@ -47,5 +49,4 @@ export class QuizPageComponent implements OnInit {
       this.parent.routerCrumbs = ['earnpoints', 'quizzes'];
     });
   }
-
 }

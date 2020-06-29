@@ -70,20 +70,20 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
     this.quiz.subject.subjectName = sub;
     console.log(this.quiz.subject);
     return this.httpclient.post<any>(
-      this.url + '/subject/add',
+      this.url + '/subject/admin/add',
       this.quiz.subject
     );
   }
 
   getAllSubjects(): Observable<Subject[]> {
-    return this.httpclient.get<Subject[]>(this.url + '/subject/all');
+    return this.httpclient.get<Subject[]>(this.url + '/subject/obtain/all');
   }
 
   //Quiz Controller

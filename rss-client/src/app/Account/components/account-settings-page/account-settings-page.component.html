@@ -3,114 +3,54 @@
     <div class="border-right col-6 p-2">
       <div class="form-group">
         <label for="userPicture"></label>
-        <div
-          style="
+        <div style="
             height: 300px;
             display: grid;
             justify-items: center;
             align-items: center;
-          "
-        >
-          <img
-            *ngIf="!imagePreview && user.profilePic"
-            [src]="'data:image/jpg;base64,' + user.profilePic"
-            class="img-thumbnail"
-            alt="Profile picture"
-            style="height: -webkit-fill-available;"
-          />
-          <img
-            *ngIf="!imagePreview && !user.profilePic"
-            [src]="placeholderPic"
-            alt="user pic placeholder"
-            class="img-thumbnail"
-            alt="Profile picture"
-            style="height: -webkit-fill-available;"
-          />
-          <img
-            *ngIf="imagePreview"
-            [src]="imagePreview"
-            class="img-thumbnail"
-            alt="Image preview"
-            style="height: -webkit-fill-available;"
-          />
+          ">
+          <img *ngIf="!imagePreview && user.profilePic" [src]="'data:image/jpg;base64,' + user.profilePic"
+            class="img-thumbnail" alt="Profile picture" style="height: -webkit-fill-available;" />
+          <img *ngIf="!imagePreview && !user.profilePic" [src]="placeholderPic" alt="user pic placeholder"
+            class="img-thumbnail" alt="Profile picture" style="height: -webkit-fill-available;" />
+          <img *ngIf="imagePreview" [src]="imagePreview" class="img-thumbnail" alt="Image preview"
+            style="height: -webkit-fill-available;" />
         </div>
         <div>
           <form>
-            <input
-              type="file"
-              id="fileInput"
-              name="profilePic"
-              accept="image/*"
-              (change)="onFileChanged($event)"
-            />
-            <input
-              class="d-block btn btn-outline-light"
-              [disabled]="!imagePreview"
-              type="submit"
-              id="btn1"
-              value="submit"
-              (click)="onUpload()"
-              style="background-color: #f26925;"
-            />
+            <input type="file" id="fileInput" name="profilePic" accept="image/*" (change)="onFileChanged($event)" />
+            <input class="d-block btn btn-outline-light" [disabled]="!imagePreview" type="submit" id="btn1"
+              value="submit" (click)="onUpload()" style="background-color: #f26925;" />
           </form>
         </div>
       </div>
       <form [formGroup]="userProfileForm">
         <div class="form-group">
           <label for="firstName">First Name: </label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="firstName"
-            placeholder="Enter first name..."
-          />
-          <div
-            *ngIf="firstName.touched && firstName.invalid"
-            class="alert alert-danger"
-          >
+          <input class="form-control" type="text" formControlName="firstName" placeholder="Enter first name..." />
+          <div *ngIf="firstName.touched && firstName.invalid" class="alert alert-danger">
             <div *ngIf="firstName.errors.required">First name is required</div>
           </div>
         </div>
         <div class="form-group">
           <label for=""> Last Name: </label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="lastName"
-            placeholder="Enter last name..."
-          />
-          <div
-            *ngIf="lastName.touched && lastName.invalid"
-            class="alert alert-danger"
-          >
+          <input class="form-control" type="text" formControlName="lastName" placeholder="Enter last name..." />
+          <div *ngIf="lastName.touched && lastName.invalid" class="alert alert-danger">
             <div *ngIf="lastName.errors.required">Last name is required</div>
           </div>
         </div>
         <div class="form-group">
           <label for="">Email: </label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="email"
-            placeholder="Enter email..."
-          />
-          <div
-            *ngIf="email.touched && email.invalid"
-            class="alert alert-danger"
-          >
+          <input class="form-control" type="text" formControlName="email" placeholder="Enter email..." />
+          <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
             <div *ngIf="email.errors.required">Email is required</div>
             <div *ngIf="email.errors.email">Valid email is required</div>
           </div>
         </div>
       </form>
       <br />
-      <button
-        type="submit"
-        [disabled]="!userProfileForm.valid"
-        (click)="submitForm()"
-        class="btn btn-primary"
-        style="background-color: #f26925;"
-      >
+      <button type="submit" [disabled]="!userProfileForm.valid" (click)="submitForm()" class="btn btn-primary"
+        style="background-color: #f26925;">
         Update Changes
       </button>
     </div>
@@ -119,13 +59,8 @@
       <hr />
       <div class="row">
         <div class="col-12">
-          <button
-            *ngIf="!evalAccount"
-            type="submit"
-            class="m-2 btn btn-success"
-            (click)="createAccount('Eval')"
-            style="background-color: #f26925;"
-          >
+          <button *ngIf="!evalAccount" type="submit" class="m-2 btn btn-success" (click)="createAccount('Eval')"
+            style="background-color: #f26925;">
             Link To Your Eval
           </button>
           <h3 *ngIf="evalAccount">
@@ -133,13 +68,28 @@
             <span class="rev_orange">{{ evalAccount.points }}</span> points from
             the quizzes you have taken
           </h3>
-          <button
-            type="submit"
-            class="m-2 btn btn-success"
-            style="background-color: #f26925;"
-          >
+          <br />
+          <h3 *ngIf="bugAccount">
+            You have
+            <span class="rev_orange">{{ bugAccount.points }}</span> points from
+            the bugs you have squashed
+          </h3>
+          <button *ngIf="!bugAccount" type="submit" class="m-2 btn btn-success" (click)="createAccount('Bug')"
+            style="background-color: #f26925;">
             Link To Your Bug Bounty
           </button>
+          <hr />
+          <div class="row">
+            <div class="justify-content-center col-12">
+              <h2>Update Your Password</h2>
+              <form [formGroup]="passForm">
+                <input class="my-2 form-control" type="password" placeholder="New Password" formControlName="newPass" />
+                <input class="my-2 form-control" type="password" placeholder="Confirm Password"
+                  formControlName="confirmPass" />
+                <button class="btn btn-primary" (click)="compareAndChangePassword()">Change Password</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

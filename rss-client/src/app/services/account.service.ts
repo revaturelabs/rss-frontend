@@ -34,8 +34,8 @@ export class AccountService {
     return this.httpclient.post<any>(this.url + '/account/account', acc);
   }
 
-  getAccountByUserId(user: User): Observable<Account> {
-    return this.httpclient.post<any>(this.url + '/account/accounts', user);
+  getAccountByUserId(user: User): Observable<Account[]> {
+    return this.httpclient.post<any[]>(this.url + '/account/accounts', user);
   }
 
   getAllAccountUsers(account: Account): Observable<Account> {

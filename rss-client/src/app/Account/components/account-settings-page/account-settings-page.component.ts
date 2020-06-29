@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-account-settings-page',
@@ -17,10 +18,13 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./account-settings-page.component.css'],
 })
 export class AccountSettingsPageComponent implements OnInit {
+  // newPass = new FormControl('');
+  // confirmPass = new FormControl('');
   user: User;
   isLoggedIn;
   userProfileForm: FormGroup;
   evalAccount: Account;
+  bugAccount: Account;
   myAccount: Account = {
     accId: 0,
     accTypeId: 0,
@@ -28,13 +32,15 @@ export class AccountSettingsPageComponent implements OnInit {
     points: 0,
   };
   accounts: Account[];
+  passForm: FormGroup;
 
   constructor(
     private imageservice: ImageService,
     private userservice: UserService,
     private fb: FormBuilder,
-    private accountService: AccountService
-  ) {}
+    private accountService: AccountService,
+    private parent: AppComponent
+  ) { }
 
   selectedFile: string;
   imagePreview: any;
@@ -67,15 +73,34 @@ export class AccountSettingsPageComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
     });
+
+    this.passForm = this.fb.group({
+      newPass: new FormControl('', Validators.required),
+      confirmPass: new FormControl('', Validators.required)
+    })
+
     this.getUser();
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
-      console.log(res[0]);
-      this.evalAccount = res[0];
-      console.log(this.evalAccount);
+      console.log(res);
+      res.forEach((x) => {
+        if (x.accTypeId == 1) {
+          this.bugAccount = x;
+          console.log(this.bugAccount);
+        }
+        if (x.accTypeId == 2) {
+          this.evalAccount = x;
+          console.log(this.evalAccount);
+        }
+      });
     });
     this.grabAccounts();
   }
-
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.parent.breadcrumbs = ['Settings'];
+      this.parent.routerCrumbs = ['account/settings'];
+    });
+  }
   getUser() {
     this.user = this.userservice.userPersistance();
     console.log(this.user.password);
@@ -125,6 +150,7 @@ export class AccountSettingsPageComponent implements OnInit {
     this.accountService.createAccount(this.myAccount).subscribe((res) => {
       console.log(res);
     });
+    window.location.reload();
   }
 
   grabAccounts() {
@@ -132,5 +158,19 @@ export class AccountSettingsPageComponent implements OnInit {
       this.accounts = res;
       console.log(this.accounts);
     });
+  }
+
+  async compareAndChangePassword() {
+    if (this.passForm.controls['newPass'].value == this.passForm.controls['confirmPass'].value) {
+      const formValue = this.passForm.controls['newPass'].value;
+      console.log(formValue);
+      this.userservice.updatePassword(formValue).subscribe();
+      window.alert('Your password has been updated');
+      this.passForm.reset();
+    } else {
+      console.log(this.passForm.controls['newPass'].value);
+      console.log(this.passForm.controls['confirmPass'].value)
+      window.alert('Your new passwords did not match.')
+    }
   }
 }
