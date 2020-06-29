@@ -102,29 +102,20 @@ export class InventoryItemComponent implements OnInit {
 				}
 			}
 			if (exists) {
-				this.cartItemService.updateCartItem(addedCartItem).subscribe(
-					() => {
-						if (this.activeCart.cartId == 0) {
-							sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
-						} else {
-							sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
-							sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
-						}
-					}
-				)
+				this.cartItemService.updateCartItem(addedCartItem).subscribe()
 			} else {
 				this.cartItemService.addCartItem(cartItemToAdd).subscribe(
 					cartItem => {
 						addedCartItem = cartItem;
 						this.activeCart.cartItems.push(addedCartItem);
-						if (this.activeCart.cartId == 0) {
-							sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
-						} else {
-							sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
-							sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
-						}
 					}
 				)
+			}
+			if (this.activeCart.cartId == 0) {
+				sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+			} else {
+				sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+				sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
 			}
 		} else {
 			this.modalService.dismissAll();
