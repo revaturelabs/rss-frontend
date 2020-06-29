@@ -82,7 +82,7 @@ export class QuizService {
   }
 
   getAllSubjects(): Observable<Subject[]> {
-    return this.httpclient.get<Subject[]>(this.url + '/subject/obtain/all');
+    return this.httpclient.get<Subject[]>(this.url + '/subject/all');
   }
 
   //Quiz Controller
@@ -104,7 +104,7 @@ export class QuizService {
   }
 
   getAllQuizzes(): Observable<Quiz[]> {
-    return this.httpclient.get<Quiz[]>(this.url + '/quiz/obtain/all');
+    return this.httpclient.get<Quiz[]>(this.url + '/quiz/getallquizzes');
   }
 
   //Questions Bank Controller
