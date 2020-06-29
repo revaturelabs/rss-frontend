@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-account-settings-page',
@@ -23,6 +24,7 @@ export class AccountSettingsPageComponent implements OnInit {
   isLoggedIn;
   userProfileForm: FormGroup;
   evalAccount: Account;
+  bugAccount: Account;
   myAccount: Account = {
     accId: 0,
     accTypeId: 0,
@@ -36,7 +38,8 @@ export class AccountSettingsPageComponent implements OnInit {
     private imageservice: ImageService,
     private userservice: UserService,
     private fb: FormBuilder,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private parent: AppComponent
   ) { }
 
   selectedFile: string;
@@ -78,13 +81,26 @@ export class AccountSettingsPageComponent implements OnInit {
 
     this.getUser();
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
-      console.log(res[0]);
-      this.evalAccount = res[0];
-      console.log(this.evalAccount);
+      console.log(res);
+      res.forEach((x) => {
+        if (x.accTypeId == 1) {
+          this.bugAccount = x;
+          console.log(this.bugAccount);
+        }
+        if (x.accTypeId == 2) {
+          this.evalAccount = x;
+          console.log(this.evalAccount);
+        }
+      });
     });
     this.grabAccounts();
   }
-
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.parent.breadcrumbs = ['Settings'];
+      this.parent.routerCrumbs = ['account/settings'];
+    });
+  }
   getUser() {
     this.user = this.userservice.userPersistance();
     console.log(this.user.password);
@@ -134,6 +150,7 @@ export class AccountSettingsPageComponent implements OnInit {
     this.accountService.createAccount(this.myAccount).subscribe((res) => {
       console.log(res);
     });
+    window.location.reload();
   }
 
   grabAccounts() {

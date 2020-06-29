@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'admin-quiz',
@@ -11,6 +12,13 @@ export class AdminQuizComponent implements OnInit {
     this.navigateEvent.emit('');
   }
 
-  constructor() {}
+  constructor(private parent: AppComponent) {}
   ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.parent.breadcrumbs = ['Admin'];
+      this.parent.routerCrumbs = ['admin'];
+    });
+  }
 }

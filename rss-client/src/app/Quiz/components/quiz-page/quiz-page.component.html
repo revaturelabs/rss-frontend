@@ -1,9 +1,13 @@
 <!-- Below is the search function that you can search through the list of quiz names to limit the ngFor to displaying only what you search for -->
 <div *ngIf="evalAccount">
-  <h3 class="text-center ml-2">Search a Subject</h3>
+  <h3 class="text-center ml-2">Search a Topic</h3>
   <div class="input-group ml-2 justify-content-center">
-    <input id="search-box" class="col-3 my-2 form-control" [(ngModel)]="searchText"
-      placeholder="Type in the subject..." />
+    <input
+      id="search-box"
+      class="col-3 my-2 form-control"
+      [(ngModel)]="searchText"
+      placeholder="Type in the topic..."
+    />
     <!-- <select [(ngModel)]="searchSubject">
       <option value="">All</option>
       <option value="Java">Java</option>
@@ -13,10 +17,16 @@
   </div>
   <!--This is the list of quizzes -->
   <ol class="col-6 offset-3">
-    <li class="border p-2 my-2" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
+    <li
+      class="border p-2 my-2"
+      *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText"
+    >
       <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
       <br />
-      <b><em>Topic: </em></b><a routerLink="/quizzes/{{ quizdata.quizId }}">{{ quizdata.quizTopic | titlecase }}</a>
+      <b><em>Topic: </em></b
+      ><a routerLink="/quizzes/{{ quizdata.quizId }}">{{
+        quizdata.quizTopic | titlecase
+      }}</a>
       <br />
       <b><em> Description: </em></b> {{ quizdata.quizDescription }}
     </li>
