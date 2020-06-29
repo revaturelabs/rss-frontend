@@ -16,6 +16,16 @@ export class EditQuizComponent implements OnInit {
   quizData: any;
   focusedQuiz;
   focusedQuestion;
+
+  isValid = false;
+  validate() {
+    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+  }
+
   reducer = (accumulator, currentValue) =>
     accumulator + currentValue.questionValue;
   updateTotal() {
@@ -29,6 +39,7 @@ export class EditQuizComponent implements OnInit {
       res.forEach((x) => this.focusedQuiz.questions.push(x));
     });
     this.updateTotal();
+    this.validate();
     this.view = 'focus';
   }
   onBack() {
@@ -44,7 +55,7 @@ export class EditQuizComponent implements OnInit {
         x.quizId = this.focusedQuiz.quizId;
         x.quiz = {};
         delete x.userEmail;
-        delete x.selectedAnswer
+        delete x.selectedAnswer;
       });
       this.quizService.addManyQuestions(this.focusedQuiz.questions).subscribe();
     });
@@ -63,8 +74,7 @@ export class EditQuizComponent implements OnInit {
         option3: null,
         option4: null,
         option5: null,
-        quiz: {
-        },
+        quiz: {},
       };
     } else {
       this.focusedQuestion = question;
@@ -108,6 +118,7 @@ export class EditQuizComponent implements OnInit {
             }
             // updates the total points available in this quiz
             this.updateTotal();
+            this.validate();
           } else if (result.type == 'delete') {
             //TODO:remove question from database here
             this.quizService.deleteQuestion(result.value).subscribe();
@@ -115,6 +126,7 @@ export class EditQuizComponent implements OnInit {
               (x) => x.questionId != result.value.questionId
             );
             this.updateTotal();
+            this.validate();
           }
         },
         (reason) => {
@@ -138,12 +150,12 @@ export class EditQuizComponent implements OnInit {
     private testservice: QuizPageService,
     private modalService: NgbModal,
     private userservice: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.quizService.getAllQuizzes().subscribe((x) => {
       this.quizData = x;
     });
-    console.log(this.userservice.userPersistance().email)
+    console.log(this.userservice.userPersistance().email);
   }
 }

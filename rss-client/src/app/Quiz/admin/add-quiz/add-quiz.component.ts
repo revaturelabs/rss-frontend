@@ -22,6 +22,14 @@ export class AddQuizComponent implements OnInit {
     questions: [],
     availablePoints: null,
   };
+  isValid = false;
+  validate() {
+    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+  }
   focusedQuestion;
 
   subjectText = '';
@@ -124,12 +132,14 @@ export class AddQuizComponent implements OnInit {
             }
             // updates the total points available in this quiz
             this.updateTotal();
+            this.validate();
           } else if (result.type == 'delete') {
             //TODO:remove question from database here
             this.focusedQuiz.questions = this.focusedQuiz.questions.filter(
               (x) => x.questionId != result.value.questionId
             );
             this.updateTotal();
+            this.validate();
           } else if (result.type == 'subject') {
             this.addSubject(subject);
           }
