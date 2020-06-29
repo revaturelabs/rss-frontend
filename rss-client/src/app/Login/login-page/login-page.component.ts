@@ -46,15 +46,11 @@ export class LoginPageComponent implements OnInit {
 
   async submitForm() {
     const formValue = this.loginForm.value;
-    console.log(formValue);
     this.userService.login(formValue).subscribe((res) => {
-      console.log(res);
       if (res == null) {
         window.alert('Invalid login credentials');
       } else {
-        console.log('what');
         this.user = res;
-        console.log(res);
         this.userLogin.emit(res);
         this.isLoggedIn.emit(true);
         this.userService.changeUser(res);

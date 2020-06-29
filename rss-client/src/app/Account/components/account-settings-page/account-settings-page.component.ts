@@ -40,7 +40,7 @@ export class AccountSettingsPageComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private parent: AppComponent
-  ) { }
+  ) {}
 
   selectedFile: string;
   imagePreview: any;
@@ -76,20 +76,17 @@ export class AccountSettingsPageComponent implements OnInit {
 
     this.passForm = this.fb.group({
       newPass: new FormControl('', Validators.required),
-      confirmPass: new FormControl('', Validators.required)
-    })
-
+      confirmPass: new FormControl('', Validators.required),
+    });
     this.getUser();
+
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
-      console.log(res);
       res.forEach((x) => {
         if (x.accTypeId == 1) {
           this.bugAccount = x;
-          console.log(this.bugAccount);
         }
         if (x.accTypeId == 2) {
           this.evalAccount = x;
-          console.log(this.evalAccount);
         }
       });
     });
@@ -103,9 +100,6 @@ export class AccountSettingsPageComponent implements OnInit {
   }
   getUser() {
     this.user = this.userservice.userPersistance();
-    console.log(this.user.password);
-    this.editForm(this.user);
-    console.log(this.user);
   }
   editForm(user: User) {
     this.userProfileForm.patchValue({
@@ -130,10 +124,7 @@ export class AccountSettingsPageComponent implements OnInit {
 
   async submitForm() {
     const formValue = this.userProfileForm.value;
-    console.log(formValue);
-    this.userservice.updateInfo(formValue).subscribe((res) => {
-      console.log(`User has updated their info`);
-    });
+    this.userservice.updateInfo(formValue).subscribe((res) => {});
   }
 
   createAccount(event) {
@@ -142,35 +133,30 @@ export class AccountSettingsPageComponent implements OnInit {
       this.myAccount.accTypeId = num;
       this.myAccount.userId = this.userservice.userPersistance().userId;
     } else if (event == 'Bug') {
-      console.log(this.accounts[0].accTypeId);
       this.myAccount.accTypeId = this.accounts[0].accTypeId;
       this.myAccount.userId = this.userservice.userPersistance().userId;
     }
-    console.log(this.myAccount);
-    this.accountService.createAccount(this.myAccount).subscribe((res) => {
-      console.log(res);
-    });
+    this.accountService.createAccount(this.myAccount).subscribe((res) => {});
     window.location.reload();
   }
 
   grabAccounts() {
     return this.accountService.getAllAccounts().subscribe((res) => {
       this.accounts = res;
-      console.log(this.accounts);
     });
   }
 
   async compareAndChangePassword() {
-    if (this.passForm.controls['newPass'].value == this.passForm.controls['confirmPass'].value) {
+    if (
+      this.passForm.controls['newPass'].value ==
+      this.passForm.controls['confirmPass'].value
+    ) {
       const formValue = this.passForm.controls['newPass'].value;
-      console.log(formValue);
       this.userservice.updatePassword(formValue).subscribe();
       window.alert('Your password has been updated');
       this.passForm.reset();
     } else {
-      console.log(this.passForm.controls['newPass'].value);
-      console.log(this.passForm.controls['confirmPass'].value)
-      window.alert('Your new passwords did not match.')
+      window.alert('Your new passwords did not match.');
     }
   }
 }

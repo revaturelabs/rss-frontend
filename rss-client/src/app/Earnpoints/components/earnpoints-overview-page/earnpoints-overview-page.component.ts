@@ -16,8 +16,6 @@ export class EarnpointsOverviewPageComponent implements OnInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    // this.breadcrumbservice.clearBreadCrumb();
-    // this.breadcrumbservice.sendBreadCrumb(['Earn Points']);
     setTimeout(() => {
       this.parent.breadcrumbs = ['Earn Points'];
       this.parent.routerCrumbs = ['earnpoints'];

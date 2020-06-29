@@ -27,7 +27,7 @@ export class UserService {
     private httpclient: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
-  ) { }
+  ) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -91,14 +91,13 @@ export class UserService {
     this.user = user;
     const cUser: User = this.storage.get(STORAGE_KEY) || user;
     this.storage.set(STORAGE_KEY, cUser);
-    console.log(this.storage.get(STORAGE_KEY));
   }
 
   logout() {
     this.isLoggedIn = false;
     this.storage.set(STORAGE_KEY, undefined);
+
     window.location.reload();
-    this.router.navigate(['/']);
   }
 
   userPersistance() {

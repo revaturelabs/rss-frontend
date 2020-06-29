@@ -36,12 +36,10 @@ export class QuizPageComponent implements OnInit {
       res.forEach((x) => {
         if (x.accTypeId == 2) {
           this.evalAccount = x;
-          console.log(this.evalAccount);
         }
       });
     });
     this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
-    console.log(this.quizData);
   }
   ngAfterViewInit() {
     setTimeout(() => {
