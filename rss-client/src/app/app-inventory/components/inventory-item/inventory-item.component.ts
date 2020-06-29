@@ -93,7 +93,17 @@ export class InventoryItemComponent implements OnInit {
 			this.cartItemService.addCartItem(cartItemToAdd).subscribe(
 				cartItem => {
 					addedCartItem = cartItem;
-					this.activeCart.cartItems.push(addedCartItem);
+					let cartItemsInCart = this.activeCart.cartItems;
+					let exists = false;
+					for (let existingCartItem of cartItemsInCart) {
+						if (existingCartItem.productId == addedCartItem.productId) {
+							existingCartItem.quantity += addedCartItem.quantity;
+							exists = true;
+						}
+					}
+					if (!exists) {
+						this.activeCart.cartItems.push(addedCartItem);
+					}
 					if (this.activeCart.cartId == 0) {
 						sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
 					} else {
