@@ -69,7 +69,7 @@ export class AddQuizComponent implements OnInit {
     });
   }
   closeResult = '';
-  open(content, question, subject) {
+  open(content, question, subject?) {
     if (question == 'new') {
       this.focusedQuestion = {
         question: null,
