@@ -27,7 +27,7 @@ export class UserService {
     private httpclient: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
-  ) {}
+  ) { }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -62,8 +62,10 @@ export class UserService {
     return this.httpclient.post<any>(this.url + '/update/i', user);
   }
 
-  updatePassword(u: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/updatepassword', u);
+  updatePassword(u): Observable<User> {
+    this.user.password = u;
+    this.user.userId = this.userPersistance().userId;
+    return this.httpclient.post<any>(this.url + '/cred', this.user);
   }
 
   updateProfilePic(u: User): Observable<User> {

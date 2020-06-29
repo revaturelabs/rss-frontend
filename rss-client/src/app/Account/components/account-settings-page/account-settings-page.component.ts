@@ -18,6 +18,8 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./account-settings-page.component.css'],
 })
 export class AccountSettingsPageComponent implements OnInit {
+  // newPass = new FormControl('');
+  // confirmPass = new FormControl('');
   user: User;
   isLoggedIn;
   userProfileForm: FormGroup;
@@ -30,6 +32,7 @@ export class AccountSettingsPageComponent implements OnInit {
     points: 0,
   };
   accounts: Account[];
+  passForm: FormGroup;
 
   constructor(
     private imageservice: ImageService,
@@ -37,7 +40,7 @@ export class AccountSettingsPageComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private parent: AppComponent
-  ) {}
+  ) { }
 
   selectedFile: string;
   imagePreview: any;
@@ -70,6 +73,11 @@ export class AccountSettingsPageComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
     });
+
+    this.passForm = this.fb.group({
+      newPass: new FormControl('', Validators.required),
+      confirmPass: new FormControl('', Validators.required)
+    })
 
     this.getUser();
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
@@ -150,5 +158,19 @@ export class AccountSettingsPageComponent implements OnInit {
       this.accounts = res;
       console.log(this.accounts);
     });
+  }
+
+  async compareAndChangePassword() {
+    if (this.passForm.controls['newPass'].value == this.passForm.controls['confirmPass'].value) {
+      const formValue = this.passForm.controls['newPass'].value;
+      console.log(formValue);
+      this.userservice.updatePassword(formValue).subscribe();
+      window.alert('Your password has been updated');
+      this.passForm.reset();
+    } else {
+      console.log(this.passForm.controls['newPass'].value);
+      console.log(this.passForm.controls['confirmPass'].value)
+      window.alert('Your new passwords did not match.')
+    }
   }
 }
