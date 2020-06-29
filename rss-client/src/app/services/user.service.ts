@@ -50,10 +50,6 @@ export class UserService {
     return this.httpclient.post<any>(this.url + '/user', id);
   }
 
-  getUserByEmail(em: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/getuserbyemail', em);
-  }
-
   addUser(user: User): Observable<User> {
     return this.httpclient.post<any>(this.url + '/adduser', user);
   }
