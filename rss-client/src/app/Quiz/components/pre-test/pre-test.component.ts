@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { async } from '@angular/core/testing';
+import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
 
 @Component({
   selector: 'pre-test',
@@ -16,7 +18,5 @@ export class PreTestComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    //why does config not work on this page???
-  }
+  ngOnInit(): void {}
 }

@@ -70,7 +70,7 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) { }
+  constructor(private httpclient: HttpClient) {}
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
@@ -90,12 +90,14 @@ export class QuizService {
     return this.httpclient.post<any>(this.url + '/quiz/admin/add', quiz);
   }
 
-  findQuizById(id): Observable<Quiz> {
-    this.quiz.quizId = id;
-    return this.httpclient.post<any>(this.url + '/quiz/obtain/id', this.quiz);
+  findQuizById(id): Observable<any> {
+    let input = {
+      quizId: id,
+    };
+    return this.httpclient.post<any>(this.url + '/quiz/obtain/id', input);
   }
 
-  findQuizBySubject(id): Observable<Quiz> {
+  findQuizBySubject(id): Observable<any> {
     this.quiz.subjectId = id;
     return this.httpclient.post<any>(
       this.url + '/quiz/obtain/subject',
@@ -119,19 +121,17 @@ export class QuizService {
     return this.httpclient.post<any>(this.url + '/question/forward', quiz);
   }
 
-  getQuestionsById(id): Observable<Questions[]> {
-    this.questions.quizId = id;
-    return this.httpclient.post<any[]>(
-      this.url + '/question/questions',
-      this.questions
-    );
+  getQuestionsById(id): Observable<any[]> {
+    let input = {
+      quizId: id,
+    };
+    return this.httpclient.post<any[]>(this.url + '/question/questions', input);
   }
 
   getQuestionsByIdAdmin(id): Observable<Questions[]> {
     let input = {
       quizId: id,
     };
-    console.log(input);
     return this.httpclient.post<any[]>(
       this.url + '/question/admin/questions',
       input
