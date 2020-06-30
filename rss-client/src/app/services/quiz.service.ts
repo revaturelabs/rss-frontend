@@ -121,7 +121,9 @@ export class QuizService {
     return this.httpclient.post<any>(this.url + '/question/forward', quiz);
   }
 
+
   getQuestionsById(id): Observable<any[]> {
+
     let input = {
       quizId: id,
     };

@@ -7,13 +7,14 @@
 				[(ngModel)]="service.searchTerm" />
 			<span class="m-4" *ngIf="service.loading$ | async">Loading...</span>
 			<div *ngIf="userType === 'admin'">
-				<button class="btn btn-outline-orange float-right ml-3" routerLink="/admin">New Item
+				<button class="btn btn-outline-orange float-right ml-3" routerLink="/add-item">New Item
 					<em class="fas fa-plus"></em></button>
 			</div>
+			<span class="px-4" *ngIf="service.loading$ | async">Loading...</span>
 		</div>
 
 		<!-- TABLE -->
-		<table class="table table-striped table-sm table-responsive-xl">
+		<table class="table table-striped table-sm table-responsive-lg">
 			<caption>List of Products</caption>
 			<thead class="thead-dark">
 				<tr>
