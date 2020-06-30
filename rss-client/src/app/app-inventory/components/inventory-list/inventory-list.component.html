@@ -7,9 +7,10 @@
 				[(ngModel)]="service.searchTerm" />
 			<span class="m-4" *ngIf="service.loading$ | async">Loading...</span>
 			<div *ngIf="userType === 'admin'">
-				<button class="btn btn-outline-orange float-right ml-3" routerLink="/inventory/add-item">New Item
+				<button class="btn btn-outline-orange float-right ml-3" routerLink="/add-item">New Item
 					<em class="fas fa-plus"></em></button>
 			</div>
+			<span class="px-4" *ngIf="service.loading$ | async">Loading...</span>
 		</div>
 		<button *ngIf="userType == 'admin'" class="btn btn-outline-orange my-2" routerLink="/add-item">Add Item</button>
 
