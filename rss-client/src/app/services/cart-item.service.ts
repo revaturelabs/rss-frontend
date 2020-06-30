@@ -28,6 +28,7 @@ export class CartItemService {
   }
   // UPDATE
   updateCartItem(cartItem: CartItem): Observable<CartItem> {
+    // console.log(cartItem);
     // return of(cartItem);
     return this.http.put<CartItem>(this.baseURL, cartItem);
   }

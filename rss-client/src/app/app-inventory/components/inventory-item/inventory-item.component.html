@@ -6,7 +6,9 @@
 </div>
 
 <div class="modal-body">
-	<!-- <<<<<<< HEAD -->
+	<div *ngIf="userType==='admin'">
+		<p class="text-sm text-danger mb-1">* These fields are required.</p>
+	</div>
 	<form (ngSubmit)="updateItem()" [formGroup]="updateProduct">
 		<div class="row">
 			<div class="col-12 col-md-6">* Name:

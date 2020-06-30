@@ -40,11 +40,11 @@ export class AccountSettingsPageComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private parent: AppComponent
-  ) {}
+  ) { }
 
   selectedFile: string;
   imagePreview: any;
-  placeholderPic = '../../../../assets/Images/user_image.png';
+  placeholderPic = 'https://i.imgur.com/HaOnwin.png';
   onFileChanged(event) {
     if (event.target.value) {
       const file = event.target.files[0];
@@ -63,7 +63,7 @@ export class AccountSettingsPageComponent implements OnInit {
     let arr = this.selectedFile.split(',');
     this.imageservice.uploadImage(this.user.userId, arr[1]).subscribe();
     this.user.profilePic = arr[1];
-    this.userservice.changeUser(this.user);
+    this.userservice.changeProfilePic(this.user);
   }
 
   ngOnInit(): void {
@@ -79,6 +79,7 @@ export class AccountSettingsPageComponent implements OnInit {
       confirmPass: new FormControl('', Validators.required),
     });
     this.getUser();
+    this.editForm();
 
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
       res.forEach((x) => {
@@ -101,12 +102,12 @@ export class AccountSettingsPageComponent implements OnInit {
   getUser() {
     this.user = this.userservice.userPersistance();
   }
-  editForm(user: User) {
+  editForm() {
     this.userProfileForm.patchValue({
-      userId: user.userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
+      userId: this.user.userId,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email,
     });
   }
   get userId() {
@@ -124,7 +125,7 @@ export class AccountSettingsPageComponent implements OnInit {
 
   async submitForm() {
     const formValue = this.userProfileForm.value;
-    this.userservice.updateInfo(formValue).subscribe((res) => {});
+    this.userservice.updateInfo(formValue).subscribe((res) => { });
   }
 
   createAccount(event) {
@@ -136,8 +137,8 @@ export class AccountSettingsPageComponent implements OnInit {
       this.myAccount.accTypeId = this.accounts[0].accTypeId;
       this.myAccount.userId = this.userservice.userPersistance().userId;
     }
-    this.accountService.createAccount(this.myAccount).subscribe((res) => {});
-    window.location.reload();
+    this.accountService.createAccount(this.myAccount).subscribe((res) => { });
+    //window.location.reload();
   }
 
   grabAccounts() {

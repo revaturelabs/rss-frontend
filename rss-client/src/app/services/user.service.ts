@@ -27,7 +27,7 @@ export class UserService {
     private httpclient: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
-  ) { }
+  ) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -110,6 +110,11 @@ export class UserService {
     this.user = user;
     const cUser: User = this.storage.get(STORAGE_KEY) || user;
     this.storage.set(STORAGE_KEY, cUser);
+  }
+
+  changeProfilePic(user: User) {
+    this.user = user;
+    this.storage.set(STORAGE_KEY, this.user);
   }
 
   logout() {

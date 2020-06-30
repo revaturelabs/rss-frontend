@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
 	selector: 'app-add-item',
@@ -18,7 +19,8 @@ export class AddItemComponent implements OnInit {
 	product: Product;
 	currentUser: User;
 
-	constructor(private http: HttpClient, private router: Router, private inventoryService: InventoryService, private userService: UserService, private location: Location) { }
+	constructor(private http: HttpClient, private router: Router, private inventoryService: InventoryService,
+		private userService: UserService, private parent: AppComponent, private location: Location) { }
 
 	ngOnInit(): void {
 		this.product = new Product();
@@ -29,7 +31,14 @@ export class AddItemComponent implements OnInit {
 	// Adds an item to inventory and route to inventory list
 	addItem() {
 		this.inventoryService.addProduct(this.product).subscribe(data => {
-			this.router.navigate(['/inventory-list'])
+			this.router.navigate(['/inventory/inventory-list'])
+		});
+	}
+
+	ngAfterViewInit() {
+		setTimeout(() => {
+			this.parent.breadcrumbs = ['Admin', 'Inventory', 'Add-Item'];
+			this.parent.routerCrumbs = ['admin', 'inventory', 'inventory/add-item'];
 		});
 	}
 
