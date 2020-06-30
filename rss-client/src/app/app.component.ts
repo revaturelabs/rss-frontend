@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private userservice: UserService
-  ) {}
+  ) { }
 
   fakeUser;
   ngOnInit(): void {
