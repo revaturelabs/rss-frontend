@@ -11,9 +11,9 @@ import { SortService } from '../../service/sort.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
-
-import { UserService } from '../../../services/user.service';
-import { AppComponent } from 'src/app/app.component';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-inventory-list',
@@ -21,99 +21,79 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./inventory-list.component.css'],
 })
 export class InventoryListComponent implements OnInit {
-  // Change application view (admin/customer)
-  userType: string = 'admin';
 
-  products$: Observable<Product[]>;
-  total$: Observable<number>;
+	// Change application view (admin/customer)
+	userType: string = "admin";
 
-  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
+	products$: Observable<Product[]>;
+	total$: Observable<number>;
 
-  constructor(
-    private router: Router,
-    private inventoryService: InventoryService,
-    public service: SortService,
-    private modalService: NgbModal,
-    private user: UserService,
-    private parent: AppComponent
-  ) {
-    this.getAllProducts();
-  }
+	@ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
-  ngOnInit(): void {
-    if (!this.user.getCurrentUser().admin) this.userType = 'customer';
-  }
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.parent.breadcrumbs = ['Store'];
-      this.parent.routerCrumbs = ['inventory-list'];
-    });
-  }
+	constructor(
+		private router: Router,
+		private inventoryService: InventoryService,
+		public service: SortService,
+		private modalService: NgbModal,
+		private userService: UserService) {
+		this.getAllProducts();
+	}
 
-  // FOR ADMIN
-  open(product) {
-    console.log('open() called.');
+	ngOnInit(): void {
+		// this.userType = environment.admin ? 'admin' : 'customer';
+		this.userType = this.userService.getCurrentUser().admin ? 'admin' : 'customer';
+	}
 
-    const modalRef = this.modalService.open(InventoryItemComponent);
-    modalRef.componentInstance.product = product;
+	// FOR ADMIN
+	open(product) {
+		const modalRef = this.modalService.open(InventoryItemComponent);
+		modalRef.componentInstance.product = product;
+		modalRef.componentInstance.userType = this.userType;
+	}
 
-    modalRef.componentInstance.userType = this.userType;
-  }
+	// FOR CUSTOMER
+	addToCart(product) {
+		console.log("addToCart() called.");
+		console.log(product);
+		// TODO: ADD TO CART, SOMEHOW
+	}
 
-  // FOR CUSTOMER
-  addToCart(product) {
-    console.log('addToCart() called.');
-    console.log(product);
+	updateItem(product: Product) {
+		console.log("updateItem() called.");
+		console.log(product);
+	}
 
-    // TODO: ADD TO CART, SOMEHOW
-  }
+	deleteItem(product: Product) {
+		const modalRef = this.modalService.open(ConfirmationModalComponent);
+		modalRef.componentInstance.product = product;
+	}
 
-  updateItem(product: Product) {
-    console.log('updateItem() called.');
+	getAllProducts() {
+		this.inventoryService.getAllProducts()
+			.subscribe(result => {
+				this.service.setInventory(result);
+				this.products$ = this.service.products$;
+				this.total$ = this.service.total$;
+			})
+	}
 
-    console.log(product);
-  }
+	onSort({ column, direction }: SortEvent) {
+		// Resetting other headers
+		this.headers.forEach(header => {
+			if (header.sortable !== column) {
+				header.direction = '';
+			}
+		});
 
-  deleteItem(product: Product) {
-    console.log('deleteItem() called.');
+		this.service.sortColumn = column;
+		this.service.sortDirection = direction;
+	}
 
-    this.inventoryService.deleteProductById(product.id).subscribe((result) => {
-      if (!result) {
-        this.getAllProducts();
-      } else {
-        console.log('show something');
-      }
-    });
-  }
+	receiveUpdate($event) {
+		this.updateItem($event);
+	}
 
-  getAllProducts() {
-    console.log('getAllProducts() called.');
-
-    this.inventoryService.getAllProducts().subscribe((result) => {
-      console.log(result);
-      this.service.setInventory(result);
-      this.products$ = this.service.products$;
-      this.total$ = this.service.total$;
-    });
-  }
-
-  onSort({ column, direction }: SortEvent) {
-    // Resetting other headers
-    this.headers.forEach((header) => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-
-    this.service.sortColumn = column;
-    this.service.sortDirection = direction;
-  }
-
-  receiveUpdate($event) {
-    this.updateItem($event);
-  }
-
-  receiveDelete($event) {
-    this.deleteItem($event);
-  }
+	receiveDelete($event) {
+		this.deleteItem($event);
+	}
 }
