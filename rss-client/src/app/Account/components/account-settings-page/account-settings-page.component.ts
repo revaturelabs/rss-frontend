@@ -44,7 +44,7 @@ export class AccountSettingsPageComponent implements OnInit {
 
   selectedFile: string;
   imagePreview: any;
-  placeholderPic = '../../../../assets/Images/user_image.png';
+  placeholderPic = '../../../../assets/Images/user_image.jpg';
   onFileChanged(event) {
     if (event.target.value) {
       const file = event.target.files[0];
