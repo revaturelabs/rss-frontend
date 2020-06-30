@@ -2,8 +2,8 @@
   <input [(ngModel)]="searchText" placeholder="search for a quiz" />
   <div class="list-group">
     <a
-      class="list-group-item list-group-item-action active"
-      style="background-color: #f26925;"
+      class="list-group-item list-group-item-action"
+      style="background-color: #f26925; color:white; text-align: center; font-size: x-large; font-weight: bold;"
     >
       Select a Quiz to Edit
     </a>
@@ -29,7 +29,7 @@
     </div>
     <div class="col-4 row">
       <div class="col-6">
-        <button class="btn btn-block btn-outline-danger" (click)="onBack()">
+        <button class="btn btn-block" style="background-color: #f26925; color: white;" (click)="onBack()">
           Cancel
         </button>
       </div>
@@ -37,7 +37,7 @@
         <button
           [disabled]="!isValid"
           (click)="submitChanges()"
-          class="btn btn-block btn-outline-success"
+          class="btn btn-block" style="background-color: #f26925; color: white;"
         >
           Save
         </button>
@@ -68,16 +68,16 @@
   </div>
 
   <div class="border">
-    <div class="bg-secondary">
+    <div style="background-color: #474C55;">
       <div class="text-white form-group">
-        <h2>Questions</h2>
+        <h2 style="text-align: center;">Questions</h2>
       </div>
 
       <div style="margin: 0 0 1rem 0;" class="form-group row">
-        <div class="col-6 text-white">
+        <div class="col-6 text-white" style="text-align: center;">
           Total questions: {{ focusedQuiz.questions.length }}
         </div>
-        <div class="col-6 text-white">
+        <div class="col-6 text-white" style="text-align: center;">
           Total points: {{ focusedQuiz.availablePoints }}
         </div>
       </div>
@@ -86,7 +86,8 @@
     <div class="form-group border">
       <button
         (click)="open(content, 'new')"
-        class="btn btn-block btn-outline-primary"
+        class="btn btn-block"
+        style="background-color: #f26925; color: white;"
       >
         Add New Question
       </button>

@@ -8,6 +8,8 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/interfaces/account';
+import { subscribeOn } from 'rxjs/operators';
+import { QuizSubmit } from 'src/app/interfaces/quizSubmit';
 
 @Component({
   selector: 'quiz-page',
@@ -17,6 +19,7 @@ import { Account } from 'src/app/interfaces/account';
 export class QuizPageComponent implements OnInit {
   evalAccount: Account;
   user: User = this.userservice.userPersistance();
+  quizzesTaken: any[] = [0];
 
   @Input() config;
   searchText: string;
@@ -29,7 +32,7 @@ export class QuizPageComponent implements OnInit {
     private parent: AppComponent,
     private userservice: UserService,
     private accountService: AccountService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
@@ -39,6 +42,16 @@ export class QuizPageComponent implements OnInit {
         }
       });
     });
+    this.quizservice.getUserScores(this.user.email).subscribe(res => {
+      console.log(res);
+      if (res.length == 0) {
+        this.quizzesTaken.push(0);
+        console.log(this.quizzesTaken)
+      } else {
+        this.quizzesTaken = res;
+        console.log(this.quizzesTaken)
+      }
+    })
     this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
   }
   ngAfterViewInit() {

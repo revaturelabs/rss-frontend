@@ -21,13 +21,13 @@ export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
   providedIn: 'root',
 })
 export class UserService {
-  // url = 'http://localhost:9000/user';
+  //url = 'http://localhost:9000/user';
   url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/user';
   constructor(
     private httpclient: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
-  ) {}
+  ) { }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

@@ -10,7 +10,7 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
-  // url = 'http://localhost:8080';
+  //url = 'http://localhost:8080';
   url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10000';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -70,7 +70,7 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
@@ -128,10 +128,13 @@ export class QuizService {
   }
 
   getQuestionsByIdAdmin(id): Observable<Questions[]> {
-    this.questions.quizId = id;
+    let input = {
+      quizId: id,
+    };
+    console.log(input);
     return this.httpclient.post<any[]>(
       this.url + '/question/admin/questions',
-      this.questions
+      input
     );
   }
 
@@ -151,7 +154,7 @@ export class QuizService {
   }
 
   //User Quiz Score Controller
-  getUserScores(email): Observable<QuizSubmit> {
+  getUserScores(email): Observable<any[]> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
       this.url + '/userscore/obtain/taken',
