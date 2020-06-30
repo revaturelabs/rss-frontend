@@ -4,6 +4,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizService } from 'src/app/services/quiz.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AccountService } from 'src/app/services/account.service';
+import { AppComponent } from 'src/app/app.component';
+import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
 
 @Component({
   selector: 'test-in-progress',
@@ -22,8 +24,6 @@ export class TestInProgressComponent implements OnInit {
   onSubmit() {
     //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
-    //loop through answers to create question[]
-    let questionss = [];
     let answersArr = [];
     for (let [key, value] of Object.entries(this.answers)) {
       let obj = {
@@ -37,7 +37,7 @@ export class TestInProgressComponent implements OnInit {
     }
     this.quizservice.submitQuiz(answersArr).subscribe((res) => {
       this.account.points = res.totalPoints;
-      console.log(this.account);
+      this.parentaluntil.results = res;
       this.accountservice.updatePoints(this.account).subscribe();
     });
   }
@@ -121,7 +121,8 @@ export class TestInProgressComponent implements OnInit {
     private quizservice: QuizService,
     private modalService: NgbModal,
     private userService: UserService,
-    private accountservice: AccountService
+    private accountservice: AccountService,
+    private parentaluntil: IndividualQuizPageComponent
   ) {}
 
   accId;

@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PreTestComponent implements OnInit {
   @Input() config;
   @Output() pushProgress = new EventEmitter();
-  instructions = [];
+  questions;
 
   onEvent() {
     this.pushProgress.emit('in-progress');
@@ -16,5 +16,7 @@ export class PreTestComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //why does config not work on this page???
+  }
 }
