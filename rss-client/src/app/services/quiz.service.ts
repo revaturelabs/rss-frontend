@@ -154,7 +154,7 @@ export class QuizService {
   }
 
   //User Quiz Score Controller
-  getUserScores(email): Observable<QuizSubmit[]> {
+  getUserScores(email): Observable<any[]> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
       this.url + '/userscore/obtain/taken',
