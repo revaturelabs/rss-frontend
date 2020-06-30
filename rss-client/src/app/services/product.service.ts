@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Product } from '../interfaces/product.model';
+import { Product } from '../app-inventory/class/product/product';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators'
 import { Config } from 'protractor';

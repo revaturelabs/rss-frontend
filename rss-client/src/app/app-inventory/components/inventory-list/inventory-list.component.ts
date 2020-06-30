@@ -9,9 +9,9 @@ import { SortService } from '../../service/sort.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
-import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
 	selector: 'app-inventory-list',
@@ -34,14 +34,15 @@ export class InventoryListComponent implements OnInit {
 		private inventoryService: InventoryService,
 		public service: SortService,
 		private modalService: NgbModal,
-		private userService: UserService) {
+		private userService: UserService,
+		private parent: AppComponent) {
 		this.getAllProducts();
 	}
 
 	ngOnInit(): void {
 		this.currentUser = this.userService.getCurrentUser();
 		this.userType = this.currentUser.admin ? 'admin' : 'customer';
-		console.log(this.userType);
+		// console.log(this.userType);
 	}
 
 	// FOR ADMIN
@@ -95,5 +96,12 @@ export class InventoryListComponent implements OnInit {
 
 	receiveDelete($event) {
 		this.deleteItem($event);
+	}
+
+	ngAfterViewInit() {
+		setTimeout(() => {
+			this.parent.breadcrumbs = ['Admin', 'Inventory'];
+			this.parent.routerCrumbs = ['admin', 'inventory'];
+		});
 	}
 }

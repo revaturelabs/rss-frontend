@@ -13,6 +13,12 @@ import { LowerCasePipe, TitleCasePipe } from '@angular/common';
 export class IndividualQuizPageComponent implements OnInit {
   @Input() config;
 
+  results: {
+    totalQuestions: 0;
+    correctAnswers: 0;
+    totalPoints: 0;
+  };
+
   subjectPicture;
   instructions = [];
   //options are pre-test, in-progress, post-test
@@ -28,13 +34,16 @@ export class IndividualQuizPageComponent implements OnInit {
 
   ngOnInit(): void {
     //this pulls in the id passed from the quiz-page
-    console.log(this.route.snapshot.params.id);
     this.quizService
       .findQuizById(this.route.snapshot.params.id)
-      .subscribe((res) => (this.config = res));
+      .subscribe((res) => {
+        this.config = res;
+      });
     this.quizService
       .getQuestionsById(this.route.snapshot.params.id)
-      .subscribe((res) => (this.config.questions = res));
+      .subscribe((res) => {
+        this.config.questions = res;
+      });
   }
 
   id = this.route.snapshot.params.id;

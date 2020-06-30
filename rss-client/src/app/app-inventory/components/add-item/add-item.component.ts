@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../class/product/product';
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
-import { environment } from "../../../../environments/environment";
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
 	selector: 'app-add-item',
@@ -18,7 +19,8 @@ export class AddItemComponent implements OnInit {
 	product: Product;
 	currentUser: User;
 
-	constructor(private http: HttpClient, private router: Router, private inventoryService: InventoryService, private userService: UserService) { }
+	constructor(private http: HttpClient, private router: Router, private inventoryService: InventoryService,
+		private userService: UserService, private parent: AppComponent, private location: Location) { }
 
 	ngOnInit(): void {
 		this.product = new Product();
@@ -28,12 +30,19 @@ export class AddItemComponent implements OnInit {
 
 	// Adds an item to inventory and route to inventory list
 	addItem() {
-		// console.log("addItem() called.");
-
-		// console.log(this.product);
-
 		this.inventoryService.addProduct(this.product).subscribe(data => {
-			this.router.navigate(['/inventory-list'])
+			this.router.navigate(['/inventory/inventory-list'])
 		});
+	}
+
+	ngAfterViewInit() {
+		setTimeout(() => {
+			this.parent.breadcrumbs = ['Admin', 'Inventory', 'Add-Item'];
+			this.parent.routerCrumbs = ['admin', 'inventory', 'inventory/add-item'];
+		});
+	}
+
+	goBack() {
+		this.location.back();
 	}
 }

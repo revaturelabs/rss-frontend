@@ -1,16 +1,32 @@
-<!-- topic picture -->
-<img [src]="subjectPicture" width="25px" height="25px" alt="subjectPicture" />
-<!-- I believe the topic is the quiz name -->
-{{ config.quizTopic | titlecase }}
-<!-- Quiz description -->
-{{ config.quizDescription }}
-<!-- Quiz Instruction from an array of instructions-->
-<div *ngFor="let item of instructions">
-  {{ item }}
+<div class="text-center my-2 p-2 container">
+  <!-- topic picture -->
+  <!-- <img [src]="subjectPicture" width="25px" height="25px" alt="subjectPicture" /> -->
+  <!-- I believe the topic is the quiz name -->
+  <div class="row">
+    <div class="text-left col-6">
+      <div class="my-2 p-2">
+        <h4>
+          <b><em>Topic: </em></b>{{ config.quizTopic | titlecase }}
+        </h4>
+      </div>
+      <!-- Quiz description -->
+      <div class="my-2 p-2">
+        <h4>
+          <b><em>Description: </em></b>{{ config.quizDescription }}
+        </h4>
+      </div>
+      <!-- Quiz Instruction from an array of instructions-->
+      <div class="my-2 p-2">
+        <h4>
+          <b><em>Instructions: </em></b> You will need to complete these
+          questions in an amount of time alloted by your instructor. No
+          cheating.
+        </h4>
+      </div>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-warning" (click)="onEvent()">Start Quiz</button>
+    </div>
+  </div>
+  <!-- Start Quiz -->
 </div>
-<!-- Possible points available -->
-{{ config.availablePoints }}
-<!-- Quiz Attempt Number -->
-{{ config.quizAttempts }}
-<!-- Start Quiz -->
-<button (click)="onEvent()">Start Quiz</button>

@@ -1,10 +1,12 @@
 <!-- Number correctly answered -->
-{{ config.numberCorrect }}
+<h2>
+  Total Questions Answered Correctly: {{ parentalunit.results.correctAnswers }}
+</h2>
 <!-- Total questions in test for  correct / possible -->
-{{ config.questions.length }}
+<h2>Total Questions in the Quiz: {{ parentalunit.results.totalQuestions }}</h2>
 <!-- Points earned from this attempt -->
-{{ config.pointsAwarded }}
+<h2>Total Points Received: {{ parentalunit.results.totalPoints }}</h2>
 <!-- Back button -->
 <button (click)="onRetake()">Retake Test</button>
-<!-- Incomplete back button, waiting on Router to be set up -->
-<button (click)="onBack()">Back</button>
+<!-- back to quiz overview page -->
+<button routerLink="/quizzes">Back</button>

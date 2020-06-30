@@ -6,6 +6,9 @@
 </div>
 
 <div class="modal-body">
+	<div *ngIf="userType==='admin'">
+		<p class="text-sm text-danger mb-1">* These fields are required.</p>
+	</div>
 	<form (ngSubmit)="updateItem()" [formGroup]="updateProduct">
 		<div class="row">
 			<div class="col-12 col-md-6">* Name:
@@ -64,74 +67,4 @@
 		</div>
 
 	</form>
-
-
-	<!-- <form (submit)="updateItem()" #updateForm="ngForm">
-		<div class="row">
-			<div class="col-12 col-md-6">* Name:
-				<input [disabled]="admin" type="text" class="form-control" id="inputName" name="name"
-					[(ngModel)]="product.name" #name="ngModel" required>
-				<p class="text-danger small-text" [hidden]="name.valid || name.pristine">Name is required</p>
-			</div>
-			<div class="col-12 col-md-6">Brand:
-				<input [disabled]="admin" type="text" class="form-control" id="brand" name="brand"
-					[(ngModel)]="product.brand">
-			</div>
-		</div> -->
-	<!-- MODAL FORM FIELDS -->
-	<!-- <div>Description:
-			<input [disabled]="admin" type="text" class="form-control" id="inputDescription" name="description"
-				[(ngModel)]="product.description">
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-6">Model:
-				<input [disabled]="admin" type="text" class="form-control" id="inputModel" name="model"
-					[(ngModel)]="product.model">
-			</div>
-			<div class="col-12 col-md-6">Category:
-				<input [disabled]="admin" type="text" class="form-control" id="category" name="category"
-					[(ngModel)]="product.category">
-			</div>
-		</div>
-		<div>
-			<img src="{{product.image}}" alt="product_img" class="rounded mx-auto d-block mt-4 mb-4"
-				style="width: 300px;">
-			Image URL:
-			<input [disabled]="admin" type="text" class="form-control" id="inputImage" name="image"
-				[(ngModel)]="product.image">
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-6">* Quantity:
-				<input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="product.quantity"
-					#quantity="ngModel" required min="0" pattern="([0-9]+)">
-				<p class="text-danger small-text" [hidden]="quantity.valid || quantity.pristine">Quantity is
-					required
-				</p>
-			</div>
-			<div class="col-12 col-md-6">* Unit Price:
-				<input [disabled]="admin" type="number" class="form-control" id="unitPrice" name="unitPrice"
-					[(ngModel)]="product.unitPrice" #unitPrice="ngModel" min="0" pattern="([0-9]+)">
-				<p class="text-danger small-text" [hidden]="unitPrice.valid || unitPrice.pristine">Unit price is
-					required
-				</p>
-			</div>
-		</div>
-
-		<div>Color:
-			<input [disabled]="admin" type="text" class="form-control" id="inputColor" name="color"
-				[(ngModel)]="product.color">
-		</div> -->
-
-	<!-- SHOW IF ADMIN -->
-	<!-- <div *ngIf="userType==='admin'" class="modal-footer">
-			<button type="button" class="btn btn-outline-danger"
-				(click)="activeModal.dismiss('Cross click')">Cancel</button>
-			<button type="submit" class="btn btn-outline-orange" [disabled]="!updateForm.form.valid">Save</button>
-		</div> -->
-	<!-- SHOW IF CUSTOMER -->
-	<!-- <div *ngIf="userType==='customer'" class="modal-footer">
-			<button type="button" class="btn btn-outline-orange" (click)="reduceInventory()">Add to Cart</button>
-		</div>
-
-	</form> -->
 </div>

@@ -110,16 +110,16 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     this.cartService.listCartsByUser(this.currentUser)
       .subscribe(carts => {
         this.userCarts = carts;
-        this.fillToggleRecord(this.userCarts);
-        this.currentUser.userCartIds = [];
-        if (this.userCarts) {
-          for (let cart of this.userCarts) {
-            this.currentUser.userCartIds.push(cart.cartId);
-          }
-        }
-        else {
-          this.currentUser.userCartIds.push(0);
-        }
+        this.fillToggleRecord(carts);
+        // this.currentUser.userCartIds = [];
+        // if (carts) {
+        //   for (let cart of carts) {
+        //     this.currentUser.userCartIds.push(cart.cartId);
+        //   }
+        // }
+        // else {
+        //   this.currentUser.userCartIds.push(0);
+        // }
       })
   }
 
@@ -133,12 +133,12 @@ export class SelectCartComponent implements OnInit, OnDestroy {
         resp => {
           console.log(resp);
           if ([200, 201, 202].includes(resp.status)) {
-            let index = this.currentUser.userCartIds.indexOf(cart.cartId);
-            // splice out this cart from the user's cart array
-            if (index > -1) {
-              this.currentUser.userCartIds.splice(index, 1);
-              console.log(this.currentUser.userCartIds + " front after");
-            }
+            // let index = this.currentUser.userCartIds.indexOf(cart.cartId);
+            // // splice out this cart from the user's cart array
+            // if (index > -1) {
+            //   this.currentUser.userCartIds.splice(index, 1);
+            //   console.log(this.currentUser.userCartIds + " front after");
+            // }
             sessionStorage.removeItem("activecartId");
             console.log(sessionStorage.getItem("activecartId") === null);
             this.updateSelectCartView()

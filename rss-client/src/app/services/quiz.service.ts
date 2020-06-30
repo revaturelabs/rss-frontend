@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../interfaces/subject';
-import { Quiz } from '../interfaces/Quiz';
+import { Quiz } from '../interfaces/quiz';
 import { Questions } from '../interfaces/questions';
 import { QuizSubmit } from '../interfaces/quizSubmit';
 
@@ -10,6 +10,12 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
+  //url = 'http://localhost:8080';
+  url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10000';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
   quiz: Quiz = {
     quizId: 0,
     quizTopic: '',
@@ -64,147 +70,95 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
-    return this.httpclient.post<any>('http://localhost:8080/subject/add', sub);
+    this.quiz.subject.subjectName = sub;
+    return this.httpclient.post<any>(
+      this.url + '/subject/admin/add',
+      this.quiz.subject
+    );
   }
 
   getAllSubjects(): Observable<Subject[]> {
-    return this.httpclient.get<Subject[]>('http://localhost:8080/subject/all');
+    return this.httpclient.get<Subject[]>(this.url + '/subject/obtain/all');
   }
 
   //Quiz Controller
   addQuiz(quiz): Observable<Quiz> {
-    return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/addquiz',
-      quiz
-    );
-  }
-
-  submitQuiz(quiz): Observable<Quiz> {
-    return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/findbyid',
-      quiz
-    );
+    return this.httpclient.post<any>(this.url + '/quiz/admin/add', quiz);
   }
 
   findQuizById(id): Observable<Quiz> {
     this.quiz.quizId = id;
-    return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/findbyid',
-      this.quiz
-    );
+    return this.httpclient.post<any>(this.url + '/quiz/obtain/id', this.quiz);
   }
 
   findQuizBySubject(id): Observable<Quiz> {
     this.quiz.subjectId = id;
     return this.httpclient.post<any>(
-      'http://localhost:8080/quiz/findbysubject',
+      this.url + '/quiz/obtain/subject',
       this.quiz.subjectId
     );
   }
 
   getAllQuizzes(): Observable<Quiz[]> {
-    return this.httpclient.get<Quiz[]>(
-      'http://localhost:8080/quiz/getallquizzes'
-    );
+    return this.httpclient.get<Quiz[]>(this.url + '/quiz/obtain/all');
   }
 
   //Questions Bank Controller
+  //this method is also going to be used to update questions aswell
   addSingularQuestion(question): Observable<Questions> {
     return this.httpclient.post<any>(
-      'http://localhost:8080/question/add',
+      this.url + '/question/admin/add',
       question
     );
   }
+  submitQuiz(quiz): Observable<any> {
+    return this.httpclient.post<any>(this.url + '/question/forward', quiz);
+  }
 
-  getQuestionsById(id): Observable<Questions> {
+  getQuestionsById(id): Observable<Questions[]> {
     this.questions.quizId = id;
-    return this.httpclient.post<any>(
-      'http://localhost:8080/question/getquestions',
+    return this.httpclient.post<any[]>(
+      this.url + '/question/questions',
       this.questions
     );
   }
 
+  getQuestionsByIdAdmin(id): Observable<Questions[]> {
+    let input = {
+      quizId: id,
+    };
+    console.log(input);
+    return this.httpclient.post<any[]>(
+      this.url + '/question/admin/questions',
+      input
+    );
+  }
+
   addManyQuestions(questions): Observable<Questions> {
+    this.questions = questions;
     return this.httpclient.post<any>(
-      'http://localhost:8080/question/addall',
-      questions
+      this.url + '/question/admin/addall',
+      this.questions
+    );
+  }
+  deleteQuestion(id) {
+    return this.httpclient.post<any[]>(
+      this.url + '/question/admin/delete',
+      JSON.stringify(id),
+      this.httpOptions
     );
   }
 
   //User Quiz Score Controller
-  getUserScores(email): Observable<QuizSubmit> {
+  getUserScores(email): Observable<any[]> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
-      'http://localhost:8080/userscore/takenquiz',
+      this.url + '/userscore/obtain/taken',
       this.quizSubmit
     );
   }
-  // quizId: number;
-  // getSampleSubjects() {
-  //   return ['subject 1', 'subject 2', 'subject 3'];
-  // }
-
-  // getSampleQuiz(id) {
-  //   this.quizId = 1;
-  //   if (this.quizId == id) {
-  //     return {
-  //       quizId: 1,
-  //       creatorEmail: 'email@email.com',
-  //       subject: 'Java',
-  //       topic: 'Spring',
-  //       subjectPicture: null,
-  //       description: 'A quiz about Java Spring',
-  //       instructions: [
-  //         'When taking the quiz you will be able to see how much time you have remaining ',
-  //         '	When you have completed the quiz click finish button to record your answers',
-  //         'You will receive marks on completion of the quiz',
-  //       ],
-  //       availablePoints: 10,
-  //       quizAttempts: 1,
-  //       questions: [
-  //         {
-  //           questionId: 1,
-  //           question: 'here is the first question',
-  //           options: ['option 1', 'option 2', 'option 3', 'option 4'],
-  //         },
-  //         {
-  //           questionId: 2,
-  //           question: 'here is the second question',
-  //           options: ['option 5', 'option 6', 'option 7', 'option 8'],
-  //         },
-  //         {
-  //           questionId: 3,
-  //           question: 'here is the third question',
-  //           options: ['option 9', 'option 10', 'option 11', 'option 12'],
-  //         },
-  //         {
-  //           questionId: 5,
-  //           question: 'here is the fourth question',
-  //           options: ['option 13', 'option 14', 'option 15', 'option 16'],
-  //         },
-  //       ],
-  //       numberCorrect: 3,
-  //       pointsAwarded: 2,
-  //     };
-  //   }
-  // }
 }
-
-//Eval team
-//How are we storing picture data?
-
-//Things that the backend should provide
-//subjectPicture
-//AvailablePoints from a specific quiz
-//quizAttempts from userId and quizId
-
-// What information would they like when we submit a test for eval?
-
-//What we want
-//what we need back
-//numberCorrect
-//pointsAwarded

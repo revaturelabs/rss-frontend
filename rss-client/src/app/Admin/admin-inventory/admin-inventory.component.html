@@ -1,25 +1,5 @@
 <div class="container">
-  <!-- Add quiz topic -->
-  <ul ngbNav #nav="ngbNav" [activeId]="2" class="nav-tabs">
-    <li [ngbNavItem]="1">
-      <a ngbNavLink (click)="navigateBack()">Back</a>
-    </li>
-    <li [ngbNavItem]="2">
-      <a ngbNavLink>Add item</a>
-      <ng-template ngbNavContent>
-        <div class="container">
-          <app-inventory-view></app-inventory-view>
-        </div>
-      </ng-template>
-    </li>
-    <li [ngbNavItem]="3">
-      <a ngbNavLink>View all</a>
-      <ng-template ngbNavContent>
-        <div class="container">
-          <app-adminview></app-adminview>
-        </div>
-      </ng-template>
-    </li>
-  </ul>
-  <div [ngbNavOutlet]="nav"></div>
+  <div class="">
+    <router-outlet></router-outlet>
+  </div>
 </div>

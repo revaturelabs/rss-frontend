@@ -1,4 +1,4 @@
-import { Product } from './../inventory/class/product/product';
+import { Product } from '../app-inventory/class/product/product';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 

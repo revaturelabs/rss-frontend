@@ -11,10 +11,6 @@ export class AccountService {
 
   mockAccounts: Account[];
 
-  constructor(private httpclient: HttpClient) {
-    this.mockAccounts = this.generateMockAccounts(2021);
-  }
-
   generateMockAccounts(userId): Account[] {
     let account: Account = {
       accId: 0,
@@ -30,32 +26,49 @@ export class AccountService {
     }
     return [account, bugBounty];
   }
-
-  updatePoints(acc: Account): Observable<Account> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/account/updatepoints',
-      acc
-    );
+  //url = 'http://localhost:9000/account';
+  url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/account';
+  constructor(private httpclient: HttpClient) {
+    this.mockAccounts = this.generateMockAccounts(2021);
   }
 
-  addAccount(acc: Account): Observable<Account> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/account/addaccount',
-      acc
-    );
+  //Account controller
+
+  user: User = {
+    userId: 0,
+    email: '',
+    password: '',
+    profilePic: null,
+    firstName: '',
+    lastName: '',
+    admin: false
+  };
+
+  account: Account;
+  getAllUserAccounts(id): Observable<any> {
+    this.user.userId = id;
+    return this.httpclient.post<any>(this.url + '/accounts', this.user);
   }
 
   getAccountByAccId(acc: Account): Observable<Account> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/accuont/getaccountbyaccid',
-      acc
-    );
+    return this.httpclient.post<any>(this.url + '/account', acc);
   }
 
-  getAccountByUserId(acc: Account): Observable<Account> {
-    return this.httpclient.post<any>(
-      'http://localhost:9000/account/getaccountbyuserid',
-      acc
+  getAccountByUserId(user: User): Observable<Account[]> {
+    return this.httpclient.post<any[]>(this.url + '/accounts', user);
+  }
+
+  // getAllAccountUsers(account: Account): Observable<Account> {
+  //   return this.httpclient.post<any>(this.url + '/account/account/ai', account);
+  // }
+
+  // linkAccount(account: Account): Observable<Account> {
+  //   return this.httpclient.post<any>(this.url + '/account/account', account);
+  // }
+
+  getAllAccounts(): Observable<any> {
+    return this.httpclient.get<any>(
+      'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/acctype/all'
     );
   }
 
@@ -74,5 +87,15 @@ export class AccountService {
       }
     }
     return of(account);
+  }
+
+  createAccount(account: Account): Observable<Account> {
+    return this.httpclient.post<any>(this.url + '/new', account);
+  }
+  updatePoints(account: Account): Observable<Account> {
+    return this.httpclient.post<any>(this.url + '/points/a', account);
+  }
+  setPoints(account: Account): Observable<Account> {
+    return this.httpclient.post<any>(this.url + '/points', account);
   }
 }

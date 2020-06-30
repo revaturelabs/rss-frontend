@@ -1,5 +1,5 @@
 import { QuizService } from './services/quiz.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { User } from './interfaces/user';
 import { Subscription } from 'rxjs';
 import { UserService } from './services/user.service';
@@ -29,18 +29,22 @@ export class AppComponent implements OnInit {
     private userservice: UserService
   ) { }
 
+  fakeUser;
   ngOnInit(): void {
     this.user = this.userservice.getCurrentUser();
+    this.fakeUser = this.userservice.userPersistance();
+    if (this.fakeUser != undefined) {
+      this.user = this.fakeUser;
+      this.isLoggedIn = true;
+    }
   }
 
   loginEvent(e) {
     this.user = e;
-    // console.log(this.user);
   }
 
   changeLoginStatus(status) {
     this.isLoggedIn = status;
-    // console.log(this.isLoggedIn);
   }
 
   onHome() {
