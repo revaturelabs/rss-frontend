@@ -3,18 +3,14 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg" style="background-color: white; border-bottom: 2px solid #474C55;">
         <a class="navbar-brand" routerLink="/">
-          <img
-            src="../../assets/Images/Revature Logo.png"
-            alt="Revature Logo"
-          />
+
+          <img src="https://i.imgur.com/j0xqO7e.png" alt="Revature Logo" />
+
         </a>
       </nav>
     </div>
   </div>
-  <login-page
-    (userLogin)="loginEvent($event)"
-    (isLoggedIn)="changeLoginStatus(true)"
-  ></login-page>
+  <login-page (userLogin)="loginEvent($event)" (isLoggedIn)="changeLoginStatus(true)"></login-page>
 </div>
 <div *ngIf="isLoggedIn == true">
   <header [config]="headerConfig" [currentUser]="user"></header>
@@ -26,12 +22,8 @@
             <li class="breadcrumb-item">
               <a routerLink="" (click)="onHome()">{{ rootPage }}</a>
             </li>
-            <li
-              id="breadCrumbNav"
-              class="breadcrumb-item active"
-              *ngFor="let breadCrumb of breadcrumbs; index as i"
-              aria-current="page"
-            >
+            <li id="breadCrumbNav" class="breadcrumb-item active" *ngFor="let breadCrumb of breadcrumbs; index as i"
+              aria-current="page">
               <a routerLink="{{ routerCrumbs[i] }}">{{ breadCrumb }}</a>
             </li>
           </ol>
