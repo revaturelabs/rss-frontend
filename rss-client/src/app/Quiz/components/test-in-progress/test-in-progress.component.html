@@ -1,32 +1,92 @@
 <!-- numbered buttons coorisponding to questions -->
-<div *ngFor="let question of config.questions; let i = index">
-  <button [class.bg-info]="isMarkedOff(i)" (click)="onFocus(i)">
-    {{ i + 1 }}
-  </button>
+<div class="row mb-3">
+  <ul
+    class="list-group list-group-horizontal"
+    *ngFor="let question of config.questions; let i = index"
+  >
+    <button
+      class="mx-1 btn btn-light list-group-item"
+      [class.bg-info]="isMarkedOff(i)"
+      (click)="onFocus(i)"
+    >
+      {{ i + 1 }}
+    </button>
+  </ul>
 </div>
 <!-- Current question -->
-{{ config.questions[index].question }} <br />
+<div class="row my-2">
+  <h4>{{ config.questions[index].question }}</h4>
+  <br />
+</div>
 <!-- Current multiple choice question options -->
-<div *ngFor="let item of config.questions[index].options; let i = index">
+<!-- Option 1 -->
+<div class="m-3" *ngIf="config.questions[index].option1">
   <input
-    (change)="onChange(index, i + 1)"
-    [checked]="isChecked(index, i + 1)"
+    (change)="onChange(index, 1)"
+    [checked]="isChecked(index, 1)"
     type="radio"
-    [id]="item"
+    id="item1"
     [name]="index"
   />
-  <label [for]="item">{{ item }}</label>
+  <label for="item1"> {{ config.questions[index].option1 }}</label>
 </div>
+<div class="m-3" *ngIf="config.questions[index].option2">
+  <input
+    (change)="onChange(index, 2)"
+    [checked]="isChecked(index, 2)"
+    type="radio"
+    id="item2"
+    [name]="index"
+  />
+  <label for="item2"> {{ config.questions[index].option2 }}</label>
+</div>
+<div class="m-3" *ngIf="config.questions[index].option3">
+  <input
+    (change)="onChange(index, 3)"
+    [checked]="isChecked(index, 3)"
+    type="radio"
+    id="item3"
+    [name]="index"
+  />
+  <label for="item3"> {{ config.questions[index].option3 }}</label>
+</div>
+<div class="m-3" *ngIf="config.questions[index].option4">
+  <input
+    (change)="onChange(index, 4)"
+    [checked]="isChecked(index, 4)"
+    type="radio"
+    id="item4"
+    [name]="index"
+  />
+  <label for="item4"> {{ config.questions[index].option4 }}</label>
+</div>
+<div class="m-3" *ngIf="config.questions[index].option5">
+  <input
+    (change)="onChange(index, 5)"
+    [checked]="isChecked(index, 5)"
+    type="radio"
+    id="item5"
+    [name]="index"
+  />
+  <label for="item5"> {{ config.questions[index].option5 }}</label>
+</div>
+
 <!-- Navigating buttons between questions -->
-<button (click)="navigate('first')">Fisrt</button>
-<button (click)="navigate('previous')">Previous</button>
-<button (click)="navigate('next')">Next</button>
-<button (click)="navigate('last')">Last</button>
+
+<button class="btn btn-light mx-2" (click)="navigate('first')">First</button>
+
+<button class="btn btn-light mx-2" (click)="navigate('previous')">
+  Previous
+</button>
+
+<button class="btn btn-light mx-2" (click)="navigate('next')">Next</button>
+
+<button class="btn btn-light mx-2" (click)="navigate('last')">Last</button>
 <!-- Submit buttons -->
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Are you sure?!</h4>
+    <h4 class="modal-title" id="modal-basic-title">Are you sure?</h4>
     <button
       type="button"
       class="close"
@@ -37,18 +97,21 @@
     </button>
   </div>
   <div class="modal-body">
-    <button (click)="onSubmit()">Submit</button>
+    <button class="btn btn-outline-success" (click)="modal.close('Save click')">
+      Submit
+    </button>
     <button
-      type="button"
-      class="close"
+      class="btn btn-outline-secondary"
       aria-label="Close"
       (click)="modal.dismiss('Cross click')"
     >
-      NO!
+      Cancel
     </button>
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
-  Submit
-</button>
+<div class="row justify-content-end">
+  <button class="col-3 btn btn-lg btn-outline-success" (click)="open(content)">
+    Submit
+  </button>
+</div>

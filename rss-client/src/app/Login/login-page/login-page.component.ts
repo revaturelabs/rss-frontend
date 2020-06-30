@@ -1,8 +1,14 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { Statement } from '@angular/compiler';
 
 @Component({
   selector: 'login-page',
@@ -24,22 +30,31 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: '',
-      password: '',
+      email: new FormControl('', [
+        Validators.required,
+        // Validators.minLength(4),
+      ]),
+      password: new FormControl('', Validators.required),
     });
+  }
+  get email() {
+    return this.loginForm.get('email');
+  }
+  get password() {
+    return this.loginForm.get('password');
   }
 
   async submitForm() {
     const formValue = this.loginForm.value;
-    console.log(formValue);
     this.userService.login(formValue).subscribe((res) => {
-      this.user = res;
-      console.log(res);
-      this.userLogin.emit(res);
-      this.isLoggedIn.emit(true);
-      this.userService.changeUser(res);
-      // this.userService.isLoggedIn = true;
-      // this.userService.user = res;
+      if (res == null) {
+        window.alert('Invalid login credentials');
+      } else {
+        this.user = res;
+        this.userLogin.emit(res);
+        this.isLoggedIn.emit(true);
+        this.userService.changeUser(res);
+      }
     });
   }
 

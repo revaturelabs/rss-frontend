@@ -8,7 +8,8 @@ import { Cart } from '../interfaces/cart.model';
   providedIn: 'root',
 })
 export class CartItemService {
-  baseURL: string = 'http://localhost:9999/cartitem/';
+  baseURL: string = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10002/cartitem/'
+  // baseURL: string = 'http://localhost:9999/cartitem/';
 
   constructor(private http: HttpClient) { }
 

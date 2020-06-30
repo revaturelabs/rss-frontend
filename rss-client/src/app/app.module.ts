@@ -17,9 +17,6 @@ import { PreTestComponent } from './Quiz/components/pre-test/pre-test.component'
 import { TestInProgressComponent } from './Quiz/components/test-in-progress/test-in-progress.component';
 import { PostTestComponent } from './Quiz/components/post-test/post-test.component';
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
-import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
-import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
-import { AdminviewComponent } from './inventory/adminview/adminview.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers/user.reducer';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
@@ -30,6 +27,9 @@ import { AddQuizComponent } from './Quiz/admin/add-quiz/add-quiz.component';
 import { EditQuizComponent } from './Quiz/admin/edit-quiz/edit-quiz.component';
 import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
 import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
+import { SESSION_STORAGE } from 'ngx-webstorage-service';
+import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
+
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
 
 @NgModule({
@@ -47,9 +47,6 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
     TestInProgressComponent,
     PostTestComponent,
     ShoppingCartComponent,
-    InventoryViewComponent,
-    InventoryItemComponent,
-    AdminviewComponent,
     LoginPageComponent,
     AdminPageComponent,
     AdminQuizComponent,
@@ -67,9 +64,11 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
     NgbModule,
     FormsModule,
     StoreModule.forRoot(reducer, {}),
-    AppInventoryModule
+    AppInventoryModule,
   ],
   providers: [
+    { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
+    UserService,
     SelectCartComponent
   ],
   bootstrap: [AppComponent],

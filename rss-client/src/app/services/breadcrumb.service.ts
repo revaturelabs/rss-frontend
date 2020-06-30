@@ -8,7 +8,6 @@ export class BreadcrumbService {
   private subject = new Subject<any>();
 
   sendBreadCrumb(breadcrumb: string[]) {
-    console.log(breadcrumb);
     this.subject.next({ breadcrumb });
   }
 

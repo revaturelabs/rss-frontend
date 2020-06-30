@@ -29,6 +29,18 @@ export class ShoppingCartComponent implements OnInit {
   // cartItemArray: CartItem[] = [];
   products: Product[];
   product: Product;
+  noProduct: Product = {
+    id: 0,
+    name: "No Name",
+    description: "No product found",
+    brand: "No brand",
+    model: "No model",
+    category: "No category",
+    image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
+    quantity: NaN,
+    unitPrice: NaN,
+    color: "N/A"
+  }
   // testcart: Cart;
   userAccounts: Account[];
   pointPicker: Record<number, number> = {};
@@ -83,7 +95,7 @@ export class ShoppingCartComponent implements OnInit {
       }
     )
 
-    this.accountService.getAccountsByUser(this.currentUser).subscribe(
+    this.accountService.getAccountByUserId(this.currentUser).subscribe(
       accounts => {
         this.userAccounts = accounts;
         for (let account of accounts) {
@@ -105,10 +117,12 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getProductById(id: number) {
-    this.product = null;
-    for (let product of this.products) {
-      if (product.id == id) {
-        this.product = product;
+    this.product = this.noProduct;
+    if (this.products) {
+      for (let product of this.products) {
+        if (product.id == id) {
+          this.product = product;
+        }
       }
     }
     return this.product;
@@ -143,7 +157,11 @@ export class ShoppingCartComponent implements OnInit {
         }
       }
       this.getTotalPointCost();
-      this.ciService.updateCartItem(ciToUpdate).subscribe();
+      if (this.activeCart.cartId == 0) {
+        sessionStorage.setItem("defaultcart", JSON.stringify(this.activeCart));
+      } else {
+        this.ciService.updateCartItem(ciToUpdate).subscribe();
+      }
       sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
     } else {
       alert("Can't have 0 or negative quantity")
@@ -152,18 +170,29 @@ export class ShoppingCartComponent implements OnInit {
 
   deleteItem(cartItem: CartItem) {
     console.log(cartItem);
-    this.ciService.deleteCartItem(cartItem).subscribe(
-      result => {
-        const index = this.activeCart.cartItems.indexOf(cartItem);
-        if (index > -1) {
-          this.activeCart.cartItems.splice(index, 1);
-          // console.log(index);
-          sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
-          console.log(sessionStorage);
-          this.getTotalPointCost();
+    if (cartItem.cartItemId >= 0) {
+      this.ciService.deleteCartItem(cartItem).subscribe(
+        result => {
+          const index = this.activeCart.cartItems.indexOf(cartItem);
+          if (index > -1) {
+            this.activeCart.cartItems.splice(index, 1);
+            // console.log(index);
+            sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
+            // console.log(sessionStorage);
+            this.getTotalPointCost();
+          }
         }
+      );
+    } else {
+      const index = this.activeCart.cartItems.indexOf(cartItem);
+      if (index > -1) {
+        this.activeCart.cartItems.splice(index, 1);
+        // console.log(index);
+        sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
+        // console.log(sessionStorage);
+        this.getTotalPointCost();
       }
-    );
+    }
   }
 
   // async getAndDelete(cartId: number) {
@@ -187,12 +216,12 @@ export class ShoppingCartComponent implements OnInit {
         resp => {
           console.log(resp);
           if ([200, 201, 202].includes(resp.status)) {
-            let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
-            // splice out this cart from the user's cart array
-            if (index > -1) {
-              this.currentUser.userCartIds.splice(index, 1);
-              console.log(this.currentUser.userCartIds + " front after");
-            }
+            // let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
+            // // splice out this cart from the user's cart array
+            // if (index > -1) {
+            //   this.currentUser.userCartIds.splice(index, 1);
+            //   console.log(this.currentUser.userCartIds + " front after");
+            // }
             sessionStorage.removeItem("activecartId");
             console.log(sessionStorage.getItem("activecartId") === null);
             if (path == "") {
@@ -235,7 +264,8 @@ export class ShoppingCartComponent implements OnInit {
             accTypeId: this.userAccountRecord[accId].accTypeId,
             points: this.userAccountRecord[accId].points - this.pointPicker[accId]
           }
-          this.accountService.updateAccount(accountToUpdate);
+          console.log(accountToUpdate);
+          this.accountService.setPoints(accountToUpdate).subscribe();
           this.userAccountRecord[accId] = accountToUpdate;
         }
         for (let prodId in newProductRecord) {
@@ -313,21 +343,31 @@ export class ShoppingCartComponent implements OnInit {
       };
       this.cartService.addCart(cartToSave).subscribe(
         (generatedCart) => {
-          console.log(generatedCart);
-          console.log(this.activeCart.cartItems);
-          for (let cItem of this.activeCart.cartItems) {
-            let tempCartItem = {
-              cartItemId: -1,
-              cart: generatedCart,
-              productId: cItem.productId,
-              quantity: cItem.quantity
+          // console.log(generatedCart);
+          // console.log(this.activeCart.cartItems);
+          if (this.activeCart.cartItems.length > 0) {
+            for (let cItem of this.activeCart.cartItems) {
+              let tempCartItem = {
+                cartItemId: -1,
+                cart: generatedCart,
+                productId: cItem.productId,
+                quantity: cItem.quantity
+              }
+              // console.log(tempCartItem);
+              this.ciService.addCartItem(tempCartItem).subscribe(
+                resp => {
+                  console.log("about to redirect");
+                  this.router.navigate(["selectcart"]);
+                }
+              );
             }
-            console.log(tempCartItem);
-            this.ciService.addCartItem(tempCartItem).subscribe(
-              resp => this.router.navigate(["selectcart"]));
+          } else {
+            this.router.navigate(["selectcart"]);
           }
         }
       );
+    } else {
+      alert("You must change the name from '(default)' in order to save your cart.")
     }
   }
 

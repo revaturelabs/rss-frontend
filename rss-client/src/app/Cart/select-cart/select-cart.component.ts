@@ -50,10 +50,11 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     // set the default cart to be selected
     // console.log(this.cartService.isCartSelected());
 
-    try {
+    if (sessionStorage.getItem('activecartId')) {
       this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
-    } catch (error) {
-      console.log(error);
+    } else {
+      this.activeCartId = 0;
+      sessionStorage.setItem("activecartId", `${this.activeCartId}`);
     }
 
     // This gets a list of carts that the user has and stores it
@@ -75,9 +76,11 @@ export class SelectCartComponent implements OnInit, OnDestroy {
 
   getProductById(id: number): Product {
     this.product = this.noProduct;
-    for (let product of this.products) {
-      if (product.id == id) {
-        this.product = product;
+    if (this.products) {
+      for (let product of this.products) {
+        if (product.id == id) {
+          this.product = product;
+        }
       }
     }
     return this.product;
@@ -108,15 +111,15 @@ export class SelectCartComponent implements OnInit, OnDestroy {
       .subscribe(carts => {
         this.userCarts = carts;
         this.fillToggleRecord(carts);
-        this.currentUser.userCartIds = [];
-        if (carts) {
-          for (let cart of carts) {
-            this.currentUser.userCartIds.push(cart.cartId);
-          }
-        }
-        else {
-          this.currentUser.userCartIds.push(0);
-        }
+        // this.currentUser.userCartIds = [];
+        // if (carts) {
+        //   for (let cart of carts) {
+        //     this.currentUser.userCartIds.push(cart.cartId);
+        //   }
+        // }
+        // else {
+        //   this.currentUser.userCartIds.push(0);
+        // }
       })
   }
 
@@ -130,12 +133,12 @@ export class SelectCartComponent implements OnInit, OnDestroy {
         resp => {
           console.log(resp);
           if ([200, 201, 202].includes(resp.status)) {
-            let index = this.currentUser.userCartIds.indexOf(cart.cartId);
-            // splice out this cart from the user's cart array
-            if (index > -1) {
-              this.currentUser.userCartIds.splice(index, 1);
-              console.log(this.currentUser.userCartIds + " front after");
-            }
+            // let index = this.currentUser.userCartIds.indexOf(cart.cartId);
+            // // splice out this cart from the user's cart array
+            // if (index > -1) {
+            //   this.currentUser.userCartIds.splice(index, 1);
+            //   console.log(this.currentUser.userCartIds + " front after");
+            // }
             sessionStorage.removeItem("activecartId");
             console.log(sessionStorage.getItem("activecartId") === null);
             this.updateSelectCartView()

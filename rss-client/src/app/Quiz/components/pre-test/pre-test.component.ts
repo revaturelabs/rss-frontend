@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'pre-test',
@@ -9,23 +8,15 @@ import { ImageService } from 'src/app/services/image.service';
 export class PreTestComponent implements OnInit {
   @Input() config;
   @Output() pushProgress = new EventEmitter();
-  subjectPicture;
-  instructions = [];
+  questions;
 
   onEvent() {
     this.pushProgress.emit('in-progress');
   }
 
-  constructor(private imageService: ImageService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    //Set the subject image
-    this.subjectPicture = this.imageService.setImage(
-      this.config.subjectPicture
-    );
-    //Adds instructions about quiz
-    // this.config.instructions.forEach((item) => {
-    //   this.instructions.push(item);
-    // });
+    //why does config not work on this page???
   }
 }

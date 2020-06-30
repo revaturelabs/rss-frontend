@@ -41,7 +41,7 @@ export class InventoryListComponent implements OnInit {
 	ngOnInit(): void {
 		this.currentUser = this.userService.getCurrentUser();
 		this.userType = this.currentUser.admin ? 'admin' : 'customer';
-		console.log(this.userType);
+		// console.log(this.userType);
 	}
 
 	// FOR ADMIN

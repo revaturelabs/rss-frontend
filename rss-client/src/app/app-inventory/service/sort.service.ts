@@ -33,6 +33,23 @@ function sort(products: Product[], column: SortColumn, direction: string): Produ
 }
 
 function matches(product: Product, term: string, pipe: PipeTransform) {
+	let noProduct: Product = {
+		id: 0,
+		name: "No Name",
+		description: "No product found",
+		brand: "No brand",
+		model: "No model",
+		category: "No category",
+		image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
+		quantity: NaN,
+		unitPrice: NaN,
+		color: "N/A"
+	}
+	for (let key in product) {
+		if (!product[key]) {
+			product[key] = noProduct[key];
+		}
+	}
 	return product.name.toLowerCase().includes(term.toLowerCase())
 		|| pipe.transform(product.id).includes(term)
 		|| product.brand.toLowerCase().includes(term.toLowerCase())

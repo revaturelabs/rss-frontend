@@ -7,8 +7,6 @@ import { AccountSettingsPageComponent } from './Account/components/account-setti
 import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
-import { AdminviewComponent } from './inventory/adminview/adminview.component';
-import { InventoryViewComponent } from './inventory/inventory-view/inventory-view.component';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
 import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
@@ -17,7 +15,8 @@ import { InventoryListComponent } from './app-inventory/components/inventory-lis
 
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
+  { path: 'landing', component: LandingPageComponent },
   { path: 'account/dashboard', component: AccountPageComponent },
   { path: 'earnpoints', component: EarnpointsOverviewPageComponent },
   { path: 'quizzes', component: QuizPageComponent },
@@ -25,8 +24,6 @@ const routes: Routes = [
   { path: 'account/settings', component: AccountSettingsPageComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'admin', component: AdminPageComponent },
-  { path: 'adminview', component: AdminviewComponent },
-  { path: 'inventoryview', component: InventoryViewComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'selectcart', component: SelectCartComponent },
   { path: 'add-item', component: AddItemComponent },

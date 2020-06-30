@@ -10,9 +10,9 @@ fdescribe('ShoppingCartComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [ ShoppingCartComponent ]
+      declarations: [ShoppingCartComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

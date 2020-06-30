@@ -4,14 +4,21 @@
     <br />
     <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
       <div class="form-group">
-        <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" />
         <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" />
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+          <div *ngIf="email.errors.required">Email is required</div>
+        </div>
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" id="password" formControlName="password" />
         <label for="password">Password </label>
+        <input type="password" class="form-control" id="password" formControlName="password" />
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+          <div *ngIf="password.errors.required">password is required</div>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">
+      <button [disabled]="!loginForm.valid" type="submit" (click)="submitForm()" class="btn"
+        style="color: white; background-color: #f26925;">
         Submit
       </button>
     </form>

@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
 import { CartService } from './cart.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 fdescribe('CartService', () => {
   let service: CartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      declarations: [],
+      imports: [HttpClientTestingModule],
+      providers: [CartService],
     });
     service = TestBed.inject(CartService);
   });

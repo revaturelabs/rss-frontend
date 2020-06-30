@@ -1,15 +1,17 @@
-<!-- main container -->
-<div [ngSwitch]="view">
-  <!-- the same view can be shown in more than one case -->
-  <ng-template [ngSwitchCase]="'quiz'">
-    <admin-quiz (navigateEvent)="navigateTo($event)"></admin-quiz>
-  </ng-template>
-  <ng-template [ngSwitchCase]="'inventory'">
-    <admin-inventory (navigateEvent)="navigateTo($event)"></admin-inventory>
-  </ng-template>
-  <!--default case when there are no matches -->
-  <ng-template [ngSwitchDefault]>
-    <!-- <div class="container">
+<!-- admin check -->
+<div *ngIf="user.admin">
+  <!-- main container -->
+  <div [ngSwitch]="view">
+    <!-- the same view can be shown in more than one case -->
+    <ng-template [ngSwitchCase]="'quiz'">
+      <admin-quiz (navigateEvent)="navigateTo($event)"></admin-quiz>
+    </ng-template>
+    <ng-template [ngSwitchCase]="'inventory'">
+      <admin-inventory (navigateEvent)="navigateTo($event)"></admin-inventory>
+    </ng-template>
+    <!--default case when there are no matches -->
+    <ng-template [ngSwitchDefault]>
+      <!-- <div class="container">
       <!- quizzes 
       <div class="border container">
         <button (click)="navigateTo('quiz')">go here</button>
@@ -24,27 +26,47 @@
     </div>
   </ng-template>
 </div> -->
-    <div class ="row justify-content-center">
-      <div class="col-4">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGOq8zcxHug0hBzXDNHOyUGQB9FJOHZsFiWw&usqp=CAU" alt="Quiz card image">
-          <div class="card-body">
-            <h5 class="card-title">Quizzes</h5>
-            <p class="card-text">Here you can create new quizzes or edit existing ones.</p>
-            <button class="btn btn-primary" (click)="navigateTo('quiz')">Quizzes</button>
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              class="card-img-top"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGOq8zcxHug0hBzXDNHOyUGQB9FJOHZsFiWw&usqp=CAU"
+              alt="Quiz card image"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Quizzes</h5>
+              <p class="card-text">
+                Here you can create new quizzes or edit existing ones.
+              </p>
+              <button class="btn btn-primary" (click)="navigateTo('quiz')">
+                Quizzes
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              class="card-img-top"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhzeyvx6pAutBvjbdmTnzuRK9K6cDFyHqHNQ&usqp=CAU"
+              alt="Inventory card image"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Inventory</h5>
+              <p class="card-text">
+                Here you can manage Swagg Shop product inventory
+              </p>
+              <button class="btn btn-primary" (click)="navigateTo('inventory')">
+                Inventory
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-4">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhzeyvx6pAutBvjbdmTnzuRK9K6cDFyHqHNQ&usqp=CAU" alt="Inventory card image">
-          <div class="card-body">
-            <h5 class="card-title">Inventory</h5>
-            <p class="card-text">Here you can manage Swagg Shop product inventory</p>
-            <button class="btn btn-primary" (click)="navigateTo('inventory')">Inventory</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-template>
+    </ng-template>
+  </div>
+</div>
+<div *ngIf="!user.admin">
+  <a href="https://themanwhofellinbuffalo.com/">You are not an admin!</a>
 </div>
