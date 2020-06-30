@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private userservice: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.userservice.getCurrentUser();
@@ -35,12 +35,12 @@ export class AppComponent implements OnInit {
 
   loginEvent(e) {
     this.user = e;
-    console.log(this.user);
+    // console.log(this.user);
   }
 
   changeLoginStatus(status) {
     this.isLoggedIn = status;
-    console.log(this.isLoggedIn);
+    // console.log(this.isLoggedIn);
   }
 
   onHome() {

@@ -82,7 +82,7 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.activeCart = null;
     }
-    console.log(this.activeCart);
+    // console.log(this.activeCart);
 
 
     // var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
@@ -338,6 +338,8 @@ export class ShoppingCartComponent implements OnInit {
           }
         }
       );
+    } else {
+      alert("You must change the name from '(default)' in order to save your cart.")
     }
   }
 

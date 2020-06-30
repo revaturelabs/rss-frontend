@@ -110,10 +110,10 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     this.cartService.listCartsByUser(this.currentUser)
       .subscribe(carts => {
         this.userCarts = carts;
-        this.fillToggleRecord(carts);
+        this.fillToggleRecord(this.userCarts);
         this.currentUser.userCartIds = [];
-        if (carts) {
-          for (let cart of carts) {
+        if (this.userCarts) {
+          for (let cart of this.userCarts) {
             this.currentUser.userCartIds.push(cart.cartId);
           }
         }

@@ -4,35 +4,37 @@ import { Cart } from '../interfaces/cart.model';
 import { Observable, of, Subject } from 'rxjs';
 import { isEmpty } from 'rxjs/operators';
 import { User } from '../interfaces/user';
-import { TempProducts } from '../Cart/temp_products';
-import { CartItem } from '../interfaces/cart-item.model';
+// import { TempProducts } from '../Cart/temp_products';
+// import { CartItem } from '../interfaces/cart-item.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private baseURL = 'http://localhost:9999/cart/';
-  private baseURLplural = 'http://localhost:9999/carts/';
+  private baseURL = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10002/cart/';
+  // private baseURL = 'http://localhost:9999/cart/';
+  private baseURLplural = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10002/carts/';
+  // private baseURLplural = 'http://localhost:9999/carts/';
   private ActiveCart = new Subject<Cart>();
-  private mockData: Cart[] = [];
+  // private mockData: Cart[] = [];
 
   constructor(private http: HttpClient) {
-    this.generateMockData();
+    // this.generateMockData();
   }
 
   // temporary data until we get endpoints
-  generateMockData(): void {
-    let bdayCart: Cart = new Cart(0, 0, "Birthday", []);
-    let bdayCartItem: CartItem = new CartItem(1, TempProducts[0].id, 5);
-    bdayCart.cartItems.push(bdayCartItem);
-    let xmasCart: Cart = new Cart(1, 0, "Christmas", []);
-    let xmasCartItem: CartItem = new CartItem(2, TempProducts[1].id, 10);
-    xmasCart.cartItems.push(xmasCartItem);
-    let hnkaCart: Cart = new Cart(2, 0, "Hanukkah", []);
-    let hnkaCartItem: CartItem = new CartItem(3, TempProducts[2].id, 1);
-    hnkaCart.cartItems.push(hnkaCartItem);
-    this.mockData = [bdayCart, xmasCart, hnkaCart];
-  }
+  // generateMockData(): void {
+  //   let bdayCart: Cart = new Cart(0, 0, "Birthday", []);
+  //   let bdayCartItem: CartItem = new CartItem(1, TempProducts[0].id, 5);
+  //   bdayCart.cartItems.push(bdayCartItem);
+  //   let xmasCart: Cart = new Cart(1, 0, "Christmas", []);
+  //   let xmasCartItem: CartItem = new CartItem(2, TempProducts[1].id, 10);
+  //   xmasCart.cartItems.push(xmasCartItem);
+  //   let hnkaCart: Cart = new Cart(2, 0, "Hanukkah", []);
+  //   let hnkaCartItem: CartItem = new CartItem(3, TempProducts[2].id, 1);
+  //   hnkaCart.cartItems.push(hnkaCartItem);
+  //   this.mockData = [bdayCart, xmasCart, hnkaCart];
+  // }
 
   // CREATE
   addCart(cart: Cart): Observable<Cart> {
@@ -74,8 +76,8 @@ export class CartService {
   listCartsByUser(user: User): Observable<Cart[]> {
     // return of(this.mockData);
     let userCarts: Cart[];
-    if (sessionStorage.getItem("defaultCart")) {
-      userCarts = [JSON.parse(sessionStorage.getItem("defaultCart"))];
+    if (sessionStorage.getItem("defaultcart")) {
+      userCarts = [JSON.parse(sessionStorage.getItem("defaultcart"))];
     } else {
       userCarts = [new Cart(0, user.userId, "(default)", [])];
       sessionStorage.setItem("defaultcart", JSON.stringify(userCarts[0]));
@@ -86,7 +88,7 @@ export class CartService {
     }
     this.http.get<Cart[]>(this.baseURLplural + user.userId).subscribe(
       carts => {
-        console.log(carts);
+        // console.log(carts);
         if (carts) {
           for (let cart of carts) {
             userCarts.push(cart);

@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   constructor(private parent: AppComponent, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
   }
 
   onHome() {
