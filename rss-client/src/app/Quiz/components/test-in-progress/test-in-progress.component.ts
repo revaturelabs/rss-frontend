@@ -19,6 +19,7 @@ export class TestInProgressComponent implements OnInit {
   index;
   max;
   answers = {};
+  quizzesTaken: any[] = [0];
 
   //Submits the form and
   onSubmit() {
@@ -35,11 +36,30 @@ export class TestInProgressComponent implements OnInit {
       };
       answersArr.push(obj);
     }
-    this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-      this.account.points = res.totalPoints;
-      this.parentaluntil.results = res;
-      this.accountservice.updatePoints(this.account).subscribe();
-    });
+    var theQuiz = this.quizzesTaken.filter(x => {
+      return x == this.config.quizId
+    })
+    for (let i = 0; i < theQuiz.length; i++) {
+      if (theQuiz[i] == this.config.quizId) {
+        var theOne = true;
+        break;
+      }
+    }
+
+    if (theOne == true) {
+      this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+        this.account.points = res.totalPoints;
+        this.parentaluntil.results = res;
+        this.parentaluntil.results.totalPoints = 0;
+      });
+    } else {
+      this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+        this.account.points = res.totalPoints;
+        this.parentaluntil.results = res;
+        this.accountservice.updatePoints(this.account).subscribe();
+      });
+    }
+
   }
 
   closeResult: string;
@@ -123,7 +143,7 @@ export class TestInProgressComponent implements OnInit {
     private userService: UserService,
     private accountservice: AccountService,
     private parentaluntil: IndividualQuizPageComponent
-  ) {}
+  ) { }
 
   accId;
   account = {
@@ -145,5 +165,15 @@ export class TestInProgressComponent implements OnInit {
           }
         })
       );
+    this.quizservice.getUserScores(this.userService.userPersistance().email).subscribe(res => {
+      console.log(res);
+      if (res.length == 0) {
+        this.quizzesTaken.push(0);
+        console.log(this.quizzesTaken)
+      } else {
+        this.quizzesTaken = res;
+        console.log(this.quizzesTaken)
+      }
+    })
   }
 }

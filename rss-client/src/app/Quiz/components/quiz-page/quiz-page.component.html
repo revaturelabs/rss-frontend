@@ -17,26 +17,24 @@
   </div>
   <!--This is the list of quizzes -->
   <ol class="col-6 offset-3">
-    <li class="border p-2 my-2" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
-      <div *ngFor="let quiz of quizzesTaken">
-        <div *ngIf="quiz !==  quizdata.quizId">
-          <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
-          <br />
-          <b><em>Topic: </em></b><a routerLink="/quizzes/{{ quizdata.quizId }}">
-            {{quizdata.quizTopic | titlecase}}</a>
-          <br />
-          <b><em> Description: </em></b> {{ quizdata.quizDescription }}
-        </div>
-        <!-- Will Display which Quizzes are completed -->
-        <div *ngIf="quiz ==  quizdata.quizId">
+    <li class="border p-2 my-2" *ngFor="let quizdata of quizData; index i | filter: 'quizTopic':searchText">
+      <div>
+        <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
+        <br />
+        <b><em>Topic: </em></b><a routerLink="/quizzes/{{ quizdata.quizId }}">
+          {{quizdata.quizTopic | titlecase}}</a>
+        <br />
+        <b><em> Description: </em></b> {{ quizdata.quizDescription }}
+      </div>
+      <!-- Will Display which Quizzes are completed -->
+      <!-- <div *ngIf="quiz ==  quizdata.quizId">
           <div class=""><b><em><u>Completed</u></em></b></div>
           <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
           <br />
           <b><em>Topic: </em></b><span>{{quizdata.quizTopic | titlecase}}</span>
           <br />
           <b><em> Description: </em></b> {{ quizdata.quizDescription }}
-        </div>
-      </div>
+        </div> -->
     </li>
   </ol>
 </div>
