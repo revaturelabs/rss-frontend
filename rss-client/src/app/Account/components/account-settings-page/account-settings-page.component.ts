@@ -40,7 +40,7 @@ export class AccountSettingsPageComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private parent: AppComponent
-  ) {}
+  ) { }
 
   selectedFile: string;
   imagePreview: any;
@@ -124,7 +124,7 @@ export class AccountSettingsPageComponent implements OnInit {
 
   async submitForm() {
     const formValue = this.userProfileForm.value;
-    this.userservice.updateInfo(formValue).subscribe((res) => {});
+    this.userservice.updateInfo(formValue).subscribe((res) => { });
   }
 
   createAccount(event) {
@@ -136,8 +136,8 @@ export class AccountSettingsPageComponent implements OnInit {
       this.myAccount.accTypeId = this.accounts[0].accTypeId;
       this.myAccount.userId = this.userservice.userPersistance().userId;
     }
-    this.accountService.createAccount(this.myAccount).subscribe((res) => {});
-    window.location.reload();
+    this.accountService.createAccount(this.myAccount).subscribe((res) => { });
+    //window.location.reload();
   }
 
   grabAccounts() {
