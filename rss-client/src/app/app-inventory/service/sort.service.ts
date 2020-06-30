@@ -127,7 +127,7 @@ export class SortService {
 		let products = sort(this.inventoryList, sortColumn, sortDirection);
 
 		// 2. filter
-		products = products.filter(product => matches(product, searchTerm, this.pipe));
+		products = products ? products.filter(product => matches(product, searchTerm, this.pipe)) : [];
 		const total = products.length;
 
 		// 3. paginate

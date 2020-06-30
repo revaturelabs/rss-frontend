@@ -260,7 +260,7 @@ export class ShoppingCartComponent implements OnInit {
             accTypeId: this.userAccountRecord[accId].accTypeId,
             points: this.userAccountRecord[accId].points - this.pointPicker[accId]
           }
-          console.log(accountToUpdate);
+          // console.log(accountToUpdate);
           this.accountService.setPoints(accountToUpdate).subscribe();
           this.userAccountRecord[accId] = accountToUpdate;
         }
