@@ -60,21 +60,16 @@
 				</div>
 			</div>
 			<!-- BUTTONS -->
-			<div class="row mt-3">
-				<div class="form-group col-12 col-md-6">
-					<button type="reset" class="btn btn-outline-danger btn-block">Reset</button>
-				</div>
-				<div class="form-group col-12 col-md-6">
-					<button type="submit" class="btn btn-outline-orange btn-block"
-						[disabled]="!f.form.valid">Submit</button>
-				</div>
-
-
+			<div class="row mx-auto mt-3">
+				<!-- <button class="btn btn-outline-secondary col-12 col-md-4" (click)="goBack()">Back</button> -->
+				<button type="reset" class="btn btn-outline-danger col-12 col-md-4">Reset</button>
+				<button type="submit" class="btn btn-outline-orange col-12 col-md-4"
+					[disabled]="!f.form.valid">Submit</button>
 			</div>
 
 		</form>
 	</div>
 </div>
 <div *ngIf="userType === 'customer'" class="text-center mt-3">
-	<h1>Hey! Sorry, but this page is not accessible to you.</h1>
+	<h1>Sorry, but this page is not accessible to you.</h1>
 </div>

@@ -4,7 +4,12 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ShareItemService } from '../../service/share-item.service';
+import { Cart } from 'src/app/interfaces/cart.model';
+import { User } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user.service';
+import { CartService } from 'src/app/services/cart.service';
+import { CartItemService } from 'src/app/services/cart-item.service';
+import { CartItem } from 'src/app/interfaces/cart-item.model';
 
 @Component({
 	selector: 'app-inventory-item',
@@ -17,9 +22,10 @@ export class InventoryItemComponent implements OnInit {
 	@Input() userType: string;
 	admin: boolean = true;
 	localQuantity: number;
+	activeCart: Cart;
+	currentUser: User;
 
 	nProduct: Product = new Product();
-	negativeQ: boolean = false;
 
 	updateProduct: FormGroup;
 
@@ -33,8 +39,8 @@ export class InventoryItemComponent implements OnInit {
 		public service: SortService,
 		public activeModal: NgbActiveModal,
 		private inventoryService: InventoryService,
-		private shareItem: ShareItemService) {
-
+		private userService: UserService,
+		private cartItemService: CartItemService) {
 	}
 
 	ngOnInit(): void {
@@ -55,40 +61,113 @@ export class InventoryItemComponent implements OnInit {
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin }, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
 		});
+
+		this.currentUser = this.userService.getCurrentUser();
+
+		if (!this.currentUser.admin) {
+			if (sessionStorage.getItem("myactivecart")) {
+				this.activeCart = JSON.parse(sessionStorage.getItem("myactivecart"));
+			} else if (sessionStorage.getItem('defaultcart')) {
+				this.activeCart = JSON.parse(sessionStorage.getItem('defaultcart'));
+				sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+				sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId));
+			} else {
+				this.activeCart = new Cart(0, this.currentUser.userId, "(default)", []);
+				sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+				sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+				sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId));
+			}
+		}
 	}
 
 	reduceInventory() {
-		let reduce = this.localQuantity - this.quantity.value;
-		if (reduce >= 0) {
-			this.nProduct = this.setUpProductToShare();
-			this.shareItem.addToCart(this.nProduct);
-			this.callShare();
-			this.modalService.dismissAll();
+		let quantityLeft = this.localQuantity - this.quantity.value;
+		// console.log(this.quantity.value)
+		if (quantityLeft >= 0) {
+			// console.log(this.activeCart);
+			// Copy the active cart for establishing ownership in the backend
+			let activeCartCopy: Cart = {
+				cartId: this.activeCart.cartId,
+				userId: this.activeCart.userId,
+				name: this.activeCart.name,
+				cartItems: []
+			}
+			// Check activeCart's cart items for an existing product
+			let existingCartItem: CartItem = null;
+			for (let cartItem of this.activeCart.cartItems) {
+				if (cartItem.productId == this.product.id) {
+					cartItem.quantity += this.quantity.value;
+					existingCartItem = cartItem;
+					break;
+				}
+			}
+			// console.log(existingCartItem);
+			if (existingCartItem) {
+				// udpate the cart item if there's one to update
+				// console.log("Found existing cart item.")
+				if (this.activeCart.cartId == 0) {
+					// console.log("This is a default cart.")
+					sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+					sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+					sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
+				} else {
+					// console.log("This is not a default cart.")
+					let updateCartItem = {
+						cartItemId: existingCartItem.cartItemId,
+						cart: activeCartCopy,
+						productId: existingCartItem.productId,
+						quantity: existingCartItem.quantity
+					}
+					this.cartItemService.updateCartItem(updateCartItem).subscribe(
+						() => {
+							// console.log("I updated the backend")
+							// Find the active cart's corresponding cart item and update the quantity
+							for (let i = 0; i < this.activeCart.cartItems.length; i++) {
+								if (this.activeCart.cartItems[i].cartItemId == existingCartItem.cartItemId) {
+									this.activeCart.cartItems[i].quantity = existingCartItem.quantity;
+									break;
+								}
+							}
+							// Update the active cart and activecartId
+							sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+							sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId))
+						}
+					)
+				}
+			} else {
+				// console.log("This is a new cart item.");
+				// Add new cart item (cartItemId will be autogenerated so long as it doesn't exist in the DB)
+				let cartItemToAdd = {
+					cartItemId: -1,
+					cart: activeCartCopy,
+					productId: this.product.id,
+					quantity: this.quantity.value
+				}
+				if (this.activeCart.cartId == 0) {
+					// console.log("This is a default cart");
+					// console.log(cartItemToAdd);
+					this.activeCart.cartItems.push(cartItemToAdd);
+					sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
+					sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+					sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId));
+				} else {
+					// console.log("this is not a default cart.")
+					this.cartItemService.addCartItem(cartItemToAdd).subscribe(
+						cartItem => {
+							// console.log("I updated the backend");
+							this.activeCart.cartItems.push(cartItem);
+							sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));
+							sessionStorage.setItem('activecartId', JSON.stringify(this.activeCart.cartId));
+						}
+					);
+				}
+			}
+			this.activeModal.dismiss('Put items in cart');
 		} else {
-			// this.modalService.dismissAll();
-			this.quantity.setValue(this.localQuantity);
-			this.negativeQ = true;
-			// alert("Insufficient inventory.");
+			this.modalService.dismissAll();
+			this.product.quantity = this.localQuantity;
+			alert("Insufficient inventory.");
 		}
-	}
-
-	setUpProductToShare(): Product {
-		return {
-			id: this.updateProduct.get('id').value,
-			name: this.updateProduct.get('name').value,
-			description: this.updateProduct.get('description').value,
-			brand: this.updateProduct.get('brand').value,
-			model: this.updateProduct.get('model').value,
-			category: this.updateProduct.get('category').value,
-			image: this.updateProduct.get('image').value,
-			quantity: this.updateProduct.get('quantity').value,
-			unitPrice: this.updateProduct.get('unitPrice').value,
-			color: this.updateProduct.get('color').value
-		}
-	}
-
-	callShare() {
-		this.shareItem.shareItems.subscribe(res => console.log(res));
 	}
 
 	updateItem() {

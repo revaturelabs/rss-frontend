@@ -3,17 +3,14 @@ import { Product } from '../../class/product/product';
 import { InventoryService } from '../../service/inventory.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import {
-	SortableDirective,
-	SortEvent,
-} from '../../directives/sortable.directive';
+import { SortableDirective, SortEvent } from '../../directives/sortable.directive';
 import { SortService } from '../../service/sort.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
-import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/interfaces/user';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
@@ -25,6 +22,7 @@ export class InventoryListComponent implements OnInit {
 
 	// Change application view (admin/customer)
 	userType: string = "admin";
+	currentUser: User
 
 	products$: Observable<Product[]>;
 	total$: Observable<number>;
@@ -42,8 +40,9 @@ export class InventoryListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		// this.userType = environment.admin ? 'admin' : 'customer';
-		this.userType = this.userService.getCurrentUser().admin ? 'admin' : 'customer';
+		this.currentUser = this.userService.getCurrentUser();
+		this.userType = this.currentUser.admin ? 'admin' : 'customer';
+		// console.log(this.userType);
 	}
 
 	// FOR ADMIN

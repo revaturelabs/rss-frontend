@@ -26,6 +26,7 @@ import { AdminInventoryComponent } from './Admin/admin-inventory/admin-inventory
 import { AddQuizComponent } from './Quiz/admin/add-quiz/add-quiz.component';
 import { EditQuizComponent } from './Quiz/admin/edit-quiz/edit-quiz.component';
 import { QuizFormComponent } from './Quiz/admin/quiz-form/quiz-form.component';
+import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
 import { SESSION_STORAGE } from 'ngx-webstorage-service';
 import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 
@@ -53,6 +54,7 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
     AddQuizComponent,
     EditQuizComponent,
     QuizFormComponent,
+    SelectCartComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
     UserService,
+    SelectCartComponent
   ],
   bootstrap: [AppComponent],
 })

@@ -38,7 +38,7 @@
 }
 
 
-
+/* ....................cart stuff on the left...................... */
 
 .checkout-div {
 }
@@ -59,11 +59,13 @@
 .img-large {
     width: 100px;
     height: 100px;
+    
 }
 
 .img-large:hover {
     transform: scale(1.05);
     box-shadow: 2px 2px 8px #474C55;
+    cursor: pointer;
 }
 
 
@@ -86,17 +88,20 @@
 }
 
 .item-div {
-    width: 70%;
+    /* width: 70%; */
+    background-color: #aab1bd;
+    border-radius: 4px;
+    padding: 4px;
 }
 
 .item-div-small {
     width: 100%;
+    background-color: #aab1bd;
+    border-radius: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 4px;
 }
-
-/* .item-mobile-check {
-    display: flex;
-    flex-direction: column;
-} */
 
 /* ...................checkout........................ */
 
@@ -125,4 +130,11 @@
 
 #pointsCard {
     padding: 6px;
+}
+
+.save-delete {
+    /* border: 2px solid #474C55; */
+    background-color: #aab1bd;
+    border-radius: 4px;
+    padding: 4px;
 }

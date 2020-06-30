@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShoppingCartComponent } from './shopping-cart.component';
+import { SelectCartComponent } from './select-cart.component';
 import { HttpClientModule } from '@angular/common/http';
 
-fdescribe('ShoppingCartComponent', () => {
-  let component: ShoppingCartComponent;
-  let fixture: ComponentFixture<ShoppingCartComponent>;
+fdescribe('SelectCartComponent', () => {
+  let component: SelectCartComponent;
+  let fixture: ComponentFixture<SelectCartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [ShoppingCartComponent]
+      declarations: [SelectCartComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShoppingCartComponent);
+    fixture = TestBed.createComponent(SelectCartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

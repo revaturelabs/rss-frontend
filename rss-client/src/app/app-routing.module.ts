@@ -9,6 +9,10 @@ import { LandingPageComponent } from './LandingPage/components/landing-page/land
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
+import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
+import { AddItemComponent } from './app-inventory/components/add-item/add-item.component';
+import { InventoryListComponent } from './app-inventory/components/inventory-list/inventory-list.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -21,6 +25,9 @@ const routes: Routes = [
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'selectcart', component: SelectCartComponent },
+  { path: 'add-item', component: AddItemComponent },
+  { path: 'inventory-list', component: InventoryListComponent }
 ];
 
 @NgModule({

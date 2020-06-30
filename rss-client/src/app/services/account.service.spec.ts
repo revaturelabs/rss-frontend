@@ -7,19 +7,19 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user';
 import { Account } from '../interfaces/account'
 
-let httpClientSpy : {get : jasmine.Spy};
-let accountService : AccountService;
+let httpClientSpy: { get: jasmine.Spy };
+let accountService: AccountService;
 
 beforeEach(() => {
   //spy on the methods here
   httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-  accountService = new AccountService(<any> httpClientSpy);
+  accountService = new AccountService(<any>httpClientSpy);
 });
 
 it('should return expected accounts', () => {
-  const expectedAccounts : Account[] = 
-    [{  accId: 1, userId: 1, accTypeId: 1, points: 20},
-      {  accId: 2, userId: 1, accTypeId: 2, points: 0}];
+  const expectedAccounts: Account[] =
+    [{ accId: 1, userId: 1, accTypeId: 1, points: 20 },
+    { accId: 2, userId: 1, accTypeId: 2, points: 0 }];
 
   httpClientSpy.get.and.returnValue(of(expectedAccounts));
 

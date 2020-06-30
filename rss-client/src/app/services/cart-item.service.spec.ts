@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
 import { CartItemService } from './cart-item.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('CartItemService', () => {
+fdescribe('CartItemService', () => {
   let service: CartItemService;
 
   beforeEach(() => {

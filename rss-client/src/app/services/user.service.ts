@@ -1,6 +1,6 @@
 import { Injectable, Inject, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Store } from '@ngrx/store';
 import {
@@ -34,6 +34,10 @@ export class UserService {
   };
 
   //user controller
+  loginMock(log): Observable<User> {
+    return of(this.user)
+  }
+
   login(log): Observable<User> {
     return this.httpclient.post<any>(
       this.url + '/login',
@@ -73,15 +77,34 @@ export class UserService {
   }
 
   isLoggedIn = false;
+  // user: User = {
+  //   userId: 2021,
+  //   email: '',
+  //   password: '',
+  //   profilePic: null,
+  //   firstName: 'test',
+  //   lastName: 'testerson',
+  //   admin: false
+  // };
   user: User = {
-    userId: 0,
+    userId: 2021,
     email: '',
     password: '',
     profilePic: null,
-    firstName: '',
-    lastName: '',
-    admin: false,
+    firstName: 'admin',
+    lastName: 'admin',
+    admin: true
   };
+  // user: User = {
+  //   userId: 2022,
+  //   email: 'admin',
+  //   password: 'admin',
+  //   profilePic: null,
+  //   firstName: 'admin',
+  //   lastName: 'admin',
+  //   admin: true,
+  //   userCartIds: []
+  // };
   changeUser(user: User) {
     this.isLoggedIn = true;
     this.user = user;
@@ -97,7 +120,7 @@ export class UserService {
   logout() {
     this.isLoggedIn = false;
     this.storage.set(STORAGE_KEY, undefined);
-
+    sessionStorage.clear();
     window.location.reload();
   }
 

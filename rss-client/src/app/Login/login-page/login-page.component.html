@@ -2,42 +2,23 @@
   <div class="formCol col-5 offset-3">
     <h3>Login Here</h3>
     <br />
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
       <div class="form-group">
         <label for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          formControlName="email"
-          aria-describedby="emailHelp"
-        />
+        <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" />
         <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
           <div *ngIf="email.errors.required">Email is required</div>
         </div>
       </div>
       <div class="form-group">
         <label for="password">Password </label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          formControlName="password"
-        />
-        <div
-          *ngIf="password.touched && password.invalid"
-          class="alert alert-danger"
-        >
+        <input type="password" class="form-control" id="password" formControlName="password" />
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
           <div *ngIf="password.errors.required">password is required</div>
         </div>
       </div>
-      <button
-        [disabled]="!loginForm.valid"
-        type="submit"
-        (click)="submitForm()"
-        class="btn"
-        style="color: white; background-color: #f26925;"
-      >
+      <button [disabled]="!loginForm.valid" type="submit" (click)="submitForm()" class="btn"
+        style="color: white; background-color: #f26925;">
         Submit
       </button>
     </form>
