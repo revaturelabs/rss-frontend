@@ -108,7 +108,7 @@
         type="submit"
         [disabled]="!userProfileForm.valid"
         (click)="submitForm()"
-        class="btn btn-primary"
+        class="btn"
         style="background-color: #f26925;"
       >
         Update Changes
@@ -122,7 +122,7 @@
           <button
             *ngIf="!evalAccount"
             type="submit"
-            class="m-2 btn btn-success"
+            class="m-2 btn"
             (click)="createAccount('Eval')"
             style="background-color: #f26925;"
           >
@@ -142,7 +142,7 @@
           <button
             *ngIf="!bugAccount"
             type="submit"
-            class="m-2 btn btn-success"
+            class="m-2 btn"
             (click)="createAccount('Bug')"
             style="background-color: #f26925;"
           >
@@ -166,8 +166,9 @@
                   formControlName="confirmPass"
                 />
                 <button
-                  class="btn btn-primary"
+                  class="btn"
                   (click)="compareAndChangePassword()"
+                  style="background-color: #f26925;"
                 >
                   Change Password
                 </button>
