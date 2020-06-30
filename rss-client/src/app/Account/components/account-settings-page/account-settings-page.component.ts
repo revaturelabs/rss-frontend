@@ -40,7 +40,7 @@ export class AccountSettingsPageComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private parent: AppComponent
-  ) { }
+  ) {}
 
   selectedFile: string;
   imagePreview: any;
@@ -64,6 +64,7 @@ export class AccountSettingsPageComponent implements OnInit {
     this.imageservice.uploadImage(this.user.userId, arr[1]).subscribe();
     this.user.profilePic = arr[1];
     this.userservice.changeProfilePic(this.user);
+    window.alert('Updated picture');
   }
 
   ngOnInit(): void {
@@ -125,7 +126,8 @@ export class AccountSettingsPageComponent implements OnInit {
 
   async submitForm() {
     const formValue = this.userProfileForm.value;
-    this.userservice.updateInfo(formValue).subscribe((res) => { });
+    window.alert('Updated account information');
+    this.userservice.updateInfo(formValue).subscribe((res) => {});
   }
 
   createAccount(event) {
@@ -137,7 +139,7 @@ export class AccountSettingsPageComponent implements OnInit {
       this.myAccount.accTypeId = this.accounts[0].accTypeId;
       this.myAccount.userId = this.userservice.userPersistance().userId;
     }
-    this.accountService.createAccount(this.myAccount).subscribe((res) => { });
+    this.accountService.createAccount(this.myAccount).subscribe((res) => {});
     //window.location.reload();
   }
 
