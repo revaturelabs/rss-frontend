@@ -50,10 +50,11 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     // set the default cart to be selected
     // console.log(this.cartService.isCartSelected());
 
-    try {
+    if (sessionStorage.getItem('activecartId')) {
       this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
-    } catch (error) {
-      console.log(error);
+    } else {
+      this.activeCartId = 0;
+      sessionStorage.setItem("activecartId", `${this.activeCartId}`);
     }
 
     // This gets a list of carts that the user has and stores it
@@ -75,9 +76,11 @@ export class SelectCartComponent implements OnInit, OnDestroy {
 
   getProductById(id: number): Product {
     this.product = this.noProduct;
-    for (let product of this.products) {
-      if (product.id == id) {
-        this.product = product;
+    if (this.products) {
+      for (let product of this.products) {
+        if (product.id == id) {
+          this.product = product;
+        }
       }
     }
     return this.product;

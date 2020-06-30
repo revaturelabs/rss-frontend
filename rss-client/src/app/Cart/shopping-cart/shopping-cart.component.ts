@@ -35,6 +35,18 @@ export class ShoppingCartComponent implements OnInit {
   userAccountRecord: Record<number, Account> = {};
   totalPointCost: number = 0;
   successfulPurchase: boolean = false;
+  noProduct: Product = {
+    id: 0,
+    name: "No Name",
+    description: "No product found",
+    brand: "No brand",
+    model: "No model",
+    category: "No category",
+    image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
+    quantity: NaN,
+    unitPrice: NaN,
+    color: "N/A"
+  }
 
 
   constructor(
@@ -105,10 +117,12 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getProductById(id: number) {
-    this.product = null;
-    for (let product of this.products) {
-      if (product.id == id) {
-        this.product = product;
+    this.product = this.noProduct;
+    if (this.products) {
+      for (let product of this.products) {
+        if (product.id == id) {
+          this.product = product;
+        }
       }
     }
     return this.product;
@@ -151,7 +165,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteItem(cartItem: CartItem) {
-    console.log(cartItem);
+    // console.log(cartItem);
     this.ciService.deleteCartItem(cartItem).subscribe(
       result => {
         const index = this.activeCart.cartItems.indexOf(cartItem);
@@ -159,7 +173,7 @@ export class ShoppingCartComponent implements OnInit {
           this.activeCart.cartItems.splice(index, 1);
           // console.log(index);
           sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
-          console.log(sessionStorage);
+          // console.log(sessionStorage);
           this.getTotalPointCost();
         }
       }
@@ -185,16 +199,16 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.cartService.deleteCartWithId(this.activeCart.cartId).subscribe(
         resp => {
-          console.log(resp);
+          // console.log(resp);
           if ([200, 201, 202].includes(resp.status)) {
             let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
             // splice out this cart from the user's cart array
             if (index > -1) {
               this.currentUser.userCartIds.splice(index, 1);
-              console.log(this.currentUser.userCartIds + " front after");
+              // console.log(this.currentUser.userCartIds + " front after");
             }
             sessionStorage.removeItem("activecartId");
-            console.log(sessionStorage.getItem("activecartId") === null);
+            // console.log(sessionStorage.getItem("activecartId") === null);
             if (path == "") {
               alert("Purchase Successful!");
             }
@@ -214,11 +228,7 @@ export class ShoppingCartComponent implements OnInit {
         let ciProduct: Product = this.getProductById(cItem.productId);
         if (cItem.quantity <= ciProduct.quantity) {
           ciProduct.quantity -= cItem.quantity;
-          if (ciProduct.quantity > 0) {
-            newProductRecord[ciProduct.id] = ciProduct;
-          } else {
-            terminatePurchase = true;
-          }
+          newProductRecord[ciProduct.id] = ciProduct;
         } else {
           let properVerb: string;
           ciProduct.quantity == 1 ? properVerb = "is" : properVerb = "are";
@@ -313,8 +323,8 @@ export class ShoppingCartComponent implements OnInit {
       };
       this.cartService.addCart(cartToSave).subscribe(
         (generatedCart) => {
-          console.log(generatedCart);
-          console.log(this.activeCart.cartItems);
+          // console.log(generatedCart);
+          // console.log(this.activeCart.cartItems);
           for (let cItem of this.activeCart.cartItems) {
             let tempCartItem = {
               cartItemId: -1,
@@ -322,7 +332,7 @@ export class ShoppingCartComponent implements OnInit {
               productId: cItem.productId,
               quantity: cItem.quantity
             }
-            console.log(tempCartItem);
+            // console.log(tempCartItem);
             this.ciService.addCartItem(tempCartItem).subscribe(
               resp => this.router.navigate(["selectcart"]));
           }
@@ -331,6 +341,7 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  // Do in the near future. Show product details when clicking image.
   productDetails(id: number): any {
     // ask max for url to product details
 
@@ -339,11 +350,5 @@ export class ShoppingCartComponent implements OnInit {
     console.log(id);
     // this.router.navigate([detailsURL]);
   }
-
-  // UPDATE
-  // updateCart(cart: Cart): Observable<Cart> {
-  //   return of(cart);
-  // return this.http.put<Cart>(this.baseURL, cart);
-  // }
 
 }

@@ -22,6 +22,7 @@
                                             (click)="productDetails(cItem.productId)" />
                                         <div class="d-flex flex-column" style="text-align: right;">
                                             <h2>{{product.name}}</h2>
+                                            <h5>{{product.quantity}} left</h5>
                                             <h3>{{product.unitPrice}} Points</h3>
                                         </div>
                                     </td>
@@ -59,8 +60,9 @@
                                         (click)="productDetails(cItem.productId)" />
                                 </td>
                                 <td class="align-bottom">
-                                    <h2>{{getProductById(cItem.productId).name}}</h2>
-                                    <h3>{{getProductById(cItem.productId).unitPrice}} Points</h3>
+                                    <h2>{{product.name}}</h2>
+                                    <h5>{{product.quantity}} left</h5>
+                                    <h3>{{product.unitPrice}} Points</h3>
                                 </td>
 
                                 <td class="align-bottom quantity-large">
@@ -101,8 +103,8 @@
                             <td class="align-bottom img-frame">
                                 <img class="img-small" src="{{getProductById(cItem.productId).image}}" />
                             </td>
-                            <td class="align-bottom"><b>{{getProductById(cItem.productId).name}}</b></td>
-                            <td class="align-bottom">{{getProductById(cItem.productId).unitPrice}} Points</td>
+                            <td class="align-bottom"><b>{{product.name}}</b></td>
+                            <td class="align-bottom">{{product.unitPrice}} Points</td>
                         </tr>
                     </table>
                 </div>
