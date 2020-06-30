@@ -3,7 +3,13 @@
   <div class="list-group">
     <a
       class="list-group-item list-group-item-action"
-      style="background-color: #f26925; color:white; text-align: center; font-size: x-large; font-weight: bold;"
+      style="
+        background-color: #f26925;
+        color: white;
+        text-align: center;
+        font-size: x-large;
+        font-weight: bold;
+      "
     >
       Select a Quiz to Edit
     </a>
@@ -29,7 +35,11 @@
     </div>
     <div class="col-4 row">
       <div class="col-6">
-        <button class="btn btn-block" style="background-color: #f26925; color: white;" (click)="onBack()">
+        <button
+          class="btn btn-block"
+          style="background-color: #f26925; color: white;"
+          (click)="onBack()"
+        >
           Cancel
         </button>
       </div>
@@ -37,7 +47,8 @@
         <button
           [disabled]="!isValid"
           (click)="submitChanges()"
-          class="btn btn-block" style="background-color: #f26925; color: white;"
+          class="btn btn-block"
+          style="background-color: #f26925; color: white;"
         >
           Save
         </button>
@@ -68,7 +79,7 @@
   </div>
 
   <div class="border">
-    <div style="background-color: #474C55;">
+    <div style="background-color: #474c55;">
       <div class="text-white form-group">
         <h2 style="text-align: center;">Questions</h2>
       </div>
@@ -100,13 +111,13 @@
             (click)="open(content, item)"
             class="btn btn-outline-success col-2"
           >
-            edit
+            Edit
           </button>
           <button
             (click)="open(content2, item)"
             class="btn btn-outline-danger col-2"
           >
-            rem
+            Delete
           </button>
           <div class="col-6">{{ item.question | slice: 0:50 }}...</div>
           <div class="col-2 text-right">{{ item.questionValue }} pts</div>
