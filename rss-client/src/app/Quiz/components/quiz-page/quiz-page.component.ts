@@ -32,7 +32,7 @@ export class QuizPageComponent implements OnInit {
     private parent: AppComponent,
     private userservice: UserService,
     private accountService: AccountService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
@@ -42,16 +42,13 @@ export class QuizPageComponent implements OnInit {
         }
       });
     });
-    this.quizservice.getUserScores(this.user.email).subscribe(res => {
-      console.log(res);
+    this.quizservice.getUserScores(this.user.email).subscribe((res) => {
       if (res.length == 0) {
         this.quizzesTaken.push(0);
-        console.log(this.quizzesTaken)
       } else {
         this.quizzesTaken = res;
-        console.log(this.quizzesTaken)
       }
-    })
+    });
     this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
   }
   ngAfterViewInit() {
