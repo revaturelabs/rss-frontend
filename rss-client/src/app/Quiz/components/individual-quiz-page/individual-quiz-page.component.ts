@@ -11,7 +11,28 @@ import { LowerCasePipe, TitleCasePipe } from '@angular/common';
   styleUrls: ['./individual-quiz-page.component.css'],
 })
 export class IndividualQuizPageComponent implements OnInit {
-  @Input() config;
+  @Input() config = {
+    creatorEmail: '',
+    quizDescription: '',
+    quizId: 0,
+    quizTopic: '',
+    subject: { subjectId: 0, subjectName: '' },
+    subjectId: 0,
+    questions: [
+      {
+        option1: null,
+        option2: null,
+        option3: null,
+        option4: null,
+        option5: null,
+        question: null,
+        questionId: 0,
+        questionValue: 0,
+        selectedAnswer: null,
+        userEmail: null,
+      },
+    ],
+  };
 
   results: {
     totalQuestions: 0;
@@ -62,6 +83,8 @@ export class IndividualQuizPageComponent implements OnInit {
         'quizzes',
         'quizzes/' + this.id,
       ];
+
     }, 2000);
+
   }
 }
