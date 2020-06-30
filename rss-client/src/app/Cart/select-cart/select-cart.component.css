@@ -44,22 +44,30 @@ a:hover {
 .downarrow {
     height: 40px;
     width: 40px;
+    font-size: 40px;
+    color: #F26925;
 }
 
 .downarrow:hover {
     transform: scale(1.05);
     cursor: pointer;
+    font-size: 40px;
+    filter: brightness(0%);
 }
 
 .uparrow {
     transform: rotate(180deg);
     height: 40px;
     width: 40px;
+    font-size: 40px;
+    color: #F26925;
 }
 
 .uparrow:hover {
     transform: scale(1.05) rotate(180deg);
     cursor: pointer;
+    font-size: 40px;
+    filter: brightness(0%);
 }
 
 .cart-button-holder {

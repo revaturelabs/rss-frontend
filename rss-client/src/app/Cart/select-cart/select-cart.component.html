@@ -15,8 +15,9 @@
                         <div class="d-flex align-items-end justify-content-between cart-title">
                             <h3>{{cart.name}}</h3>
                             <a href='#cartDetails-{{cart.cartId}}' (click)="toggleArrow($event)" data-toggle="collapse">
-                                <img src="assets/Images/dropdown.png" id="arrow-{{cart.cartId}}" class="downarrow"
-                                    type="button" alt="details">
+                                <!-- <img src="assets/Images/dropdown.png" id="arrow-{{cart.cartId}}" class="downarrow"
+                                    type="button" alt="details"> -->
+                                    <em class="fas fa-caret-square-down downarrow" id="arrow-{{cart.cartId}}"></em>
                             </a>
                         </div>
                         <div class="collapse" id="cartDetails-{{cart.cartId}}">
