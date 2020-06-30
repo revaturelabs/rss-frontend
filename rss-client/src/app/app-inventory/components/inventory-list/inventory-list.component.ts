@@ -4,8 +4,8 @@ import { InventoryService } from '../../service/inventory.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
-  SortableDirective,
-  SortEvent,
+	SortableDirective,
+	SortEvent,
 } from '../../directives/sortable.directive';
 import { SortService } from '../../service/sort.service';
 
@@ -14,11 +14,12 @@ import { InventoryItemComponent } from '../inventory-item/inventory-item.compone
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/services/user.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
-  selector: 'app-inventory-list',
-  templateUrl: './inventory-list.component.html',
-  styleUrls: ['./inventory-list.component.css'],
+	selector: 'app-inventory-list',
+	templateUrl: './inventory-list.component.html',
+	styleUrls: ['./inventory-list.component.css'],
 })
 export class InventoryListComponent implements OnInit {
 
@@ -35,7 +36,8 @@ export class InventoryListComponent implements OnInit {
 		private inventoryService: InventoryService,
 		public service: SortService,
 		private modalService: NgbModal,
-		private userService: UserService) {
+		private userService: UserService,
+		private parent: AppComponent) {
 		this.getAllProducts();
 	}
 
@@ -95,5 +97,12 @@ export class InventoryListComponent implements OnInit {
 
 	receiveDelete($event) {
 		this.deleteItem($event);
+	}
+
+	ngAfterViewInit() {
+		setTimeout(() => {
+			this.parent.breadcrumbs = ['Admin', 'Inventory'];
+			this.parent.routerCrumbs = ['admin', 'inventory'];
+		});
 	}
 }

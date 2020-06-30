@@ -63,7 +63,7 @@ export class AccountSettingsPageComponent implements OnInit {
     let arr = this.selectedFile.split(',');
     this.imageservice.uploadImage(this.user.userId, arr[1]).subscribe();
     this.user.profilePic = arr[1];
-    this.userservice.changeUser(this.user);
+    this.userservice.changeProfilePic(this.user);
   }
 
   ngOnInit(): void {
@@ -79,6 +79,7 @@ export class AccountSettingsPageComponent implements OnInit {
       confirmPass: new FormControl('', Validators.required),
     });
     this.getUser();
+    this.editForm();
 
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
       res.forEach((x) => {
@@ -101,12 +102,12 @@ export class AccountSettingsPageComponent implements OnInit {
   getUser() {
     this.user = this.userservice.userPersistance();
   }
-  editForm(user: User) {
+  editForm() {
     this.userProfileForm.patchValue({
-      userId: user.userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
+      userId: this.user.userId,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email,
     });
   }
   get userId() {

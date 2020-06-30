@@ -97,13 +97,14 @@
     </button>
   </div>
   <div class="modal-body">
-    <button class="btn btn-outline-success" (click)="modal.close('Save click')">
+    <button class="btn" (click)="modal.close('Save click')" style="background-color: #f26925;">
       Submit
     </button>
     <button
-      class="btn btn-outline-secondary"
+      class="btn"
       aria-label="Close"
       (click)="modal.dismiss('Cross click')"
+      style="background-color: #f26925;"
     >
       Cancel
     </button>
@@ -111,7 +112,7 @@
 </ng-template>
 
 <div class="row justify-content-end">
-  <button class="col-3 btn btn-lg btn-outline-success" (click)="open(content)">
+  <button class="col-3 btn btn-lg" (click)="open(content)" style="background-color: #f26925;">
     Submit
   </button>
 </div>

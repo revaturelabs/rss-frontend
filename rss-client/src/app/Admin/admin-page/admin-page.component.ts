@@ -10,7 +10,7 @@ import { AppComponent } from 'src/app/app.component';
 export class AdminPageComponent implements OnInit {
   view;
   user;
-  constructor(private userservice: UserService, private parent: AppComponent) {}
+  constructor(private userservice: UserService, private parent: AppComponent) { }
 
   ngOnInit(): void {
     this.user = this.userservice.userPersistance();
