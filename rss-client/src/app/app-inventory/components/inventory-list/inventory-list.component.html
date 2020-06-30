@@ -6,6 +6,10 @@
 			Product Search: <input class="form-control ml-2" type="text" name="searchTerm"
 				[(ngModel)]="service.searchTerm" />
 			<span class="m-4" *ngIf="service.loading$ | async">Loading...</span>
+			<div *ngIf="userType === 'admin'">
+				<button class="btn btn-outline-orange float-right ml-3" routerLink="/admin">New Item
+					<em class="fas fa-plus"></em></button>
+			</div>
 		</div>
 
 		<!-- TABLE -->

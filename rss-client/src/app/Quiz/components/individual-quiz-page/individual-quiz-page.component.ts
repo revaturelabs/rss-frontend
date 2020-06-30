@@ -13,6 +13,12 @@ import { LowerCasePipe, TitleCasePipe } from '@angular/common';
 export class IndividualQuizPageComponent implements OnInit {
   @Input() config;
 
+  results: {
+    totalQuestions: 0;
+    correctAnswers: 0;
+    totalPoints: 0;
+  };
+
   subjectPicture;
   instructions = [];
   //options are pre-test, in-progress, post-test
