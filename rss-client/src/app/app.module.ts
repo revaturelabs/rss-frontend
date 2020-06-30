@@ -30,8 +30,6 @@ import { SESSION_STORAGE } from 'ngx-webstorage-service';
 import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
-import { AddItemComponent } from "../app/app-inventory/components/add-item/add-item.component";
-import { InventoryListComponent } from "../app/app-inventory/components/inventory-list/inventory-list.component";
 
 @NgModule({
   declarations: [
