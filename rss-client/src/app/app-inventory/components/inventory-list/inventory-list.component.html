@@ -7,7 +7,10 @@
 				[(ngModel)]="service.searchTerm" />
 			<span class="m-4" *ngIf="service.loading$ | async">Loading...</span>
 		</div>
-
+		<div>
+			<button class="btn btn-outline-orange my-2" *ngIf="currentUser.admin" routerLink="/add-item">Add
+				Item</button>
+		</div>
 		<!-- TABLE -->
 		<table class="table table-striped table-sm table-responsive-xl">
 			<caption>List of Products</caption>
@@ -46,7 +49,7 @@
 						<ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm"></ngb-highlight>
 					</td>
 					<td>
-						<ngb-highlight [result]="product.unitPrice | currency" [term]="service.searchTerm">
+						<ngb-highlight [result]="product.unitPrice | number" [term]="service.searchTerm">
 						</ngb-highlight>
 					</td>
 					<td>

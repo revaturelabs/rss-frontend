@@ -20,13 +20,13 @@ export class AccountService {
       accId: 0,
       userId: userId,
       accTypeId: 0,
-      points: 1000
+      points: 10000
     }
     let bugBounty: Account = {
       accId: 1,
       userId: userId,
       accTypeId: 1,
-      points: 2000
+      points: 20000
     }
     return [account, bugBounty];
   }

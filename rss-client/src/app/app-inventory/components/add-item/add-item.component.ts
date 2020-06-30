@@ -28,9 +28,9 @@ export class AddItemComponent implements OnInit {
 
 	// Adds an item to inventory and route to inventory list
 	addItem() {
-		console.log("addItem() called.");
+		// console.log("addItem() called.");
 
-		console.log(this.product);
+		// console.log(this.product);
 
 		this.inventoryService.addProduct(this.product).subscribe(data => {
 			this.router.navigate(['/inventory-list'])
