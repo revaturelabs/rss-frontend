@@ -87,14 +87,24 @@ export class UserService {
   //   admin: false
   // };
   user: User = {
-    userId: 2022,
-    email: 'admin',
-    password: 'admin',
+    userId: 2021,
+    email: '',
+    password: '',
     profilePic: null,
     firstName: 'admin',
     lastName: 'admin',
     admin: true
   };
+  // user: User = {
+  //   userId: 2022,
+  //   email: 'admin',
+  //   password: 'admin',
+  //   profilePic: null,
+  //   firstName: 'admin',
+  //   lastName: 'admin',
+  //   admin: true,
+  //   userCartIds: []
+  // };
   changeUser(user: User) {
     this.isLoggedIn = true;
     this.user = user;

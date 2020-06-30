@@ -82,7 +82,7 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.activeCart = null;
     }
-    console.log(this.activeCart);
+    // console.log(this.activeCart);
 
 
     // var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
@@ -169,7 +169,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteItem(cartItem: CartItem) {
-    console.log(cartItem);
+    // console.log(cartItem);
     if (cartItem.cartItemId >= 0) {
       this.ciService.deleteCartItem(cartItem).subscribe(
         result => {
@@ -214,7 +214,7 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.cartService.deleteCartWithId(this.activeCart.cartId).subscribe(
         resp => {
-          console.log(resp);
+          // console.log(resp);
           if ([200, 201, 202].includes(resp.status)) {
             // let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
             // // splice out this cart from the user's cart array
@@ -223,7 +223,7 @@ export class ShoppingCartComponent implements OnInit {
             //   console.log(this.currentUser.userCartIds + " front after");
             // }
             sessionStorage.removeItem("activecartId");
-            console.log(sessionStorage.getItem("activecartId") === null);
+            // console.log(sessionStorage.getItem("activecartId") === null);
             if (path == "") {
               alert("Purchase Successful!");
             }
@@ -243,11 +243,7 @@ export class ShoppingCartComponent implements OnInit {
         let ciProduct: Product = this.getProductById(cItem.productId);
         if (cItem.quantity <= ciProduct.quantity) {
           ciProduct.quantity -= cItem.quantity;
-          if (ciProduct.quantity > 0) {
-            newProductRecord[ciProduct.id] = ciProduct;
-          } else {
-            terminatePurchase = true;
-          }
+          newProductRecord[ciProduct.id] = ciProduct;
         } else {
           let properVerb: string;
           ciProduct.quantity == 1 ? properVerb = "is" : properVerb = "are";
@@ -371,19 +367,14 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  // Do in the near future. Show product details when clicking image.
   productDetails(id: number): any {
     // ask max for url to product details
 
     // let detailsURL: string = "http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/product/" + id;
 
-    console.log(id);
+    // console.log(id);
     // this.router.navigate([detailsURL]);
   }
-
-  // UPDATE
-  // updateCart(cart: Cart): Observable<Cart> {
-  //   return of(cart);
-  // return this.http.put<Cart>(this.baseURL, cart);
-  // }
 
 }

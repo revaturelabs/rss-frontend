@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
-import { environment } from "../../../../environments/environment";
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 

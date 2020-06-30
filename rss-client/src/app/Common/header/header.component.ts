@@ -22,9 +22,9 @@ export class HeaderComponent implements OnInit {
     private parent: AppComponent,
     private userservice: UserService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onHome() {
     this.parent.breadcrumbs = [];
