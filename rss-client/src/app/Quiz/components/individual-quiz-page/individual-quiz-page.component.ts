@@ -62,6 +62,6 @@ export class IndividualQuizPageComponent implements OnInit {
         'quizzes',
         'quizzes/' + this.id,
       ];
-    });
+    }, 2000);
   }
 }
