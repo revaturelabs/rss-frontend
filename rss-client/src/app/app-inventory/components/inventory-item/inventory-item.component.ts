@@ -27,6 +27,8 @@ export class InventoryItemComponent implements OnInit {
 
 	nProduct: Product = new Product();
 
+	negativeQ: boolean = false;
+
 	updateProduct: FormGroup;
 
 	get name() { return this.updateProduct.get('name') }
@@ -82,8 +84,8 @@ export class InventoryItemComponent implements OnInit {
 
 	reduceInventory() {
 		let quantityLeft = this.localQuantity - this.quantity.value;
-		// console.log(this.quantity.value)
-		if (quantityLeft >= 0) {
+		console.log(quantityLeft);
+		if (quantityLeft >= 0 && this.quantity.value >= 0) {
 			// console.log(this.activeCart);
 			// Copy the active cart for establishing ownership in the backend
 			let activeCartCopy: Cart = {
@@ -164,9 +166,10 @@ export class InventoryItemComponent implements OnInit {
 			}
 			this.activeModal.dismiss('Put items in cart');
 		} else {
-			this.modalService.dismissAll();
-			this.product.quantity = this.localQuantity;
-			alert("Insufficient inventory.");
+			// this.modalService.dismissAll();
+			this.quantity.setValue(this.localQuantity);
+			this.negativeQ = true;
+			// alert("Insufficient inventory.");
 		}
 	}
 
