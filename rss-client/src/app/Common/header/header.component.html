@@ -18,10 +18,10 @@
         </li>
 
         <!-- temporary links -->
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!currentUser.admin">
           <a class="nav-link" routerLink="/cart">Cart</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!currentUser.admin">
           <a class="nav-link" routerLink="/selectcart">Select Cart</a>
         </li>
 

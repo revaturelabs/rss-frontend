@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
-import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { AppComponent } from 'src/app/app.component';
 
@@ -17,15 +16,13 @@ export class AddItemComponent implements OnInit {
 
 	userType: string = 'customer';
 	product: Product;
-	currentUser: User;
 
 	constructor(private http: HttpClient, private router: Router, private inventoryService: InventoryService,
 		private userService: UserService, private parent: AppComponent, private location: Location) { }
 
 	ngOnInit(): void {
 		this.product = new Product();
-		this.currentUser = this.userService.getCurrentUser();
-		this.userType = this.currentUser.admin ? 'admin' : 'customer';
+		this.userType = this.userService.getCurrentUser().admin ? 'admin' : 'customer';
 	}
 
 	// Adds an item to inventory and route to inventory list
@@ -40,9 +37,5 @@ export class AddItemComponent implements OnInit {
 			this.parent.breadcrumbs = ['Admin', 'Inventory', 'Add-Item'];
 			this.parent.routerCrumbs = ['admin', 'inventory', 'inventory/add-item'];
 		});
-	}
-
-	goBack() {
-		this.location.back();
 	}
 }

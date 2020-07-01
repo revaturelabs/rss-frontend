@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user';
 import { Account } from '../interfaces/account'
 
-let httpClientSpy: { get: jasmine.Spy };
-let accountService: AccountService;
+let httpClientSpy : {get: jasmine.Spy};
+let accountService : AccountService;
 
 beforeEach(() => {
   //spy on the methods here

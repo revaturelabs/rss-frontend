@@ -10,7 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/interfaces/user';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
@@ -22,7 +21,6 @@ export class InventoryListComponent implements OnInit {
 
 	// Change application view (admin/customer)
 	userType: string = "admin";
-	currentUser: User
 
 	products$: Observable<Product[]>;
 	total$: Observable<number>;
@@ -40,9 +38,7 @@ export class InventoryListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.currentUser = this.userService.getCurrentUser();
-		this.userType = this.currentUser.admin ? 'admin' : 'customer';
-		// console.log(this.userType);
+		this.userType = this.userService.getCurrentUser().admin ? 'admin' : 'customer';
 	}
 
 	// FOR ADMIN
