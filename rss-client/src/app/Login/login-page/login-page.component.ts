@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { Statement } from '@angular/compiler';
+import { CheaterService } from 'src/app/services/cheater.service';
 
 @Component({
   selector: 'login-page',
@@ -25,7 +26,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private cheaterService: CheaterService
   ) { }
 
   ngOnInit(): void {
