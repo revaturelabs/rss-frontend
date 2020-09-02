@@ -43,6 +43,7 @@ export class CheaterService {
           if (!from || from.nodeName == 'HTML') {
             // the cursor has left the building
             console.log('If you change tabs or windows, this quiz will be invalid.');
+            this.leftTab.next(true);
           }
         });
         // Add an event listener for when the user deliberately changes tabs.
@@ -59,10 +60,10 @@ export class CheaterService {
           }
         });
         this.addEvent(document,'focus', (e) => {
-          console.log(document.activeElement.tagName + ' active');
+          console.log(document.activeElement.tagName + ' focused');
         });
         this.addEvent(document,'blur', (e) => {
-          console.log(document.activeElement.tagName + ' active');
+          console.log(document.activeElement.tagName + ' blurred');
         });
       }
   }
