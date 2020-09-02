@@ -42,21 +42,27 @@ export class CheaterService {
           const from = e.relatedTarget || e.toElement;
           if (!from || from.nodeName == 'HTML') {
             // the cursor has left the building
-            alert('If you change tabs or windows, this quiz will be invalid.')
+            console.log('If you change tabs or windows, this quiz will be invalid.');
           }
         });
         // Add an event listener for when the user deliberately changes tabs.
         this.addEvent(document, this.visibilityChange, () => {
           if (document.hidden) {
-            alert('Tab left, quiz void');
+            console.log('Tab left, quiz void');
             this.leftTab.next(true);
           }
         });
 
         this.addEvent(document,'keydown', (e) => {
           if (e.altKey){
-            alert('Stop pressing Alt!');
+            console.log('Stop pressing Alt!');
           }
+        });
+        this.addEvent(document,'focus', (e) => {
+          console.log(document.activeElement.tagName + ' active');
+        });
+        this.addEvent(document,'blur', (e) => {
+          console.log(document.activeElement.tagName + ' active');
         });
       }
   }
