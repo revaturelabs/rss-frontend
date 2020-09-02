@@ -67,6 +67,10 @@ export class CheaterService {
       }
   }
 
+  resetValidity() {
+    this.invalidated.next(false)
+  }
+
   // Support for different kinds of browsers.
  addEvent(obj, evt, fn) {
   if (obj.addEventListener) {

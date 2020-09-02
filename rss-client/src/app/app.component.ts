@@ -36,13 +36,13 @@ export class AppComponent implements OnInit {
     })
     this.user = this.userservice.getCurrentUser();
     this.fakeUser = this.userservice.userPersistance();
-    // if (this.fakeUser != undefined) {
-    //   this.user = this.fakeUser;
-    //   this.isLoggedIn = true;
-    // }
-    if (this.user) {
-      this.isLoggedIn = true
+    if (this.fakeUser != undefined) {
+      this.user = this.fakeUser;
+      this.isLoggedIn = true;
     }
+    // if (this.user) {
+    //   this.isLoggedIn = true
+    // }
    }
 
 

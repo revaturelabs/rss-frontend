@@ -60,7 +60,11 @@ export class TestInProgressComponent implements OnInit {
       this.quizservice.submitQuiz(answersArr).subscribe((res) => {
         this.account.points = res.totalPoints;
         this.parentaluntil.results = res;
-        this.accountservice.updatePoints(this.account).subscribe();
+        if (this.isADirtyCheater) {
+          return
+        } else {
+          this.accountservice.updatePoints(this.account).subscribe();
+        }
       });
     }
   }
@@ -148,7 +152,7 @@ export class TestInProgressComponent implements OnInit {
     private parentaluntil: IndividualQuizPageComponent,
     private cheaterService: CheaterService,
   ) {
-    cheaterService.leftTab.subscribe(e => {
+    cheaterService.invalidated.subscribe(e => {
       this.isADirtyCheater = e
     })
   }

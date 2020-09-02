@@ -12,12 +12,19 @@ import { CheaterService } from 'src/app/services/cheater.service';
 })
 export class CheaterWarningComponent implements OnInit {
   open: boolean
+  dialogRef
   
   constructor(public dialog: MatDialog, private cheaterService: CheaterService) {
     this.cheaterService.leftTab.subscribe(e => {
       if (e) {
-        if (!this.open)
-        this.openDialog()
+        if (!this.open) {
+          this.openDialog()
+        }
+      }
+    })
+    this.cheaterService.invalidated.subscribe(e => {
+      if (e) {
+        this.dialogRef.close()
       }
     })
   }
@@ -28,9 +35,9 @@ export class CheaterWarningComponent implements OnInit {
   
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContent);
+    this.dialogRef = this.dialog.open(DialogContent);
     this.open = true
-    dialogRef.afterClosed().subscribe(() => {
+    this.dialogRef.afterClosed().subscribe(() => {
       this.open = false
     });
   }
