@@ -34,6 +34,8 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CheaterWarningComponent, DialogContent } from './Quiz/components/cheater-warning/cheater-warning.component';
 import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { InvalidQuizComponent, InvalidQuizDialogContent } from './Quiz/components/invalid-quiz/invalid-quiz.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
     SelectCartComponent,
     CheaterWarningComponent,
     DialogContent,
+    InvalidQuizComponent,
+    InvalidQuizDialogContent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,7 @@ import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
     AppInventoryModule,
     NoopAnimationsModule,
     MatDialogModule,
+    MatButtonModule,
   ],
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },

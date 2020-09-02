@@ -30,8 +30,7 @@ export class CheaterWarningComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(DialogContent);
     this.open = true
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe(() => {
       this.open = false
     });
   }

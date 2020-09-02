@@ -40,9 +40,9 @@ export class AppComponent implements OnInit {
     //   this.user = this.fakeUser;
     //   this.isLoggedIn = true;
     // }
-    // if (this.user) {
-    //   this.isLoggedIn = true
-    // }
+    if (this.user) {
+      this.isLoggedIn = true
+    }
    }
 
 

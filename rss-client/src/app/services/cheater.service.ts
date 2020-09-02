@@ -18,6 +18,7 @@ export class CheaterService {
   visibilityChange: string;
   confirmMessage: string;
   leftTab: Subject<boolean>; // A special type of observable that we can use to easily communicate with our Quiz Component.
+  invalidated: Subject<boolean>; // A special type of observable that we can use to easily communicate with our Quiz Component.
 
   constructor() {
     // Check if browser supports the 'hidden' attribute
@@ -26,9 +27,10 @@ export class CheaterService {
       this.visibilityChange = 'visibilitychange';
     }
     this.leftTab = new Subject<boolean>();
+    this.invalidated = new Subject<boolean>()
 
+    this.invalidated.next(false)
     this.leftTab.next(false);
-    this.confirmMessage = 'Changing your tab or going to another window will void your quiz. \nDo you understand? \n\nClicking "no" will void the quiz.';
 
       // Warn if the browser doesn't support addEventListener or the Page Visibility API 
     if (typeof document.addEventListener === 'undefined' || this.hidden === undefined) {
@@ -42,14 +44,12 @@ export class CheaterService {
           const from = e.relatedTarget || e.toElement;
           if (!from || from.nodeName == 'HTML') {
             // the cursor has left the building
-            console.log('If you change tabs or windows, this quiz will be invalid.');
             this.leftTab.next(true);
           }
         });
         // Add an event listener for when the user deliberately changes tabs.
         this.addEvent(document, this.visibilityChange, () => {
           if (document.hidden) {
-            console.log('Tab left, quiz void');
             this.leftTab.next(true);
           }
         });
@@ -59,11 +59,10 @@ export class CheaterService {
             console.log('Stop pressing Alt!');
           }
         });
-        this.addEvent(document,'focus', (e) => {
-          console.log(document.activeElement.tagName + ' focused');
-        });
+
         this.addEvent(document,'blur', (e) => {
-          console.log(document.activeElement.tagName + ' blurred');
+          // console.log(document.activeElement.tagName + ' blurred');
+          this.invalidated.next(true)
         });
       }
   }

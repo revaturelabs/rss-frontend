@@ -150,7 +150,6 @@ export class TestInProgressComponent implements OnInit {
   ) {
     cheaterService.leftTab.subscribe(e => {
       this.isADirtyCheater = e
-      console.log("caught that fool in test component" + e)
     })
   }
 
