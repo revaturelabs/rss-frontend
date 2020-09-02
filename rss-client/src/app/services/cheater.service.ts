@@ -25,6 +25,8 @@ export class CheaterService {
       this.hidden = 'hidden';
       this.visibilityChange = 'visibilitychange';
     }
+    this.leftTab = new Subject<boolean>();
+
     this.leftTab.next(false);
     this.confirmMessage = 'Changing your tab or going to another window will void your quiz. \nDo you understand? \n\nClicking "no" will void the quiz.';
 
