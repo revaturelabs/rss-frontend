@@ -31,6 +31,7 @@ import { SESSION_STORAGE } from 'ngx-webstorage-service';
 import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
     FormsModule,
     StoreModule.forRoot(reducer, {}),
     AppInventoryModule,
+    NoopAnimationsModule,
   ],
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },

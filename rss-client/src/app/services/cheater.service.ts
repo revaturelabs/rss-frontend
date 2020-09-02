@@ -41,31 +41,24 @@ export class CheaterService {
           e = e ? e : window.event;
           const from = e.relatedTarget || e.toElement;
           if (!from || from.nodeName == 'HTML') {
-              // the cursor has left the building
-              if (!confirm(this.confirmMessage)){
-                this.leftTab.next(true); // If they click 'no' on the confirm box, they void their quiz.
-              }
+            // the cursor has left the building
+            alert('If you change tabs or windows, this quiz will be invalid.')
           }
         });
         // Add an event listener for when the user deliberately changes tabs.
-        this.addEvent(document, this.visibilityChange, this.handleVisibilityChange);
+        this.addEvent(document, this.visibilityChange, () => {
+          if (document.hidden) {
+            alert('Tab left, quiz void');
+            this.leftTab.next(true);
+          }
+        });
 
-        this.addEvent(document,'keypress',this.logKey);
+        this.addEvent(document,'keydown', (e) => {
+          if (e.altKey){
+            alert('Stop pressing Alt!');
+          }
+        });
       }
-  }
-
-  // If the page is hidden (after switching tabs typically), change the subject;
-  handleVisibilityChange(): void {
-    if (document.hidden) {
-      alert('Tab left, quiz void');
-      this.leftTab.next(true);
-    }
-  }
-
-  logKey(e): void{
-    if (e.code == 'AltLeft' || e.code == 'AltRight'){
-      alert('Stop pressing Alt!');
-    }
   }
 
   // Support for different kinds of browsers.

@@ -6,6 +6,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AccountService } from 'src/app/services/account.service';
 import { AppComponent } from 'src/app/app.component';
 import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
+import { CheaterService } from 'src/app/services/cheater.service';
+import { Observer } from 'rxjs';
 
 @Component({
   selector: 'test-in-progress',
@@ -20,6 +22,8 @@ export class TestInProgressComponent implements OnInit {
   max;
   answers = {};
   quizzesTaken: any[] = [0];
+
+  isADirtyCheater: boolean;
 
   //Submits the form and
   onSubmit() {
@@ -141,8 +145,14 @@ export class TestInProgressComponent implements OnInit {
     private modalService: NgbModal,
     private userService: UserService,
     private accountservice: AccountService,
-    private parentaluntil: IndividualQuizPageComponent
-  ) {}
+    private parentaluntil: IndividualQuizPageComponent,
+    private cheaterService: CheaterService,
+  ) {
+    cheaterService.leftTab.subscribe(e => {
+      this.isADirtyCheater = e
+      console.log("caught that fool in test component" + e)
+    })
+  }
 
   accId;
   account = {

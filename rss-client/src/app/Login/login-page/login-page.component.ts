@@ -22,13 +22,19 @@ export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
   user: User;
+  isADirtyCheater: boolean;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
     private cheaterService: CheaterService
-  ) { }
+  ) {
+    cheaterService.leftTab.subscribe(e => {
+      this.isADirtyCheater = e
+      console.log("caught that fool in login component" + e)
+    })
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
