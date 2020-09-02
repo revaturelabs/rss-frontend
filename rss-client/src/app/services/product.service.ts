@@ -9,7 +9,8 @@ import { Config } from 'protractor';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl: string = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/product/';
+  // baseUrl: string = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/product/';
+  baseUrl: string = 'http://localhost:8989/product';
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +25,7 @@ export class ProductService {
   }
 
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(this.baseUrl + id); // http://localhost:8989/product/{id}
+    return this.http.get<Product>(this.baseUrl + "/" + id); // http://localhost:8989/product/{id}
   }
 
   // UPDATE
@@ -34,6 +35,6 @@ export class ProductService {
 
   // DELETE
   deleteProductById(id: number): Observable<Product> {
-    return this.http.delete<Product>(this.baseUrl + id); // http://localhost:8989/product/{id}
+    return this.http.delete<Product>(this.baseUrl + "/" + id); // http://localhost:8989/product/{id}
   }
 }

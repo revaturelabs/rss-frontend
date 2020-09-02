@@ -69,6 +69,8 @@ export class AccountSettingsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.userservice.userPersistance();
+    console.log(this.user);
     this.userProfileForm = this.fb.group({
       userId: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),

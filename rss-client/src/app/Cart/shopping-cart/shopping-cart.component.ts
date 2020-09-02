@@ -47,6 +47,7 @@ export class ShoppingCartComponent implements OnInit {
   userAccountRecord: Record<number, Account> = {};
   totalPointCost: number = 0;
   successfulPurchase: boolean = false;
+  displayTotalPoints:number;
 
 
   constructor(
@@ -58,7 +59,7 @@ export class ShoppingCartComponent implements OnInit {
     private accountService: AccountService
   ) {
     // access hardcoded user temporarily
-    this.currentUser = this.userService.getCurrentUser();
+    this.currentUser = this.userService.userPersistance();
 
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
@@ -296,8 +297,11 @@ export class ShoppingCartComponent implements OnInit {
             break;
           }
         }
-      }
+      }     
     }
+    console.log("hit");
+    this.totalPointCost = 15000;
+    this.displayTotalPoints = this.totalPointCost;
   }
 
   getYourPoints() {
@@ -378,6 +382,21 @@ export class ShoppingCartComponent implements OnInit {
 
     // console.log(id);
     // this.router.navigate([detailsURL]);
+  }
+
+  getUpdateTotalPoints(){
+    let elements = document.getElementsByClassName("allPointInputs");
+    this.displayTotalPoints = this.totalPointCost;
+    for(let i = 0; i < elements.length; i++){
+      let element = elements[i].attributes.getNamedItem("ng-reflect-model")
+      if(element !== null){
+          this.displayTotalPoints = this.displayTotalPoints - Number(element.value);
+          if(this.displayTotalPoints < 0){
+            this.displayTotalPoints = 0;
+          }
+      }
+    }
+    
   }
 
 }
