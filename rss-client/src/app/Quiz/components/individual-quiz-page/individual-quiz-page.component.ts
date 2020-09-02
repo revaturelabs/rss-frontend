@@ -67,6 +67,7 @@ export class IndividualQuizPageComponent implements OnInit {
       .subscribe((res) => {
         this.config = res;
       });
+    this.retrieveQuizResolver()
   }
 
   retrieveQuizQuestions(): void {
