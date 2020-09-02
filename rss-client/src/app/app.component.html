@@ -9,6 +9,7 @@
     </div>
   </div>
   <login-page (userLogin)="loginEvent($event)" (isLoggedIn)="changeLoginStatus(true)"></login-page>
+  <app-cheater-warning></app-cheater-warning>
 </div>
 <div *ngIf="isLoggedIn == true">
   <header [config]="headerConfig" [currentUser]="user"></header>

@@ -32,6 +32,8 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CheaterWarningComponent, DialogContent } from './Quiz/components/cheater-warning/cheater-warning.component';
+import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     EditQuizComponent,
     QuizFormComponent,
     SelectCartComponent,
+    CheaterWarningComponent,
+    DialogContent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     StoreModule.forRoot(reducer, {}),
     AppInventoryModule,
     NoopAnimationsModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
