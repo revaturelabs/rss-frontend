@@ -25,6 +25,7 @@ export class AccountSettingsPageComponent implements OnInit {
   userProfileForm: FormGroup;
   evalAccount: Account;
   bugAccount: Account;
+  overflowAccount: Account;
   myAccount: Account = {
     accId: 0,
     accTypeId: 0,
@@ -90,6 +91,9 @@ export class AccountSettingsPageComponent implements OnInit {
         if (x.accTypeId == 2) {
           this.evalAccount = x;
         }
+        if(x.accTypeId == 3){
+          this.overflowAccount = x; 
+        }
       });
     });
     this.grabAccounts();
@@ -131,15 +135,31 @@ export class AccountSettingsPageComponent implements OnInit {
   }
 
   createAccount(event) {
+    let index = null;
     if (event == 'Eval') {
       let num = this.accounts[1].accTypeId;
       this.myAccount.accTypeId = num;
       this.myAccount.userId = this.userservice.userPersistance().userId;
+      index = 1;
     } else if (event == 'Bug') {
       this.myAccount.accTypeId = this.accounts[0].accTypeId;
       this.myAccount.userId = this.userservice.userPersistance().userId;
+      index = 0;
     }
-    this.accountService.createAccount(this.myAccount).subscribe((res) => {});
+    else if (event == 'Overflow'){
+      if(this.accounts[2] == undefined || this.accounts[2] == null){
+        alert("There is not a Rev Overflow account linked with your user");
+      }
+      else{
+        this.myAccount.accTypeId = this.accounts[2].accTypeId;
+        this.myAccount.userId = this.userservice.userPersistance().userId;
+      }
+      index = 2;
+    }
+    if(this.accounts[index] !== undefined && !this.accounts[index] !== null){
+      console.log("hit");
+      this.accountService.createAccount(this.myAccount).subscribe((res) => {});
+    }
     //window.location.reload();
   }
 

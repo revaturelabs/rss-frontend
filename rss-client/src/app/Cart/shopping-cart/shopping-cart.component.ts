@@ -275,10 +275,13 @@ export class ShoppingCartComponent implements OnInit {
 
   displayName(account: Account) {
     let name: string;
-    if (account.accTypeId == 0) {
+    if (account.accTypeId == 2) {
       name = "Quiz Account"
     } else if (account.accTypeId == 1) {
       name = "Bug Bounty"
+    }
+    else if(account.accTypeId == 3){
+      name = "Rev OverFlow"
     }
     return name
   }
