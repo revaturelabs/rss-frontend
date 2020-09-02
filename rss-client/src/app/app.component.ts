@@ -23,20 +23,25 @@ export class AppComponent implements OnInit {
   // quizPageConfig;
   // quizConfig;
   rootPage = 'Home';
-
+  
+  fakeUser;
   constructor(
     private quizService: QuizService,
     private userservice: UserService
-  ) { }
-
-  fakeUser;
-  ngOnInit(): void {
+  ) {
     this.user = this.userservice.getCurrentUser();
     this.fakeUser = this.userservice.userPersistance();
-    if (this.fakeUser != undefined) {
-      this.user = this.fakeUser;
-      this.isLoggedIn = true;
+    // if (this.fakeUser != undefined) {
+    //   this.user = this.fakeUser;
+    //   this.isLoggedIn = true;
+    // }
+    if (this.user) {
+      this.isLoggedIn = true
     }
+   }
+
+
+  ngOnInit(): void {
   }
 
   loginEvent(e) {
