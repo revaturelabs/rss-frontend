@@ -66,8 +66,8 @@ export class IndividualQuizPageComponent implements OnInit {
       .findQuizById(this.route.snapshot.params.id)
       .subscribe((res) => {
         this.config = res;
+        this.retrieveQuizResolver();
       });
-    this.retrieveQuizResolver()
   }
 
   retrieveQuizQuestions(): void {
