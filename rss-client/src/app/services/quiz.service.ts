@@ -10,8 +10,8 @@ import { QuizSubmit } from '../interfaces/quizSubmit';
   providedIn: 'root',
 })
 export class QuizService {
-  url = 'http://localhost:8080';
-  //url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10000';
+ // url = 'http://localhost:8080';
+  url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10000';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };

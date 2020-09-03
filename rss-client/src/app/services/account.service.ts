@@ -26,8 +26,8 @@ export class AccountService {
     }
     return [account, bugBounty];
   }
-  url = 'http://localhost:9000/account';
-  //url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/account';
+  //url = 'http://localhost:9000/account';
+  url = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/account';
   constructor(private httpclient: HttpClient) {
     this.mockAccounts = this.generateMockAccounts(2021);
   }
