@@ -40,10 +40,13 @@ export class IndividualQuizPageComponent implements OnInit {
     totalPoints: 0;
   };
 
+  retrieveQuizResolver;
+
   subjectPicture;
   instructions = [];
   //options are pre-test, in-progress, post-test
   testProgress = 'pre-test';
+
   updateprogress(status) {
     this.testProgress = status;
   }
@@ -55,16 +58,31 @@ export class IndividualQuizPageComponent implements OnInit {
 
   ngOnInit(): void {
     //this pulls in the id passed from the quiz-page
+    this.retrieveQuizPromise().then(() => {this.retrieveQuizQuestions()});
+  }
+
+  retrieveQuiz(): void {
     this.quizService
       .findQuizById(this.route.snapshot.params.id)
       .subscribe((res) => {
         this.config = res;
+        this.retrieveQuizResolver();
       });
+  }
+
+  retrieveQuizQuestions(): void {
     this.quizService
       .getQuestionsById(this.route.snapshot.params.id)
       .subscribe((res) => {
         this.config.questions = res;
       });
+  }
+
+  retrieveQuizPromise(): Promise<any> {
+    return new Promise((resolve) => {
+      this.retrieveQuizResolver = resolve;
+      this.retrieveQuiz();
+    })
   }
 
   id = this.route.snapshot.params.id;

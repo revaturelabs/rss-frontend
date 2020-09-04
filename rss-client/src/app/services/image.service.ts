@@ -6,8 +6,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ImageService {
+
   // url = 'http://localhost:9000';
   url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001';
+
   constructor(private httpClient: HttpClient) {}
   setImage(input) {
     if (input == null) {
