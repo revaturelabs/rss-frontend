@@ -8,10 +8,16 @@ import { Cart } from '../interfaces/cart.model';
   providedIn: 'root',
 })
 export class CartItemService {
-  baseURL: string = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10002/cartitem/'
+  //baseURL: string = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/cartitem/'
   // baseURL: string = 'http://localhost:9999/cartitem/';
-
-  constructor(private http: HttpClient) { }
+  baseURL;
+  constructor(private http: HttpClient) { 
+    if(window.location.host=='localhost:4200'){
+      this.baseURL='http://localhost:9999/cartitem/';
+    }else{
+      this.baseURL = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/cartitem/';
+    }
+  }
 
   // CREATE
   addCartItem(cartItem: CartItem): Observable<CartItem> {

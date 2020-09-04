@@ -31,6 +31,11 @@ import { SESSION_STORAGE } from 'ngx-webstorage-service';
 import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CheaterWarningComponent, DialogContent } from './Quiz/components/cheater-warning/cheater-warning.component';
+import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { InvalidQuizComponent, InvalidQuizDialogContent } from './Quiz/components/invalid-quiz/invalid-quiz.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,10 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
     EditQuizComponent,
     QuizFormComponent,
     SelectCartComponent,
+    CheaterWarningComponent,
+    DialogContent,
+    InvalidQuizComponent,
+    InvalidQuizDialogContent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +74,9 @@ import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
     FormsModule,
     StoreModule.forRoot(reducer, {}),
     AppInventoryModule,
+    NoopAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },

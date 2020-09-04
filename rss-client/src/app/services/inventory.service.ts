@@ -8,9 +8,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class InventoryService {
-  baseUrl: string = 'http://localhost:8989/';
+  //baseUrl: string = 'http://localhost:8989/';
 
-  constructor(private http: HttpClient) { }
+  baseUrl;
+  constructor(private http: HttpClient) { 
+    if(window.location.host=='localhost:4200'){
+      this.baseUrl='http://localhost:8989/';
+    }else{
+      this.baseUrl = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10003/';
+    }
+  }
 
   // CREATE
   addProduct(product: Product): Observable<Product> {

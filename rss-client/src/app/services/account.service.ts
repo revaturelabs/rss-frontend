@@ -26,11 +26,17 @@ export class AccountService {
     }
     return [account, bugBounty];
   }
-  //url = 'http://localhost:9000/account';
-  url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
   
+  // url = 'http://localhost:9000/account';
+  //url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
+  url;
   constructor(private httpclient: HttpClient) {
     this.mockAccounts = this.generateMockAccounts(2021);
+    if(window.location.host=='localhost:4200'){
+      this.url='http://localhost:9000/account';
+    }else{
+      this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
+    }
   }
 
   //Account controller
@@ -68,8 +74,14 @@ export class AccountService {
   // }
 
   getAllAccounts(): Observable<any> {
+    let hardcoded;
+    if(window.location.host=='localhost:4200'){
+      hardcoded='http://localhost:9000/acctype/all';
+    }else{
+      hardcoded = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/acctype/all';
+    }
     return this.httpclient.get<any>(
-      'http://ec2-34-203-75-254.compute-1.amazonaws.com:10001/acctype/all'
+      hardcoded
     );
   }
 
