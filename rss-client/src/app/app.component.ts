@@ -3,6 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { User } from './interfaces/user';
 import { Subscription } from 'rxjs';
 import { UserService } from './services/user.service';
+import { CheaterService } from './services/cheater.service';
 
 @Component({
   selector: 'app-root',
@@ -23,20 +24,25 @@ export class AppComponent implements OnInit {
   // quizPageConfig;
   // quizConfig;
   rootPage = 'Home';
-
+  mouseOut: boolean;
+  fakeUser;
   constructor(
     private quizService: QuizService,
-    private userservice: UserService
-  ) { }
-
-  fakeUser;
-  ngOnInit(): void {
+    private userservice: UserService,
+  ) {
     this.user = this.userservice.getCurrentUser();
     this.fakeUser = this.userservice.userPersistance();
     if (this.fakeUser != undefined) {
       this.user = this.fakeUser;
       this.isLoggedIn = true;
     }
+    // if (this.user) {
+    //   this.isLoggedIn = true
+    // }
+   }
+
+
+  ngOnInit(): void {
   }
 
   loginEvent(e) {

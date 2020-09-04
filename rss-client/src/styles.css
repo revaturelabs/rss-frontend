@@ -12,3 +12,13 @@
     font-size: 12px;
     margin-top: 3px;
 }
+
+html {
+    height: 98vh;
+}
+
+body {
+    height: 98vh;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

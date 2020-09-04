@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  // urlInventory: 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/',
   urlInventory: 'http://localhost:8989/',
   admin: true,
 };
