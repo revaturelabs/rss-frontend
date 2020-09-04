@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectCartComponent } from './select-cart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 fdescribe('SelectCartComponent', () => {
   let component: SelectCartComponent;
@@ -9,7 +10,7 @@ fdescribe('SelectCartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, RouterTestingModule],
       declarations: [SelectCartComponent]
     })
       .compileComponents();

@@ -9,7 +9,7 @@ import { Config } from 'protractor';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl: string = 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/product/';
+  baseUrl: string = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10003/product/';
 
   constructor(private http: HttpClient) { }
 
