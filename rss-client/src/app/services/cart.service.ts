@@ -11,12 +11,21 @@ import { CartItem } from '../interfaces/cart-item.model';
 })
 export class CartService {
   // private baseURL = 'http://localhost:9999/cart/';
-  private baseURL = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/cart/'
+  //private baseURL = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/cart/'
   // private baseURLplural = 'http://localhost:9999/carts/';
-  private baseURLplural = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/carts/'
+  //private baseURLplural = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/carts/'
   private ActiveCart = new Subject<Cart>();
 
+  private baseURL;
+  private baseURLplural;
   constructor(private http: HttpClient) {
+    if(window.location.host=='localhost:4200'){
+      this.baseURL='http://localhost:9999/cart/';
+      this.baseURLplural = 'http://localhost:9999/carts/';
+    }else{
+      this.baseURL = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/cart/';
+      this.baseURLplural='http://ec2-100-25-22-66.compute-1.amazonaws.com:10002/carts/'
+    }
   }
 
   // CREATE

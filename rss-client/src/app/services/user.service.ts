@@ -24,12 +24,21 @@ export class UserService {
 
   // url = 'http://localhost:9000/user';
 
-  url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/user';
+  //url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/user';
+  url;
+
   constructor(
     private httpclient: HttpClient,
     private router: Router,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
-  ) {}
+  ) {
+    console.log(window.location.host)
+    if(window.location.host=='localhost:4200'){
+      this.url='http://localhost:9000/user';
+    }else{
+      this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/user';
+    }
+  }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

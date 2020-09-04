@@ -8,9 +8,17 @@ import { Injectable } from '@angular/core';
 export class ImageService {
 
   // url = 'http://localhost:9000';
-  url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001';
+  //url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001';
 
-  constructor(private httpClient: HttpClient) {}
+  url;
+  constructor(private httpClient: HttpClient) {
+    if(window.location.host=='localhost:4200'){
+      this.url='http://localhost:9000';
+    }else{
+      this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001';
+    }
+  }
+
   setImage(input) {
     if (input == null) {
       return 'https://storage.googleapis.com/indie-hackers.appspot.com/product-avatars/quick-and-simple-image-placeholders/bcohuFwnmPgIu4aM56YZudq12m02';
