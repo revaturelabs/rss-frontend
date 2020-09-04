@@ -22,7 +22,6 @@ export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
   user: User;
-  isADirtyCheater: boolean;
 
   constructor(
     private fb: FormBuilder,

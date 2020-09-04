@@ -14,9 +14,6 @@ import { Subject } from 'rxjs';
 })
 export class CheaterService {
 
-  hidden: string;
-  visibilityChange: string;
-  confirmMessage: string;
   leftTab: Subject<boolean>; // A special type of observable that we can use to easily communicate with our Quiz Component.
   invalidated: Subject<boolean>; // A special type of observable that we can use to easily communicate with our Quiz Component.
 
