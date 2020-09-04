@@ -29,11 +29,7 @@ export class AppComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private userservice: UserService,
-    private cheaterService: CheaterService,
   ) {
-    this.cheaterService.leftTab.subscribe(e => {
-      this.mouseOut = e
-    })
     this.user = this.userservice.getCurrentUser();
     this.fakeUser = this.userservice.userPersistance();
     if (this.fakeUser != undefined) {

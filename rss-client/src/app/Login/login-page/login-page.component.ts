@@ -28,11 +28,7 @@ export class LoginPageComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private cheaterService: CheaterService
   ) {
-    cheaterService.leftTab.subscribe(e => {
-      this.isADirtyCheater = e
-    })
   }
 
   ngOnInit(): void {

@@ -27,6 +27,8 @@ export class TestInProgressComponent implements OnInit {
 
   //Submits the form and
   onSubmit() {
+    console.log('in submit')
+    this.cheaterService.resetValidity()
     //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
     let answersArr = [];
@@ -152,7 +154,8 @@ export class TestInProgressComponent implements OnInit {
     private parentaluntil: IndividualQuizPageComponent,
     private cheaterService: CheaterService,
   ) {
-    cheaterService.invalidated.subscribe(e => {
+    this.cheaterService.beginMonitoring()
+    this.cheaterService.invalidated.subscribe(e => {
       this.isADirtyCheater = e
     })
   }
