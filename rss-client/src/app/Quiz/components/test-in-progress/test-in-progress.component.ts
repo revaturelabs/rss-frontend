@@ -25,6 +25,24 @@ export class TestInProgressComponent implements OnInit {
 
   isADirtyCheater: boolean;
 
+  constructor(
+    private quizservice: QuizService,
+    private modalService: NgbModal,
+    private userService: UserService,
+    private accountservice: AccountService,
+    private parentaluntil: IndividualQuizPageComponent,
+    private cheaterService: CheaterService,
+  ) {
+    this.cheaterService.beginMonitoring()
+    this.cheaterService.invalidated.subscribe(e => {
+      this.isADirtyCheater = e
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.cheaterService.resetValidity()
+  }
+
   //Submits the form and
   onSubmit() {
     console.log('in submit')
@@ -145,19 +163,6 @@ export class TestInProgressComponent implements OnInit {
       default:
         break;
     }
-  }
-  constructor(
-    private quizservice: QuizService,
-    private modalService: NgbModal,
-    private userService: UserService,
-    private accountservice: AccountService,
-    private parentaluntil: IndividualQuizPageComponent,
-    private cheaterService: CheaterService,
-  ) {
-    this.cheaterService.beginMonitoring()
-    this.cheaterService.invalidated.subscribe(e => {
-      this.isADirtyCheater = e
-    })
   }
 
   accId;
