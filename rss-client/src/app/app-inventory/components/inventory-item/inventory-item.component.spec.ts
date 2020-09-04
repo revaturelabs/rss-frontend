@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InventoryItemComponent } from './inventory-item.component';
+import { DecimalPipe } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('InventoryItemComponent', () => {
   let component: InventoryItemComponent;
@@ -8,7 +11,9 @@ describe('InventoryItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [InventoryItemComponent]
+      declarations: [InventoryItemComponent],
+      providers: [DecimalPipe],
+      imports: [HttpClientTestingModule, NgbModule]
     })
       .compileComponents();
   }));
