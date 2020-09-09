@@ -387,7 +387,7 @@ export class ShoppingCartComponent implements OnInit {
     this.displayTotalPoints = this.totalPointCost;
     for(let i = 0; i < elements.length; i++){
       let element = elements[i].attributes.getNamedItem("ng-reflect-model")
-      if(element !== null){
+      if(element !== null && Number(element.value) >= 0){
           this.displayTotalPoints = this.displayTotalPoints - Number(element.value);
           if(this.displayTotalPoints < 0){
             this.displayTotalPoints = 0;
