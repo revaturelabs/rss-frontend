@@ -25,6 +25,7 @@ export class AccountSettingsPageComponent implements OnInit {
   userProfileForm: FormGroup;
   evalAccount: Account;
   bugAccount: Account;
+  overflowAccount: Account;
   myAccount: Account = {
     accId: 0,
     accTypeId: 0,
@@ -68,6 +69,8 @@ export class AccountSettingsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.userservice.userPersistance();
+    console.log(this.user);
     this.userProfileForm = this.fb.group({
       userId: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
@@ -89,6 +92,9 @@ export class AccountSettingsPageComponent implements OnInit {
         }
         if (x.accTypeId == 2) {
           this.evalAccount = x;
+        }
+        if(x.accTypeId == 3){
+          this.overflowAccount = x; 
         }
       });
     });
@@ -131,15 +137,33 @@ export class AccountSettingsPageComponent implements OnInit {
   }
 
   createAccount(event) {
+    let index = null;
     if (event == 'Eval') {
       let num = this.accounts[1].accTypeId;
       this.myAccount.accTypeId = num;
       this.myAccount.userId = this.userservice.userPersistance().userId;
+      index = 1;
     } else if (event == 'Bug') {
       this.myAccount.accTypeId = this.accounts[0].accTypeId;
       this.myAccount.userId = this.userservice.userPersistance().userId;
+      index = 0;
     }
-    this.accountService.createAccount(this.myAccount).subscribe((res) => {});
+    else if (event == 'Overflow'){
+      this.myAccount.accTypeId = this.accounts[2].accTypeId;
+      this.myAccount.userId = this.userservice.userPersistance().userId;
+      index = 2;
+    }
+    this.accountService.createAccount(this.myAccount).subscribe((res) => {
+      if(index == 0){
+        this.bugAccount = res;
+      }
+      else if(index == 1){
+        this.evalAccount = res;
+      }
+      else if(index == 2){
+        this.overflowAccount = res;
+      }
+    });
     //window.location.reload();
   }
 
