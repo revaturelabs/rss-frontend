@@ -149,19 +149,21 @@ export class AccountSettingsPageComponent implements OnInit {
       index = 0;
     }
     else if (event == 'Overflow'){
-      if(this.accounts[2] == undefined || this.accounts[2] == null){
-        alert("There is not a Rev Overflow account linked with your user");
-      }
-      else{
-        this.myAccount.accTypeId = this.accounts[2].accTypeId;
-        this.myAccount.userId = this.userservice.userPersistance().userId;
-      }
+      this.myAccount.accTypeId = this.accounts[2].accTypeId;
+      this.myAccount.userId = this.userservice.userPersistance().userId;
       index = 2;
     }
-    if(this.accounts[index] !== undefined && !this.accounts[index] !== null){
-      console.log("hit");
-      this.accountService.createAccount(this.myAccount).subscribe((res) => {});
-    }
+    this.accountService.createAccount(this.myAccount).subscribe((res) => {
+      if(index == 0){
+        this.bugAccount = res;
+      }
+      else if(index == 1){
+        this.evalAccount = res;
+      }
+      else if(index == 2){
+        this.overflowAccount = res;
+      }
+    });
     //window.location.reload();
   }
 

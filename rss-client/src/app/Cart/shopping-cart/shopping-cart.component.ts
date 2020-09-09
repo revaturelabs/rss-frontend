@@ -299,8 +299,6 @@ export class ShoppingCartComponent implements OnInit {
         }
       }     
     }
-    console.log("hit");
-    this.totalPointCost = 15000;
     this.displayTotalPoints = this.totalPointCost;
   }
 
