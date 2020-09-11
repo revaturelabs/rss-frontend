@@ -148,6 +148,21 @@
           >
             Link To Your Bug Bounty
           </button>
+          <br />
+          <h3 *ngIf="overflowAccount">
+            You have
+            <span class="rev_orange">{{ overflowAccount.points }}</span> points from
+            the questions you've answered
+          </h3>
+          <button
+            *ngIf="!overflowAccount"
+            type="submit"
+            class="m-2 btn"
+            (click)="createAccount('Overflow')"
+            style="background-color: #f26925;"
+          >
+            Link To Your Rev OverFlow
+          </button>
           <hr />
           <div class="row">
             <div class="justify-content-center col-12">

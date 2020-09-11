@@ -142,17 +142,17 @@
                                         <h5 href="#">Total {{displayName(account)}} Points:</h5>
                                         <h6><span>{{account.points}}</span></h6>
                                     </div>
-                                    <input id="points-{{account.accId}}" class="form-control" type="number" min="0"
+                                    <input id="points-{{account.accId}}" class="form-control allPointInputs" type="number" min="0"
                                         [(ngModel)]="pointPicker[account.accId]" max={{account.points}} step="1"
-                                        placeholder="Quiz Points">
+                                        placeholder="Quiz Points" (keyup)="getUpdateTotalPoints()">
                                 </div>
                             </div>
                         </div>
                         <div>
                             <button *ngIf="successfulPurchase" class="btn btn-lg btn-block btn-primary"
                                 (click)="purchaseCart()">Purchase</button>
-                            <button *ngIf="!successfulPurchase" class="btn btn-lg btn-block btn-primary" disabled>
-                                Need {{totalPointCost}} Total Points</button>
+                            <button *ngIf="!successfulPurchase" class="btn btn-lg btn-block btn-primary"disabled>
+                                Need {{displayTotalPoints}} Total Points</button>
                         </div>
                         <div>
                             <button class="btn btn-block btn-outline-success" href="#savingcart" data-toggle="collapse">
