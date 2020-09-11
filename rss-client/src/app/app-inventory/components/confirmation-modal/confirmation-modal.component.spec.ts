@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmationModalComponent } from './confirmation-modal.component';
+import { NgbModalModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DecimalPipe } from '@angular/common';
 
 describe('ConfirmationModalComponent', () => {
   let component: ConfirmationModalComponent;
@@ -8,7 +11,15 @@ describe('ConfirmationModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationModalComponent ]
+      declarations: [ ConfirmationModalComponent ],
+      imports: [
+        NgbModalModule,
+        HttpClientTestingModule
+      ],
+      providers: [
+        NgbActiveModal,
+        DecimalPipe
+      ]
     })
     .compileComponents();
   }));

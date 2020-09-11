@@ -15,6 +15,9 @@ export class CheaterWarningComponent implements OnInit {
   dialogRef
   
   constructor(public dialog: MatDialog, private cheaterService: CheaterService) {
+  }
+
+  ngOnInit(): void {
     this.cheaterService.leftTab.subscribe(e => {
       if (e) {
         if (!this.open) {
@@ -27,9 +30,6 @@ export class CheaterWarningComponent implements OnInit {
         this.dialogRef.close()
       }
     })
-  }
-
-  ngOnInit(): void {
   }
 
   

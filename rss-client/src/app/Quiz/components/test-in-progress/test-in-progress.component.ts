@@ -46,7 +46,6 @@ export class TestInProgressComponent implements OnInit {
   //Submits the form and
   onSubmit() {
     console.log('in submit')
-    this.cheaterService.resetValidity()
     //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
     let answersArr = [];
@@ -77,16 +76,20 @@ export class TestInProgressComponent implements OnInit {
         this.parentaluntil.results.totalPoints = 0;
       });
     } else {
-      this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-        this.account.points = res.totalPoints;
-        this.parentaluntil.results = res;
-        if (this.isADirtyCheater) {
-          return
-        } else {
+      if (this.isADirtyCheater) {
+        this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+          this.parentaluntil.results = res;
+          this.parentaluntil.results.totalPoints = 0;
+        });
+      } else {
+        this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+          this.account.points = res.totalPoints;
+          this.parentaluntil.results = res;
           this.accountservice.updatePoints(this.account).subscribe();
-        }
-      });
+        });
+      }
     }
+    this.cheaterService.resetValidity()
   }
 
   closeResult: string;

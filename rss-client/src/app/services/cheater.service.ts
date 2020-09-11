@@ -20,6 +20,7 @@ export class CheaterService {
   constructor() {}
 
   setInvalidated() {
+    console.log('invalidated')
     this.invalidated.next(true)
   }
 
@@ -43,6 +44,7 @@ export class CheaterService {
   }
 
   blur = () => {
+    console.log('blur')
     this.invalidated.next(true)
   }
 

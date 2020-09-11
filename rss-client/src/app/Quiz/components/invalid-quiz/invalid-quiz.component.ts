@@ -11,15 +11,15 @@ export class InvalidQuizComponent implements OnInit {
 
   open: boolean
   
-  constructor(public dialog: MatDialog, private cheaterService: CheaterService) {
+  constructor(public dialog: MatDialog, private cheaterService: CheaterService) {}
+  
+  ngOnInit(): void {
     this.cheaterService.invalidated.subscribe(e => {
       if (e) {
         if (!this.open)
         this.openDialog()
       }
     })
-  }
-  ngOnInit(): void {
   }
 
   openDialog() {

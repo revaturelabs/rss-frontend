@@ -4,7 +4,7 @@ import { ShoppingCartComponent } from './shopping-cart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
-fdescribe('ShoppingCartComponent', () => {
+describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
   let fixture: ComponentFixture<ShoppingCartComponent>;
 
