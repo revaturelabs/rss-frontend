@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CartItemService } from './cart-item.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-fdescribe('CartItemService', () => {
+describe('CartItemService', () => {
   let service: CartItemService;
 
   beforeEach(() => {

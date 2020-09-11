@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheaterWarningComponent } from './cheater-warning.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('CheaterWarningComponent', () => {
   let component: CheaterWarningComponent;
@@ -8,7 +9,8 @@ describe('CheaterWarningComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheaterWarningComponent ]
+      declarations: [ CheaterWarningComponent ],
+      imports: [MatDialogModule]
     })
     .compileComponents();
   }));

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './filter.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -81,7 +81,8 @@ import { InvalidQuizComponent, InvalidQuizDialogContent } from './Quiz/component
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
     UserService,
-    SelectCartComponent
+    SelectCartComponent,
+    NgbActiveModal
   ],
   bootstrap: [AppComponent],
 })
