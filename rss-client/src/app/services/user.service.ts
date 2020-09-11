@@ -10,6 +10,7 @@ import {
 } from 'ngx-webstorage-service';
 import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common'
 
 const STORAGE_KEY = 'currentUser';
 
@@ -30,8 +31,10 @@ export class UserService {
   constructor(
     private httpclient: HttpClient,
     private router: Router,
+    private location: Location,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
   ) {
+
     console.log(window.location.host)
     if(window.location.host=='localhost:4200'){
       this.url='http://localhost:9000/user';
@@ -132,7 +135,8 @@ export class UserService {
     this.isLoggedIn = false;
     this.storage.set(STORAGE_KEY, undefined);
     sessionStorage.clear();
-    window.location.reload();
+    this.location.replaceState('');
+    //window.location.reload();
   }
 
   userPersistance() {

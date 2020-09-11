@@ -11,7 +11,7 @@
   <login-page (userLogin)="loginEvent($event)" (isLoggedIn)="changeLoginStatus(true)"></login-page>
 </div>
 <div *ngIf="isLoggedIn == true">
-  <header [config]="headerConfig" [currentUser]="user"></header>
+  <header [config]="headerConfig" [currentUser]="user" (isLoggedIn)="changeLoginStatus(false)"></header>
   <div class="">
     <div class="container">
       <div class="row" aria-label="breadcrumb">

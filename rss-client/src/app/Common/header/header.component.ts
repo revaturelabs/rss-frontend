@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { User } from 'src/app/interfaces/user';
 import { AppComponent } from 'src/app/app.component';
@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   */
   @Input() config;
   @Input() currentUser: User;
+  @Output() isLoggedIn = new EventEmitter();
 
   constructor(
     private parent: AppComponent,
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.isLoggedIn.emit(false);
     this.userservice.logout();
   }
 }
