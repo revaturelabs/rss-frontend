@@ -3,7 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { InventoryItemComponent } from './inventory-item.component';
 import { DecimalPipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('InventoryItemComponent', () => {
   let component: InventoryItemComponent;
@@ -12,10 +13,13 @@ describe('InventoryItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [InventoryItemComponent],
-      providers: [DecimalPipe],
-      imports: [HttpClientTestingModule, NgbModule]
+      providers: [DecimalPipe, NgbActiveModal],
+      imports: [
+        HttpClientTestingModule,
+        NgbModule,
+        RouterTestingModule
+      ]
     })
-      .compileComponents();
   }));
 
   beforeEach(() => {

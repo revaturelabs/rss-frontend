@@ -7,7 +7,7 @@ import { CheaterService } from 'src/app/services/cheater.service';
 describe('InvalidQuizComponent', () => {
   let component: InvalidQuizComponent;
   let fixture: ComponentFixture<InvalidQuizComponent>;
-  
+  let cheaterService: CheaterService;
 
   beforeEach(async(() => {
 
@@ -17,6 +17,9 @@ describe('InvalidQuizComponent', () => {
       
     })
     .compileComponents();
+
+    cheaterService = TestBed.inject(CheaterService);
+
   }));
 
   beforeEach(() => {
