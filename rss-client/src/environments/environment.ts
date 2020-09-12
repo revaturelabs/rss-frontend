@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   urlInventory: 'http://localhost:8989/',
+  accountServiceUrlWithZuul: 'http://localhost:8079/gateway/account',
   admin: true,
 };
 

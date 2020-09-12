@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Account } from '../interfaces/account';
 import { User } from '../interfaces/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -29,14 +30,14 @@ export class AccountService {
   
   // url = 'http://localhost:9000/account';
   //url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
-  url;
+  url = `${environment.accountServiceUrlWithZuul}`;
   constructor(private httpclient: HttpClient) {
     this.mockAccounts = this.generateMockAccounts(2021);
-    if(window.location.host=='localhost:4200'){
-      this.url='http://localhost:9000/account';
-    }else{
-      this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
-    }
+    // if(window.location.host=='localhost:4200'){
+    //   this.url='http://localhost:9000/account';
+    // }else{
+    //   this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
+    // }
   }
 
   //Account controller
