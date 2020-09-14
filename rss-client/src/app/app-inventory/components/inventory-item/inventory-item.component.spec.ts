@@ -25,6 +25,18 @@ describe('InventoryItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(InventoryItemComponent);
     component = fixture.componentInstance;
+    component.product = {
+      id: 1,
+      name: 'test',
+      description: 'test descr',
+      brand: 'test brand',
+      model: 'test model',
+      category: 'test cat',
+      image: 'tets image',
+      quantity: 1,
+      unitPrice: 1,
+      color: 'red'
+    }
     fixture.detectChanges();
   });
 

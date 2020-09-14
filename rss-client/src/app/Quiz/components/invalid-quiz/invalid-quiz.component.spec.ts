@@ -18,7 +18,6 @@ describe('InvalidQuizComponent', () => {
       ]
     })
     .compileComponents();
-
   }));
 
   beforeEach(() => {
