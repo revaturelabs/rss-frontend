@@ -17,7 +17,10 @@ export class CheaterService {
   leftTab: Subject<boolean>; // A special type of observable that we can use to easily communicate with our Quiz Component.
   invalidated: Subject<boolean>; // A special type of observable that we can use to easily communicate with our Quiz Component.
 
-  constructor() {}
+  constructor() {
+    this.leftTab = new Subject<boolean>();
+    this.invalidated = new Subject<boolean>();
+  }
 
   setInvalidated() {
     console.log('invalidated')
@@ -49,9 +52,6 @@ export class CheaterService {
   }
 
   beginMonitoring() {
-
-    this.leftTab = new Subject<boolean>();
-    this.invalidated = new Subject<boolean>()
 
     this.invalidated.next(false)
     this.leftTab.next(false);
