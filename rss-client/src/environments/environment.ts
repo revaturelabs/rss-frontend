@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  urlInventory: 'http://localhost:8989/',
+  accountServiceUrlWithZuul: 'http://localhost:9000',
+  evaluationServiceUrlWithZuul: 'http://localhost:8080',
+  cartServiceUrlWithZuul: 'http://localhost:9999',
+  inventoryServiceUrlWithZuul: 'http://localhost:8989',
   admin: true,
 };
 
