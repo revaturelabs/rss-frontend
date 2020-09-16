@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AccountService {
-
+  url = `${environment.accountServiceUrlWithZuul}/account`;
   mockAccounts: Account[];
 
   generateMockAccounts(userId): Account[] {
@@ -27,17 +27,10 @@ export class AccountService {
     }
     return [account, bugBounty];
   }
-  
-  // url = 'http://localhost:9000/account';
-  //url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
-  url = `${environment.accountServiceUrlWithZuul}`;
+
+
   constructor(private httpclient: HttpClient) {
     this.mockAccounts = this.generateMockAccounts(2021);
-    // if(window.location.host=='localhost:4200'){
-    //   this.url='http://localhost:9000/account';
-    // }else{
-    //   this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/account';
-    // }
   }
 
   //Account controller
@@ -66,23 +59,10 @@ export class AccountService {
     return this.httpclient.post<any[]>(this.url + '/accounts', user);
   }
 
-  // getAllAccountUsers(account: Account): Observable<Account> {
-  //   return this.httpclient.post<any>(this.url + '/account/account/ai', account);
-  // }
-
-  // linkAccount(account: Account): Observable<Account> {
-  //   return this.httpclient.post<any>(this.url + '/account/account', account);
-  // }
-
   getAllAccounts(): Observable<any> {
-    let hardcoded;
-    if(window.location.host=='localhost:4200'){
-      hardcoded='http://localhost:9000/acctype/all';
-    }else{
-      hardcoded = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/acctype/all';
-    }
+    const separateAccountTypeUrl = `${environment.accountServiceUrlWithZuul}/acctype/all`;
     return this.httpclient.get<any>(
-      hardcoded
+      separateAccountTypeUrl
     );
   }
 
