@@ -43,6 +43,7 @@ export class CheaterService {
   keyDown = (e) => {
     if (e.altKey){
       console.log('Stop pressing Alt!');
+      this.leftTab.next(true);
     }
   }
 
