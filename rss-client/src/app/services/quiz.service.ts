@@ -71,13 +71,7 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) {
-    if(window.location.host=='localhost:4200'){
-      this.url='http://localhost:8080';
-    }else{
-      this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10000';
-    }
-  }
+  constructor(private httpclient: HttpClient) { }
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
