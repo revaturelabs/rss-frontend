@@ -47,7 +47,8 @@ export class UserService {
   login(log): Observable<User> {
     return this.httpclient.post<any>(
       this.url + '/login',
-      log
+      log,
+      this.httpOptions
     );
   }
 
