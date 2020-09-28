@@ -1,23 +1,15 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageService {
+  url = `${environment.accountServiceUrlWithZuul}`;
 
-  // url = 'http://localhost:9000';
-  //url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001';
-
-  url;
-  constructor(private httpClient: HttpClient) {
-    if(window.location.host=='localhost:4200'){
-      this.url='http://localhost:9000';
-    }else{
-      this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001';
-    }
-  }
+  constructor(private httpClient: HttpClient) { }
 
   setImage(input) {
     if (input == null) {

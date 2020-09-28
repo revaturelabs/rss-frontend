@@ -11,6 +11,7 @@ import {
 import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
+import { environment } from 'src/environments/environment';
 
 const STORAGE_KEY = 'currentUser';
 
@@ -22,11 +23,7 @@ export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
   providedIn: 'root',
 })
 export class UserService {
-
-  // url = 'http://localhost:9000/user';
-
-  //url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/user';
-  url;
+  url = `${environment.accountServiceUrlWithZuul}/user`;
 
   constructor(
     private httpclient: HttpClient,
@@ -35,12 +32,7 @@ export class UserService {
     @Inject(SESSION_STORAGE) private storage: WebStorageService
   ) {
 
-    console.log(window.location.host)
-    if(window.location.host=='localhost:4200'){
-      this.url='http://localhost:9000/user';
-    }else{
-      this.url = 'http://ec2-100-25-22-66.compute-1.amazonaws.com:10001/user';
-    }
+    console.log(window.location.host);
   }
 
   httpOptions = {
@@ -49,7 +41,7 @@ export class UserService {
 
   //user controller
   loginMock(log): Observable<User> {
-    return of(this.user)
+    return of(this.user);
   }
 
   login(log): Observable<User> {
