@@ -20,6 +20,8 @@ export class QuizPageComponent implements OnInit {
   evalAccount: Account;
   user: User = this.userservice.userPersistance();
   quizzesTaken: any[] = [0];
+  outOfAttempts: boolean = false;
+  attempted: boolean = false;
 
   @Input() config;
   searchText: string;
@@ -56,5 +58,9 @@ export class QuizPageComponent implements OnInit {
       this.parent.breadcrumbs = ['Earn Points', 'Quiz Overview'];
       this.parent.routerCrumbs = ['earnpoints', 'quizzes'];
     });
+  }
+
+  changeButton() {
+
   }
 }

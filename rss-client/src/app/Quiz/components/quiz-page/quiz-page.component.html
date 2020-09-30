@@ -27,10 +27,8 @@
       <div>
         <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
         <br />
-        <b><em>Topic: </em></b
-        ><a routerLink="/quizzes/{{ quizdata.quizId }}">
-          {{ quizdata.quizTopic | titlecase }}</a
-        >
+        <b><em>Topic: </em></b>
+          {{ quizdata.quizTopic | titlecase }}
         <br />
         <b><em> Description: </em></b> {{ quizdata.quizDescription }}
       </div>
@@ -43,7 +41,13 @@
           <br />
           <b><em> Description: </em></b> {{ quizdata.quizDescription }}
         </div> -->
-    </li>
+        <div *ngIf = "!outOfAttempts">
+          <button class=""><a routerLink="/quizzes/{{ quizdata.quizId }}">Enter</a></button>
+        </div>
+        <div *ngIf = "attempted">
+          <button>Review</button>
+        </div>
+      </li>
   </ol>
 </div>
 <div *ngIf="!evalAccount" class="text-center">

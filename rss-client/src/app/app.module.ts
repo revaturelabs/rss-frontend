@@ -36,6 +36,7 @@ import { CheaterWarningComponent, DialogContent } from './Quiz/components/cheate
 import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { InvalidQuizComponent, InvalidQuizDialogContent } from './Quiz/components/invalid-quiz/invalid-quiz.component';
+import { ReviewQuizPageComponent } from './quiz/components/review-quiz-page/review-quiz-page.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { InvalidQuizComponent, InvalidQuizDialogContent } from './Quiz/component
     CheaterWarningComponent,
     DialogContent,
     InvalidQuizComponent,
-    InvalidQuizDialogContent
+    InvalidQuizDialogContent,
+    ReviewQuizPageComponent
   ],
   imports: [
     BrowserModule,
