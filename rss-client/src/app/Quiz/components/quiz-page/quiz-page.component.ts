@@ -35,6 +35,7 @@ export class QuizPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
       res.forEach((x) => {
         if (x.accTypeId == 2) {
@@ -49,7 +50,9 @@ export class QuizPageComponent implements OnInit {
         this.quizzesTaken = res;
       }
     });
-    this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
+    this.quizservice.getAllQuizzes().subscribe((res) =>(
+      this.quizData = res
+    ));
   }
   ngAfterViewInit() {
     setTimeout(() => {

@@ -18,6 +18,7 @@ export class AddQuizComponent implements OnInit {
     quizTopic: null,
     quizDescription: null,
     subjectId: 0,
+    quizTotalPoints: 0,
     creatorEmail: this.userservice.userPersistance().email,
     questions: [],
     availablePoints: null,
@@ -47,6 +48,9 @@ export class AddQuizComponent implements OnInit {
         }
       }
     );
+    //Group 2 change
+    console.log("changing subject");
+    console.log('subject');
   }
   setSubject(event) {
     this.focusedQuiz.subject = event;
@@ -65,6 +69,8 @@ export class AddQuizComponent implements OnInit {
   }
   submitChanges() {
     //TODO: save focused quiz to the database
+    //Group 2 change --> the real winner and what we need to change
+    //this.focusedQuiz.quizTotalPoints = Number(sessionStorage.getItem('points'));
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
@@ -100,6 +106,7 @@ export class AddQuizComponent implements OnInit {
           if (result.type == 'update') {
             //TODO:update question in Database
             // Addstuff here to change what each question contains
+            
             let newQuestion = {
               questionId: this.focusedQuestion.questionId,
               question: result.value.question,
@@ -145,7 +152,14 @@ export class AddQuizComponent implements OnInit {
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
-      );
+    );
+    // Group 2 change 
+    this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
+    /*console.log("overall focused quiz points that we want for sure");
+    console.log(this.focusedQuiz.quizTotalPoints);
+    sessionStorage.setItem('points', String(this.focusedQuiz.quizTotalPoints));
+    let quizPoints = sessionStorage.getItem('points');
+    console.log(quizPoints);*/
   }
 
   private getDismissReason(reason: any): string {
