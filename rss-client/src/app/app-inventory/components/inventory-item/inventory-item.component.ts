@@ -64,7 +64,8 @@ export class InventoryItemComponent implements OnInit {
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin }, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
 			discountedAmount: new FormControl({value:this.product.discountedAmount, disabled:this.admin}),
-			discounted : new FormControl({value : this.product.discounted, disabled:this.admin})
+			discounted : new FormControl({value : this.product.discounted, disabled:this.admin}),
+			currentPrice : new FormControl({value : this.product.unitPrice - this.product.discountedAmount, disabled:this.admin})
 		});
 
 		this.currentUser = this.userService.getCurrentUser();
@@ -177,11 +178,14 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	updateItem() {
+		console.log("tes");
 		if (this.updateProduct.get("discountedAmount").value !== null || this.updateProduct.get("discountedAmount").value !== 0){
 			console.log("discountPrice has a value");
 			this.updateProduct.get("discounted").setValue(true);
+
 			console.log(this.updateProduct.value);
 		} else {
+			this.updateProduct.get("discounted").setValue(false);
 			console.log("discountPrice does not have a value")
 		}
 		if (this.updateProduct.valid) {
