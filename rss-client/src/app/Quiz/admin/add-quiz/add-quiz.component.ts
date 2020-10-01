@@ -9,7 +9,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-quiz.component.css'],
 })
 /*This class is  the ts file for the page that admin is in when they are adding a quiz
-* This .ts file is also almost (if not exactly) the same as edit-quiz.component.html
+* This .ts file is also almost (if not exactly) the same as edit-quiz.component.html based on the inherited code
+ * the differences are the subject methods: addSubject() & setSubject() , subject text field
+ * which are necessary to add subject quizes to the database.
 * @focusedQuiz is type quiz (interfaces --> quiz.ts)
 */
 export class AddQuizComponent implements OnInit {

@@ -11,7 +11,8 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./edit-quiz.component.css'],
 })
  /*This class is  the ts file for the page that admin is in when they are editing
-  * This .ts file is also almost (if not exactly) the same as add-quiz.component.html 
+  * This .ts file is also almost (if not exactly) the same as add-quiz.component.html
+  * differences lie within the add-quiz.component.ts file
   * @focusedQuiz is type quiz (interfaces --> quiz.ts)
   * @focusedQuestion is type question (interfaces --> question.ts)
   */
