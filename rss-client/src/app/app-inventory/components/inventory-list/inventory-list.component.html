@@ -55,7 +55,7 @@
 						<p class="text-sm m-0"><strong>Points</strong></p>
 					</td>
 					<td>
-						<ngb-highlight [result]="product.discountedAmount| number" [term]="service.searchTerm">
+						<ngb-highlight [result]="product.unitPrice - product.discountedAmount | number" [term]="service.searchTerm">
 						</ngb-highlight>
 						<p class="text-sm m-0"><strong>Discounted Points</strong></p>
 					</td>

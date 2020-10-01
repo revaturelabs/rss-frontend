@@ -102,7 +102,7 @@ export class ShoppingCartComponent implements OnInit {
       accounts => {
         this.userAccounts = accounts;
         for (let account of accounts) {
-          this.pointPicker[account.accId] = 0;
+          this.pointPicker[account.accId] = account.points;
           this.userAccountRecord[account.accId] = account;
         }
       }
@@ -241,7 +241,7 @@ export class ShoppingCartComponent implements OnInit {
     let terminatePurchase = false;
     let yourPoints: number = this.getYourPoints();
     let newProductRecord: Record<number, Product> = {}
-    if (yourPoints == this.totalPointCost) {
+    if (yourPoints >= this.totalPointCost) {
       for (let cItem of this.activeCart.cartItems) {
         let ciProduct: Product = this.getProductById(cItem.productId);
         if (cItem.quantity <= ciProduct.quantity) {
@@ -261,7 +261,8 @@ export class ShoppingCartComponent implements OnInit {
             accId: this.userAccountRecord[accId].accId,
             userId: this.userAccountRecord[accId].userId,
             accTypeId: this.userAccountRecord[accId].accTypeId,
-            points: this.userAccountRecord[accId].points - this.pointPicker[accId]
+            //points: this.userAccountRecord[accId].points - this.pointPicker[accId]
+            points : this.userAccountRecord[accId].points - this.totalPointCost
           }
           // console.log(accountToUpdate);
           this.accountService.setPoints(accountToUpdate).subscribe();
@@ -295,7 +296,7 @@ export class ShoppingCartComponent implements OnInit {
       for (let cItem of this.activeCart.cartItems) {
         for (let product of this.products) {
           if (product.id == cItem.productId) {
-            this.totalPointCost += product.unitPrice * cItem.quantity;
+            this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
             break;
           }
         }
@@ -317,7 +318,7 @@ export class ShoppingCartComponent implements OnInit {
         points += this.pointPicker[accId];
       }
     }
-    if (points == this.totalPointCost) {
+    if (points >= this.totalPointCost) {
       this.successfulPurchase = true;
     } else {
       this.successfulPurchase = false;

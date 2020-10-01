@@ -67,10 +67,16 @@
 			</div>
 			<div class="col-12 col-md-6 mb-2">
 				<span class="text-danger" *ngIf="userType==='admin'"></span>
-				<strong *ngIf="userType==='admin'; else pointsBlock">Discount Price:</strong>
-				<ng-template #pointsBlock><span>Discount Price:</span></ng-template>
+				<strong *ngIf="userType==='admin'; else pointsBlock">Discounted Amount:</strong>
+				<ng-template #pointsBlock><span>Discounted Amount:</span></ng-template>
 				<input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" required min="0" pattern="([0-9]+)">
 			</div>
+			<!-- <div class="col-12 col-md-6 mb-2">
+				<span class="text-danger" *ngIf="userType==='admin'"></span>
+				<strong *ngIf="userType==='admin'; else pointsBlock">Total Price:</strong>
+				<ng-template #pointsBlock><span>Total Price:</span></ng-template>
+				{{updateProduct.totalPrice}}
+			</div> -->
 		</div>
 		<div class="mb-2">Color:
 			<input type="text" class="form-control form-control-sm" id="inputColor" name="color" formControlName="color">
