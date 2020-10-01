@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { User } from 'src/app/interfaces/user';
 import { AppComponent } from 'src/app/app.component';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/user/services/user.service';
 import { Router } from '@angular/router';
 import { timeout } from 'rxjs/operators';
 

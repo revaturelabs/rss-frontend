@@ -6,7 +6,7 @@ import { InventoryService } from '../../service/inventory.service';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cart } from 'src/app/interfaces/cart.model';
 import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/user/services/user.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
 import { CartItem } from 'src/app/interfaces/cart-item.model';

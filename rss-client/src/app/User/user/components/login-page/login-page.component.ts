@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/user/services/user.service';
 import { Statement } from '@angular/compiler';
 import { CheaterService } from 'src/app/services/cheater.service';
 

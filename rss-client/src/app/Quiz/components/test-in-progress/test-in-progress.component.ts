@@ -1,9 +1,9 @@
-import { UserService } from './../../../services/user.service';
+import { UserService } from '../../../User/user/services/user.service';
 import { ImageService } from './../../../services/image.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizService } from 'src/app/services/quiz.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { AccountService } from 'src/app/services/account.service';
+import { AccountService } from 'src/app/User/user/services/account.service';
 import { AppComponent } from 'src/app/app.component';
 import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
 import { CheaterService } from 'src/app/services/cheater.service';

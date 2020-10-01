@@ -2,7 +2,7 @@ import { QuizService } from './../../../services/quiz.service';
 import { QuizPageService } from './../../../Test/Quiz/quiz-page.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/user/services/user.service';
 import { User } from 'src/app/interfaces/user';
 
 @Component({

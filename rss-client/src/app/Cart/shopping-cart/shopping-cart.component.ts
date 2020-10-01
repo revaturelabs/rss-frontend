@@ -7,9 +7,9 @@ import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
 import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/user/services/user.service';
 import { Router } from '@angular/router';
-import { AccountService } from 'src/app/services/account.service';
+import { AccountService } from 'src/app/User/user/services/account.service';
 import { Account } from '../../interfaces/account'
 import { CartItem } from 'src/app/interfaces/cart-item.model';
 
