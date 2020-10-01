@@ -1,15 +1,15 @@
 import { ImageService } from './../../../services/image.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/interfaces/user';
-import { Account } from 'src/app/interfaces/account';
+import { UserService } from 'src/app/User/services/user.service';
+import { User } from 'src/app/User/models/user';
+import { Account } from 'src/app/User/models/account';
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators,
 } from '@angular/forms';
-import { AccountService } from 'src/app/services/account.service';
+import { AccountService } from 'src/app/User/services/account.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
@@ -132,6 +132,7 @@ export class AccountSettingsPageComponent implements OnInit {
 
   async submitForm() {
     const formValue = this.userProfileForm.value;
+    console.log(formValue);
     window.alert('Updated account information');
     this.userservice.updateInfo(formValue).subscribe((res) => {});
   }

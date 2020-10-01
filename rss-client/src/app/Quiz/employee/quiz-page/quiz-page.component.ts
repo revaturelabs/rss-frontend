@@ -1,15 +1,15 @@
-import { QuizPageService } from 'src/app/Test/Quiz/quiz-page.service';
+import { QuizPageService } from '../../service/quiz-page.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ImageService } from 'src/app/services/image.service';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { AppComponent } from 'src/app/app.component';
-import { QuizService } from 'src/app/services/quiz.service';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/interfaces/user';
-import { AccountService } from 'src/app/services/account.service';
-import { Account } from 'src/app/interfaces/account';
+import { QuizService } from '../../service/quiz.service';
+import { UserService } from 'src/app/User/services/user.service';
+import { User } from 'src/app/User/models/user';
+import { AccountService } from 'src/app/User/services/account.service';
+import { Account } from 'src/app/User/models/account';
 import { subscribeOn } from 'rxjs/operators';
-import { QuizSubmit } from 'src/app/interfaces/quizSubmit';
+import { QuizSubmit } from '../../models/quizSubmit';
 
 @Component({
   selector: 'quiz-page',

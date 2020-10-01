@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/User/models/user';
 import { Cart } from 'src/app/interfaces/cart.model';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/services/user.service';
 import { Product } from '../../app-inventory/class/product/product';
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 import { Router } from '@angular/router';

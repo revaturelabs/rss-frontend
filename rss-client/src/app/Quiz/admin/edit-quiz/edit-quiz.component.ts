@@ -1,9 +1,9 @@
-import { QuizService } from './../../../services/quiz.service';
-import { QuizPageService } from './../../../Test/Quiz/quiz-page.service';
+import { QuizService } from '../../service/quiz.service';
+import { QuizPageService } from '../../service/quiz-page.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/User/services/user.service';
+import { User } from 'src/app/User/models/user';
 
 @Component({
   selector: 'edit-quiz',

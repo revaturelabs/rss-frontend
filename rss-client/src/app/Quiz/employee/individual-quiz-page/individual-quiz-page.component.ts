@@ -1,7 +1,7 @@
-import { ImageService } from './../../../services/image.service';
+import { ImageService } from '../../../services/image.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { QuizService } from 'src/app/services/quiz.service';
+import { QuizService } from '../../service/quiz.service';
 import { AppComponent } from 'src/app/app.component';
 import { LowerCasePipe, TitleCasePipe } from '@angular/common';
 

@@ -1,13 +1,13 @@
 import { NgModule, Input } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AccountPageComponent } from './Account/components/account-page/account-page.component';
+import { AccountPageComponent } from './User/components/account-page/account-page.component';
 import { EarnpointsOverviewPageComponent } from './Earnpoints/components/earnpoints-overview-page/earnpoints-overview-page.component';
-import { QuizPageComponent } from './Quiz/components/quiz-page/quiz-page.component';
-import { AccountSettingsPageComponent } from './Account/components/account-settings-page/account-settings-page.component';
-import { IndividualQuizPageComponent } from './Quiz/components/individual-quiz-page/individual-quiz-page.component';
+import { QuizPageComponent } from './Quiz/employee/quiz-page/quiz-page.component';
+import { AccountSettingsPageComponent } from './User/components/account-settings-page/account-settings-page.component';
+import { IndividualQuizPageComponent } from './Quiz/employee/individual-quiz-page/individual-quiz-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
-import { LoginPageComponent } from './Login/login-page/login-page.component';
+import { LoginPageComponent } from './User/components/login-page/login-page.component';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
 import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
 import { AddItemComponent } from './app-inventory/components/add-item/add-item.component';

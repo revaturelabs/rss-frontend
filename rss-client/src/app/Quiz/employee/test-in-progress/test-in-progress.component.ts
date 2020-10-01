@@ -1,12 +1,12 @@
-import { UserService } from './../../../services/user.service';
-import { ImageService } from './../../../services/image.service';
+import { UserService } from '../../../User/services/user.service';
+import { ImageService } from '../../../services/image.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QuizService } from 'src/app/services/quiz.service';
+import { QuizService } from '../../service/quiz.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { AccountService } from 'src/app/services/account.service';
+import { AccountService } from 'src/app/User/services/account.service';
 import { AppComponent } from 'src/app/app.component';
 import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
-import { CheaterService } from 'src/app/services/cheater.service';
+import { CheaterService } from '../../service/cheater.service';
 import { Observer } from 'rxjs';
 
 @Component({

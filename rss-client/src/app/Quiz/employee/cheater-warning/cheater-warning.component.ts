@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { CheaterService } from 'src/app/services/cheater.service';
+import { CheaterService } from '../../service/cheater.service';
 
 /**
  * @title Warning dialog to display whenever the mouse leaves the browser window
@@ -13,7 +13,7 @@ import { CheaterService } from 'src/app/services/cheater.service';
 export class CheaterWarningComponent implements OnInit {
   open: boolean
   dialogRef
-  
+
   constructor(public dialog: MatDialog, private cheaterService: CheaterService) {
   }
 
@@ -32,7 +32,7 @@ export class CheaterWarningComponent implements OnInit {
     })
   }
 
-  
+
 
   openDialog() {
     this.dialogRef = this.dialog.open(DialogContent);

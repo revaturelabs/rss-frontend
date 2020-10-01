@@ -1,4 +1,4 @@
-import { User } from '../../interfaces/user';
+import { User } from '../../../User/models/user';
 import { LOGIN_USER, LOGOUT_USER } from '../actions/users.actions';
 
 export interface UserState {
