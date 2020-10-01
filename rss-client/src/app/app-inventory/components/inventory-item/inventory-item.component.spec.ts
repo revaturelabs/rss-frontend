@@ -35,7 +35,9 @@ describe('InventoryItemComponent', () => {
       image: 'tets image',
       quantity: 1,
       unitPrice: 1,
-      color: 'red'
+      color: 'red',
+      discounted : false,
+      discountedAmount : NaN
     }
     fixture.detectChanges();
   });

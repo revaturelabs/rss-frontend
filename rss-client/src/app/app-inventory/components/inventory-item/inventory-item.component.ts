@@ -35,7 +35,8 @@ export class InventoryItemComponent implements OnInit {
 	get image() { return this.updateProduct.get('image') }
 	get quantity() { return this.updateProduct.get('quantity') }
 	get unitPrice() { return this.updateProduct.get('unitPrice') }
-
+	get discountedAmount(){return this.updateProduct.get('discountAmount')}
+	get discounted(){return this.updateProduct.get('discounted')}
 	constructor(
 		private modalService: NgbModal,
 		public service: SortService,
@@ -62,6 +63,8 @@ export class InventoryItemComponent implements OnInit {
 			quantity: new FormControl(this.product.quantity, [Validators.required]),
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin }, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
+			discountedAmount: new FormControl({value:this.product.discountedAmount, disabled:this.admin}),
+			discounted : new FormControl({value : this.product.discounted, disabled:this.admin})
 		});
 
 		this.currentUser = this.userService.getCurrentUser();
@@ -174,6 +177,13 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	updateItem() {
+		if (this.updateProduct.get("discountedAmount").value !== null || this.updateProduct.get("discountedAmount").value !== 0){
+			console.log("discountPrice has a value");
+			this.updateProduct.get("discounted").setValue(true);
+			console.log(this.updateProduct.value);
+		} else {
+			console.log("discountPrice does not have a value")
+		}
 		if (this.updateProduct.valid) {
 			this.inventoryService
 				.updateProduct(this.updateProduct.value)
