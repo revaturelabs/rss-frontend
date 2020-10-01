@@ -1,3 +1,15 @@
 .rev_orange{
-    color: rgba(242, 105, 38);
+    color: #F26925;
+}
+
+input {
+    border: 0 0 1px 0;
+    line-height: 16px;
+    background-color: transparent;
+    padding: 3px 0 13px;
+}
+
+button {
+    color: #FFFFFF !important;
+    background-color: #72A4C2 !important;
 }

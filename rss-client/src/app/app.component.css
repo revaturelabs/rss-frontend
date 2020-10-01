@@ -1,8 +1,31 @@
 .breadcrumb{
-    background-color: #fff;
+    background-color: #474C55;
+    height: 40 px;
 }
 
-img {
-    width: 150px;
-    height: 50px;
+.breadcrumb-left{
+    width: 1025px;
+}
+
+.breadcrumb-links{
+    color: #FFFFFF;
+    font-size: larger;
+    font-family: futura-pt, sans-serif;
+}
+
+.breadcrumb-carat{
+    color: #FFFFFF;
+    padding: 8px;
+    font-size: 20px;
+    font-weight: bolder;
+    line-height: 22px;
+}
+
+.role-label{
+    color: #FFFFFF;
+    background-color: #3A3E44;
+    font-family: futura-pt, arial;
+    font-weight: bold;
+    font-size: small;
+    padding: 5px 10px 2px 10px;
 }
