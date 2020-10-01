@@ -49,7 +49,7 @@ export class QuizPageComponent implements OnInit {
         this.quizzesTaken = res;
       }
     });
-    this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
+    this.quizservice.getAllQuizzes().subscribe((res) =>(this.quizData = res));
   }
   ngAfterViewInit() {
     setTimeout(() => {

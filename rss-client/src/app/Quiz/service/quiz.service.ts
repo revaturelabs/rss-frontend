@@ -21,6 +21,7 @@ export class QuizService {
     quizId: 0,
     quizTopic: '',
     quizDescription: '',
+    quizTotalPoints:0,
     creatorEmail: '',
     subjectId: 0,
     subject: {
