@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CheaterService } from 'src/app/services/cheater.service';
+import { CheaterService } from '../../service/cheater.service';
 
 @Component({
   selector: 'app-invalid-quiz',
@@ -10,9 +10,9 @@ import { CheaterService } from 'src/app/services/cheater.service';
 export class InvalidQuizComponent implements OnInit {
 
   open: boolean
-  
+
   constructor(public dialog: MatDialog, private cheaterService: CheaterService) {}
-  
+
   ngOnInit(): void {
     this.cheaterService.invalidated.subscribe(e => {
       if (e) {

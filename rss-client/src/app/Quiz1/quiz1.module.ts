@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterPipe } from 'src/app/filter.pipe';
 
 import { AddQuizComponent } from './admin/add-quiz/add-quiz.component';
 import { EditQuizComponent } from './admin/edit-quiz/edit-quiz.component';
 import { QuizFormComponent } from './admin/quiz-form/quiz-form.component';
 
-import { CheaterWarningComponent } from './employee/cheater-warning/cheater-warning.component';
+import { CheaterWarningComponent, DialogContent } from './employee/cheater-warning/cheater-warning.component';
 import { IndividualQuizPageComponent } from './employee/individual-quiz-page/individual-quiz-page.component';
 import { InvalidQuizComponent, InvalidQuizDialogContent } from './employee/invalid-quiz/invalid-quiz.component';
 import { PostTestComponent } from './employee/post-test/post-test.component';
@@ -18,11 +23,11 @@ import { Questions } from './models/questions';
 import { Quiz } from './models/quiz';
 import { QuizSubmit } from './models/quizSubmit';
 import { Subject } from './models/subject';
-import { TestQuizPageData } from './models/test-quiz-page-data';
+import { TestQuizPage } from './models/test-quiz-page-data';
 
-import { CheaterService, DialogContent } from './service/cheater.service';
+import { CheaterService } from './service/cheater.service';
 import { QuizPageService } from './service/quiz-page.service';
-import { QuizService } from './service/quiz-service';
+import { QuizService } from './service/quiz.service';
 
 
 @NgModule({
@@ -38,14 +43,22 @@ import { QuizService } from './service/quiz-service';
     QuizPageComponent,
     TestInProgressComponent,
     DialogContent,
+    FilterPipe,
     InvalidQuizDialogContent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    NgbModalModule,
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers:[
     CheaterService,
     QuizPageService,
+    NgbActiveModal,
     QuizService
   ]
 })
