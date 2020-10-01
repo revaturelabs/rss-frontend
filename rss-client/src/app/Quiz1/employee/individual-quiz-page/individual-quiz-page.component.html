@@ -1,0 +1,15 @@
+<div class="container">
+  <!-- These items show pre-test -->
+  <div *ngIf="testProgress == 'pre-test'">
+    <pre-test (pushProgress)="updateprogress($event)" [config]="config">
+    </pre-test>
+  </div>
+  <!-- These items show during the test -->
+  <div *ngIf="testProgress == 'in-progress'">
+    <test-in-progress (pushProgress)="updateprogress($event)" [config]="config"></test-in-progress>
+  </div>
+  <!-- These items show after the test -->
+  <div *ngIf="testProgress == 'post-test'">
+    <post-test (pushProgress)="updateprogress($event)" [config]="config"></post-test>
+  </div>
+</div>
