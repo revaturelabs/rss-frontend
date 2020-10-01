@@ -1,3 +1,4 @@
+<!--first aspect of view that asks the admin which quiz to edit-->
 <div *ngIf="view == 'select'">
   <input [(ngModel)]="searchText" placeholder="search for a quiz" />
   <div class="list-group">
@@ -25,7 +26,7 @@
   </div>
 </div>
 
-<!-- Focused quiz form -->
+<!-- Focused quiz (quiz that was selected to edit)form -->
 <div *ngIf="view != 'select'">
   <div class="row">
     <div class="col-8">
