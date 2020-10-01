@@ -27,12 +27,13 @@
       <div>
         <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
         <br />
-        <b><em>Topic: </em></b
-        ><a routerLink="/quizzes/{{ quizdata.quizId }}">
-          {{ quizdata.quizTopic | titlecase }}</a
-        >
+        <b><em>Topic: </em></b><a routerLink="/quizzes/{{ quizdata.quizId }}">
+          {{ quizdata.quizTopic | titlecase }}
+        </a>
         <br />
         <b><em> Description: </em></b> {{ quizdata.quizDescription }}
+        <br />
+        <b><em> Points: </em> </b>{{quizdata.quizTotalPoints}}
       </div>
       <!-- Will Display which Quizzes are completed -->
       <!-- <div *ngIf="quiz ==  quizdata.quizId">
