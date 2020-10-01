@@ -70,6 +70,7 @@ export class AddQuizComponent implements OnInit {
   submitChanges() {
     //TODO: save focused quiz to the database
     //Group 2 change --> the real winner and what we need to change
+    this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     //this.focusedQuiz.quizTotalPoints = Number(sessionStorage.getItem('points'));
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
@@ -138,6 +139,8 @@ export class AddQuizComponent implements OnInit {
             // updates the total points available in this quiz
             this.updateTotal();
             this.validate();
+            //group 2 change
+            this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
           } else if (result.type == 'delete') {
             //TODO:remove question from database here
             this.focusedQuiz.questions = this.focusedQuiz.questions.filter(
@@ -155,11 +158,11 @@ export class AddQuizComponent implements OnInit {
     );
     // Group 2 change 
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
-    /*console.log("overall focused quiz points that we want for sure");
+    console.log("overall focused quiz points that we want for sure");
     console.log(this.focusedQuiz.quizTotalPoints);
     sessionStorage.setItem('points', String(this.focusedQuiz.quizTotalPoints));
     let quizPoints = sessionStorage.getItem('points');
-    console.log(quizPoints);*/
+    console.log(quizPoints);
   }
 
   private getDismissReason(reason: any): string {

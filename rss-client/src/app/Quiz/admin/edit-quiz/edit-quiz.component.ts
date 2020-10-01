@@ -48,6 +48,8 @@ export class EditQuizComponent implements OnInit {
   }
   submitChanges() {
     //TODO: finish this method in add-quiz and copy here.
+    //Group 2 Change
+    this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
@@ -120,6 +122,8 @@ export class EditQuizComponent implements OnInit {
             // updates the total points available in this quiz
             this.updateTotal();
             this.validate();
+            //Group 2 change
+            this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
           } else if (result.type == 'delete') {
             //TODO:remove question from database here
             this.quizService.deleteQuestion(result.value).subscribe();
