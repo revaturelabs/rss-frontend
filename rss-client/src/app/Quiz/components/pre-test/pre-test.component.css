@@ -1,0 +1,20 @@
+#startBtn {
+    background-color: #72A4C2;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.outer {
+    position: flex;
+    flex-direction: column;
+}
+
+.inner {
+    flex: 1 1;
+}
+
+.container {
+    position: flex;
+}
+
