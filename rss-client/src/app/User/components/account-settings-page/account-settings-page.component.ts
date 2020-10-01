@@ -1,15 +1,15 @@
-import { ImageService } from './../../../../services/image.service';
+import { ImageService } from './../../../services/image.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/User/user/services/user.service';
-import { User } from 'src/app/interfaces/user';
-import { Account } from 'src/app/interfaces/account';
+import { UserService } from 'src/app/User/services/user.service';
+import { User } from 'src/app/User/models/user';
+import { Account } from 'src/app/User/models/account';
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators,
 } from '@angular/forms';
-import { AccountService } from 'src/app/User/user/services/account.service';
+import { AccountService } from 'src/app/User/services/account.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({

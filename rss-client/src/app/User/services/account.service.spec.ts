@@ -4,8 +4,8 @@ import { AccountService } from './account.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../interfaces/user';
-import { Account } from '../interfaces/account'
+import { User } from '../models/user';
+import { Account } from '../models/account'
 
 let httpClientSpy : {get: jasmine.Spy};
 let accountService : AccountService;

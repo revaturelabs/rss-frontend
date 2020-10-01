@@ -6,11 +6,11 @@ import { InventoryService } from '../../app-inventory/service/inventory.service'
 import { Cart } from 'src/app/interfaces/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
-import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/User/user/services/user.service';
+import { User } from 'src/app/User/models/user';
+import { UserService } from 'src/app/User/services/user.service';
 import { Router } from '@angular/router';
-import { AccountService } from 'src/app/User/user/services/account.service';
-import { Account } from '../../interfaces/account'
+import { AccountService } from 'src/app/User/services/account.service';
+import { Account } from '../../User/models/account'
 import { CartItem } from 'src/app/interfaces/cart-item.model';
 
 

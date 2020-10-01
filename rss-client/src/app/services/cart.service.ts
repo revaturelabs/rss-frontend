@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Cart } from '../interfaces/cart.model';
 import { Observable, of, Subject } from 'rxjs';
 import { isEmpty } from 'rxjs/operators';
-import { User } from '../interfaces/user';
+import { User } from '../User/models/user';
 import { CartItem } from '../interfaces/cart-item.model';
 import { environment } from 'src/environments/environment';
 

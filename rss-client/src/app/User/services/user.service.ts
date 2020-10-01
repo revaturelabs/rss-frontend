@@ -1,7 +1,7 @@
 import { Injectable, Inject, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { User } from '../../../interfaces/user';
+import { User } from '../models/user';
 import { Store } from '@ngrx/store';
 import {
   SESSION_STORAGE,

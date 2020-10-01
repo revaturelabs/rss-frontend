@@ -9,7 +9,7 @@ import { SortService } from '../../service/sort.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
-import { UserService } from 'src/app/User/user/services/user.service';
+import { UserService } from 'src/app/User/services/user.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({

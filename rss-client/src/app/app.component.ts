@@ -1,8 +1,8 @@
 import { QuizService } from './services/quiz.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { User } from './interfaces/user';
+import { User } from './User/models/user';
 import { Subscription } from 'rxjs';
-import { UserService } from './User/user/services/user.service';
+import { UserService } from './User/services/user.service';
 import { CheaterService } from './services/cheater.service';
 
 @Component({

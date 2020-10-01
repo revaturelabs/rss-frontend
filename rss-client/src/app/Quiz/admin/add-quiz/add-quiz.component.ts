@@ -1,7 +1,7 @@
 import { QuizService } from '../../service/quiz.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from 'src/app/User/user/services/user.service';
+import { UserService } from 'src/app/User/services/user.service';
 
 @Component({
   selector: 'add-quiz',

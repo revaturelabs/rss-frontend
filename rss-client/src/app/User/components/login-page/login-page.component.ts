@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/User/user/services/user.service';
+import { User } from 'src/app/User/models/user';
+import { UserService } from 'src/app/User/services/user.service';
 import { Statement } from '@angular/compiler';
 import { CheaterService } from 'src/app/services/cheater.service';
 
