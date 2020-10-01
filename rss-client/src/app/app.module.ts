@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './filter.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,8 +33,6 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CheaterWarningComponent, DialogContent } from './Quiz/components/cheater-warning/cheater-warning.component';
-import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
 import { InvalidQuizComponent, InvalidQuizDialogContent } from './Quiz/components/invalid-quiz/invalid-quiz.component';
 
 @NgModule({
@@ -74,9 +72,7 @@ import { InvalidQuizComponent, InvalidQuizDialogContent } from './Quiz/component
     FormsModule,
     StoreModule.forRoot(reducer, {}),
     AppInventoryModule,
-    NoopAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
+    NoopAnimationsModule
   ],
   providers: [
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
