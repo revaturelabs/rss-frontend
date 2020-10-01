@@ -23,6 +23,7 @@
 					<th scope="col" sortable="description" (sort)="onSort($event)">Description</th>
 					<th scope="col" sortable="quantity" (sort)="onSort($event)">Quantity</th>
 					<th scope="col" sortable="unitPrice" (sort)="onSort($event)">Price</th>
+					<th scope="col" sortable="discountedAmount" (sort)="onSort($event)">Discounted</th>
 					<th scope="col" sortable="brand" (sort)="onSort($event)">Brand</th>
 					<th scope="col" sortable="model" (sort)="onSort($event)">Model</th>
 					<th scope="col" sortable="category" (sort)="onSort($event)">Category</th>
@@ -52,6 +53,11 @@
 						<ngb-highlight [result]="product.unitPrice | number" [term]="service.searchTerm">
 						</ngb-highlight>
 						<p class="text-sm m-0"><strong>Points</strong></p>
+					</td>
+					<td>
+						<ngb-highlight [result]="product.discountedAmount| number" [term]="service.searchTerm">
+						</ngb-highlight>
+						<p class="text-sm m-0"><strong>Discounted Points</strong></p>
 					</td>
 					<td>
 						<ngb-highlight [result]="product.brand" [term]="service.searchTerm"></ngb-highlight>
