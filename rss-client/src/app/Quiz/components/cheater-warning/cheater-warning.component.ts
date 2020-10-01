@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CheaterService } from 'src/app/services/cheater.service';
 
 /**
@@ -14,7 +14,7 @@ export class CheaterWarningComponent implements OnInit {
   open: boolean
   dialogRef
   
-  constructor(public dialog: MatDialog, private cheaterService: CheaterService) {
+  constructor(private dialog: NgbModal, private cheaterService: CheaterService) {
   }
 
   ngOnInit(): void {
