@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { FilterPipe } from './filter.pipe';
+// import { FilterPipe } from './Quiz1/filter.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { QuizPageComponent } from './Quiz/components/quiz-page/quiz-page.component';
@@ -18,7 +18,7 @@ import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.compon
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducers/user.reducer';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
-// import { AdminQuizComponent } from './Admin/admin-quiz/admin-quiz.component';
+import { AdminQuizComponent } from './Admin/admin-quiz/admin-quiz.component';
 import { AdminInventoryComponent } from './Admin/admin-inventory/admin-inventory.component';
 // import { AddQuizComponent } from './Quiz/admin/add-quiz/add-quiz.component';
 // import { EditQuizComponent } from './Quiz/admin/edit-quiz/edit-quiz.component';
@@ -41,13 +41,13 @@ import { Quiz1Module } from './Quiz1/quiz1.module';
     EarnpointsOverviewPageComponent,
     LandingPageComponent,
     // IndividualQuizPageComponent,
-    FilterPipe,
+    // FilterPipe,
     // PreTestComponent,
     // TestInProgressComponent,
     // PostTestComponent,
     ShoppingCartComponent,
     AdminPageComponent,
-    // AdminQuizComponent,
+    AdminQuizComponent,
     AdminInventoryComponent,
     // AddQuizComponent,
     // EditQuizComponent,

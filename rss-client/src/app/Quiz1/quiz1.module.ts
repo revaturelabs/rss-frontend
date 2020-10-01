@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { FilterPipe } from 'src/app/filter.pipe';
+import { FilterPipe } from './filter.pipe';
 
 import { AddQuizComponent } from './admin/add-quiz/add-quiz.component';
 import { EditQuizComponent } from './admin/edit-quiz/edit-quiz.component';
@@ -53,13 +54,18 @@ import { QuizService } from './service/quiz.service';
     NgbModule,
     NgbModalModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule
   ],
   providers:[
     CheaterService,
     QuizPageService,
     NgbActiveModal,
     QuizService
+  ],
+  exports:[
+    AddQuizComponent,
+    EditQuizComponent
   ]
 })
 export class Quiz1Module { }

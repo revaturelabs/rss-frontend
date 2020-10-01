@@ -132,6 +132,7 @@ export class AccountSettingsPageComponent implements OnInit {
 
   async submitForm() {
     const formValue = this.userProfileForm.value;
+    console.log(formValue);
     window.alert('Updated account information');
     this.userservice.updateInfo(formValue).subscribe((res) => {});
   }
