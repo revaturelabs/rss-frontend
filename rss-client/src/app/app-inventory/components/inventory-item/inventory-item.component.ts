@@ -177,12 +177,14 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	updateItem() {
-		if (this.updateProduct.get("discountedAmount").value !== null || this.updateProduct.get("discountedAmount").value !== 0){
+		if (this.updateProduct.get("discountedAmount").value !== null || this.updateProduct.get("discountedAmount").value != 0){
 			console.log("discountPrice has a value");
 			this.updateProduct.get("discounted").setValue(true);
 			console.log(this.updateProduct.value);
 		} else {
-			console.log("discountPrice does not have a value")
+			console.log("discountPrice does not have a value");
+			this.updateProduct.get("discounted").setValue(false);
+			console.log(this.updateProduct.value);
 		}
 		if (this.updateProduct.valid) {
 			this.inventoryService
