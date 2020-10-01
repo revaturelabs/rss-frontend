@@ -1,61 +1,46 @@
-<div>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg" style="background-color: white; border-bottom: 2px solid #474c55;">
-      <a class="navbar-brand" routerLink="/">
-        <img src="https://i.imgur.com/j0xqO7e.png" alt="Revature Logo" />
-      </a>
+<div class="container">
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" routerLink="/">
+      <img src="./assets/Images/logo.png" alt="Revature Logo" />
+    </a>
 
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="" (click)="onHome()">Home <span class="sr-only">(current)</span></a>
-        </li>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a id="homeLink" class="nav-link" routerLink="" (click)="ifHome()">Home <span class="sr-only">(current)</span></a>
+      </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/inventory/inventory-list">Store</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/earnpoints">Earn Points</a>
-        </li>
+      <li class="nav-item">
+        <a id="storeLink" class="nav-link" routerLink="/inventory/inventory-list"
+          (click)="currentRoute('store')">Store</a>
+      </li>
+      <li class="nav-item">
+        <a id="earnpointsLink" class="nav-link" routerLink="/earnpoints" (click)="currentRoute('earnpoints')">Earn Points</a>
+      </li>
 
-        <!-- temporary links -->
-        <li class="nav-item" *ngIf="!currentUser.admin">
-          <a class="nav-link" routerLink="/cart">Cart</a>
-        </li>
-        <li class="nav-item" *ngIf="!currentUser.admin">
-          <a class="nav-link" routerLink="/selectcart">Select Cart</a>
-        </li>
+      <!-- temporary links -->
+      <li class="nav-item" *ngIf="!currentUser.admin">
+        <a id="cartLink" class="nav-link" routerLink="/cart" (click)="currentRoute('cart')">Cart</a>
+      </li>
+      <li class="nav-item" *ngIf="!currentUser.admin">
+        <a id="selectcartLink" class="nav-link" routerLink="/selectcart" (click)="currentRoute('selectcart')">Select Cart</a>
+      </li>
+    </ul>
 
-      </ul>
-
-      <!-- Access to User Options.-->
-      <div class="justify-content-end">
-        <div class="btn-group dropleft">
-          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false" style="color: white; background-color: #f26925;">
-            {{ currentUser.firstName | titlecase }}
-          </button>
-          <!-- <a
-            class="btn dropdown-toggle"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            style="color: white; background-color: #F26925;"
-          >
-            {{ currentUser.firstName }}
-          </a> -->
-
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" routerLink="/account/settings">Account Settings</a>
-            <div *ngIf="currentUser.admin == true">
-              <a class="dropdown-item" routerLink="/admin">Admin Settings</a>
-            </div>
-            <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
-          </div>
+    <!-- Access to User Options.-->
+    <div class="justify-content-end">
+      <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle settings" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{ currentUser.firstName | titlecase }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" routerLink="/account/settings">Account Settings</a>
+          <ng-container *ngIf="currentUser.admin == true">
+            <a class="dropdown-item" routerLink="/admin">Admin Settings</a>
+          </ng-container>
+          <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </div>

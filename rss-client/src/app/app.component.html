@@ -3,7 +3,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg" style="background-color: white; border-bottom: 2px solid #474C55;">
         <a class="navbar-brand" routerLink="/">
-          <img src="https://i.imgur.com/j0xqO7e.png" alt="Revature Logo" />
+          <img src="./assets/Images/logo.png" alt="Revature Logo" />
         </a>
       </nav>
     </div>
@@ -14,23 +14,20 @@
   <header [config]="headerConfig" [currentUser]="user" (isLoggedIn)="changeLoginStatus(false)"></header>
   <div class="">
     <div class="container">
-      <div class="row" aria-label="breadcrumb">
-        <div class="col-6">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a routerLink="" (click)="onHome()">{{ rootPage }}</a>
-            </li>
-            <li id="breadCrumbNav" class="breadcrumb-item active" *ngFor="let breadCrumb of breadcrumbs; index as i"
-              aria-current="page">
-              <a [routerLink]="routerCrumbs[i]">{{ breadCrumb }}</a>
-              <!--<a routerLink="{{ routerCrumbs[i] }}">{{ breadCrumb }}</a>-->
-            </li>
-          </ol>
+      <div class="row breadcrumb" aria-label="breadcrumb">
+        <div class="breadcrumb-left">
+          <a routerLink="" (click)="onHome()" class="breadcrumb-links">{{ rootPage }}</a>
+          <ng-container id="breadCrumbNav" class="breadcrumb-item active"
+            *ngFor="let breadCrumb of breadcrumbs; index as i" aria-current="page">
+            <span class="breadcrumb-carat">></span> <a [routerLink]="routerCrumbs[i]"
+              class="breadcrumb-links">{{ breadCrumb }}</a>
+          </ng-container>
         </div>
-        <div *ngIf="user.admin == true" class="offset-5 col-1">Admin</div>
-        <div *ngIf="user.admin == false" class="offset-5 col-1">Employee</div>
+        <ng-container>
+          <span *ngIf="user.admin == true" class="role-label">Admin</span>
+          <span *ngIf="user.admin == false" class="role-label">Employee</span>
+        </ng-container>
       </div>
+      <router-outlet></router-outlet>
     </div>
-    <router-outlet></router-outlet>
   </div>
-</div>
