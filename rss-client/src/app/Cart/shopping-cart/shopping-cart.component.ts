@@ -3,15 +3,15 @@ import { HostListener, Component, OnInit } from '@angular/core';
 import { Product } from '../../app-inventory/models/product.model';
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 
-import { Cart } from 'src/app/interfaces/cart.model';
-import { CartService } from 'src/app/services/cart.service';
-import { CartItemService } from 'src/app/services/cart-item.service';
+import { Cart } from 'src/app/Cart/models/cart.model';
+import { CartService } from 'src/app/Cart/services/cart.service';
+import { CartItemService } from 'src/app/Cart/services/cart-item.service';
 import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/User/services/account.service';
 import { Account } from '../../User/models/account'
-import { CartItem } from 'src/app/interfaces/cart-item.model';
+import { CartItem } from 'src/app/Cart/models/cart-item.model';
 
 
 @Component({

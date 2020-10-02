@@ -1,4 +1,4 @@
-import { ImageService } from '../../../services/image.service';
+import { ImageService } from 'src/app/User/services/image.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../service/quiz.service';

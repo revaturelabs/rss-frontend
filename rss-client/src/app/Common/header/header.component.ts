@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
+import { BreadcrumbService } from 'src/app/Common/services/breadcrumb.service';
 import { User } from 'src/app/User/models/user';
 import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/User/services/user.service';

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
 import { Statement } from '@angular/compiler';
-import { CheaterService } from 'src/app/services/cheater.service';
+import { CheaterService } from 'src/app/Quiz/service/cheater.service';
 
 @Component({
   selector: 'login-page',

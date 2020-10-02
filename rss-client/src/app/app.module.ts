@@ -11,9 +11,9 @@ import { LandingPageComponent } from './LandingPage/components/landing-page/land
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './LandingPage/Auth/reducers/user.reducer';
-import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
-import { AdminQuizComponent } from './Admin/admin-quiz/admin-quiz.component';
-import { AdminInventoryComponent } from './Admin/admin-inventory/admin-inventory.component';
+// import { AdminPageComponent } from './User/Admin/admin-page/admin-page.component';
+// import { AdminQuizComponent } from './User/Admin/admin-quiz/admin-quiz.component';
+// import { AdminInventoryComponent } from './User/Admin/admin-inventory/admin-inventory.component';
 import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
 import { UserModule } from './User/user.module';
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
@@ -29,9 +29,9 @@ import { Quiz1Module } from './Quiz/quiz1.module';
     EarnpointsOverviewPageComponent,
     LandingPageComponent,
     ShoppingCartComponent,
-    AdminPageComponent,
-    AdminQuizComponent,
-    AdminInventoryComponent,
+    // AdminPageComponent,
+    // AdminQuizComponent,
+    // AdminInventoryComponent,
     SelectCartComponent,
   ],
   imports: [

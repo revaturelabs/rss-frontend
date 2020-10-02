@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/Cart/services/cart.service';
 import { User } from 'src/app/User/models/user';
-import { Cart } from 'src/app/interfaces/cart.model';
+import { Cart } from 'src/app/Cart/models/cart.model';
 import { UserService } from 'src/app/User/services/user.service';
 import { Product } from 'src/app/app-inventory/models/product.model';
 import { InventoryService } from '../../app-inventory/service/inventory.service';

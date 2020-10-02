@@ -4,12 +4,12 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Cart } from 'src/app/interfaces/cart.model';
+import { Cart } from 'src/app/cart/models/cart.model';
 import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
-import { CartService } from 'src/app/services/cart.service';
-import { CartItemService } from 'src/app/services/cart-item.service';
-import { CartItem } from 'src/app/interfaces/cart-item.model';
+import { CartService } from 'src/app/Cart/services/cart.service';
+import { CartItemService } from 'src/app/Cart/services/cart-item.service';
+import { CartItem } from 'src/app/Cart/models/cart-item.model';
 
 @Component({
 	selector: 'app-inventory-item',

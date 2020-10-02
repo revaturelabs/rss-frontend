@@ -1,7 +1,7 @@
 import { QuizPageService } from '../../service/quiz-page.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { ImageService } from 'src/app/services/image.service';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
+import { ImageService } from 'src/app/User/services/image.service';
+import { BreadcrumbService } from 'src/app/Common/services/breadcrumb.service';
 import { AppComponent } from 'src/app/app.component';
 import { QuizService } from '../../service/quiz.service';
 import { UserService } from 'src/app/User/services/user.service';

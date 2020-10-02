@@ -1,5 +1,5 @@
 import { UserService } from '../../../User/services/user.service';
-import { ImageService } from '../../../services/image.service';
+import { ImageService } from 'src/app/User/services/image.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizService } from '../../service/quiz.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';

@@ -8,7 +8,7 @@ import { IndividualQuizPageComponent } from './Quiz/employee/individual-quiz-pag
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { LoginPageComponent } from './User/components/login-page/login-page.component';
-import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
+import { AdminPageComponent } from './User/Admin/admin-page/admin-page.component';
 import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
 import { AddItemComponent } from './app-inventory/components/add-item/add-item.component';
 import { InventoryListComponent } from './app-inventory/components/inventory-list/inventory-list.component';
