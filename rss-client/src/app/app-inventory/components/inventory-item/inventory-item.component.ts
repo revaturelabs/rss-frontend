@@ -4,7 +4,7 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Cart } from 'src/app/cart/models/cart.model';
+import { Cart } from 'src/app/Cart/models/cart.model';
 import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
 import { CartService } from 'src/app/Cart/services/cart.service';

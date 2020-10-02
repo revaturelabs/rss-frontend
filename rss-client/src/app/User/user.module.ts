@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
+import { Quiz1Module } from '../Quiz/quiz1.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -36,7 +37,8 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
     NgbModalModule,
     HttpClientModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    Quiz1Module
   ],
   providers:[
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },

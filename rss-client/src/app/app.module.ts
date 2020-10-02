@@ -8,13 +8,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './Common/header/header.component';
 import { EarnpointsOverviewPageComponent } from './Earnpoints/components/earnpoints-overview-page/earnpoints-overview-page.component';
 import { LandingPageComponent } from './LandingPage/components/landing-page/landing-page.component';
-import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './LandingPage/Auth/reducers/user.reducer';
-// import { AdminPageComponent } from './User/Admin/admin-page/admin-page.component';
-// import { AdminQuizComponent } from './User/Admin/admin-quiz/admin-quiz.component';
-// import { AdminInventoryComponent } from './User/Admin/admin-inventory/admin-inventory.component';
-import { SelectCartComponent } from './Cart/select-cart/select-cart.component';
+import { CartModule } from './Cart/cart.module';
 import { UserModule } from './User/user.module';
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,12 +23,7 @@ import { Quiz1Module } from './Quiz/quiz1.module';
     AppComponent,
     HeaderComponent,
     EarnpointsOverviewPageComponent,
-    LandingPageComponent,
-    ShoppingCartComponent,
-    // AdminPageComponent,
-    // AdminQuizComponent,
-    // AdminInventoryComponent,
-    SelectCartComponent,
+    LandingPageComponent
   ],
   imports: [
     UserModule,
@@ -47,10 +38,10 @@ import { Quiz1Module } from './Quiz/quiz1.module';
     NoopAnimationsModule,
     MatDialogModule,
     MatButtonModule,
-    Quiz1Module
+    Quiz1Module,
+    CartModule
   ],
   providers: [
-    SelectCartComponent,
     NgbActiveModal
   ],
   bootstrap: [AppComponent],
