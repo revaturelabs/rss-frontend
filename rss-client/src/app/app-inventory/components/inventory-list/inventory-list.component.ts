@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Product } from '../../class/product/product';
+import { Product } from '../../models/product.model';
 import { InventoryService } from '../../service/inventory.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';

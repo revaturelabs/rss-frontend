@@ -1,6 +1,6 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 // temporary fake products
-import { Product } from '../../app-inventory/class/product/product';
+import { Product } from '../../app-inventory/models/product.model';
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 
 import { Cart } from 'src/app/interfaces/cart.model';
