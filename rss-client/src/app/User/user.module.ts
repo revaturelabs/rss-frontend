@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AccountSettingsPageComponent } from './components/account-settings-page/account-settings-page.component';
 import { AccountPageComponent } from './components/account-page/account-page.component';
 import { AccountService } from './services/account.service';
