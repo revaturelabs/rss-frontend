@@ -1,34 +1,31 @@
-<div class="text-center my-2 p-2 container">
-  <div class="side">
-    <div class="row">
-      <div class="text-left col-6">
-        <div class="my-2 p-2">
-          <h2>Topic -- {{ config.quizTopic | titlecase }}</h2>
-        </div>
-        <!-- Quiz description -->
-        <div class="my-2 p-2">
-          <h2>Description</h2>
-          <p>{{ config.quizDescription }}</p>
-        </div>
-        <!-- Quiz Instruction from an array of instructions-->
-        <div class="my-2 p-2">
-          <h2>Instructions</h2>
-          <p>You will need to complete these
-            questions in an amount of time alloted by your instructor. No
-            cheating.</p>
-        </div>
+<div class="my-2 p-2 container">
+  <section class="row">
+    <div class="col-8">
+      <div class="my-2 p-2">
+        <h2>Topic -- {{ config.quizTopic | titlecase }}</h2>
+      </div>
+      <!-- Quiz description -->
+      <div class="my-2 p-2">
+        <h2>Description</h2>
+        <p>{{ config.quizDescription }}</p>
+      </div>
+      <!-- Quiz Instruction from an array of instructions-->
+      <div class="my-2 p-2">
+        <h2>Instructions</h2>
+        <p>You will need to complete these
+          questions in an amount of time alloted by your instructor. No
+          cheating.</p>
       </div>
     </div>
-  </div>
 
-  <div class="side">
-    <div class="outer">
-      <div class="inner">Details</div>
-      <div class="inner">
-        <p>No. of Attempts: </p>
-        <p>Pass Percentage: 70%</p>
+    <aside class="col-4 p-4">
+      <h3>Details</h3>
+      <h4>No. of Attempts: </h4>
+      <p>Pass Percentage: 70%</p>
+      <div class="text-center">
+        <button class="btn btn-lg" id="startBtn" (click)="onEvent()">Start</button>
       </div>
-      <div class="inner"><button class="btn" id="startBtn" (click)="onEvent()">Start</button></div>
-    </div>
-  </div>
+    </aside>
+  </section>
+
 </div>
