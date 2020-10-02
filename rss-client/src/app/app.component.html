@@ -12,14 +12,13 @@
 </div>
 <div *ngIf="isLoggedIn == true">
   <header [config]="headerConfig" [currentUser]="user" (isLoggedIn)="changeLoginStatus(false)"></header>
-  <div class="">
     <div class="container">
-      <div class="row breadcrumb" aria-label="breadcrumb">
+      <section class="row breadcrumb" aria-label="breadcrumb">
         <div class="breadcrumb-left">
-          <a routerLink="" (click)="onHome()" class="breadcrumb-links">{{ rootPage }}</a>
+          <a routerLink="" (click)="onHome()" class="breadcrumb-links"><i class="fas fa-home"></i></a>
           <ng-container id="breadCrumbNav" class="breadcrumb-item active"
             *ngFor="let breadCrumb of breadcrumbs; index as i" aria-current="page">
-            <span class="breadcrumb-carat">></span> <a [routerLink]="routerCrumbs[i]"
+            <span class="breadcrumb-carat"><i class="fas fa-angle-right"></i></span> <a [routerLink]="routerCrumbs[i]"
               class="breadcrumb-links">{{ breadCrumb }}</a>
           </ng-container>
         </div>
@@ -27,7 +26,6 @@
           <span *ngIf="user.admin == true" class="role-label">Admin</span>
           <span *ngIf="user.admin == false" class="role-label">Employee</span>
         </ng-container>
-      </div>
+      </section>
       <router-outlet></router-outlet>
-    </div>
   </div>

@@ -13,40 +13,15 @@
         <div class="quizDetails">
           <h1>{{ quizdata.subject.subjectName | titlecase }}</h1>
           <h2>{{ quizdata.quizTopic | titlecase }}</h2>
-          <p>{{ quizdata.quizDescription }}</p>
+          <p>
+            {{ quizdata.quizDescription }}<br/>
+            <b>Points: </b>{{quizdata.quizTotalPoints}}
+          </p>
           <a class="btn" id="detailsBtn" routerLink="/quizzes/{{ quizdata.quizId }}">Details</a>
         </div>
       </section>
     </ng-container>
   </div>
-  <!--This is the list of quizzes -->
-  <ol class="col-6 offset-3">
-    <li
-      class="border p-2 my-2"
-      *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText"
-    >
-      <div>
-        <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
-        <br />
-        <b><em>Topic: </em></b><a routerLink="/quizzes/{{ quizdata.quizId }}">
-          {{ quizdata.quizTopic | titlecase }}
-        </a>
-        <br />
-        <b><em> Description: </em></b> {{ quizdata.quizDescription }}
-        <br />
-        <b><em> Points: </em> </b>{{quizdata.quizTotalPoints}}
-      </div>
-      <!-- Will Display which Quizzes are completed -->
-      <!-- <div *ngIf="quiz ==  quizdata.quizId">
-          <div class=""><b><em><u>Completed</u></em></b></div>
-          <b><em>Subject: </em></b>{{ quizdata.subject.subjectName | titlecase }}
-          <br />
-          <b><em>Topic: </em></b><span>{{quizdata.quizTopic | titlecase}}</span>
-          <br />
-          <b><em> Description: </em></b> {{ quizdata.quizDescription }}
-        </div> -->
-    </li>
-  </ol>
 </div>
 <div *ngIf="!evalAccount" class="text-center">
   <a routerLink="/account/settings">

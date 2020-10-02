@@ -9,6 +9,7 @@ import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-
 import { CheaterService } from 'src/app/services/cheater.service';
 import { Observer } from 'rxjs';
 
+
 @Component({
   selector: 'test-in-progress',
   templateUrl: './test-in-progress.component.html',

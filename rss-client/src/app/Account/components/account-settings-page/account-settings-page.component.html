@@ -11,20 +11,26 @@
           <img *ngIf="imagePreview" [src]="imagePreview" class="img-thumbnail" alt="Image preview"
             style="height: -webkit-fill-available;" />
         </div>
-        <div class="text-center">
           <form>
-            <input type="file" id="fileInput" name="profilePic" accept="image/*" (change)="onFileChanged($event)" />
-            <button class="d-block btn btn-outline-light" [disabled]="!imagePreview" type="submit" id="btn1"
-              (click)="onUpload()">Submit</button>
-            <div class="clearfix"></div>
+            <div class="input-group">
+              <div class="custom-file">
+                <input class="custom-file-input" type="file" id="fileInput" name="profilePic" accept="image/*"
+                  (change)="onFileChanged($event)" />
+                <label class="custom-file-label" for="fileInput">Choose file</label>
+              </div>
+              <div class="input-group-append">
+                <button class="d-block btn btn-outline-light" [disabled]="!imagePreview" type="submit" id="btn1"
+                  (click)="onUpload()">Upload</button>
+              </div>
+            </div>
           </form>
-        </div>
       </div>
       <form [formGroup]="userProfileForm">
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" for="firstNameField">First Name: </label>
           <div class="col-sm-9">
-            <input id="firstNameField" class="form-control" type="text" formControlName="firstName" placeholder="Enter first name..." />
+            <input id="firstNameField" class="form-control" type="text" formControlName="firstName"
+              placeholder="Enter first name..." />
           </div>
           <ng-container *ngIf="firstName.touched && firstName.invalid" class="alert alert-danger">
             <div *ngIf="firstName.errors.required">First name is required</div>
@@ -33,8 +39,9 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" for="lastNameField">Last Name: </label>
           <div class="col-sm-9">
-            <input id="lastNameField" class="form-control" type="text" formControlName="lastName" placeholder="Enter last name..." />
-          </div> 
+            <input id="lastNameField" class="form-control" type="text" formControlName="lastName"
+              placeholder="Enter last name..." />
+          </div>
           <ng-container *ngIf="lastName.touched && lastName.invalid" class="alert alert-danger">
             <div *ngIf="lastName.errors.required">Last name is required</div>
           </ng-container>
@@ -42,7 +49,8 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" for="emailField">Email: </label>
           <div class="col-sm-9">
-            <input id="emailField" class="form-control" type="text" formControlName="email" placeholder="Enter email..." />
+            <input id="emailField" class="form-control" type="text" formControlName="email"
+              placeholder="Enter email..." />
           </div>
           <ng-container *ngIf="email.touched && email.invalid" class="alert alert-danger">
             <div *ngIf="email.errors.required">Email is required</div>
@@ -51,12 +59,14 @@
         </div>
       </form>
       <br />
-      <button type="submit" [disabled]="!userProfileForm.valid" (click)="submitForm()" class="btn">Update Changes</button>
+      <button type="submit" [disabled]="!userProfileForm.valid" (click)="submitForm()" class="btn">Update
+        Changes</button>
     </div>
     <div class="col-6">
       <div class="row">
         <div class="col-12">
-          <button *ngIf="!evalAccount" type="submit" class="m-2 btn" (click)="createAccount('Eval')">Link To Your Eval</button>
+          <button *ngIf="!evalAccount" type="submit" class="m-2 btn" (click)="createAccount('Eval')">Link To Your
+            Eval</button>
           <h4 *ngIf="evalAccount">
             You have <span class="rev_orange">{{ evalAccount.points }}</span> points from the quizzes you have taken
           </h4>
@@ -64,12 +74,15 @@
           <h4 *ngIf="bugAccount">
             You have <span class="rev_orange">{{ bugAccount.points }}</span> points from the bugs you have squashed
           </h4>
-          <button *ngIf="!bugAccount" type="submit" class="m-2 btn" (click)="createAccount('Bug')">Link To Your Bug Bounty</button>
+          <button *ngIf="!bugAccount" type="submit" class="m-2 btn" (click)="createAccount('Bug')">Link To Your Bug
+            Bounty</button>
           <br />
           <h4 *ngIf="overflowAccount">
-            You have <span class="rev_orange">{{ overflowAccount.points }}</span> points from the questions you've answered
+            You have <span class="rev_orange">{{ overflowAccount.points }}</span> points from the questions you've
+            answered
           </h4>
-          <button *ngIf="!overflowAccount" type="submit" class="m-2 btn" (click)="createAccount('Overflow')">Link To Your Rev OverFlow</button>
+          <button *ngIf="!overflowAccount" type="submit" class="m-2 btn" (click)="createAccount('Overflow')">Link To
+            Your Rev OverFlow</button>
           <hr />
           <div class="row">
             <div class="justify-content-center col-12">
