@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
+
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AccountSettingsPageComponent } from './components/account-settings-page/account-settings-page.component';
 import { AccountPageComponent } from './components/account-page/account-page.component';
@@ -24,8 +30,13 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    NgbModule,
+    NgbModalModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatDialogModule
   ],
   providers:[
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },

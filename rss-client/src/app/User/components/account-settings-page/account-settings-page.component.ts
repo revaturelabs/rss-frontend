@@ -1,4 +1,4 @@
-import { ImageService } from './../../../services/image.service';
+import { ImageService } from './../../services/image.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/User/services/user.service';
 import { User } from 'src/app/User/models/user';
