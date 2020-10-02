@@ -17,7 +17,6 @@
         <a id="earnpointsLink" class="nav-link" routerLink="/earnpoints" (click)="currentRoute('earnpoints')">Earn Points</a>
       </li>
 
-      <!-- temporary links -->
       <li class="nav-item" *ngIf="!currentUser.admin">
         <a id="cartLink" class="nav-link" routerLink="/cart" (click)="currentRoute('cart')">Cart</a>
       </li>
@@ -26,7 +25,7 @@
       </li>
     </ul>
 
-    <!-- Access to User Options.-->
+
     <div class="justify-content-end">
       <div class="btn-group">
         <button type="button" class="btn dropdown-toggle settings" data-toggle="dropdown" aria-haspopup="true"
