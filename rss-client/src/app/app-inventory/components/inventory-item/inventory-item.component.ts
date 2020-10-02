@@ -178,8 +178,10 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	updateItem() {
+
 		console.log("tes");
 		if (this.updateProduct.get("discountedAmount").value !== null || this.updateProduct.get("discountedAmount").value !== 0){
+
 			console.log("discountPrice has a value");
 			this.updateProduct.get("discounted").setValue(true);
 
@@ -187,6 +189,7 @@ export class InventoryItemComponent implements OnInit {
 		} else {
 			this.updateProduct.get("discounted").setValue(false);
 			console.log("discountPrice does not have a value")
+
 		}
 		if (this.updateProduct.valid) {
 			this.inventoryService
