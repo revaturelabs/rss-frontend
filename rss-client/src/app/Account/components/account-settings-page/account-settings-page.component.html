@@ -11,11 +11,12 @@
           <img *ngIf="imagePreview" [src]="imagePreview" class="img-thumbnail" alt="Image preview"
             style="height: -webkit-fill-available;" />
         </div>
-        <div>
-          <form style="text-align: center;">
+        <div class="text-center">
+          <form>
             <input type="file" id="fileInput" name="profilePic" accept="image/*" (change)="onFileChanged($event)" />
-            <input class="d-block btn btn-outline-light" [disabled]="!imagePreview" type="submit" id="btn1"
-              value="submit" (click)="onUpload()"/>
+            <button class="d-block btn btn-outline-light" [disabled]="!imagePreview" type="submit" id="btn1"
+              (click)="onUpload()">Submit</button>
+            <div class="clearfix"></div>
           </form>
         </div>
       </div>
@@ -56,25 +57,35 @@
       <div class="row">
         <div class="col-12">
           <button *ngIf="!evalAccount" type="submit" class="m-2 btn" (click)="createAccount('Eval')">Link To Your Eval</button>
-          <h3 *ngIf="evalAccount">
+          <h4 *ngIf="evalAccount">
             You have <span class="rev_orange">{{ evalAccount.points }}</span> points from the quizzes you have taken
-          </h3>
+          </h4>
           <br />
-          <h3 *ngIf="bugAccount">
+          <h4 *ngIf="bugAccount">
             You have <span class="rev_orange">{{ bugAccount.points }}</span> points from the bugs you have squashed
-          </h3>
+          </h4>
           <button *ngIf="!bugAccount" type="submit" class="m-2 btn" (click)="createAccount('Bug')">Link To Your Bug Bounty</button>
           <br />
-          <h3 *ngIf="overflowAccount">
+          <h4 *ngIf="overflowAccount">
             You have <span class="rev_orange">{{ overflowAccount.points }}</span> points from the questions you've answered
-          </h3>
+          </h4>
           <button *ngIf="!overflowAccount" type="submit" class="m-2 btn" (click)="createAccount('Overflow')">Link To Your Rev OverFlow</button>
           <hr />
           <div class="row">
             <div class="justify-content-center col-12">
               <form [formGroup]="passForm">
-                <input class="my-2 form-control" type="password" placeholder="New Password" formControlName="newPass" />
-                <input class="my-2 form-control" type="password" placeholder="Confirm Password" formControlName="confirmPass" />
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label" for="newPass">New Password:</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="password" formControlName="newPass" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label" for="confirmPass">Confirm Password:</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="password" formControlName="confirmPass" />
+                  </div>
+                </div>
                 <button class="btn" (click)="compareAndChangePassword()">Change Password</button>
               </form>
             </div>

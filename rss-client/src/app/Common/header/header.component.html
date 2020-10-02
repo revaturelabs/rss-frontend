@@ -34,9 +34,9 @@
           {{ currentUser.firstName | titlecase }}
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" routerLink="/account/settings">Account Settings</a>
+          <a class="dropdown-item" routerLink="/account/settings" (click)="currentRoute('')">Account Settings</a>
           <ng-container *ngIf="currentUser.admin == true">
-            <a class="dropdown-item" routerLink="/admin">Admin Settings</a>
+            <a class="dropdown-item" routerLink="/admin" (click)="currentRoute('')">Admin Settings</a>
           </ng-container>
           <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
         </div>
