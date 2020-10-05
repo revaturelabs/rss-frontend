@@ -1,26 +1,27 @@
-/* 
-**Primary Colors
-Revature Orange
-242, 105, 38
+a {
+    font-family: futura-pt, arial;
+    color: #000000;
+    text-decoration: none;
+    padding: 0 25px;
+}
 
-Dark Gray
-72, 76, 86
+a:active {
+    color: #72A4C2;
+}
 
-White
-0, 0, 0
+a.not-current {
+    color: #000000;
+}
 
-**Secondary Colors
-Blue
-115, 165, 194
+a.current {
+    color: #72A4C2;
+}
 
-Yellow
-253, 181, 21
+.btn:focus {
+    box-shadow: none;
+  }
 
-Light Gray
-185, 185, 186
-
-*/
-img {
-    width: 150px;
-    height: 50px;
+.settings {
+    color: #72A4C2 !important;
+    background-color: #FFFFFF;
 }
