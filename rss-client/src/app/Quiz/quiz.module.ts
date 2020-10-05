@@ -68,4 +68,4 @@ import { QuizService } from './service/quiz.service';
     EditQuizComponent
   ]
 })
-export class Quiz1Module { }
+export class QuizModule { }

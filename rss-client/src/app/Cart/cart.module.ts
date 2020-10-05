@@ -11,7 +11,7 @@ import { SelectCartComponent } from './select-cart/select-cart.component';
 
 import {CartItemService} from './services/cart-item.service';
 import {CartService} from './services/cart.service';
-import { Quiz1Module } from '../Quiz/quiz1.module';
+import { QuizModule } from '../Quiz/quiz.module';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { Quiz1Module } from '../Quiz/quiz1.module';
     MatDialogModule,
     AppInventoryModule,
     UserModule,
-    Quiz1Module
+    QuizModule
   ],
   providers:[
     CartService,

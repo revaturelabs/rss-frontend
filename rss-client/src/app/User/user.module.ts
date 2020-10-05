@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
-import { Quiz1Module } from '../Quiz/quiz1.module';
+import { QuizModule } from '../Quiz/quiz.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AccountSettingsPageComponent } from './components/account-settings-page/account-settings-page.component';
 import { AccountPageComponent } from './components/account-page/account-page.component';
 import { AccountService } from './services/account.service';
@@ -22,7 +22,6 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
-    LoginPageComponent,
     AccountSettingsPageComponent,
     AccountPageComponent,
     AdminPageComponent,
@@ -38,7 +37,7 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
     HttpClientModule,
     AppRoutingModule,
     MatDialogModule,
-    Quiz1Module
+    QuizModule
   ],
   providers:[
     { provide: USER_SERVICE_STORAGE, useExisting: SESSION_STORAGE },
@@ -46,7 +45,6 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
     AccountService
   ],
   exports:[
-    LoginPageComponent
   ]
 })
 export class UserModule { }
