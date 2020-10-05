@@ -5,7 +5,7 @@ import { EarnpointsOverviewPageComponent } from './Earnpoints/components/earnpoi
 import { QuizPageComponent } from './Quiz/employee/quiz-page/quiz-page.component';
 import { AccountSettingsPageComponent } from './User/components/account-settings-page/account-settings-page.component';
 import { IndividualQuizPageComponent } from './Quiz/employee/individual-quiz-page/individual-quiz-page.component';
-import { LandingPageComponent } from 'src/app/LandingPage/components/landing/landing-page.component';
+import { LandingPageComponent } from 'src/app/LandingPage/components/landing-page/landing-page.component';
 import { ShoppingCartComponent } from './Cart/shopping-cart/shopping-cart.component';
 import { LoginPageComponent } from 'src/app/LandingPage/components/login-page/login-page.component';
 import { AdminPageComponent } from './User/Admin/admin-page/admin-page.component';
