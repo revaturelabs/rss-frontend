@@ -36,4 +36,62 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn.emit(false);
     this.userservice.logout();
   }
+
+  currentRoute(route: string) {
+    switch(route) {
+      case "home": {
+        document.getElementById("homeLink").setAttribute("class", "current");
+        document.getElementById("storeLink").setAttribute("class", "not-current");
+        document.getElementById("earnpointsLink").setAttribute("class", "not-current");
+        document.getElementById("cartLink").setAttribute("class", "not-current");
+        document.getElementById("selectcartLink").setAttribute("class", "not-current");
+        break;
+      }
+      case "store": {
+        document.getElementById("homeLink").setAttribute("class", "not-current");
+        document.getElementById("storeLink").setAttribute("class", "current");
+        document.getElementById("earnpointsLink").setAttribute("class", "not-current");
+        document.getElementById("cartLink").setAttribute("class", "not-current");
+        document.getElementById("selectcartLink").setAttribute("class", "not-current");
+        break;
+      }
+      case "earnpoints": {
+        document.getElementById("homeLink").setAttribute("class", "not-current");
+        document.getElementById("storeLink").setAttribute("class", "not-current");
+        document.getElementById("earnpointsLink").setAttribute("class", "current");
+        document.getElementById("cartLink").setAttribute("class", "not-current");
+        document.getElementById("selectcartLink").setAttribute("class", "not-current");
+        break;
+      }
+      case "cart": {
+        document.getElementById("homeLink").setAttribute("class", "not-current");
+        document.getElementById("storeLink").setAttribute("class", "not-current");
+        document.getElementById("earnpointsLink").setAttribute("class", "not-current");
+        document.getElementById("cartLink").setAttribute("class", "current");
+        document.getElementById("selectcartLink").setAttribute("class", "not-current");
+        break;
+      }
+      case "selectcart": {
+        document.getElementById("homeLink").setAttribute("class", "not-current");
+        document.getElementById("storeLink").setAttribute("class", "not-current");
+        document.getElementById("earnpointsLink").setAttribute("class", "not-current");
+        document.getElementById("cartLink").setAttribute("class", "not-current");
+        document.getElementById("selectcartLink").setAttribute("class", "current");
+        break;
+      }
+      default: {
+        document.getElementById("homeLink").setAttribute("class", "not-current");
+        document.getElementById("storeLink").setAttribute("class", "not-current");
+        document.getElementById("earnpointsLink").setAttribute("class", "not-current");
+        document.getElementById("cartLink").setAttribute("class", "not-current");
+        document.getElementById("selectcartLink").setAttribute("class", "not-current");
+        break;
+      }
+    }
+  }
+
+  ifHome() {
+    this.onHome();
+    this.currentRoute("home");
+  }
 }

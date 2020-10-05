@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CheaterService } from '../../service/cheater.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CheaterService } from 'src/app/Quiz/service/cheater.service';
 
 @Component({
   selector: 'app-invalid-quiz',
@@ -10,25 +10,25 @@ import { CheaterService } from '../../service/cheater.service';
 export class InvalidQuizComponent implements OnInit {
 
   open: boolean
-
-  constructor(public dialog: MatDialog, private cheaterService: CheaterService) {}
-
+  
+  constructor(public dialog: NgbModal, private cheaterService: CheaterService) {}
+  
   ngOnInit(): void {
     this.cheaterService.invalidated.subscribe(e => {
-      if (e) {
-        if (!this.open)
-        this.openDialog()
-      }
+      // if (e) {
+      //   if (!this.open)
+      //   this.openDialog()
+      // }
     })
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(InvalidQuizDialogContent);
-    this.open = true
-    dialogRef.afterClosed().subscribe(() => {
-      this.open = false
-    });
-  }
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(InvalidQuizDialogContent);
+  //   this.open = true
+  //   dialogRef.close().subscribe(() => {
+  //     this.open = false
+  //   });
+  // }
 
 }
 
