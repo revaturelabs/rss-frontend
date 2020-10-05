@@ -1,118 +1,16 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <h1>Welcome to the Revature Swagg Shop!</h1>
-  </div>
-  <br />
-  <br />
-  <div class="container">
-    <div class="row justify-content-center">
-      <h3 style="font-size: larger; text-align: center;">
-        Here at Revature, we know our associates work hard, and want to look
-        good doing it. <br />Reward yourself for all that hard work with some
-        cool Revature swagg!
-      </h3>
-    </div>
-    <br />
-    <div
-      id="carouselExampleSlidesOnly"
-      class="carousel slide"
-      data-ride="carousel"
-      style="margin-left: 300px;"
-    >
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img
-            class="d-block w-50"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/A_fedora_hat%2C_made_by_Borsalino.jpg/1200px-A_fedora_hat%2C_made_by_Borsalino.jpg"
-            alt="black shirt slide"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            class="d-block w-50"
-            src="https://s7d5.scene7.com/is/image/UrbanOutfitters/51246528_023_b?$xlarge$&fit=constrain&qlt=80&wid=683"
-            alt="pen slide"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            class="d-block w-50"
-            src="https://images.ulta.com/is/image/Ulta/2305485"
-            alt="coffee mug slide"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            class="d-block w-50"
-            src="https://agnesb-agnesb-com-storage.omn.proximis.com/Imagestorage/imagesSynchro/0/0/18b1cb5b02580c42e5e843801fa7cb272f984cac_1977AH91_460_1.jpeg"
-          />
-        </div>
-      </div>
-      <br />
-      <!--change this button routing to the store once we have it-->
-      <div>
-        <button
-          class="btn btn-lg"
-          style="color: white; background-color: #f26925;"
-          routerLink="/cart"
-        >
-          Swagg Shop
-        </button>
-      </div>
-    </div>
-    <br />
-    <br />
-    <div class="jumbotron">
-      <h1 class="display-4">Earn Points to get Swagg</h1>
-      <p class="lead">
-        Earn points to buy your cool Revature swagg by taking quizzes
-      </p>
-      <hr class="my-4" />
-      <div class="row">
-        <div class="border col-6"><br />JAVA<br /><br /></div>
-        <div class="border col-6"><br />.NET<br /><br /></div>
-        <div class="border col-6"><br />WEB TOOLS<br /><br /></div>
-        <div class="border col-6"><br />ANOTHER QUIZ SUBJECT<br /><br /></div>
-      </div>
-      <br />
-      <p>See all available quizzes here</p>
-      <p class="lead">
-        <a
-          class="btn btn-lg"
-          style="color: white; background-color: #f26925;"
-          routerLink="/quizzes"
-          role="button"
-          >Quizzes</a
-        >
-      </p>
-    </div>
-    <br />
-    <br />
-    <div class="jumbotron">
-      <h1 class="display-4">More Ways to Earn Points</h1>
-      <p class="lead">
-        You can also use points you're already earning by linking your Bug
-        Bounty account!
-      </p>
-      <hr class="my-4" />
-      <div class="row">
-        <img
-          src="https://www.securitymagazine.com/ext/resources/Issues/2018/September/SEC0918-cyber-feature-slide1_900px.jpg"
-          alt="temp bug bounty image"
-          style="width: 512px; height: 256px; margin-left: 15px;"
-        />
-      </div>
-      <br />
-      <p>Go to your account settings to link your Bug Bounty account</p>
-      <p class="lead">
-        <a
-          class="btn btn-lg"
-          style="color: white; background-color: #f26925;"
-          routerLink="/account/settings"
-          role="button"
-          >Account Settings</a
-        >
-      </p>
-    </div>
-  </div>
+<div id="landing"> 
+  <ngb-carousel>
+      <ng-template ngbSlide>
+          <img src="https://media.discordapp.net/attachments/760591490031288370/761255687321681970/20171003_011310_IMG_0485.JPG" alt="batman!" />
+      </ng-template>
+      <ng-template ngbSlide>
+          <img src="https://cdn.discordapp.com/attachments/760591490031288370/761255724667240449/akidobbie.jpg" alt="aki doggie">
+      </ng-template>
+  </ngb-carousel>
+
+  <section>
+    <h1><b>Welcome to the Revature Swagg Shop!</b></h1>
+    <p>Here at Revature, we know our associates work hard, and want to look good doing it.</p>
+    <p>Reward yourself for all that hard work with some cool Revature swagg!</p>
+  </section>
 </div>
