@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../class/product/product';
+import { Product } from '../../models/product.model';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InventoryService } from '../../service/inventory.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/services/user.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({

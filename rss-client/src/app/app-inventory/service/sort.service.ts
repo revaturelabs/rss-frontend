@@ -1,6 +1,6 @@
 import { Injectable, PipeTransform } from '@angular/core';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
-import { Product } from '../class/product/product';
+import { Product } from '../models/product.model';
 import { DecimalPipe } from '@angular/common';
 import { tap, debounceTime, switchMap, delay } from "rxjs/operators";
 import { SortColumn, SortDirection } from '../directives/sortable.directive';

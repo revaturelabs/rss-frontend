@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../class/product/product';
+import { Product } from '../../models/product.model';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryService } from '../../service/inventory.service';
 import { SortService } from '../../service/sort.service';
