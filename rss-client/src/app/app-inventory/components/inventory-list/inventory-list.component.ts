@@ -11,6 +11,7 @@ import { InventoryItemComponent } from '../inventory-item/inventory-item.compone
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import { UserService } from 'src/app/User/services/user.service';
 import { AppComponent } from 'src/app/app.component';
+import { User } from 'src/app/User/models/user';
 
 @Component({
 	selector: 'app-inventory-list',
@@ -21,6 +22,7 @@ export class InventoryListComponent implements OnInit {
 
 	// Change application view (admin/customer)
 	userType: string = "admin";
+	user: User;
 
 	products$: Observable<Product[]>;
 	total$: Observable<number>;
@@ -39,6 +41,7 @@ export class InventoryListComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.userType = this.userService.getCurrentUser().admin ? 'admin' : 'customer';
+		this.user = this.userService.getCurrentUser();
 	}
 
 	// FOR ADMIN

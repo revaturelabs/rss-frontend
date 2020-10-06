@@ -28,7 +28,9 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
     quantity: NaN,
     unitPrice: NaN,
-    color: "N/A"
+    color: "N/A",
+    discounted: false,
+    discountedAmount : NaN
   }
   tempCarts: Cart[] = [];
   activeCartId: number;

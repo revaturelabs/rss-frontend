@@ -9,4 +9,6 @@ export class Product {
     quantity: number;
     unitPrice: number;
     color: string;
+	discounted : boolean;
+    discountedAmount : number;
 }

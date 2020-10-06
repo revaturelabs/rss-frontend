@@ -99,9 +99,7 @@ export class UserService {
     profilePic: null,
     firstName: 'admin',
     lastName: 'admin',
-    admin: false,
-    userDiscounted: false,
-    userDiscount: 0
+    admin: false
   };
   // user: User = {
   //   userId: 2022,

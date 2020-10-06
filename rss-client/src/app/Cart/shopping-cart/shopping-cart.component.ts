@@ -1,17 +1,17 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 // temporary fake products
-import { Product } from '../../app-inventory/models/product.model';
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 
-import { Cart } from 'src/app/Cart/models/cart.model';
-import { CartService } from 'src/app/Cart/services/cart.service';
-import { CartItemService } from 'src/app/Cart/services/cart-item.service';
-import { User } from 'src/app/User/models/user';
-import { UserService } from 'src/app/User/services/user.service';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/app-inventory/models/product.model';
+import { User } from 'src/app/User/models/user';
 import { AccountService } from 'src/app/User/services/account.service';
-import { Account } from '../../User/models/account'
-import { CartItem } from 'src/app/Cart/models/cart-item.model';
+import { UserService } from 'src/app/User/services/user.service';
+import { CartItem } from '../models/cart-item.model';
+import { Cart } from '../models/cart.model';
+import { CartItemService } from '../services/cart-item.service';
+import { CartService } from '../services/cart.service';
+import { Account } from 'src/app/User/models/account';
 
 
 @Component({
@@ -39,7 +39,9 @@ export class ShoppingCartComponent implements OnInit {
     image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
     quantity: NaN,
     unitPrice: NaN,
-    color: "N/A"
+    color: "N/A",
+    discounted : false,
+    discountedAmount : NaN
   }
   // testcart: Cart;
   userAccounts: Account[];
@@ -100,7 +102,7 @@ export class ShoppingCartComponent implements OnInit {
       accounts => {
         this.userAccounts = accounts;
         for (let account of accounts) {
-          this.pointPicker[account.accId] = 0;
+          this.pointPicker[account.accId] = account.points;
           this.userAccountRecord[account.accId] = account;
         }
       }
@@ -239,7 +241,7 @@ export class ShoppingCartComponent implements OnInit {
     let terminatePurchase = false;
     let yourPoints: number = this.getYourPoints();
     let newProductRecord: Record<number, Product> = {}
-    if (yourPoints == this.totalPointCost) {
+    if (yourPoints >= this.totalPointCost) {
       for (let cItem of this.activeCart.cartItems) {
         let ciProduct: Product = this.getProductById(cItem.productId);
         if (cItem.quantity <= ciProduct.quantity) {
@@ -259,7 +261,8 @@ export class ShoppingCartComponent implements OnInit {
             accId: this.userAccountRecord[accId].accId,
             userId: this.userAccountRecord[accId].userId,
             accTypeId: this.userAccountRecord[accId].accTypeId,
-            points: this.userAccountRecord[accId].points - this.pointPicker[accId]
+            //points: this.userAccountRecord[accId].points - this.pointPicker[accId]
+            points : this.userAccountRecord[accId].points - this.totalPointCost
           }
           // console.log(accountToUpdate);
           this.accountService.setPoints(accountToUpdate).subscribe();
@@ -293,10 +296,20 @@ export class ShoppingCartComponent implements OnInit {
       for (let cItem of this.activeCart.cartItems) {
         for (let product of this.products) {
           if (product.id == cItem.productId) {
-            this.totalPointCost += product.unitPrice * cItem.quantity;
+            if (product.discountedAmount>0) {
+              this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
+            } else {
+              this.totalPointCost += (product.unitPrice) * cItem.quantity;
+            }
+            if (this.currentUser.userDiscounted) {
+              this.totalPointCost -= this.currentUser.userDiscount;
+            }
+            if (this.totalPointCost<0) {
+              this.totalPointCost=0;
+            }
             break;
-          }
-        }
+          } 
+        } 
       }     
     }
     this.displayTotalPoints = this.totalPointCost;
@@ -315,7 +328,7 @@ export class ShoppingCartComponent implements OnInit {
         points += this.pointPicker[accId];
       }
     }
-    if (points == this.totalPointCost) {
+    if (points >= this.totalPointCost) {
       this.successfulPurchase = true;
     } else {
       this.successfulPurchase = false;

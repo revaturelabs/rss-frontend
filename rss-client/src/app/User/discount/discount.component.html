@@ -1,0 +1,70 @@
+<h5 class="display-4 text-center m-3" style="color: #474C55">User Discount</h5>
+<div class="container shadow m-4 p-4">
+		
+
+		<!-- TABLE -->
+		<table class="table table-striped table-sm table-responsive-xl">
+			<thead class="thead-dark">
+                <tr>
+                    <th>
+                        User Id
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        First Name
+                    </th>
+                
+                    <th>
+                        Last Name
+                    </th>
+                
+                    <th>
+                        Discount
+                    </th>
+                
+                    <th>
+                       Input discount
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let u of users">
+                    <td>
+                        <ngb-highlight [result]="u.userId" ></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="u.email" ></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="u.firstName" ></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="u.lastName" ></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="u.userDiscount" ></ngb-highlight>
+                    </td>
+                    <td>
+                        <!-- <ngb-highlight [result]="u.userDiscount" ></ngb-highlight> -->
+                        <input name="discountInput" type="number" [(ngModel)]="u.userDiscount"/>
+                    </td>
+                    <td>
+                        <button type="button" (click)="updateDiscount(u)">Update Discount</button>
+                    </td>
+				</tr>
+            </tbody>
+
+            
+            
+
+
+
+
+		</table>
+
+		
+</div>

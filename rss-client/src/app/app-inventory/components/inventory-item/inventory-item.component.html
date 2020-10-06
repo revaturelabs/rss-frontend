@@ -1,82 +1,95 @@
 <div class="modal-header">
-	<h4 class="modal-title italic" id="modal-basic-title">Update {{product.name}}</h4>
-	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <h4 class="modal-title italic" id="modal-basic-title">Update {{product.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
 		<span aria-hidden="true">&times;</span>
 	</button>
 </div>
 
 <div class="modal-body">
-	<div *ngIf="userType==='admin'">
-		<p class="text-sm text-danger mb-1">* These fields are required.</p>
-	</div>
-	<form (ngSubmit)="updateItem()" [formGroup]="updateProduct">
-		<div class="row">
-			<div class="col-12 col-md-6 mb-2">
-				<span class="text-danger" *ngIf="userType==='admin'">* </span>
-				<strong *ngIf="userType==='admin'; else nameBlock">Name:</strong>
-				<ng-template #nameBlock><span>Name:</span></ng-template>
-				<input type="text" class="form-control form-control-sm" id="inputName" name="name" formControlName="name" required>
-				<p class="text-danger text-sm" [hidden]="name.valid || name.pristine"><strong>Name</strong> is required</p>
-			</div>
-			<div class="col-12 col-md-6 mb-2">Brand:
-				<input type="text" class="form-control form-control-sm" id="brand" name="brand" formControlName="brand">
-			</div>
-		</div>
-		<div class="mb-2">Description:
-			<input type="text" class="form-control form-control-sm" id="inputDescription" name="description" formControlName="description">
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-6 mb-2">Model:
-				<input type="text" class="form-control form-control-sm" id="inputModel" name="model" formControlName="model">
-			</div>
-			<div class="col-12 col-md-6 mb-2">Category:
-				<input type="text" class="form-control form-control-sm" id="category" name="category" formControlName="category">
-			</div>
-		</div>
-		<div class="mb-2">
-			<img [src]="image.value" alt="product_img" class="rounded mx-auto d-block mt-4 mb-4" style="width: 250px;">
-			<div *ngIf="userType==='admin'">
-				Image URL:
-				<input type="text" class="form-control form-control-sm" id="inputImage" name="image" formControlName="image">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-6 mb-2">
-				<span class="text-danger" *ngIf="userType==='admin'">* </span>
-				<strong *ngIf="userType==='admin'; else quantityBlock">Quantity:</strong>
-				<ng-template #quantityBlock><span>Quantity:</span></ng-template>
-				<input type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
-				<p class="text-danger text-sm" [hidden]="quantity.valid || quantity.pristine">
-					<strong>Quantity</strong> is required
-				</p>
-				<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="negativeQ">
-					<strong>Sorry!</strong> Try adding fewer items to your cart.
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div *ngIf="userType==='admin'">
+        <p class="text-sm text-danger mb-1">* These fields are required.</p>
+    </div>
+    <form (ngSubmit)="updateItem()" [formGroup]="updateProduct">
+        <div class="row">
+            <div class="col-12 col-md-6 mb-2">
+                <span class="text-danger" *ngIf="userType==='admin'">* </span>
+                <strong *ngIf="userType==='admin'; else nameBlock">Name:</strong>
+                <ng-template #nameBlock><span>Name:</span></ng-template>
+                <input type="text" class="form-control form-control-sm" id="inputName" name="name" formControlName="name" required>
+                <p class="text-danger text-sm" [hidden]="name.valid || name.pristine"><strong>Name</strong> is required</p>
+            </div>
+            <div class="col-12 col-md-6 mb-2">Brand:
+                <input type="text" class="form-control form-control-sm" id="brand" name="brand" formControlName="brand">
+            </div>
+        </div>
+        <div class="mb-2">Description:
+            <input type="text" class="form-control form-control-sm" id="inputDescription" name="description" formControlName="description">
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 mb-2">Model:
+                <input type="text" class="form-control form-control-sm" id="inputModel" name="model" formControlName="model">
+            </div>
+            <div class="col-12 col-md-6 mb-2">Category:
+                <input type="text" class="form-control form-control-sm" id="category" name="category" formControlName="category">
+            </div>
+        </div>
+        <div class="mb-2">
+            <img [src]="image.value" alt="product_img" class="rounded mx-auto d-block mt-4 mb-4" style="width: 250px;">
+            <div *ngIf="userType==='admin'">
+                Image URL:
+                <input type="text" class="form-control form-control-sm" id="inputImage" name="image" formControlName="image">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 mb-2">
+                <span class="text-danger" *ngIf="userType==='admin'">* </span>
+                <strong *ngIf="userType==='admin'; else quantityBlock">Quantity:</strong>
+                <ng-template #quantityBlock><span>Quantity:</span></ng-template>
+                <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
+                <p class="text-danger text-sm" [hidden]="quantity.valid || quantity.pristine">
+                    <strong>Quantity</strong> is required
+                </p>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="negativeQ">
+                    <strong>Sorry!</strong> Try adding fewer items to your cart.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-				</div>
-			</div>
-			<div class="col-12 col-md-6 mb-2">
-				<span class="text-danger" *ngIf="userType==='admin'">* </span>
-				<strong *ngIf="userType==='admin'; else pointsBlock">Points:</strong>
-				<ng-template #pointsBlock><span>Points:</span></ng-template>
-				<input type="number" class="form-control form-control-sm" id="unitPrice" name="unitPrice" formControlName="unitPrice" required min="0" pattern="([0-9]+)">
-				<p class="text-danger text-sm" [hidden]="unitPrice.valid || unitPrice.pristine">
-					<strong>Points</strong> is required
-				</p>
-			</div>
-		</div>
-		<div class="mb-2">Color:
-			<input type="text" class="form-control form-control-sm" id="inputColor" name="color" formControlName="color">
-		</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-2">
+                <span class="text-danger" *ngIf="userType==='admin'">* </span>
+                <strong *ngIf="userType==='admin'; else pointsBlock">Points:</strong>
+                <ng-template #pointsBlock><span>Points:</span></ng-template>
+                <input type="number" class="form-control form-control-sm" id="unitPrice" name="unitPrice" formControlName="unitPrice" required min="0" pattern="([0-9]+)">
+                <p class="text-danger text-sm" [hidden]="unitPrice.valid || unitPrice.pristine">
+                    <strong>Points</strong> is required
+                </p>
+            </div>
+            <div class="col-12 col-md-6 mb-2">
+                <span class="text-danger" *ngIf="userType==='admin'"></span>
+                <strong *ngIf="userType==='admin'; else discountBlock">Discounted Amount:</strong>
+                <ng-template #discountBlock><span>Discounted Amount:</span></ng-template>
+                <input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" required min="0" pattern="([0-9]+)">
+            </div>
+            <!-- <div class="col-12 col-md-6 mb-2">
+				<span class="text-danger" *ngIf="userType==='admin'"></span>
+				<strong *ngIf="userType==='admin'; else pointsBlock">Total Price:</strong>
+				<ng-template #pointsBlock><span>Total Price:</span></ng-template>
+				{{updateProduct.totalPrice}}
+			</div> -->
+        </div>
+        <div class="mb-2">Color:
+            <input type="text" class="form-control form-control-sm" id="inputColor" name="color" formControlName="color">
+        </div>
 
-		<div *ngIf="userType==='admin'" class="modal-footer">
-			<button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss('Cross click')">Cancel</button>
-			<button type="submit" class="btn btn-outline-orange" [disabled]="!updateProduct.valid">Save</button>
-		</div>
-		<div *ngIf="userType==='customer'" class="modal-footer">
-			<button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss('Cross click')">Cancel</button>
-			<button type="button" class="btn btn-outline-orange" (click)="reduceInventory()">Add to Cart</button>
-		</div>
-	</form>
+        <div *ngIf="userType==='admin'" class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+            <button type="submit" class="btn btn-outline-orange" [disabled]="!updateProduct.valid">Save</button>
+        </div>
+        <div *ngIf="userType==='customer'" class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+            <button type="button" class="btn btn-outline-orange" (click)="reduceInventory()">Add to Cart</button>
+        </div>
+    </form>
+    {{updateProduct.value | json}}
 </div>
