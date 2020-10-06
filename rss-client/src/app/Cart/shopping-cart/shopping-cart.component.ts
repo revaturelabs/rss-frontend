@@ -307,7 +307,6 @@ export class ShoppingCartComponent implements OnInit {
             if (this.totalPointCost<0) {
               this.totalPointCost=0;
             }
-            this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
             break;
           } 
         } 

@@ -31,7 +31,8 @@
                                 <div class="col-6">
                                     <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
                                         {{product.unitPrice | number}}</span>
-                                    <span style="color:#FF0000">{{product.currentPrice | number}}</span>
+										<span *ngIf="product.discounted === true"
+                                        style="color:#FF0000">{{product.unitPrice - product.discountedAmount | number}}</span>
                                 </div>
                                 <div class="col-6">
                                     <!-- SHOW IF ADMIN -->
