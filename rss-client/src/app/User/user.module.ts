@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
+//import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
 import { QuizModule } from '../Quiz/quiz.module';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -36,7 +36,7 @@ import { USER_SERVICE_STORAGE, UserService } from './services/user.service';
     NgbModalModule,
     HttpClientModule,
     AppRoutingModule,
-    MatDialogModule,
+//    MatDialogModule,
     QuizModule
   ],
   providers:[
