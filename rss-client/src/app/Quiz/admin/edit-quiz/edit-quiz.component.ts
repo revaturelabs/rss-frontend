@@ -28,7 +28,7 @@ export class EditQuizComponent implements OnInit {
    * if it does not than the save button does not appear/is faded so it cannot be submitted
    * */
   validate() {
-    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
+    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0 && this.focusedQuiz.quizDifficulty) {
       this.isValid = true;
     } else {
       this.isValid = false;

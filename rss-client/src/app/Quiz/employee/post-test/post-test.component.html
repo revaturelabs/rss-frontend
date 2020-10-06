@@ -7,6 +7,8 @@
 </h2>
 <!-- Points earned from this attempt -->
 <h2>Total Points Received: {{ parentalunit.results.totalPoints }}</h2>
+<!--Group 2 change Percentage earned from attempt-->
+<h2>Total Percentage: {{ parentalunit.results.correctAnswers / parentalunit.results.totalQuestions | percent }}</h2>
 <!-- Back button -->
 <button (click)="onRetake()">Retake Test</button>
 <!-- back to quiz overview page -->

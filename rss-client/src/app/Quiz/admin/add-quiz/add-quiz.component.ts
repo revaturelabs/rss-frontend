@@ -25,6 +25,8 @@ export class AddQuizComponent implements OnInit {
     quizDescription: null,
     subjectId: 0,
     quizTotalPoints: 0,
+    quizDifficulty: null,
+    quizAttempt: 0,
     creatorEmail: this.userservice.userPersistance().email,
     questions: [],
     availablePoints: null,
@@ -97,6 +99,8 @@ export class AddQuizComponent implements OnInit {
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     //this.focusedQuiz.quizTotalPoints = Number(sessionStorage.getItem('points'));
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
+    //This will set the amount of attempts for the quiz.
+    this.focusedQuiz.quizAttempt = 3; 
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
       this.focusedQuiz.questions.forEach((x) => {
