@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../class/product/product';
+import { Product } from '../../models/product.model';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Cart } from 'src/app/interfaces/cart.model';
-import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user.service';
-import { CartService } from 'src/app/services/cart.service';
-import { CartItemService } from 'src/app/services/cart-item.service';
-import { CartItem } from 'src/app/interfaces/cart-item.model';
+import { Cart } from 'src/app/Cart/models/cart.model';
+import { User } from 'src/app/User/models/user';
+import { UserService } from 'src/app/User/services/user.service';
+import { CartService } from 'src/app/Cart/services/cart.service';
+import { CartItemService } from 'src/app/Cart/services/cart-item.service';
+import { CartItem } from 'src/app/Cart/models/cart-item.model';
 
 @Component({
 	selector: 'app-inventory-item',

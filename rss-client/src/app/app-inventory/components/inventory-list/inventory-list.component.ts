@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Product } from '../../class/product/product';
+import { Product } from '../../models/product.model';
 import { InventoryService } from '../../service/inventory.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { SortService } from '../../service/sort.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/User/services/user.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
