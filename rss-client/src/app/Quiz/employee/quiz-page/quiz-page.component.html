@@ -1,30 +1,72 @@
-<!-- Below is the search function that you can search through the list of quiz names to limit the ngFor to displaying only what you search for -->
 <div *ngIf="evalAccount">
   <div class="container">
     <div class="input-group justify-content-center">
-      <input id="search-box" class="col-8 my-2 form-control" [(ngModel)]="searchText"
+      <input id="search-box" class="col-10 my-2 form-control" [(ngModel)]="searchText"
         placeholder="Type in the topic..." />
-
     </div>
-    <!--This is the list of quizzes -->
-    <ng-container>
-      <section *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText" class="quiz">
-        <img src="assets/Images/orangeQuizLogo.jpg">
-        <div class="quizDetails">
-          <h1>{{ quizdata.subject.subjectName | titlecase }}</h1>
-          <h2>{{ quizdata.quizTopic | titlecase }}</h2>
-          <p>
-            {{ quizdata.quizDescription }}<br/>
-            <b>Points: </b>{{quizdata.quizTotalPoints}}
-          </p>
-          <a class="btn" id="detailsBtn" routerLink="/quizzes/{{ quizdata.quizId }}">Details</a>
+
+    <div class="quiz" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
+      <div class="row row-1 align-items-center">
+        <div class="col-5">
+          <img src="assets/Images/orangeQuizLogoCrop.jpg">
         </div>
-      </section>
-    </ng-container>
+        <div class="col-7">
+          <div class="row">
+            <h1>{{ quizdata.subject.subjectName | titlecase }}</h1>
+          </div>
+          <div class="row">
+            <h2>{{ quizdata.quizTopic | titlecase }}</h2>
+          </div>
+          <div class="row">
+            {{ quizdata.quizDescription }}
+          </div>
+          <div class="row align-items-center row-2">
+            <div class="col-4">
+              <b>Points: </b>{{quizdata.quizTotalPoints}}
+            </div>
+            <div class="col-5">
+              <span>?</span>&nbsp;attempt(s) remaining
+            </div>
+            <a class="btn" id="detailsBtn" routerLink="/quizzes/{{ quizdata.quizId }}">Enter</a>
+          </div>
+          <!-- show only if the quiz has been taken at least once -->
+          <div *ngIf="!attempted">
+            <div class="row align-items-center row-2">
+              <div class="col-9">
+                <span class="panel-title">Recent Score:</span><span>&nbsp;??%</span>
+              </div>
+              <button class="btn">Review</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- review details and options -->
+      <div *ngIf="!review" class="small-text">
+        <div class="row justify-content-around align-items-center skinny-row">
+          <div class="col-1">S.No.</div>
+          <div class="col-2">Started On</div>
+          <div class="col-2">Completed On</div>
+          <div class="col-2">Status</div>
+          <div class="col-2">Score (%)</div>
+          <div class="col-3">Action</div>
+        </div>
+        <div>
+          <div class="row justify-content-around align-items-center skinny-row">
+            <div class="col-1">a</div>
+            <div class="col-2">aaa</div>
+            <div class="col-2">aaa</div>
+            <div class="col-2">aa</div>
+            <div class="col-2">%</div>
+            <div class="col-1">
+              <a>Review</a>
+            </div>
+            <div class="col-2">
+              <a>View Answers</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div *ngIf="!evalAccount" class="text-center">
-  <a routerLink="/account/settings">
-    <h3>You need to create an account!</h3>
-  </a>
 </div>
