@@ -26,10 +26,9 @@
                             <p class="card-text">{{product.description}}</p>
                             <div class="container-fluid">
                                 <div class="col-6">
-                                    <span><span *ngIf="product.discounted === true"
-                                            style="text-decoration:line-through">{{product.unitPrice | number}}</span></span>
-                                    <span *ngIf="product.discounted === true"
-                                        style="color:#FF0000">{{product.unitPrice - product.discountedAmount | number}}</span>
+                                    <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
+                                        {{product.unitPrice | number}}</span>
+                                    <span style="color:#FF0000">{{product.currentPrice | number}}</span>
                                 </div>
                                 <div class="col-6">
                                     <!-- SHOW IF ADMIN -->

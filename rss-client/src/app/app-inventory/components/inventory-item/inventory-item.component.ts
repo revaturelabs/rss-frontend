@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router'
 import { Product } from '../../models/product.model';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortService } from '../../service/sort.service';
@@ -44,7 +45,8 @@ export class InventoryItemComponent implements OnInit {
 		public activeModal: NgbActiveModal,
 		private inventoryService: InventoryService,
 		private userService: UserService,
-		private cartItemService: CartItemService) {
+		private cartItemService: CartItemService,
+		private router: Router) {
 	}
 
 	ngOnInit(): void {
@@ -181,7 +183,6 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	updateItem() {
-		console.log("tes");
 		if (this.updateProduct.get("discountedAmount").value !== null && this.updateProduct.get("discountedAmount").value !== 0) {
 			console.log("discountPrice has a value");
 			this.updateProduct.get("discounted").setValue(true);
@@ -198,8 +199,13 @@ export class InventoryItemComponent implements OnInit {
 					if (res) {
 						this.inventoryService.getAllProducts()
 							.subscribe(inventory => {
+								this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+									this.router.navigateByUrl('/inventory/inventory-list');
+									console.log("'Refreshed'");
+								}); 
 								this.service.setInventory(inventory);
 								this.modalService.dismissAll();
+								console.log("Dismissing modal");
 							})
 					}
 				});
