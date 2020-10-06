@@ -43,6 +43,7 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-2">
                 <span class="text-danger" *ngIf="userType==='admin'">* </span>
+
                 <strong *ngIf="userType==='admin'; else quantityBlock">Stock Quantity:</strong>
                 <input *ngIf="userType==='admin'" type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
                 <ng-template #quantityBlock><span>Quantity:</span>
@@ -71,6 +72,7 @@
                 <span class="text-danger" *ngIf="userType==='admin'"></span>
                 <strong *ngIf="userType==='admin'; else discountBlock">Discounted Amount:</strong>
                 <ng-template #discountBlock><span>Discounted Amount:</span></ng-template>
+
                 <input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" pattern="([0-9]+)">
             </div>
             <!-- <div class="col-12 col-md-6 mb-2" *ngIf="product.discounted">

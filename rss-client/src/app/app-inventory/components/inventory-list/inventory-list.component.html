@@ -1,4 +1,7 @@
 <div class="container shadow m-4 p-4">
+    <div *ngIf="user.userDiscounted">
+        you have a discount of {{user.userDiscount}}
+    </div>
     <section class="row">
         <!-- SIDEBAR -->
         <aside class="col-3">

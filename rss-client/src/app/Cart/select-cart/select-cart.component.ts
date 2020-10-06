@@ -29,7 +29,7 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     quantity: NaN,
     unitPrice: NaN,
     color: "N/A",
-    discounted : false,
+    discounted: false,
     discountedAmount : NaN
   }
   tempCarts: Cart[] = [];

@@ -1,17 +1,17 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 // temporary fake products
-import { Product } from '../../app-inventory/models/product.model';
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 
-import { Cart } from 'src/app/Cart/models/cart.model';
-import { CartService } from 'src/app/Cart/services/cart.service';
-import { CartItemService } from 'src/app/Cart/services/cart-item.service';
-import { User } from 'src/app/User/models/user';
-import { UserService } from 'src/app/User/services/user.service';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/app-inventory/models/product.model';
+import { User } from 'src/app/User/models/user';
 import { AccountService } from 'src/app/User/services/account.service';
-import { Account } from '../../User/models/account'
-import { CartItem } from 'src/app/Cart/models/cart-item.model';
+import { UserService } from 'src/app/User/services/user.service';
+import { CartItem } from '../models/cart-item.model';
+import { Cart } from '../models/cart.model';
+import { CartItemService } from '../services/cart-item.service';
+import { CartService } from '../services/cart.service';
+import { Account } from 'src/app/User/models/account';
 
 
 @Component({
@@ -296,10 +296,21 @@ export class ShoppingCartComponent implements OnInit {
       for (let cItem of this.activeCart.cartItems) {
         for (let product of this.products) {
           if (product.id == cItem.productId) {
+            if (product.discountedAmount>0) {
+              this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
+            } else {
+              this.totalPointCost += (product.unitPrice) * cItem.quantity;
+            }
+            if (this.currentUser.userDiscounted) {
+              this.totalPointCost -= this.currentUser.userDiscount;
+            }
+            if (this.totalPointCost<0) {
+              this.totalPointCost=0;
+            }
             this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
             break;
-          }
-        }
+          } 
+        } 
       }     
     }
     this.displayTotalPoints = this.totalPointCost;

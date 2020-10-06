@@ -36,8 +36,8 @@ export class InventoryItemComponent implements OnInit {
 	get image() { return this.updateProduct.get('image') }
 	get quantity() { return this.updateProduct.get('quantity') }
 	get unitPrice() { return this.updateProduct.get('unitPrice') }
-	get discountedAmount() { return this.updateProduct.get('discountAmount') }
-	get discounted() { return this.updateProduct.get('discounted') }
+	get discountedAmount(){return this.updateProduct.get('discountAmount')}
+	get discounted(){return this.updateProduct.get('discounted')}
 
 	constructor(
 		private modalService: NgbModal,
