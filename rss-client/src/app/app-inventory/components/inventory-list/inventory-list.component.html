@@ -27,33 +27,32 @@
                         <div class="card-body">
                             <h4 class="card-title">{{product.name}}</h4>
                             <p class="card-text">{{product.description}}</p>
-                            <div class="container-fluid">
-                                <div class="col-6">
-                                    <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
-                                        {{product.unitPrice | number}}</span>
-										<span *ngIf="product.discounted === true"
-                                        style="color:#FF0000">{{product.unitPrice - product.discountedAmount | number}}</span>
-                                </div>
-                                <div class="col-6">
-                                    <!-- SHOW IF ADMIN -->
-                                    <div *ngIf="userType==='admin'">
-                                        <div class="btn-toolbar" role="toolbar"
-                                            aria-label="Toolbar with button groups">
-                                            <div class="btn-group mr-2 mb-2" role="group" aria-label="First group">
-                                                <button class="btn btn-orange" (click)="open(product)">Update
-                                                    <em class="fas fa-pencil-alt"></em>
-                                                </button>
-                                            </div>
+                            <aside class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
+                                            {{product.unitPrice | number}}</span><br />
+                                        <span *ngIf="product.discounted === true"
+                                            style="color:#FF0000">{{product.unitPrice - product.discountedAmount | number}}</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <!-- SHOW IF ADMIN -->
+                                        <div *ngIf="userType==='admin'">
+                                            <button class="btn btn-orange" (click)="open(product)">
+                                                Update
+                                                <em class="fas fa-pencil-alt"></em>
+                                            </button>
+                                        </div>
+                                        <!-- SHOW IF CUSTOMER -->
+                                        <div *ngIf="userType==='customer'">
+                                            <button class="btn btn-orange" (click)="open(product)">
+                                                Detail
+                                                <em class="fas fa-cart-plus"></em>
+                                            </button>
                                         </div>
                                     </div>
-                                    <!-- SHOW IF CUSTOMER -->
-                                    <div *ngIf="userType==='customer'">
-                                        <button class="btn btn-orange" (click)="open(product)">Detail
-                                            <em class="fas fa-cart-plus"></em>
-                                        </button>
-                                    </div>
                                 </div>
-                            </div>
+                            </aside>
                         </div>
                     </article>
                 </div>
