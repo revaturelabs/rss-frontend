@@ -1,190 +1,181 @@
 <div *ngIf="currentUser">
-<!-- wrap it all in a container, then it can fit under their header no problem -->
-<p class="card-text" *ngIf="currentUser.admin">Admin users cannot buy items.</p>
-<div class="container main-cart-container" *ngIf="!currentUser.admin">
-    <div class="row">
+    <!-- wrap it all in a container, then it can fit under their header no problem -->
+    <p class="card-text" *ngIf="currentUser.admin">Admin users cannot buy items.</p>
+    <div class="container main-cart-container" *ngIf="!currentUser.admin">
+        <div class="row">
 
-        <!-- Cart, on the left, with large item cards -->
-        <div class="col-md-8 col-sm-12 center-divide">
+            <!-- Cart, on the left, with large item cards -->
+            <div class="col-md-8 col-sm-12 center-divide">
 
-            <div class="table-responsive-sm">
+                <div class="table-responsive-sm">
 
-                <!-- mobile layout -->
-                <ng-container *ngIf="mobile">
-                    <p class=card-text *ngIf="activeCart.cartItems.length==0">
-                        No items present in cart.
-                    </p>
-                    <ng-container *ngFor="let cItem of activeCart.cartItems">
-                        <table class="table table-striped">
-                            <tbody>
-                                <tr>
-                                    <td class="d-flex justify-content-between">
-                                        <img class="img-large" src="{{getProductById(cItem.productId).image}}"
-                                            (click)="productDetails(cItem.productId)" />
-                                        <div class="d-flex flex-column" style="text-align: right;">
-                                            <h2>{{product.name}}</h2>
-                                            <h5>{{product.quantity}} left</h5>
-                                            <h3>{{product.unitPrice}} Points</h3>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <div class="d-flex flex-column item-div-small">
-                                        <label for="">
-                                            <h5>Quantity: x{{cItem.quantity}}</h5>
-                                        </label>
-                                        <input class="form-control quantity-input" id="" type="number" min="1">
-                                        <div class="d-flex item-mobile-check">
-                                            <button class="btn btn-secondary quantity-button">Update</button>
-                                            <button class="btn btn-danger">&#10006;</button>
-                                        </div>
-                                    </div>
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                    </ng-container>
-                </ng-container>
-
-                <!-- desktop layout -->
-                <ng-container *ngIf="!mobile">
-                    <table *ngIf="activeCart" class="table table-striped">
+                    <!-- mobile layout -->
+                    <ng-container *ngIf="mobile">
                         <p class=card-text *ngIf="activeCart.cartItems.length==0">
                             No items present in cart.
                         </p>
-                        <tbody>
-                            <tr *ngFor="let cItem of activeCart.cartItems"
-                                class="d-flex justify-content-around align-items-end">
-                                <td>
-                                    <img class="img-large" src="{{getProductById(cItem.productId).image}}"
-                                        (click)="productDetails(cItem.productId)" />
-                                </td>
-                                <td class="align-bottom">
-                                    <h2>{{product.name}}</h2>
-                                    <h5>{{product.quantity}} left</h5>
-                                    <h3>{{product.unitPrice}} Points</h3>
-                                </td>
+                        <ng-container *ngFor="let cItem of activeCart.cartItems">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td class="d-flex justify-content-between">
+                                            <img class="img-large" src="{{getProductById(cItem.productId).image}}" (click)="productDetails(cItem.productId)" />
+                                            <div class="d-flex flex-column" style="text-align: right;">
+                                                <h2>{{product.name}}</h2>
+                                                <h5>{{product.quantity}} left</h5>
+                                                <h3>{{product.unitPrice}} Points</h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <div class="d-flex flex-column item-div-small">
+                                            <label for="">
+                                            <h5>Quantity: x{{cItem.quantity}}</h5>
+                                        </label>
+                                            <input class="form-control quantity-input" id="" type="number" min="1">
+                                            <div class="d-flex item-mobile-check">
+                                                <button class="btn btn-secondary quantity-button">Update</button>
+                                                <button class="btn btn-danger">&#10006;</button>
+                                            </div>
+                                        </div>
+                                    </tr>
 
-                                <td class="align-bottom quantity-large">
-                                    <div class="d-flex flex-column justify-content-between item-div">
-                                        <label for="quantity-{{cItem.cartItemId}}"
-                                            class="d-flex justify-content-around align-items-end"
-                                            style="border-bottom: 2px solid #474C55;">
+                                </tbody>
+                            </table>
+
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- desktop layout -->
+                    <ng-container *ngIf="!mobile">
+                        <table *ngIf="activeCart" class="table table-striped">
+                            <p class=card-text *ngIf="activeCart.cartItems.length==0">
+                                No items present in cart.
+                            </p>
+                            <tbody>
+                                <tr *ngFor="let cItem of activeCart.cartItems" class="d-flex justify-content-around align-items-end">
+                                    <td>
+                                        <img class="img-large" src="{{getProductById(cItem.productId).image}}" (click)="productDetails(cItem.productId)" />
+                                    </td>
+                                    <td class="align-bottom">
+                                        <h2>{{product.name}}</h2>
+                                        <h5>{{product.quantity}} left</h5>
+                                        <h3 [ngStyle]="{'text-decoration':product.discounted? 'line-through':'null'}">{{product.unitPrice}} Points</h3>
+                                        <h3 *ngIf="product.discounted">Discounted Price: {{product.unitPrice - product.discountedAmount}} Points</h3>
+                                    </td>
+
+                                    <td class="align-bottom quantity-large">
+                                        <div class="d-flex flex-column justify-content-between item-div">
+                                            <label for="quantity-{{cItem.cartItemId}}" class="d-flex justify-content-around align-items-end" style="border-bottom: 2px solid #474C55;">
                                             <h3>Quantity:</h3>
                                             <h4>x{{cItem.quantity}}</h4>
                                         </label>
-                                        <input class="form-control quantity-input" id="quantity-{{cItem.cartItemId}}"
-                                            type="number" min="1">
-                                        <div class="d-flex item-mobile-check">
-                                            <button class="btn btn-secondary quantity-button"
-                                                (click)="updateQuantity(cItem.cartItemId)">Update</button>
-                                            <button class="btn btn-danger" (click)="deleteItem(cItem)">&#10006;</button>
+                                            <input class="form-control quantity-input" id="quantity-{{cItem.cartItemId}}" type="number" min="1">
+                                            <div class="d-flex item-mobile-check">
+                                                <button class="btn btn-secondary quantity-button" (click)="updateQuantity(cItem.cartItemId)">Update</button>
+                                                <button class="btn btn-danger" (click)="deleteItem(cItem)">&#10006;</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </ng-container>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ng-container>
+
+                </div>
 
             </div>
 
-        </div>
+            <!-- Checkout, on the right or underneath, with small item summary -->
+            <div class="col-md-4 col-sm-12">
 
-        <!-- Checkout, on the right or underneath, with small item summary -->
-        <div class="col-md-4 col-sm-12">
+                <div class="container">
 
-            <div class="container">
+                    <div class="row">
+                        <table class="table" *ngIf="activeCart">
 
-                <div class="row">
-                    <table class="table" *ngIf="activeCart">
-                        <tr *ngFor="let cItem of activeCart.cartItems"
-                            class="d-flex justify-content-between align-items-end small-row">
-                            <td class="align-bottom img-frame">
-                                <img class="img-small" src="{{getProductById(cItem.productId).image}}" />
-                            </td>
-                            <td class="align-bottom"><b>{{product.name}}</b></td>
-                            <td class="align-bottom">{{product.unitPrice}} Points</td>
-                        </tr>
-                    </table>
-                </div>
+                            <tr *ngFor="let cItem of activeCart.cartItems" class="d-flex justify-content-between align-items-end small-row">
+                                <td class="align-bottom img-frame">
+                                    <img class="img-small" src="{{getProductById(cItem.productId).image}}" />
+                                </td>
+                                <td class="align-bottom"><b>{{product.name}}</b></td>
+                                <td class="align-bottom" [ngStyle]="{'text-decoration':product.discounted == true?'line-through':'null'}">{{product.unitPrice}} Points</td>
+                                <td class="align-bottom" *ngIf="product.discounted">{{product.unitPrice - product.discountedAmount}} Points</td>
 
-                <div class="row card d-flex checkout-box">
-
-                    <div class="card-title cart-total text-center">
-                        <h2>Order Summary</h2>
+                            </tr>
+                        </table>
                     </div>
 
-                    <div class="container">
-                        <div class="card-text cart-total d-flex align-bottom justify-content-between align-items-end">
-                            <h4>Total:</h4>
-                            <h6><span>{{totalPointCost}}</span> Points</h6>
+                    <div class="row card d-flex checkout-box">
+
+                        <div class="card-title cart-total text-center">
+                            <h2>Order Summary</h2>
                         </div>
-                    </div>
 
-                    <div class="container">
-                        <div class="user-points card-text d-flex justify-content-between align-items-end">
-                            <h4>Your Points:</h4>
-                            <h6><span>{{getYourPoints()}}</span> Points</h6>
+                        <div class="container">
+                            <div class="card-text cart-total d-flex align-bottom justify-content-between align-items-end">
+                                <h4>Total:</h4>
+                                <h6><span>{{totalPointCost}}</span> Points</h6>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="container">
-                        <button class="btn btn-secondary btn-lg btn-block" href="#pointSource" data-toggle="collapse">
+                        <div class="container">
+                            <div class="user-points card-text d-flex justify-content-between align-items-end">
+                                <h4>Your Points:</h4>
+                                <h6><span>{{getYourPoints()}}</span> Points</h6>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <button class="btn btn-secondary btn-lg btn-block" href="#pointSource" data-toggle="collapse">
                             Pick Points
                         </button>
-                        <div class="collapse points-div" id="pointSource">
-                            <div *ngIf="pointPicker" class="card d-flex flex-column" id="pointsCard">
-                                <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose
-                                    Sources</h3>
-                                <div *ngFor="let account of userAccounts">
-                                    <div class="card-text d-flex justify-content-between align-items-end">
-                                        <h5 href="#">Total {{displayName(account)}} Points:</h5>
-                                        <h6><span>{{account.points}}</span></h6>
+                            <div class="collapse points-div" id="pointSource">
+                                <div *ngIf="pointPicker" class="card d-flex flex-column" id="pointsCard">
+                                    <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose Sources
+                                    </h3>
+                                    <div *ngFor="let account of userAccounts">
+                                        <div class="card-text d-flex justify-content-between align-items-end">
+                                            <h5 href="#">Total {{displayName(account)}} Points:</h5>
+                                            <h6><span>{{account.points}}</span></h6>
+                                        </div>
+                                        <input id="points-{{account.accId}}" class="form-control allPointInputs" type="number" min="0" [(ngModel)]="pointPicker[account.accId]" max={{account.points}} step="1" placeholder="Quiz Points" (keyup)="getUpdateTotalPoints()">
                                     </div>
-                                    <input id="points-{{account.accId}}" class="form-control allPointInputs" type="number" min="0"
-                                        [(ngModel)]="pointPicker[account.accId]" max={{account.points}} step="1"
-                                        placeholder="Quiz Points" (keyup)="getUpdateTotalPoints()">
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <button *ngIf="successfulPurchase" class="btn btn-lg btn-block btn-primary"
-                                (click)="purchaseCart()">Purchase</button>
-                            <button *ngIf="!successfulPurchase" class="btn btn-lg btn-block btn-primary"disabled>
+                            <div>
+                                <button *ngIf="successfulPurchase" class="btn btn-lg btn-block btn-primary" (click)="purchaseCart()">Purchase</button>
+                                <button *ngIf="!successfulPurchase" class="btn btn-lg btn-block btn-primary" disabled>
                                 Need {{displayTotalPoints}} Total Points</button>
-                        </div>
-                        <div>
-                            <button class="btn btn-block btn-outline-success" href="#savingcart" data-toggle="collapse">
+                            </div>
+                            <div>
+                                <button class="btn btn-block btn-outline-success" href="#savingcart" data-toggle="collapse">
                                 Save For Later
                             </button>
-                            <div class="collapse points-div" id="savingcart">
-                                <div class="card d-flex flex-column" id="pointsCard" *ngIf="activeCart">
-                                    <!-- <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">
+                                <div class="collapse points-div" id="savingcart">
+                                    <div class="card d-flex flex-column" id="pointsCard" *ngIf="activeCart">
+                                        <!-- <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">
                                         Name Your Cart
                                     </h3> -->
-                                    <h4 class="card-text">Name your cart to save it for later!</h4>
-                                    <input class="form-control" [(ngModel)]="activeCart.name" type="text"
-                                        placeholder="Enter Cart Name">
-                                    <div *ngIf="activeCart.name=='(default)'">Cannot save cart with name (default).
-                                        Please try another name.</div>
-                                </div>
-                                <div>
-                                    <button class="btn btn-block btn-success" (click)="saveCart()">Save Cart</button>
+                                        <h4 class="card-text">Name your cart to save it for later!</h4>
+                                        <input class="form-control" [(ngModel)]="activeCart.name" type="text" placeholder="Enter Cart Name">
+                                        <div *ngIf="activeCart.name=='(default)'">Cannot save cart with name (default). Please try another name.</div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-block btn-success" (click)="saveCart()">Save Cart</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete
+                            <div>
+                                <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete
                                 Cart</button>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
-
         </div>
     </div>
-</div>
 </div>

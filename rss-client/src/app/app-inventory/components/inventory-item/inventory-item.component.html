@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title italic" id="modal-basic-title">Update {{product.name}}</h4>
+    <h4 class="modal-title italic" id="modal-basic-title">{{product.name}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -43,9 +43,12 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-2">
                 <span class="text-danger" *ngIf="userType==='admin'">* </span>
-                <strong *ngIf="userType==='admin'; else quantityBlock">Quantity:</strong>
-                <ng-template #quantityBlock><span>Quantity:</span></ng-template>
-                <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
+
+                <strong *ngIf="userType==='admin'; else quantityBlock">Stock Quantity:</strong>
+                <input *ngIf="userType==='admin'" type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
+                <ng-template #quantityBlock><span>Quantity:</span>
+                    <input type="number" class="form-control form-control-sm" required min="0" pattern="([0-9]+)" placeholder="1">
+                </ng-template>
                 <p class="text-danger text-sm" [hidden]="quantity.valid || quantity.pristine">
                     <strong>Quantity</strong> is required
                 </p>
@@ -69,14 +72,15 @@
                 <span class="text-danger" *ngIf="userType==='admin'"></span>
                 <strong *ngIf="userType==='admin'; else discountBlock">Discounted Amount:</strong>
                 <ng-template #discountBlock><span>Discounted Amount:</span></ng-template>
-                <input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" required min="0" pattern="([0-9]+)">
+
+                <input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" pattern="([0-9]+)">
             </div>
-            <!-- <div class="col-12 col-md-6 mb-2">
-				<span class="text-danger" *ngIf="userType==='admin'"></span>
-				<strong *ngIf="userType==='admin'; else pointsBlock">Total Price:</strong>
-				<ng-template #pointsBlock><span>Total Price:</span></ng-template>
-				{{updateProduct.totalPrice}}
-			</div> -->
+            <!-- <div class="col-12 col-md-6 mb-2" *ngIf="product.discounted">
+                <span class="text-danger" *ngIf="userType==='admin'"></span>
+                <strong *ngIf="userType==='admin'; else currentBlock">After Discount:</strong>
+                <ng-template #currentBlock><span>Current Points:</span></ng-template>
+                <input type="number" class="form-control form-control-sm" id="currentPrice" name="currentPrice" pattern="([0-9]+)" formControlName="currrentPrice">
+            </div> -->
         </div>
         <div class="mb-2">Color:
             <input type="text" class="form-control form-control-sm" id="inputColor" name="color" formControlName="color">
