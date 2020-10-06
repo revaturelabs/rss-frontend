@@ -2,6 +2,9 @@
     <!-- wrap it all in a container, then it can fit under their header no problem -->
     <p class="card-text" *ngIf="currentUser.admin">Admin users cannot buy items.</p>
     <div class="container main-cart-container" *ngIf="!currentUser.admin">
+        <div *ngIf="currentUser.userDiscounted">
+            you have a discount of {{currentUser.userDiscount}}
+        </div>
         <div class="row">
 
             <!-- Cart, on the left, with large item cards -->

@@ -301,16 +301,16 @@ export class ShoppingCartComponent implements OnInit {
             } else {
               this.totalPointCost += (product.unitPrice) * cItem.quantity;
             }
-            if (this.currentUser.userDiscounted) {
-              this.totalPointCost -= this.currentUser.userDiscount;
-            }
-            if (this.totalPointCost<0) {
-              this.totalPointCost=0;
-            }
-            break;
+            // break;
           } 
         } 
       }     
+      if (this.currentUser.userDiscounted) {
+        this.totalPointCost -= this.currentUser.userDiscount;
+      }
+      if (this.totalPointCost<0) {
+        this.totalPointCost=0;
+      }
     }
     this.displayTotalPoints = this.totalPointCost;
   }
