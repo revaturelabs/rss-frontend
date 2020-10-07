@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-//import { MatDialogModule, MatDialogActions } from '@angular/material/dialog';
 import{ UserModule } from 'src/app/User/user.module';
 import { AppInventoryModule } from '../app-inventory/app-inventory.module';
 
@@ -24,7 +23,6 @@ import { QuizModule } from '../Quiz/quiz.module';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-  //  MatDialogModule,
     AppInventoryModule,
     UserModule,
     QuizModule
