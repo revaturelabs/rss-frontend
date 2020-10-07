@@ -297,7 +297,8 @@ export class ShoppingCartComponent implements OnInit {
         for (let product of this.products) {
           if (product.id == cItem.productId) {
             if (product.discountedAmount>0) {
-              this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
+              let tempProduct : number = product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01));
+              this.totalPointCost += Math.round(tempProduct * cItem.quantity);
             } else {
               this.totalPointCost += (product.unitPrice) * cItem.quantity;
             }
@@ -306,7 +307,9 @@ export class ShoppingCartComponent implements OnInit {
         } 
       }     
       if (this.currentUser.userDiscounted) {
-        this.totalPointCost -= this.currentUser.userDiscount;
+        let tempUserCost : number = 1 - (this.currentUser.userDiscount * 0.01);
+        this.totalPointCost *= tempUserCost;
+        this.totalPointCost = Math.round(this.totalPointCost);
       }
       if (this.totalPointCost<0) {
         this.totalPointCost=0;
