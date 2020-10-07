@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\rss-client",
+    "\\rss-client\\src",
+    "\\rss-client\\src\\app",
+    "\\rss-client\\src\\app\\interfaces",
+    "\\rss-client\\src\\app\\Quiz",
+    "\\rss-client\\src\\app\\Quiz\\admin",
+    "\\rss-client\\src\\app\\Quiz\\admin\\add-quiz",
+    "\\rss-client\\src\\app\\Quiz\\admin\\quiz-form",
+    "\\rss-client\\src\\app\\Quiz\\components",
+    "\\rss-client\\src\\app\\Quiz\\components\\quiz-page"
+  ],
+  "SelectedNode": "\\rss-client\\src\\app\\Quiz\\admin\\add-quiz\\add-quiz.component.ts",
+  "PreviewInSolutionExplorer": false
+}

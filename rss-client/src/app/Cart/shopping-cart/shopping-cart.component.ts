@@ -1,17 +1,17 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 // temporary fake products
-import { Product } from '../../app-inventory/models/product.model';
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 
-import { Cart } from 'src/app/Cart/models/cart.model';
-import { CartService } from 'src/app/Cart/services/cart.service';
-import { CartItemService } from 'src/app/Cart/services/cart-item.service';
-import { User } from 'src/app/User/models/user';
-import { UserService } from 'src/app/User/services/user.service';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/app-inventory/models/product.model';
+import { User } from 'src/app/User/models/user';
 import { AccountService } from 'src/app/User/services/account.service';
-import { Account } from '../../User/models/account'
-import { CartItem } from 'src/app/Cart/models/cart-item.model';
+import { UserService } from 'src/app/User/services/user.service';
+import { CartItem } from '../models/cart-item.model';
+import { Cart } from '../models/cart.model';
+import { CartItemService } from '../services/cart-item.service';
+import { CartService } from '../services/cart.service';
+import { Account } from 'src/app/User/models/account';
 
 
 @Component({
@@ -20,13 +20,11 @@ import { CartItem } from 'src/app/Cart/models/cart-item.model';
   styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-  // TempProducts = TempProducts;
   mobile: boolean = false;
 
   currentUser: User;
 
   activeCart: Cart;
-  // cartItemArray: CartItem[] = [];
   products: Product[];
   product: Product;
   noProduct: Product = {
@@ -39,9 +37,10 @@ export class ShoppingCartComponent implements OnInit {
     image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
     quantity: NaN,
     unitPrice: NaN,
-    color: "N/A"
+    color: "N/A",
+    discounted : false,
+    discountedAmount : NaN
   }
-  // testcart: Cart;
   userAccounts: Account[];
   pointPicker: Record<number, number> = {};
   userAccountRecord: Record<number, Account> = {};
@@ -58,7 +57,6 @@ export class ShoppingCartComponent implements OnInit {
     private router: Router,
     private accountService: AccountService
   ) {
-    // access hardcoded user temporarily
     this.currentUser = this.userService.userPersistance();
 
 
@@ -83,11 +81,6 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.activeCart = null;
     }
-    // console.log(this.activeCart);
-
-
-    // var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
-    // this.testcart = cartobj;
 
     this.productService.getAllProducts().subscribe(
       products => {
@@ -100,16 +93,14 @@ export class ShoppingCartComponent implements OnInit {
       accounts => {
         this.userAccounts = accounts;
         for (let account of accounts) {
-          this.pointPicker[account.accId] = 0;
+          this.pointPicker[account.accId] = account.points;
           this.userAccountRecord[account.accId] = account;
         }
       }
     )
-    // console.log(this.userAccounts);
   }
 
   ngOnInit(): void {
-    // responsive conditional
     if (window.innerWidth < 550) {
       this.mobile = true;
     } else {
@@ -135,7 +126,6 @@ export class ShoppingCartComponent implements OnInit {
 
 
     if (newQuantity > 0) {
-      // console.log(newQuantity);
       let ciToUpdate;
       let emptyCartCopy: Cart = {
         cartId: this.activeCart.cartId,
@@ -154,7 +144,6 @@ export class ShoppingCartComponent implements OnInit {
             quantity: cItem.quantity,
           }
           break;
-          // console.log(cItem.quantity);
         }
       }
       this.getTotalPointCost();
@@ -170,16 +159,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteItem(cartItem: CartItem) {
-    // console.log(cartItem);
     if (cartItem.cartItemId >= 0) {
       this.ciService.deleteCartItem(cartItem).subscribe(
         result => {
           const index = this.activeCart.cartItems.indexOf(cartItem);
           if (index > -1) {
             this.activeCart.cartItems.splice(index, 1);
-            // console.log(index);
             sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
-            // console.log(sessionStorage);
             this.getTotalPointCost();
           }
         }
@@ -188,22 +174,13 @@ export class ShoppingCartComponent implements OnInit {
       const index = this.activeCart.cartItems.indexOf(cartItem);
       if (index > -1) {
         this.activeCart.cartItems.splice(index, 1);
-        // console.log(index);
         sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
-        // console.log(sessionStorage);
         this.getTotalPointCost();
       }
     }
   }
 
-  // async getAndDelete(cartId: number) {
-  //   let testcart: Cart;
-  //   this.cartService.getCartById(cartId).subscribe(
-  //     cart => testcart = cart
-  //   )
-  //   console.log(testcart);
-  // }
-
+  
   deleteCart(path: string) {
     if (this.activeCart.cartId == 0) {
       this.activeCart.cartItems = [];
@@ -215,16 +192,8 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.cartService.deleteCartWithId(this.activeCart.cartId).subscribe(
         resp => {
-          // console.log(resp);
-          if ([200, 201, 202].includes(resp.status)) {
-            // let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
-            // // splice out this cart from the user's cart array
-            // if (index > -1) {
-            //   this.currentUser.userCartIds.splice(index, 1);
-            //   console.log(this.currentUser.userCartIds + " front after");
-            // }
+          if ([200, 201, 202].includes(resp.status)) {            
             sessionStorage.removeItem("activecartId");
-            // console.log(sessionStorage.getItem("activecartId") === null);
             if (path == "") {
               alert("Purchase Successful!");
             }
@@ -239,7 +208,7 @@ export class ShoppingCartComponent implements OnInit {
     let terminatePurchase = false;
     let yourPoints: number = this.getYourPoints();
     let newProductRecord: Record<number, Product> = {}
-    if (yourPoints == this.totalPointCost) {
+    if (yourPoints >= this.totalPointCost) {
       for (let cItem of this.activeCart.cartItems) {
         let ciProduct: Product = this.getProductById(cItem.productId);
         if (cItem.quantity <= ciProduct.quantity) {
@@ -259,9 +228,8 @@ export class ShoppingCartComponent implements OnInit {
             accId: this.userAccountRecord[accId].accId,
             userId: this.userAccountRecord[accId].userId,
             accTypeId: this.userAccountRecord[accId].accTypeId,
-            points: this.userAccountRecord[accId].points - this.pointPicker[accId]
+            points : this.userAccountRecord[accId].points - this.totalPointCost
           }
-          // console.log(accountToUpdate);
           this.accountService.setPoints(accountToUpdate).subscribe();
           this.userAccountRecord[accId] = accountToUpdate;
         }
@@ -293,11 +261,20 @@ export class ShoppingCartComponent implements OnInit {
       for (let cItem of this.activeCart.cartItems) {
         for (let product of this.products) {
           if (product.id == cItem.productId) {
-            this.totalPointCost += product.unitPrice * cItem.quantity;
-            break;
-          }
-        }
+            if (product.discountedAmount>0) {
+              this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
+            } else {
+              this.totalPointCost += (product.unitPrice) * cItem.quantity;
+            }
+          } 
+        } 
       }     
+      if (this.currentUser.userDiscounted) {
+        this.totalPointCost -= this.currentUser.userDiscount;
+      }
+      if (this.totalPointCost<0) {
+        this.totalPointCost=0;
+      }
     }
     this.displayTotalPoints = this.totalPointCost;
   }
@@ -315,7 +292,7 @@ export class ShoppingCartComponent implements OnInit {
         points += this.pointPicker[accId];
       }
     }
-    if (points == this.totalPointCost) {
+    if (points >= this.totalPointCost) {
       this.successfulPurchase = true;
     } else {
       this.successfulPurchase = false;
@@ -344,8 +321,6 @@ export class ShoppingCartComponent implements OnInit {
       };
       this.cartService.addCart(cartToSave).subscribe(
         (generatedCart) => {
-          // console.log(generatedCart);
-          // console.log(this.activeCart.cartItems);
           if (this.activeCart.cartItems.length > 0) {
             for (let cItem of this.activeCart.cartItems) {
               let tempCartItem = {
@@ -354,7 +329,6 @@ export class ShoppingCartComponent implements OnInit {
                 productId: cItem.productId,
                 quantity: cItem.quantity
               }
-              // console.log(tempCartItem);
               this.ciService.addCartItem(tempCartItem).subscribe(
                 resp => {
                   console.log("about to redirect");

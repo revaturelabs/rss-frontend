@@ -5,5 +5,7 @@ export interface User {
   profilePic: any,
   firstName: string,
   lastName: string,
-  admin: boolean
+  admin: boolean,
+  userDiscounted: boolean,
+  userDiscount: number
 }

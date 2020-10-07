@@ -42,9 +42,7 @@ export class AccountService {
     profilePic: null,
     firstName: '',
     lastName: '',
-    admin: false,
-    userDiscounted: false,
-    userDiscount: 0
+    admin: false
   };
 
   account: Account;
