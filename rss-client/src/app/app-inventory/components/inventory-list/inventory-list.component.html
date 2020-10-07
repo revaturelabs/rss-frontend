@@ -11,7 +11,7 @@
                     Product Search: <input class="form-control" type="text" name="searchTerm"
                         [(ngModel)]="service.searchTerm"/>
                     <div *ngIf="userType === 'admin'">
-                        <button class="btn btn-orange mt-3" routerLink="/inventory/add-item">New Item
+                        <button class="btn btn-primary mt-3" routerLink="/inventory/add-item">New Item
                             <em class="fas fa-plus"></em></button>
                     </div>
                     <span class="px-4" *ngIf="service.loading$ | async">Loading...</span>
@@ -27,32 +27,30 @@
                         <div class="card-body">
                             <h4 class="card-title">{{product.name}}</h4>
                             <p class="card-text">{{product.description}}</p>
-                            <aside class="container-fluid">
                                 <div class="row">
                                     <div class="col-6">
                                         <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
-                                            {{product.unitPrice | number}}</span><br />
+                                            <b>{{product.unitPrice | number}} points</b></span><br />
                                         <span *ngIf="product.discounted === true"
-                                            style="color:#FF0000">{{product.unitPrice - product.discountedAmount | number}}</span>
+                                            style="color:#FF0000"><b>{{product.unitPrice - product.discountedAmount | number}} points</b></span>
                                     </div>
                                     <div class="col-6">
                                         <!-- SHOW IF ADMIN -->
                                         <div *ngIf="userType==='admin'">
-                                            <button class="btn btn-orange" (click)="open(product)">
+                                            <button class="btn btn-primary" (click)="open(product)">
                                                 Update
                                                 <em class="fas fa-pencil-alt"></em>
                                             </button>
                                         </div>
                                         <!-- SHOW IF CUSTOMER -->
                                         <div *ngIf="userType==='customer'">
-                                            <button class="btn btn-orange" (click)="open(product)">
+                                            <button class="btn btn-primary" (click)="open(product)">
                                                 Detail
                                                 <em class="fas fa-cart-plus"></em>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                            </aside>
                         </div>
                     </article>
                 </div>

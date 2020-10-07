@@ -16,7 +16,7 @@ import { User } from 'src/app/User/models/user';
 @Component({
 	selector: 'app-inventory-list',
 	templateUrl: './inventory-list.component.html',
-	styleUrls: ['./inventory-list.component.css'],
+	styleUrls: ['./inventory-list.component.scss'],
 })
 export class InventoryListComponent implements OnInit {
 
