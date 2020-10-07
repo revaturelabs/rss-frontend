@@ -20,9 +20,8 @@ export class QuizPageComponent implements OnInit {
   evalAccount: Account;
   user: User = this.userservice.userPersistance();
   quizzesTaken: any[] = [0];
-  outOfAttempts: boolean = false;
-  attempted: boolean = false;
   review: boolean = false;
+  attempts: QuizSubmit;
 
   @Input() config;
   searchText: string;
@@ -61,8 +60,13 @@ export class QuizPageComponent implements OnInit {
     });
   }
 
-  // openReview() {
-  //   this.review = (this.review == false) ? true : false;
+  // openReview(quizId) {
+  //   if (this.review == false) {
+  //     this.review = true;
+  //     this.quizservice.getAttemptReviews(quizId).subscribe((res) => (this.attempts = res))
+  //   } else {
+  //     this.review = false;
+  //   }
   // }
 
   

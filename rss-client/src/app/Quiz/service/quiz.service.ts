@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class QuizService {
+
   url = `${environment.evaluationServiceUrlWithZuul}`;
 
   httpOptions = {
@@ -160,6 +161,11 @@ export class QuizService {
       JSON.stringify(id),
       this.httpOptions
     );
+  }
+
+  //AnswersBank Controller
+  getAttemptReviews(quizId: any) {
+    return this.httpclient.get<any[]>(this.url + '/answers/..?'+quizId);
   }
 
   //User Quiz Score Controller

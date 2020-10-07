@@ -88,6 +88,7 @@ export class TestInProgressComponent implements OnInit {
         userEmail: this.userService.userPersistance().email,
         userId: this.userService.userPersistance().userId,
         quizId: this.config.quizId,
+        // quizAttempt: this.config.quizAttempt
       };
       answersArr.push(obj);
     }
