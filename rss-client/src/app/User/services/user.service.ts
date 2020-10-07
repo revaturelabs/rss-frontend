@@ -83,15 +83,7 @@ export class UserService {
   }
 
   isLoggedIn = false;
-  // user: User = {
-  //   userId: 2021,
-  //   email: '',
-  //   password: '',
-  //   profilePic: null,
-  //   firstName: 'test',
-  //   lastName: 'testerson',
-  //   admin: false
-  // };
+  
   user: User = {
     userId: 2021,
     email: '',
@@ -103,16 +95,7 @@ export class UserService {
     userDiscounted: false,
     userDiscount: 0
   };
-  // user: User = {
-  //   userId: 2022,
-  //   email: 'admin',
-  //   password: 'admin',
-  //   profilePic: null,
-  //   firstName: 'admin',
-  //   lastName: 'admin',
-  //   admin: true,
-  //   //userCartIds: []
-  // };
+  
   changeUser(user: User) {
     this.isLoggedIn = true;
     this.user = user;
@@ -130,7 +113,6 @@ export class UserService {
     this.storage.set(STORAGE_KEY, undefined);
     sessionStorage.clear();
     this.location.replaceState('');
-    //window.location.reload();
   }
 
   userPersistance() {
