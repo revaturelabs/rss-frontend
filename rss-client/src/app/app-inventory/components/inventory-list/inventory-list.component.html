@@ -32,7 +32,7 @@
                                         <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
                                             <b>{{product.unitPrice | number}} points</b></span><br />
                                         <span *ngIf="product.discounted === true"
-                                            style="color:#FF0000"><b>{{product.unitPrice - product.discountedAmount | number}} points</b></span>
+											style="color:#FF0000">{{product.discountedAmount | number}}% OFF!!!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
                                     </div>
                                     <div class="col-6">
                                         <!-- SHOW IF ADMIN -->
