@@ -10,6 +10,7 @@ import { AccountService } from 'src/app/User/services/account.service';
 import { Account } from 'src/app/User/models/account';
 import { subscribeOn } from 'rxjs/operators';
 import { QuizSubmit } from '../../models/quizSubmit';
+import { Quiz } from '../../models/quiz';
 
 @Component({
   selector: 'quiz-page',
@@ -25,6 +26,7 @@ export class QuizPageComponent implements OnInit {
   searchText: string;
   searchSubject: string;
   quizData;
+  
 
   constructor(
     private quizservice: QuizService,

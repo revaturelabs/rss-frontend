@@ -6,6 +6,9 @@ import { Quiz } from '../models/quiz';
 import { Questions } from '../models/questions';
 import { QuizSubmit } from '../models/quizSubmit';
 import { environment } from 'src/environments/environment';
+import { User } from 'src/app/User/models/user';
+import { AccountService } from 'src/app/User/services/account.service';
+import { Account } from 'src/app/User/models/account';
 
 @Injectable({
   providedIn: 'root',
@@ -74,7 +77,7 @@ export class QuizService {
     },
   };
 
-  constructor(private httpclient: HttpClient) { }
+  constructor(private httpclient: HttpClient, private accountService: AccountService) { }
 
   //Subject-Controller
   addSubject(sub): Observable<Subject> {
@@ -167,4 +170,26 @@ export class QuizService {
       this.quizSubmit
     );
   }
+  //userId: User;
+  // accId: Account;
+ // quizId: Quiz;
+  // userScoreId: number;
+
+  //subtracting away attempts
+  subtractAttempt(attempt) {
+    this.quiz.quizAttempt = attempt;
+    if(attempt > 0) {
+      --attempt;
+      this.updateQuizAttempt(this.quizSubmit.userScoreId);
+    } 
+    console.log("ATTEMPT: ", attempt);
+    return attempt;
+  }
+  //GROUP 2 - need updating method...user or account?
+  updateQuizAttempt(userScoreId): Observable<QuizSubmit> {
+    return this.httpclient.put<any>(this.url + '/userscore/quizzes', userScoreId);
+  }
+
+
+
 }

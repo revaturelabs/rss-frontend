@@ -24,7 +24,7 @@ export class EditQuizComponent implements OnInit {
   focusedQuestion;
   isValid = false;
   /** validate ()
-   * validates that the quiz topic exists and that the questions also exist
+   * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted
    * */
   validate() {
