@@ -1,3 +1,6 @@
+import { Questions } from './questions';
+import { QuizSubmit } from './quizSubmit';
+
   
 export interface Quiz {
   quizId: number;
@@ -5,10 +8,17 @@ export interface Quiz {
   quizDescription: string;
   //Group 2 change
   quizTotalPoints: number;
+  //Group 2 change
+  quizDifficulty: string;
+  quizAttempt: number;
+
   creatorEmail: string;
   subjectId: number;
   subject: {
     subjectId: number;
     subjectName: string;
   };
+
+  //Group 1 change (Oct.6)
+  // attempts: QuizSubmit[];
 }

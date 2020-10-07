@@ -1,3 +1,5 @@
+import { Questions } from './questions';
+
 export interface QuizSubmit {
   userScoreId: number;
   userEmail: string;
@@ -15,4 +17,8 @@ export interface QuizSubmit {
       subjectName: string;
     };
   };
+
+  //Group 1 change (Oct.6)
+  status: String;
+  questions: Questions[];
 }

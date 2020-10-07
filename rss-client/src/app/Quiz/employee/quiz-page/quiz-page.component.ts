@@ -22,6 +22,7 @@ export class QuizPageComponent implements OnInit {
   quizzesTaken: any[] = [0];
   outOfAttempts: boolean = false;
   attempted: boolean = false;
+  review: boolean = false;
 
   @Input() config;
   searchText: string;
@@ -59,4 +60,10 @@ export class QuizPageComponent implements OnInit {
       this.parent.routerCrumbs = ['earnpoints', 'quizzes'];
     });
   }
+
+  // openReview() {
+  //   this.review = (this.review == false) ? true : false;
+  // }
+
+  
 }
