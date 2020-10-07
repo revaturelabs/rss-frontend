@@ -22,6 +22,8 @@ export class QuizService {
     quizTopic: '',
     quizDescription: '',
     quizTotalPoints:0,
+    quizDifficulty: '',
+    quizAttempt: 0,
     creatorEmail: '',
     subjectId: 0,
     subject: {
@@ -70,6 +72,9 @@ export class QuizService {
         subjectName: '',
       },
     },
+    //Group 1 change (Oct.6)
+    status: '',
+    questions: []
   };
 
   constructor(private httpclient: HttpClient) { }
@@ -112,7 +117,7 @@ export class QuizService {
   }
 
   //Questions Bank Controller
-  //this method is also going to be used to update questions aswell
+  //this method is also going to be used to update questions as well
   addSingularQuestion(question): Observable<Questions> {
     return this.httpclient.post<any>(
       this.url + '/question/admin/add',

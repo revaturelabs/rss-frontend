@@ -25,15 +25,16 @@
               <b>Points: </b>{{quizdata.quizTotalPoints}}
             </div>
             <div class="col-5">
-              <span>?</span>&nbsp;attempt(s) remaining
+              <span>{{quizdata.quizAttempt}}</span>&nbsp;attempt(s) remaining
             </div>
             <a class="btn" id="detailsBtn" routerLink="/quizzes/{{ quizdata.quizId }}">Enter</a>
           </div>
           <!-- show only if the quiz has been taken at least once -->
-          <div *ngIf="!attempted">
+          <!-- add *ngIf="quizdata.quizAttempt < 3" -->
+          <div> 
             <div class="row align-items-center row-2">
               <div class="col-9">
-                <span class="panel-title">Recent Score:</span><span>&nbsp;??%</span>
+                <span class="panel-title">Recent Score:&nbsp;</span><span>quizdata.attempts[-1]%</span>
               </div>
               <button class="btn">Review</button>
             </div>
@@ -42,30 +43,77 @@
         </div>
       </div>
       <!-- review details and options -->
-      <div *ngIf="!review" class="small-text">
-        <div class="row justify-content-around align-items-center skinny-row">
-          <div class="col-1">S.No.</div>
-          <div class="col-2">Started On</div>
-          <div class="col-2">Completed On</div>
-          <div class="col-2">Status</div>
-          <div class="col-2">Score (%)</div>
-          <div class="col-3">Action</div>
-        </div>
-        <div>
+      <div *ngIf="!quizdata.quizAttempt" class="small-text">
           <div class="row justify-content-around align-items-center skinny-row">
-            <div class="col-1">a</div>
-            <div class="col-2">aaa</div>
-            <div class="col-2">aaa</div>
-            <div class="col-2">aa</div>
-            <div class="col-2">%</div>
-            <div class="col-1">
-              <a>Review</a>
-            </div>
-            <div class="col-2">
-              <a>View Answers</a>
+            <div class="col-1">S.No.</div>
+            <div class="col-2">Started On</div>
+            <div class="col-2">Completed On</div>
+            <div class="col-2">Status</div>
+            <div class="col-2">Score (%)</div>
+            <div class="col-3">Action</div>
+          </div>
+          <div>
+            <!-- add *ngFor="let a of quizdata.attempts" -->
+            <div class="row justify-content-around align-items-center skinny-row">
+              <div class="col-1">a.userScoreId</div>
+              <div class="col-2">a.submitDate</div>
+              <div class="col-2">a.submitDate</div>
+              <div class="col-2">a.status</div>
+              <div class="col-2">a.userScore%</div>
+              <div class="col-1">
+                <a data-toggle="modal" data-target="#exampleModalLong">Review</a>
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Review Quiz</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <!-- populate modal with questions and answers -->
+                        <!-- <div *ngFor="let q of a.questions">
+                          <h4><span>q.questionValue.&nbsp;</span>q.question</h4>
+                          <div class="m-3" *ngIf="q.option1">
+                            <input class="form-check-input" [checked]="isChecked(index, 1)" type="radio" id="item1" [name]="index" />
+                            <label class="form-check-label" for="item1">q.option1</label>
+                          </div>
+                          <div class="m-3" *ngIf="q.option2">
+                            <input class="form-check-input" [checked]="isChecked(index, 2)" type="radio"
+                              id="item2" [name]="index" />
+                            <label class="form-check-label" for="item2">q.option2</label>
+                          </div>
+                          <div class="m-3" *ngIf="q.option3">
+                            <input class="form-check-input" [checked]="isChecked(index, 3)" type="radio"
+                              id="item3" [name]="index" />
+                            <label class="form-check-label" for="item3"> q.option3</label>
+                          </div>
+                          <div class="m-3" *ngIf="q.option4">
+                            <input class="form-check-input" [checked]="isChecked(index, 4)" type="radio"
+                              id="item4" [name]="index" />
+                            <label class="form-check-label" for="item4"> q.option4 </label>
+                          </div>
+                          <div class="m-3" *ngIf="q.option5">
+                            <input class="form-check-input" [checked]="isChecked(index, 5)" type="radio"
+                              id="item5" [name]="index" />
+                            <label class="form-check-label" for="item5"> q.option5 </label>
+                          </div>
+                        </div> -->
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <a>View Answers</a>
+              </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
