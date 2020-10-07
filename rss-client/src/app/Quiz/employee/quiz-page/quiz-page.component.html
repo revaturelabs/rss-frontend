@@ -13,12 +13,12 @@
         <div class="quizDetails">
           <h1>{{ quizdata.subject.subjectName | titlecase }}</h1>
           <h2>{{ quizdata.quizTopic | titlecase }}</h2>
+          <p>{{ quizdata.quizDescription }}</p>
           <p>
-            {{ quizdata.quizDescription }}<br />
-            <b>Points: </b>{{quizdata.quizTotalPoints}}
+            <strong>Points:</strong> {{quizdata.quizTotalPoints}}<br>
+            <strong>Difficulty:</strong> {{quizdata.quizDifficulty}}<br>
+            <strong>Quiz Attempts:</strong> {{ quizdata.quizAttempt }} <br>
           </p>
-          <strong><em>Difficulty: </em></strong>{{quizdata.quizDifficulty}}
-          <p><b>Quiz Attempts:</b> {{ quizdata.quizAttempt }} </p>
           <a class="btn" id="detailsBtn" routerLink="/quizzes/{{ quizdata.quizId }}">Details</a>
         </div>
       </section>

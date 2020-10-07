@@ -1,3 +1,11 @@
+<div class="text-center">
+<p>You have scored</p>
+<!--Group 2 change Percentage earned from attempt-->
+<div class="percentage rounded-circle">
+  <h2 class="text-white">{{ parentalunit.results.correctAnswers / parentalunit.results.totalQuestions | percent }}</h2>
+</div>
+<!--Group2 - TODO: adding a quote with ngIf for pass and fail -->
+
 <!-- Number correctly answered -->
 <h2>Total Correct: {{ parentalunit.results.correctAnswers }}</h2>
 <!-- Total questions in test for  correct / possible -->
@@ -7,9 +15,9 @@
 </h2>
 <!-- Points earned from this attempt -->
 <h2>Total Points Received: {{ parentalunit.results.totalPoints }}</h2>
-<!--Group 2 change Percentage earned from attempt-->
-<h2>Total Percentage: {{ parentalunit.results.correctAnswers / parentalunit.results.totalQuestions | percent }}</h2>
-<!-- Back button -->
-<button (click)="onRetake()">Retake Test</button>
+
+<p>What would you like to do next?</p>
 <!-- back to quiz overview page -->
-<button routerLink="/quizzes">Back</button>
+<button class="btn mb-2">REVIEW ATTEMPT</button>
+<p>browse more <a routerLink="/quizzes">Quizzes</a></p>
+</div>
