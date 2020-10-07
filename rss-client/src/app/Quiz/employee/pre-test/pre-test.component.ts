@@ -5,7 +5,7 @@ import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-
 @Component({
   selector: 'pre-test',
   templateUrl: './pre-test.component.html',
-  styleUrls: ['./pre-test.component.css'],
+  styleUrls: ['./pre-test.component.scss'],
 })
 export class PreTestComponent implements OnInit {
   @Input() config;

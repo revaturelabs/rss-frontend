@@ -13,7 +13,7 @@ import { Observer } from 'rxjs';
 @Component({
   selector: 'test-in-progress',
   templateUrl: './test-in-progress.component.html',
-  styleUrls: ['./test-in-progress.component.css'],
+  styleUrls: ['./test-in-progress.component.scss'],
 })
 export class TestInProgressComponent implements OnInit {
   @Input() config;
