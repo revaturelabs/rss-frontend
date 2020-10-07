@@ -43,15 +43,14 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-2">
                 <span class="text-danger" *ngIf="userType==='admin'">* </span>
-
                 <strong *ngIf="userType==='admin'; else quantityBlock">Stock Quantity:</strong>
-                <input *ngIf="userType==='admin'" type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
-                <ng-template #quantityBlock><span>Quantity:</span>
-                    <input type="number" class="form-control form-control-sm" required min="0" pattern="([0-9]+)" placeholder="1">
-                </ng-template>
+                <ng-template #quantityBlock><span>Stock Quantity:</span></ng-template>
+                <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
+                <!-- <input type="number" class="form-control form-control-sm" required min="0" pattern="([0-9]+)"> -->
                 <p class="text-danger text-sm" [hidden]="quantity.valid || quantity.pristine">
                     <strong>Quantity</strong> is required
                 </p>
+
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="negativeQ">
                     <strong>Sorry!</strong> Try adding fewer items to your cart.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -67,8 +66,8 @@
                 <p class="text-danger text-sm" [hidden]="unitPrice.valid || unitPrice.pristine">
                     <strong>Points</strong> is required
                 </p>
-			</div>
-			<!--
+            </div>
+            <!--
 				For this Branch we have adjusted calculations in the shopping cart to make discount inputs not a subtraction operation,
 				but instead a percentage based calculation.
 			-->
