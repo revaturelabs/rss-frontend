@@ -4,7 +4,7 @@ import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'admin-quiz',
   templateUrl: './admin-quiz.component.html',
-  styleUrls: ['./admin-quiz.component.css'],
+  styleUrls: ['./admin-quiz.component.scss'],
 })
 export class AdminQuizComponent implements OnInit {
   @Output() navigateEvent = new EventEmitter();

@@ -15,7 +15,7 @@ import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-account-settings-page',
   templateUrl: './account-settings-page.component.html',
-  styleUrls: ['./account-settings-page.component.css'],
+  styleUrls: ['./account-settings-page.component.scss'],
 })
 export class AccountSettingsPageComponent implements OnInit {
   // newPass = new FormControl('');

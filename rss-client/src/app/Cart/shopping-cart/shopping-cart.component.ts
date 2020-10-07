@@ -17,16 +17,14 @@ import { Account } from 'src/app/User/models/account';
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css'],
+  styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
-  // TempProducts = TempProducts;
   mobile: boolean = false;
 
   currentUser: User;
 
   activeCart: Cart;
-  // cartItemArray: CartItem[] = [];
   products: Product[];
   product: Product;
   noProduct: Product = {
@@ -43,7 +41,6 @@ export class ShoppingCartComponent implements OnInit {
     discounted : false,
     discountedAmount : NaN
   }
-  // testcart: Cart;
   userAccounts: Account[];
   pointPicker: Record<number, number> = {};
   userAccountRecord: Record<number, Account> = {};
@@ -60,7 +57,6 @@ export class ShoppingCartComponent implements OnInit {
     private router: Router,
     private accountService: AccountService
   ) {
-    // access hardcoded user temporarily
     this.currentUser = this.userService.userPersistance();
 
 
@@ -85,11 +81,6 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.activeCart = null;
     }
-    // console.log(this.activeCart);
-
-
-    // var cartobj = JSON.parse(sessionStorage.getItem('myactivecart'));
-    // this.testcart = cartobj;
 
     this.productService.getAllProducts().subscribe(
       products => {
@@ -107,11 +98,9 @@ export class ShoppingCartComponent implements OnInit {
         }
       }
     )
-    // console.log(this.userAccounts);
   }
 
   ngOnInit(): void {
-    // responsive conditional
     if (window.innerWidth < 550) {
       this.mobile = true;
     } else {
@@ -137,7 +126,6 @@ export class ShoppingCartComponent implements OnInit {
 
 
     if (newQuantity > 0) {
-      // console.log(newQuantity);
       let ciToUpdate;
       let emptyCartCopy: Cart = {
         cartId: this.activeCart.cartId,
@@ -156,7 +144,6 @@ export class ShoppingCartComponent implements OnInit {
             quantity: cItem.quantity,
           }
           break;
-          // console.log(cItem.quantity);
         }
       }
       this.getTotalPointCost();
@@ -172,16 +159,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteItem(cartItem: CartItem) {
-    // console.log(cartItem);
     if (cartItem.cartItemId >= 0) {
       this.ciService.deleteCartItem(cartItem).subscribe(
         result => {
           const index = this.activeCart.cartItems.indexOf(cartItem);
           if (index > -1) {
             this.activeCart.cartItems.splice(index, 1);
-            // console.log(index);
             sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
-            // console.log(sessionStorage);
             this.getTotalPointCost();
           }
         }
@@ -190,22 +174,13 @@ export class ShoppingCartComponent implements OnInit {
       const index = this.activeCart.cartItems.indexOf(cartItem);
       if (index > -1) {
         this.activeCart.cartItems.splice(index, 1);
-        // console.log(index);
         sessionStorage.setItem("myactivecart", JSON.stringify(this.activeCart));
-        // console.log(sessionStorage);
         this.getTotalPointCost();
       }
     }
   }
 
-  // async getAndDelete(cartId: number) {
-  //   let testcart: Cart;
-  //   this.cartService.getCartById(cartId).subscribe(
-  //     cart => testcart = cart
-  //   )
-  //   console.log(testcart);
-  // }
-
+  
   deleteCart(path: string) {
     if (this.activeCart.cartId == 0) {
       this.activeCart.cartItems = [];
@@ -217,16 +192,8 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.cartService.deleteCartWithId(this.activeCart.cartId).subscribe(
         resp => {
-          // console.log(resp);
-          if ([200, 201, 202].includes(resp.status)) {
-            // let index = this.currentUser.userCartIds.indexOf(this.activeCart.cartId);
-            // // splice out this cart from the user's cart array
-            // if (index > -1) {
-            //   this.currentUser.userCartIds.splice(index, 1);
-            //   console.log(this.currentUser.userCartIds + " front after");
-            // }
+          if ([200, 201, 202].includes(resp.status)) {            
             sessionStorage.removeItem("activecartId");
-            // console.log(sessionStorage.getItem("activecartId") === null);
             if (path == "") {
               alert("Purchase Successful!");
             }
@@ -261,10 +228,8 @@ export class ShoppingCartComponent implements OnInit {
             accId: this.userAccountRecord[accId].accId,
             userId: this.userAccountRecord[accId].userId,
             accTypeId: this.userAccountRecord[accId].accTypeId,
-            //points: this.userAccountRecord[accId].points - this.pointPicker[accId]
             points : this.userAccountRecord[accId].points - this.totalPointCost
           }
-          // console.log(accountToUpdate);
           this.accountService.setPoints(accountToUpdate).subscribe();
           this.userAccountRecord[accId] = accountToUpdate;
         }
@@ -303,7 +268,6 @@ export class ShoppingCartComponent implements OnInit {
             } else {
               this.totalPointCost += (product.unitPrice) * cItem.quantity;
             }
-            // break;
           } 
         } 
       }     
@@ -361,8 +325,6 @@ export class ShoppingCartComponent implements OnInit {
       };
       this.cartService.addCart(cartToSave).subscribe(
         (generatedCart) => {
-          // console.log(generatedCart);
-          // console.log(this.activeCart.cartItems);
           if (this.activeCart.cartItems.length > 0) {
             for (let cItem of this.activeCart.cartItems) {
               let tempCartItem = {
@@ -371,7 +333,6 @@ export class ShoppingCartComponent implements OnInit {
                 productId: cItem.productId,
                 quantity: cItem.quantity
               }
-              // console.log(tempCartItem);
               this.ciService.addCartItem(tempCartItem).subscribe(
                 resp => {
                   console.log("about to redirect");

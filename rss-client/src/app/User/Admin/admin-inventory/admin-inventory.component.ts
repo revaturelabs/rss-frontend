@@ -4,7 +4,7 @@ import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'admin-inventory',
   templateUrl: './admin-inventory.component.html',
-  styleUrls: ['./admin-inventory.component.css'],
+  styleUrls: ['./admin-inventory.component.scss'],
 })
 export class AdminInventoryComponent implements OnInit {
   @Output() navigateEvent = new EventEmitter();

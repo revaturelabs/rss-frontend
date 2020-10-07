@@ -15,7 +15,7 @@ import { CartItem } from 'src/app/Cart/models/cart-item.model';
 @Component({
 	selector: 'app-inventory-item',
 	templateUrl: './inventory-item.component.html',
-	styleUrls: ['./inventory-item.component.css'],
+	styleUrls: ['./inventory-item.component.scss'],
 })
 export class InventoryItemComponent implements OnInit {
 
