@@ -14,6 +14,7 @@ import { Account } from 'src/app/User/models/account';
   providedIn: 'root',
 })
 export class QuizService {
+
   url = `${environment.evaluationServiceUrlWithZuul}`;
 
   httpOptions = {
@@ -75,6 +76,9 @@ export class QuizService {
         subjectName: '',
       },
     },
+    //Group 1 change (Oct.6)
+    status: '',
+    answers: []
   };
 
   constructor(private httpclient: HttpClient, private accountService: AccountService) { }
@@ -117,7 +121,7 @@ export class QuizService {
   }
 
   //Questions Bank Controller
-  //this method is also going to be used to update questions aswell
+  //this method is also going to be used to update questions as well
   addSingularQuestion(question): Observable<Questions> {
     return this.httpclient.post<any>(
       this.url + '/question/admin/add',
@@ -162,7 +166,7 @@ export class QuizService {
     );
   }
 
-  //User Quiz Score Controller
+  //UserQuizScore Controller
   getUserScores(email): Observable<any[]> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
@@ -170,6 +174,17 @@ export class QuizService {
       this.quizSubmit
     );
   }
+
+  //sends request to UserQuizScoreController - create this method +useremail
+  getAttemptsByQuizId(quizId) {
+    return this.httpclient.get<QuizSubmit[]>(this.url + '/userscore/quiz/'+quizId);
+  }
+
+  //sends request to AnswersBankController - create this method based on userscoreid
+  getAnswersByAttemptId(id) {
+    return this.httpclient.get<any[]>(this.url+'/answer/'+id);
+  }
+
   //userId: User;
   // accId: Account;
  // quizId: Quiz;
@@ -189,7 +204,4 @@ export class QuizService {
   updateQuizAttempt(userScoreId): Observable<QuizSubmit> {
     return this.httpclient.put<any>(this.url + '/userscore/quizzes', userScoreId);
   }
-
-
-
 }

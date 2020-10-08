@@ -1,3 +1,6 @@
+import { Questions } from './questions';
+import { QuizSubmit } from './quizSubmit';
+
   
 export interface Quiz {
   quizId: number;
@@ -14,4 +17,7 @@ export interface Quiz {
     subjectId: number;
     subjectName: string;
   };
+
+  //Group 1 change (Oct.6)
+  // attempts: QuizSubmit[];
 }

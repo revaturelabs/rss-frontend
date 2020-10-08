@@ -1,16 +1,16 @@
 <div class="container">
   <section class="row">
-    <div class="col-8 px-2 pr-5">
-      <div class="py-3">
-        <h2>{{ config.subject.subjectName | titlecase }} - {{ config.quizTopic | titlecase }}</h2>
+    <div class="col-8">
+      <div class="my-2 p-2">
+        <h2>Topic -- {{ config.quizTopic | titlecase }}</h2>
       </div>
       <!-- Quiz description -->
-      <div class="py-3">
+      <div class="my-2 p-2">
         <h2>Description</h2>
         <p class="description">{{ config.quizDescription }}</p>
       </div>
       <!-- Quiz Instruction from an array of instructions-->
-      <div class="py-3">
+      <div class="my-2 p-2">
         <h2>Instructions</h2>
         <div class="instructions">
           <div class="details">
@@ -38,4 +38,5 @@
       </div>
     </aside>
   </section>
+
 </div>
