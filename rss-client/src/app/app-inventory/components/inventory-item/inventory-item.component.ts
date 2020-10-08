@@ -52,6 +52,9 @@ export class InventoryItemComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.localQuantity = this.product.quantity;
+		if (this.userService.userPersistance().admin){
+			this.userType = 'admin';
+		}
 		if (this.userType === 'admin') {
 			this.admin = false;
 		}
