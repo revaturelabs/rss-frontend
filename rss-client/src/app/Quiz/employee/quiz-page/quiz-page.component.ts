@@ -66,6 +66,7 @@ export class QuizPageComponent implements OnInit {
 
   showReview(quizId) {
     const reviewElement = document.getElementById("review" + quizId);
+    console.log(quizId + " " + this.user.email);
     if (reviewElement.classList.contains("hide")) {
       reviewElement.classList.remove("hide");
 
@@ -92,9 +93,10 @@ export class QuizPageComponent implements OnInit {
   getAttemptAnswers(attemptId) {
     //get answers by the attempt
     this.quizservice.getAnswersByAttemptId(attemptId).subscribe(
-      (data) => (
+      (data) => {
+        console.log(data);
         this.answers = data //array of answers -create class (AnswersBank)
-      )
+      }
     )
   }
 }
