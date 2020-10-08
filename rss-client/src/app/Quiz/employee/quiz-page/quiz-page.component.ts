@@ -70,10 +70,11 @@ export class QuizPageComponent implements OnInit {
       reviewElement.classList.remove("hide");
 
       //make a request to get attempts for the quiz
-      this.quizservice.getAttemptsByQuizId(quizId).subscribe(
-        (data) => (
-          this.attempts = data
-        )
+      this.quizservice.getAttemptsByQuizId(quizId, this.user.email).subscribe(
+        (data) => {
+          console.log(data);
+          this.attempts = data;
+        }
       )
     } else {
       reviewElement.classList.add("hide");
