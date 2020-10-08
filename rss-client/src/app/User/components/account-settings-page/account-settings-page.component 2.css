@@ -1,0 +1,23 @@
+.rev_orange{
+    color: #F26925;
+}
+
+input {
+    border: 0px;
+    border-bottom: 1px solid #000000 !important;
+    border-radius: 0 !important;
+    line-height: 16px;
+    background-color: transparent;
+    padding: 3px 0 10px;
+}
+
+input#fileInput {
+    float: left;
+    border-bottom: 0 !important;
+}
+
+button {
+    color: #FFFFFF !important;
+    background-color: #72A4C2 !important;
+    float: right;
+}

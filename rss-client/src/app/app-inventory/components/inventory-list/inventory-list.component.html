@@ -8,8 +8,7 @@
             <form>
                 <!-- PRODUCT SEARCH -->
                 <div class="form-group form-inline">
-                    Product Search: <input class="form-control" type="text" name="searchTerm"
-                        [(ngModel)]="service.searchTerm"/>
+                    Product Search: <input class="form-control" type="text" name="searchTerm" [(ngModel)]="service.searchTerm" />
                     <div *ngIf="userType === 'admin'">
                         <button class="btn btn-primary mt-3" routerLink="/inventory/add-item">New Item
                             <em class="fas fa-plus"></em></button>
@@ -26,13 +25,15 @@
                         <img class="card-img-top" src="{{product.image}}" alt="product_img">
                         <div class="card-body">
                             <h4 class="card-title">{{product.name}}</h4>
-                            <p class="card-text">{{product.description}}</p>
+                            <!-- <p class="card-text">{{product.description}}</p> -->
+                            <p class="card-text">{{product.brand}}</p>
+                            <aside class="container-fluid">
                                 <div class="row">
                                     <div class="col-6">
                                         <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
-                                            <b>{{product.unitPrice | number}} points</b></span><br />
-                                        <span *ngIf="product.discounted === true"
-											style="color:#FF0000">{{product.discountedAmount | number}}% OFF!!!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
+                                            {{product.unitPrice | number}}</span><br />
+                                        <span *ngIf="product.discounted === true" style="color:#FF0000">{{product.discountedAmount | number}}% OFF!!!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
+
                                     </div>
                                     <div class="col-6">
                                         <!-- SHOW IF ADMIN -->
@@ -51,6 +52,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </aside>
                         </div>
                     </article>
                 </div>
