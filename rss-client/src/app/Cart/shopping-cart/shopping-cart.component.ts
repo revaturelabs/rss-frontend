@@ -122,10 +122,14 @@ export class ShoppingCartComponent implements OnInit {
 
   updateQuantity(itemId: number) {
 
-    let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
+    // let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
 
+    let selectItem = this.activeCart.cartItems.find(item=>{
+      return item.cartItemId === itemId;
+    })
 
-    if (newQuantity > 0) {
+    console.log(selectItem);
+    if (selectItem.quantity > 0) {
       let ciToUpdate;
       let emptyCartCopy: Cart = {
         cartId: this.activeCart.cartId,
@@ -136,7 +140,7 @@ export class ShoppingCartComponent implements OnInit {
       for (let i = 0; i < this.activeCart.cartItems.length; i++) {
         let cItem = this.activeCart.cartItems[i];
         if (cItem.cartItemId == itemId) {
-          this.activeCart.cartItems[i].quantity = newQuantity;
+          this.activeCart.cartItems[i].quantity = selectItem.quantity;
           ciToUpdate = {
             cartItemId: cItem.cartItemId,
             cart: emptyCartCopy,

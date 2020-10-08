@@ -19,9 +19,9 @@
             </form>
         </aside>
         <!-- PRODUCT CARDS -->
-        <div class="col-9">
+        <div class="col-12">
             <section class="row">
-                <div class="col-4" *ngFor="let product of products$ | async; let idx = index">
+                <div class="col-md-4" *ngFor="let product of products$ | async; let idx = index">
                     <article class="card">
                         <img class="card-img-top" src="{{product.image}}" alt="product_img">
                         <div class="card-body">
