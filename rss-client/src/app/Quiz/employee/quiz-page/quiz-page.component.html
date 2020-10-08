@@ -5,7 +5,7 @@
         placeholder="Type in the topic..." />
     </div>
 
-    <div class="quiz" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
+    <div class="quiz" id="accordion" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
       <div class="row row-1 align-items-center">
         <div class="col-5">
           <img src="assets/Images/orangeQuizLogoCrop.jpg">
@@ -30,38 +30,37 @@
             <a class="btn" id="detailsBtn" routerLink="/quizzes/{{ quizdata.quizId }}">Enter</a>
           </div>
           <!-- show only if the quiz has been taken at least once -->
-          <!-- add *ngIf="quizdata.quizAttempt < 3" -->
+          <!-- add *ngIf="attempts" -->
           <div> 
             <div class="row align-items-center row-2">
               <div class="col-9">
-                <span class="panel-title">Recent Score:&nbsp;</span><span>quizdata.attempts[-1]%</span>
+                <span class="panel-title">Recent Score:&nbsp;</span><span>attempts[-1].userScore%</span>
               </div>
-              <button class="btn">Review</button>
+              <button class="btn" (click)="showReview(quizdata.quizId)">Review</button>
             </div>
           </div>
 
         </div>
       </div>
       <!-- review details and options -->
-      <div *ngIf="!quizdata.quizAttempt" class="small-text">
+      <div class="small-text hide" id="review{{quizdata.quizId}}">
           <div class="row justify-content-around align-items-center skinny-row">
             <div class="col-1">S.No.</div>
-            <div class="col-2">Started On</div>
-            <div class="col-2">Completed On</div>
+            <div class="col-2">Submitted On</div>
             <div class="col-2">Status</div>
             <div class="col-2">Score (%)</div>
             <div class="col-3">Action</div>
           </div>
           <div>
-            <!-- add *ngFor="let a of quizdata.attempts" -->
+            <!-- add *ngFor="let a of attempts" -->
             <div class="row justify-content-around align-items-center skinny-row">
               <div class="col-1">a.userScoreId</div>
-              <div class="col-2">a.submitDate</div>
               <div class="col-2">a.submitDate</div>
               <div class="col-2">a.status</div>
               <div class="col-2">a.userScore%</div>
               <div class="col-1">
-                <a data-toggle="modal" data-target="#exampleModalLong">Review</a>
+                <!-- add (click)="getAttemptAnswers(a.userScoreId)" -->
+                <a data-toggle="modal" data-target="#exampleModalLong" >Review</a>
                 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -73,33 +72,36 @@
                       </div>
                       <div class="modal-body">
                         <!-- populate modal with questions and answers -->
-                        <!-- <div *ngFor="let q of a.questions">
-                          <h4><span>q.questionValue.&nbsp;</span>q.question</h4>
-                          <div class="m-3" *ngIf="q.option1">
-                            <input class="form-check-input" [checked]="isChecked(index, 1)" type="radio" id="item1" [name]="index" />
+                        <!-- add *ngFor="let q of questions; let a of answers; let i = index" -->
+                        <div >
+                          <h4><span>1. &nbsp;</span>q.question</h4>
+                          <!--  add *ngIf="q.option1" -->
+                          <div class="m-3" > 
+                            <!-- <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}} -->
+                            <!-- [checked]="isChecked(index, 1)"? -->
+                            <input class="form-check-input" type="radio" disabled="disabled" id="item1"/>
                             <label class="form-check-label" for="item1">q.option1</label>
                           </div>
-                          <div class="m-3" *ngIf="q.option2">
-                            <input class="form-check-input" [checked]="isChecked(index, 2)" type="radio"
-                              id="item2" [name]="index" />
+                          <div class="m-3">
+                            <input class="form-check-input" type="radio" disabled="disabled" id="item2"/>
                             <label class="form-check-label" for="item2">q.option2</label>
                           </div>
-                          <div class="m-3" *ngIf="q.option3">
-                            <input class="form-check-input" [checked]="isChecked(index, 3)" type="radio"
-                              id="item3" [name]="index" />
-                            <label class="form-check-label" for="item3"> q.option3</label>
+                          <div class="m-3">
+                            <input class="form-check-input" type="radio" disabled="disabled"
+                              id="item3"/>
+                            <label class="form-check-label" for="item3">q.option3</label>
                           </div>
-                          <div class="m-3" *ngIf="q.option4">
-                            <input class="form-check-input" [checked]="isChecked(index, 4)" type="radio"
-                              id="item4" [name]="index" />
+                          <div class="m-3">
+                            <input class="form-check-input" type="radio" disabled="disabled"
+                              id="item4"/>
                             <label class="form-check-label" for="item4"> q.option4 </label>
                           </div>
-                          <div class="m-3" *ngIf="q.option5">
-                            <input class="form-check-input" [checked]="isChecked(index, 5)" type="radio"
-                              id="item5" [name]="index" />
+                          <div class="m-3">
+                            <input class="form-check-input" type="radio" disabled="disabled"
+                              id="item5"/>
                             <label class="form-check-label" for="item5"> q.option5 </label>
                           </div>
-                        </div> -->
+                        </div>
                         ...
                       </div>
                       <div class="modal-footer">

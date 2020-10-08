@@ -14,13 +14,15 @@ import { CartModule } from './Cart/cart.module';
 import { UserModule } from './User/user.module';
 import { AppInventoryModule } from "../app/app-inventory/app-inventory.module";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { QuizModule } from './Quiz/quiz.module';
+import { QuizModule } from './Quiz/quiz.module'; 
+import { DiscountComponent } from './User/discount/discount.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    EarnpointsOverviewPageComponent
+    EarnpointsOverviewPageComponent,
+    DiscountComponent
   ],
   imports: [
     UserModule,

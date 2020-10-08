@@ -19,7 +19,7 @@
                 <label class="custom-file-label" for="fileInput">Choose file</label>
               </div>
               <div class="input-group-append">
-                <button class="d-block btn btn-outline-light" [disabled]="!imagePreview" type="submit" id="btn1"
+                <button class="btn d-block btn-info" [disabled]="!imagePreview" type="submit" id="btn1"
                   (click)="onUpload()">Upload</button>
               </div>
             </div>
@@ -59,13 +59,13 @@
         </div>
       </form>
       <br />
-      <button type="submit" [disabled]="!userProfileForm.valid" (click)="submitForm()" class="btn">Update
+      <button type="submit" [disabled]="!userProfileForm.valid" (click)="submitForm()" class="btn btn-info">Update
         Changes</button>
     </div>
     <div class="col-6">
       <div class="row">
         <div class="col-12">
-          <button *ngIf="!evalAccount" type="submit" class="m-2 btn" (click)="createAccount('Eval')">Link To Your
+          <button *ngIf="!evalAccount" type="submit" class="m-2 btn btn-info btn-block" (click)="createAccount('Eval')">Link To Your
             Eval</button>
           <h4 *ngIf="evalAccount">
             You have <span class="rev_orange">{{ evalAccount.points }}</span> points from the quizzes you have taken
@@ -74,15 +74,16 @@
           <h4 *ngIf="bugAccount">
             You have <span class="rev_orange">{{ bugAccount.points }}</span> points from the bugs you have squashed
           </h4>
-          <button *ngIf="!bugAccount" type="submit" class="m-2 btn" (click)="createAccount('Bug')">Link To Your Bug
+          <button *ngIf="!bugAccount" type="submit" class="m-2 btn btn-info btn-block" (click)="createAccount('Bug')">Link To Your Bug
             Bounty</button>
           <br />
           <h4 *ngIf="overflowAccount">
             You have <span class="rev_orange">{{ overflowAccount.points }}</span> points from the questions you've
             answered
           </h4>
-          <button *ngIf="!overflowAccount" type="submit" class="m-2 btn" (click)="createAccount('Overflow')">Link To
+          <button *ngIf="!overflowAccount" type="submit" class="m-2 btn btn-info btn-block" (click)="createAccount('Overflow')">Link To
             Your Rev OverFlow</button>
+          <div class="clearfix"></div>
           <hr />
           <div class="row">
             <div class="justify-content-center col-12">
@@ -99,7 +100,7 @@
                     <input class="form-control" type="password" formControlName="confirmPass" />
                   </div>
                 </div>
-                <button class="btn" (click)="compareAndChangePassword()">Change Password</button>
+                <button class="btn btn-info" (click)="compareAndChangePassword()">Change Password</button>
               </form>
             </div>
           </div>

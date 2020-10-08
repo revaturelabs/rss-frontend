@@ -6,7 +6,7 @@ import { UserService } from 'src/app/User/services/user.service';
 @Component({
   selector: 'add-quiz',
   templateUrl: './add-quiz.component.html',
-  styleUrls: ['./add-quiz.component.css'],
+  styleUrls: ['./add-quiz.component.scss'],
 })
 /*This class is  the ts file for the page that admin is in when they are adding a quiz
 * This .ts file is also almost (if not exactly) the same as edit-quiz.component.html based on the inherited code
@@ -25,6 +25,8 @@ export class AddQuizComponent implements OnInit {
     quizDescription: null,
     subjectId: 0,
     quizTotalPoints: 0,
+    quizDifficulty: null,
+    quizAttempt: 0,
     creatorEmail: this.userservice.userPersistance().email,
     questions: [],
     availablePoints: null,
@@ -97,6 +99,8 @@ export class AddQuizComponent implements OnInit {
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     //this.focusedQuiz.quizTotalPoints = Number(sessionStorage.getItem('points'));
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
+    //This will set the amount of attempts for the quiz.
+    this.focusedQuiz.quizAttempt = 3; 
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
       this.focusedQuiz.questions.forEach((x) => {

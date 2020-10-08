@@ -8,7 +8,7 @@ import { User } from 'src/app/User/models/user';
 @Component({
   selector: 'edit-quiz',
   templateUrl: './edit-quiz.component.html',
-  styleUrls: ['./edit-quiz.component.css'],
+  styleUrls: ['./edit-quiz.component.scss'],
 })
  /*This class is  the ts file for the page that admin is in when they are editing
   * This .ts file is also almost (if not exactly) the same as add-quiz.component.html
@@ -24,11 +24,11 @@ export class EditQuizComponent implements OnInit {
   focusedQuestion;
   isValid = false;
   /** validate ()
-   * validates that the quiz topic exists and that the questions also exist
+   * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted
    * */
   validate() {
-    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
+    if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0 && this.focusedQuiz.quizDifficulty) {
       this.isValid = true;
     } else {
       this.isValid = false;
