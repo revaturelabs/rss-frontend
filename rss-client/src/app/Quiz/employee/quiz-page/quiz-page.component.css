@@ -40,6 +40,10 @@
     padding-left: 40px;
 }
 
+.hide {
+    display:none;
+}
+
 /* 
 
 .quiz {

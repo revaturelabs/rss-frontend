@@ -10,6 +10,7 @@ import { AccountService } from 'src/app/User/services/account.service';
 import { Account } from 'src/app/User/models/account';
 import { subscribeOn } from 'rxjs/operators';
 import { QuizSubmit } from '../../models/quizSubmit';
+import { Questions } from '../../models/questions';
 
 @Component({
   selector: 'quiz-page',
@@ -20,8 +21,9 @@ export class QuizPageComponent implements OnInit {
   evalAccount: Account;
   user: User = this.userservice.userPersistance();
   quizzesTaken: any[] = [0];
-  review: boolean = false;
-  attempts: QuizSubmit;
+  attempts: QuizSubmit[];
+  questions: Questions[] = [];
+  answers: any[];
 
   @Input() config;
   searchText: string;
@@ -34,7 +36,7 @@ export class QuizPageComponent implements OnInit {
     private parent: AppComponent,
     private userservice: UserService,
     private accountService: AccountService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
@@ -51,7 +53,7 @@ export class QuizPageComponent implements OnInit {
         this.quizzesTaken = res;
       }
     });
-    this.quizservice.getAllQuizzes().subscribe((res) =>(this.quizData = res));
+    this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
   }
   ngAfterViewInit() {
     setTimeout(() => {
@@ -60,14 +62,39 @@ export class QuizPageComponent implements OnInit {
     });
   }
 
-  // openReview(quizId) {
-  //   if (this.review == false) {
-  //     this.review = true;
-  //     this.quizservice.getAttemptReviews(quizId).subscribe((res) => (this.attempts = res))
-  //   } else {
-  //     this.review = false;
-  //   }
-  // }
+  showReview(quizId) {
+    const reviewElement = document.getElementById("review" + quizId);
+    if (reviewElement.classList.contains("hide")) {
+      reviewElement.classList.remove("hide");
 
-  
+      //make a request to get attempts for the quiz
+      this.quizservice.getAttemptsByQuizId(quizId).subscribe(
+        (data) => (
+          this.attempts = data
+        )
+      )
+    } else {
+      reviewElement.classList.add("hide");
+    }
+  }
+
+  getQuestions(quizId) {
+    this.quizservice.getQuestionsById(quizId).subscribe(
+      (data) => (
+        this.questions = data
+      )
+    )
+  }
+
+  getAttemptAnswers(attemptId) {
+    //get answers by the attempt
+    this.quizservice.getAnswersByAttemptId(attemptId).subscribe(
+      (data) => (
+        this.answers = data //array of answers -create class (AnswersBank)
+      )
+    )
+  }
+
+
 }
+

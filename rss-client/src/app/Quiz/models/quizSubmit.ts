@@ -4,7 +4,7 @@ export interface QuizSubmit {
   userScoreId: number;
   userEmail: string;
   userId: number;
-  userScore: 0;
+  userScore: number;
   submitDate: string;
   quizId: number;
   quiz: {
@@ -20,5 +20,6 @@ export interface QuizSubmit {
 
   //Group 1 change (Oct.6)
   status: String;
-  questions: Questions[];
+  answers: any[];
+
 }

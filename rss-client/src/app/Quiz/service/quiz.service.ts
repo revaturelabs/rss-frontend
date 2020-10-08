@@ -75,7 +75,7 @@ export class QuizService {
     },
     //Group 1 change (Oct.6)
     status: '',
-    questions: []
+    answers: []
   };
 
   constructor(private httpclient: HttpClient) { }
@@ -163,17 +163,24 @@ export class QuizService {
     );
   }
 
-  //AnswersBank Controller
-  getAttemptReviews(quizId: any) {
-    return this.httpclient.get<any[]>(this.url + '/answers/..?'+quizId);
-  }
 
-  //User Quiz Score Controller
+
+  //UserQuizScore Controller
   getUserScores(email): Observable<any[]> {
     this.quizSubmit.userEmail = email;
     return this.httpclient.post<any>(
       this.url + '/userscore/obtain/taken',
       this.quizSubmit
     );
+  }
+
+  //sends request to UserQuizScoreController - create this method +useremail
+  getAttemptsByQuizId(quizId) {
+    return this.httpclient.get<QuizSubmit[]>(this.url + '/userscore/quiz/'+quizId);
+  }
+
+  //sends request to AnswersBankController - create this method based on userscoreid
+  getAnswersByAttemptId(id) {
+    return this.httpclient.get<any[]>(this.url+'/answer/'+id);
   }
 }
