@@ -13,33 +13,29 @@
         <ng-template [ngSwitchDefault]>
             <div class="row justify-content-center">
                 <section>
-                    <div class="admin">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGOq8zcxHug0hBzXDNHOyUGQB9FJOHZsFiWw&usqp=CAU" alt="Quiz card image" />
-                        <div class="adminDetails">
+                        <img src="assets/Images/quizzes.jpg" alt="Quiz card image" />
+                        <div>
                             <h1>Quizzes</h1>
                             <p>Here you can create new quizzes or edit existing ones.</p>
-                            <a class="btn btn-info" (click)="navigateTo('quiz')"> Quizzes</a>
                         </div>
-                    </div>
+                        <a class="btn btn-info button" (click)="navigateTo('quiz')"> Quizzes</a>
                 </section>
                 <section>
-                    <div class="admin">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhzeyvx6pAutBvjbdmTnzuRK9K6cDFyHqHNQ&usqp=CAU" alt="Inventory card image" />
-                        <div class="adminDetails">
+                        <img src="assets/Images/quizzes.jpg" alt="Inventory card image" />
+                        <div>
                             <h1>Inventory</h1>
-                            <p>Here you can manage Swagg Shop product inventory</p>
-                            <a class="btn btn-info" routerLink="/inventory">Inventory</a>
+                            <p>Here you can manage Swagg Shop product inventory</p>                           
                         </div>
-                    </div>
+                        <a class="btn btn-info button" routerLink="/inventory">Inventory</a>
                 </section>
                 <section>
                     <div class="admin">
                         <img src="" alt="discount_image">
-                        <div class="adminDetails">
+                        <div>
                             <h1>Discounts</h1>
-                            <p>Here you can create new discounts or edit existing ones. </p>
-                            <a class="btn btn-info" routerLink="/discounts">Discounts</a>
+                            <p>Here you can create new discounts or edit existing ones. </p>   
                         </div>
+                        <a class="btn btn-info button" routerLink="/discounts">Discounts</a>
                     </div>
                 </section>
             </div>

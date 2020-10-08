@@ -11,7 +11,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-discount',
   templateUrl: './discount.component.html',
-  styleUrls: ['./discount.component.css']
+  styleUrls: ['./discount.component.scss']
 })
 export class DiscountComponent implements OnInit {
 

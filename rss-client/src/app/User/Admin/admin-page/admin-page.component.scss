@@ -1,21 +1,30 @@
 @import '../../../../styles';
 
-.admin {
-    box-shadow: $shadow;
-    border-radius: $radius;
+section{
     display: flex;
-    margin: 2rem auto;
-    width: 100%;
+    box-shadow: $shadow;
+    position: relative;
     height: $height;
-}
+    margin: 2rem 0;
+    
+    div{
+        padding: 1rem 1.5rem;
+    }
+    
+    p{
+        padding-bottom: 0.5rem;
+    }
 
-.adminDetails {
-    width: 100%;
-    padding: 1rem;
-}
-
-.admin img {
-    width: $width;
-    height: $height;
-    object-fit: cover;
+    img{
+        width: $width;
+        height: $height;
+        object-fit: cover;
+    }
+    
+    .button{
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        padding: 0.5rem;
+    }
 }
