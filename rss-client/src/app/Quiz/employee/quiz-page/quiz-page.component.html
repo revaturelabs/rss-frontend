@@ -72,33 +72,33 @@
                       <div class="modal-body">
                         <!-- populate modal with questions and answers -->
                         <!-- add *ngFor="let q of questions; let a of answers; let i = index" -->
-                        <div>
-                          <h4><span>1. &nbsp;</span>q.question</h4>
+                        <div *ngFor="let q of questions; let a of answers; let i = index">
+                          <h4><span>{{i+1}}. &nbsp;</span>{{q.question.question}}</h4>
                           <!--  add *ngIf="q.option1" -->
-                          <div class="m-3" > 
+                          <div class="m-3" *ngIf="q.option1"> 
                             <!-- <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}} -->
                             <!-- [checked]="isChecked(index, 1)"? -->
                             <input class="form-check-input" type="radio" disabled="disabled" id="item1"/>
-                            <label class="form-check-label" for="item1">q.option1</label>
+                            <label class="form-check-label" for="item1">{{q.question.option1}}</label>
                           </div>
                           <div class="m-3">
                             <input class="form-check-input" type="radio" disabled="disabled" id="item2"/>
-                            <label class="form-check-label" for="item2">q.option2</label>
+                            <label class="form-check-label" for="item2">{{q.question.option2}}</label>
                           </div>
                           <div class="m-3">
                             <input class="form-check-input" type="radio" disabled="disabled"
                               id="item3"/>
-                            <label class="form-check-label" for="item3">q.option3</label>
+                            <label class="form-check-label" for="item3">{{q.question.option3}}</label>
                           </div>
                           <div class="m-3">
                             <input class="form-check-input" type="radio" disabled="disabled"
                               id="item4"/>
-                            <label class="form-check-label" for="item4"> q.option4 </label>
+                            <label class="form-check-label" for="item4">{{q.question.option4}}</label>
                           </div>
                           <div class="m-3">
                             <input class="form-check-input" type="radio" disabled="disabled"
                               id="item5"/>
-                            <label class="form-check-label" for="item5"> q.option5 </label>
+                            <label class="form-check-label" for="item5">{{q.question.option5}}</label>
                           </div>
                         </div>
                         ...
