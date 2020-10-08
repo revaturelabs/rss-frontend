@@ -16,7 +16,6 @@ import { CartItem } from 'src/app/Cart/models/cart-item.model';
   styleUrls: ['./user-inventory-item.component.scss']
 })
 export class UserInventoryItemComponent implements OnInit {
-
 	@Input() product: Product;
 	@Input() userType: string;
 	admin: boolean = true;
