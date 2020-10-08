@@ -70,15 +70,18 @@
             <!--
 				For this Branch we have adjusted calculations in the shopping cart to make discount inputs not a subtraction operation,
 				but instead a percentage based calculation.
-			-->
-            <div class="col-12 col-md-6 mb-2">
-                <span class="text-danger" *ngIf="userType==='admin'"></span>
-                <strong *ngIf="userType==='admin'; else discountBlock">Percent Off:</strong>
-                <ng-template #discountBlock><span>Percent Off:</span></ng-template>
-
+            -->
+            <!-- admin block for editting discount -->
+            <div class="col-12 col-md-6 mb-2" *ngIf="userType==='admin'">
+                <strong>Percent Off:</strong>
                 <input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" pattern="([0-9]+)">
             </div>
-            
+
+            <!-- customer block for viewing discounted product price -->
+            <div class="col-12 col-md-6 mb-2" *ngIf="userType ==='customer' && product.discounted">
+                <strong>Percent Off:</strong>
+                <input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" pattern="([0-9]+)">
+            </div>
         </div>
         <div class="mb-2">Color:
             <input type="text" class="form-control form-control-sm" id="inputColor" name="color" formControlName="color">
