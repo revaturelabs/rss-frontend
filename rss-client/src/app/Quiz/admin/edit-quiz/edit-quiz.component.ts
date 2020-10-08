@@ -8,7 +8,7 @@ import { User } from 'src/app/User/models/user';
 @Component({
   selector: 'edit-quiz',
   templateUrl: './edit-quiz.component.html',
-  styleUrls: ['./edit-quiz.component.css'],
+  styleUrls: ['./edit-quiz.component.scss'],
 })
  /*This class is  the ts file for the page that admin is in when they are editing
   * This .ts file is also almost (if not exactly) the same as add-quiz.component.html

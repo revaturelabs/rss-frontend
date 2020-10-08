@@ -6,7 +6,7 @@ import { UserService } from 'src/app/User/services/user.service';
 @Component({
   selector: 'add-quiz',
   templateUrl: './add-quiz.component.html',
-  styleUrls: ['./add-quiz.component.css'],
+  styleUrls: ['./add-quiz.component.scss'],
 })
 /*This class is  the ts file for the page that admin is in when they are adding a quiz
 * This .ts file is also almost (if not exactly) the same as edit-quiz.component.html based on the inherited code

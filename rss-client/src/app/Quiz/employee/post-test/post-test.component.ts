@@ -7,7 +7,7 @@ import { Quiz } from '../../models/quiz';
 @Component({
   selector: 'post-test',
   templateUrl: './post-test.component.html',
-  styleUrls: ['./post-test.component.css'],
+  styleUrls: ['./post-test.component.scss'],
 })
 export class PostTestComponent implements OnInit {
   @Input() config;
