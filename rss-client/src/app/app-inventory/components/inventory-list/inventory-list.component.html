@@ -4,13 +4,16 @@
     </div>
     <section class="row">
         <!-- SIDEBAR -->
-        <aside class="col-3">
+        <aside class="col mb-4">
             <form>
                 <!-- PRODUCT SEARCH -->
-                <div class="form-group form-inline">
-                    Product Search: <input class="form-control" type="text" name="searchTerm" [(ngModel)]="service.searchTerm" />
-                    <div *ngIf="userType === 'admin'">
-                        <button class="btn btn-primary mt-3" routerLink="/inventory/add-item">New Item
+                <div class="form-row">
+                    <div class="col-3">
+                        Product Search: <input class="form-control" type="text" name="searchTerm"
+                            [(ngModel)]="service.searchTerm"/>
+                    </div>
+                    <div class="col text-right" *ngIf="userType === 'admin'">
+                        <button class="btn btn-primary mt-4" routerLink="/inventory/add-item">New Item
                             <em class="fas fa-plus"></em></button>
                     </div>
                     <span class="px-4" *ngIf="service.loading$ | async">Loading...</span>

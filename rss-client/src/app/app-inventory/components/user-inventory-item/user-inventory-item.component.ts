@@ -1,23 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router'
 import { Product } from '../../models/product.model';
-import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SortService } from '../../service/sort.service';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryService } from '../../service/inventory.service';
-import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cart } from 'src/app/Cart/models/cart.model';
 import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
-import { CartService } from 'src/app/Cart/services/cart.service';
 import { CartItemService } from 'src/app/Cart/services/cart-item.service';
 import { CartItem } from 'src/app/Cart/models/cart-item.model';
 
 @Component({
-	selector: 'app-inventory-item',
-	templateUrl: './inventory-item.component.html',
-	styleUrls: ['./inventory-item.component.scss'],
+  selector: 'app-user-inventory-item',
+  templateUrl: './user-inventory-item.component.html',
+  styleUrls: ['./user-inventory-item.component.scss']
 })
-export class InventoryItemComponent implements OnInit {
+export class UserInventoryItemComponent implements OnInit {
 
 	@Input() product: Product;
 	@Input() userType: string;
@@ -42,7 +40,6 @@ export class InventoryItemComponent implements OnInit {
 
 	constructor(
 		private modalService: NgbModal,
-		public service: SortService,
 		public activeModal: NgbActiveModal,
 		private inventoryService: InventoryService,
 		private userService: UserService,
@@ -52,9 +49,6 @@ export class InventoryItemComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.localQuantity = this.product.quantity;
-		if (this.userService.userPersistance().admin){
-			this.userType = 'admin';
-		}
 		if (this.userType === 'admin') {
 			this.admin = false;
 		}
@@ -210,7 +204,6 @@ export class InventoryItemComponent implements OnInit {
 									this.router.navigateByUrl('/inventory/inventory-list');
 									console.log("'Refreshed'");
 								}); 
-								this.service.setInventory(inventory);
 								this.modalService.dismissAll();
 								console.log("Dismissing modal");
 							})
