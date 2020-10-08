@@ -263,6 +263,7 @@ export class ShoppingCartComponent implements OnInit {
           if (product.id == cItem.productId) {
             if (product.discountedAmount>0) {
               let tempProduct : number = product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01));
+              console.log(cItem.quantity)
               this.totalPointCost += Math.round(tempProduct * cItem.quantity);
             } else {
               this.totalPointCost += (product.unitPrice) * cItem.quantity;
