@@ -25,11 +25,7 @@ export class QuizService {
     quizId: 0,
     quizTopic: '',
     quizDescription: '',
-<<<<<<< HEAD:rss-client/src/app/Quiz/service/quiz.service.ts
     quizTotalPoints:0,
-=======
-    quizTotalPoints: 0,
->>>>>>> 3d0e6abd0e5d27a74f9397429394f73065484b41:rss-client/src/app/services/quiz.service.ts
     quizDifficulty: '',
     quizAttempt: 0,
     creatorEmail: '',
@@ -190,7 +186,7 @@ export class QuizService {
   getAnswersByAttemptId(id) {
     return this.httpclient.get<any[]>(this.url+'/answer/'+id);
   }
-}
+
   //userId: User;
   // accId: Account;
  // quizId: Quiz;
@@ -211,6 +207,5 @@ export class QuizService {
     return this.httpclient.put<any>(this.url + '/userscore/quizzes', userScoreId);
   }
 
-
-
 }
+
