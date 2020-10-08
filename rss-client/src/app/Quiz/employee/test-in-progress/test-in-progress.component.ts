@@ -8,12 +8,13 @@ import { AppComponent } from 'src/app/app.component';
 import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
 import { CheaterService } from '../../service/cheater.service';
 import { Observer } from 'rxjs';
+import { Quiz } from '../../models/quiz';
 
 
 @Component({
   selector: 'test-in-progress',
   templateUrl: './test-in-progress.component.html',
-  styleUrls: ['./test-in-progress.component.css'],
+  styleUrls: ['./test-in-progress.component.scss'],
 })
 export class TestInProgressComponent implements OnInit {
   @Input() config;
@@ -23,6 +24,9 @@ export class TestInProgressComponent implements OnInit {
   max;
   answers = {};
   quizzesTaken: any[] = [0];
+  //group 2 addition
+  quizAttempt: Quiz;
+  attempt: number;
 
   isADirtyCheater: boolean;
 
@@ -87,8 +91,7 @@ export class TestInProgressComponent implements OnInit {
         selectedAnswer: value,
         userEmail: this.userService.userPersistance().email,
         userId: this.userService.userPersistance().userId,
-        quizId: this.config.quizId,
-        
+        quizId: this.config.quizId
       };
       answersArr.push(obj);
     }
@@ -119,6 +122,7 @@ export class TestInProgressComponent implements OnInit {
           this.account.points = res.totalPoints;
           this.parentaluntil.results = res;
           this.accountservice.updatePoints(this.account).subscribe();
+          
         });
       }
     }

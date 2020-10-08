@@ -11,7 +11,6 @@ export interface Quiz {
   //Group 2 change
   quizDifficulty: string;
   quizAttempt: number;
-
   creatorEmail: string;
   subjectId: number;
   subject: {

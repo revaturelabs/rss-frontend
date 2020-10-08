@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router'
 import { Product } from '../../models/product.model';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortService } from '../../service/sort.service';
@@ -14,7 +15,7 @@ import { CartItem } from 'src/app/Cart/models/cart-item.model';
 @Component({
 	selector: 'app-inventory-item',
 	templateUrl: './inventory-item.component.html',
-	styleUrls: ['./inventory-item.component.css'],
+	styleUrls: ['./inventory-item.component.scss'],
 })
 export class InventoryItemComponent implements OnInit {
 
@@ -35,6 +36,8 @@ export class InventoryItemComponent implements OnInit {
 	get image() { return this.updateProduct.get('image') }
 	get quantity() { return this.updateProduct.get('quantity') }
 	get unitPrice() { return this.updateProduct.get('unitPrice') }
+	get discountedAmount(){return this.updateProduct.get('discountAmount')}
+	get discounted(){return this.updateProduct.get('discounted')}
 
 	constructor(
 		private modalService: NgbModal,
@@ -42,7 +45,8 @@ export class InventoryItemComponent implements OnInit {
 		public activeModal: NgbActiveModal,
 		private inventoryService: InventoryService,
 		private userService: UserService,
-		private cartItemService: CartItemService) {
+		private cartItemService: CartItemService,
+		private router: Router) {
 	}
 
 	ngOnInit(): void {
@@ -53,16 +57,21 @@ export class InventoryItemComponent implements OnInit {
 
 		this.updateProduct = new FormGroup({
 			id: new FormControl(this.product.id),
-			name: new FormControl({ value: this.product.name, disabled: this.admin }, [Validators.required]),
+			name: new FormControl({value: this.product.name, disabled: this.admin}, [Validators.required]),
 			brand: new FormControl({ value: this.product.brand, disabled: this.admin }),
 			description: new FormControl({ value: this.product.description, disabled: this.admin }),
 			model: new FormControl({ value: this.product.model, disabled: this.admin }),
 			category: new FormControl({ value: this.product.category, disabled: this.admin }),
 			image: new FormControl({ value: this.product.image, disabled: this.admin }),
 			quantity: new FormControl(this.product.quantity, [Validators.required]),
-			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin }, [Validators.required]),
+			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin}, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
+			discountedAmount: new FormControl({ value: this.product.discountedAmount, disabled: this.admin }),
+			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin }),
+			currentPrice: new FormControl({value: this.product.unitPrice - this.product.discountedAmount, disabled: true })
 		});
+
+		
 
 		this.currentUser = this.userService.getCurrentUser();
 
@@ -174,6 +183,15 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	updateItem() {
+		if (this.updateProduct.get("discountedAmount").value !== null && this.updateProduct.get("discountedAmount").value !== 0) {
+			console.log("discountPrice has a value");
+			this.updateProduct.get("discounted").setValue(true);
+			console.log(this.updateProduct.value);
+		} else {
+			console.log("discountPrice does not have a value");
+			this.updateProduct.get("discounted").setValue(false);
+			console.log(this.updateProduct.value);
+		}
 		if (this.updateProduct.valid) {
 			this.inventoryService
 				.updateProduct(this.updateProduct.value)
@@ -181,16 +199,21 @@ export class InventoryItemComponent implements OnInit {
 					if (res) {
 						this.inventoryService.getAllProducts()
 							.subscribe(inventory => {
+								this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+									this.router.navigateByUrl('/inventory/inventory-list');
+									console.log("'Refreshed'");
+								}); 
 								this.service.setInventory(inventory);
 								this.modalService.dismissAll();
+								console.log("Dismissing modal");
 							})
 					}
 				});
 		} else {
 			alert("Update Invalid.");
 		}
-
 	}
+
 
 	private getDismissReason(reason: any): string {
 		if (reason === ModalDismissReasons.ESC) {

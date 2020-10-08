@@ -8,7 +8,7 @@ import { CheaterService } from 'src/app/Quiz/service/cheater.service';
 @Component({
   selector: 'app-cheater-warning',
   templateUrl: './cheater-warning.component.html',
-  styleUrls: ['./cheater-warning.component.css']
+  styleUrls: ['./cheater-warning.component.scss']
 })
 export class CheaterWarningComponent implements OnInit {
   open: boolean

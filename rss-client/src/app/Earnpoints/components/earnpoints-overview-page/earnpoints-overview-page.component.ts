@@ -5,7 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-earnpoints-overview-page',
   templateUrl: './earnpoints-overview-page.component.html',
-  styleUrls: ['./earnpoints-overview-page.component.css'],
+  styleUrls: ['./earnpoints-overview-page.component.scss'],
 })
 export class EarnpointsOverviewPageComponent implements OnInit {
   constructor(
