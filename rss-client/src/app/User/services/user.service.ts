@@ -33,10 +33,10 @@ export class UserService{
   ) {
     this.user = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
 
-    if(!this.user){
-      router.navigate(['login'])
-    }
-    console.log(window.location.host);
+    // if(!this.user){
+    //   router.navigate(['login'])
+    // }
+    // console.log(window.location.host);
   }
 
   httpOptions = {
