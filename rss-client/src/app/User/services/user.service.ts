@@ -1,4 +1,4 @@
-import { Injectable, Inject, InjectionToken } from '@angular/core';
+import { Injectable, Inject, InjectionToken, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
@@ -22,7 +22,7 @@ export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserService{
   url = `${environment.accountServiceUrlWithZuul}/user`;
 
   constructor(
@@ -31,7 +31,11 @@ export class UserService {
     private location: Location,
     @Inject(SESSION_STORAGE) private storage: WebStorageService
   ) {
+    this.user = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
 
+    if(!this.user){
+      router.navigate(['login'])
+    }
     console.log(window.location.host);
   }
 
@@ -84,17 +88,7 @@ export class UserService {
 
   isLoggedIn = false;
   
-  user: User = {
-    userId: 2021,
-    email: '',
-    password: '',
-    profilePic: null,
-    firstName: 'admin',
-    lastName: 'admin',
-    admin: false,
-    userDiscounted: false,
-    userDiscount: 0
-  };
+  user: User;
   
   changeUser(user: User) {
     this.isLoggedIn = true;
@@ -107,7 +101,7 @@ export class UserService {
     this.user = user;
     this.storage.set(STORAGE_KEY, this.user);
   }
-
+ 
   logout() {
     this.isLoggedIn = false;
     this.storage.set(STORAGE_KEY, undefined);
