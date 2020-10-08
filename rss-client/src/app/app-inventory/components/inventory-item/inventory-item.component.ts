@@ -38,6 +38,7 @@ export class InventoryItemComponent implements OnInit {
 	get unitPrice() { return this.updateProduct.get('unitPrice') }
 	get discountedAmount(){return this.updateProduct.get('discountAmount')}
 	get discounted(){return this.updateProduct.get('discounted')}
+	get color(){return this.updateProduct.get('color')}
 
 	constructor(
 		private modalService: NgbModal,
@@ -63,12 +64,12 @@ export class InventoryItemComponent implements OnInit {
 			model: new FormControl({ value: this.product.model, disabled: this.admin }),
 			category: new FormControl({ value: this.product.category, disabled: this.admin }),
 			image: new FormControl({ value: this.product.image, disabled: this.admin }),
-			quantity: new FormControl(this.product.quantity, [Validators.required]),
+			quantity: new FormControl({value: this.product.quantity, disabled: this.admin}, [Validators.required]),
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin}, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
 			discountedAmount: new FormControl({ value: this.product.discountedAmount, disabled: this.admin }),
 			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin }),
-			currentPrice: new FormControl({value: this.product.unitPrice - this.product.discountedAmount, disabled: true })
+			//currentPrice: new FormControl({value: this.product.unitPrice - this.product.discountedAmount, disabled: true })
 		});
 
 		
@@ -92,6 +93,9 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	reduceInventory() {
+		//defaulting purchase quantity to 1 instead of stock value
+		this.quantity.setValue(1);
+		//console.log(this.quantity.value);
 		let quantityLeft = this.localQuantity - this.quantity.value;
 		console.log(quantityLeft);
 		if (quantityLeft >= 0 && this.quantity.value >= 0) {
