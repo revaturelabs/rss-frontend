@@ -26,7 +26,6 @@ export class QuizPageComponent implements OnInit {
   searchText: string;
   searchSubject: string;
   quizData;
-  
 
   constructor(
     private quizservice: QuizService,

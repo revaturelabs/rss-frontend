@@ -1,19 +1,40 @@
-.quiz {
-    box-shadow: 0 0 10px 5px rgba(0,0,0,0.25);
-    border-radius: 5px;
+@import '../../../../styles';
+
+section{
     display: flex;
-    margin: 2rem auto;
-    width: 67%;
+    box-shadow: $shadow;
+    height: $height;
+    margin: 2rem 0;
+    
+    img{
+        width: $width;
+        height: $height;
+        object-fit: cover;
+    }
+
+    .quizInfo{
+        border-bottom: $border;
+        width: 100%;
+        padding: 1rem 2rem 0;
+    }
+    .quizDetails{
+        width: 100%;
+        display: flex;
+        justify-content:space-between;
+        align-content: center;
+        flex-direction: row;
+        padding: 1rem 2rem 0;
+
+        .button{
+            padding: 0.5rem;
+        }
+        
+        .difficulty{
+            padding: 0.25rem 1rem;
+            font-size: small;
+            background-color: $warning;
+            border-radius: 2px;
+        }
+    }
 }
 
-.quizDetails {
-    width: 100%;
-    padding: 1rem;
-}
-
-.quiz img {
-    width: 350px;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}

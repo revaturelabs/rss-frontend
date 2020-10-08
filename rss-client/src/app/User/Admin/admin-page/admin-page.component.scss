@@ -1,0 +1,21 @@
+@import '../../../../styles';
+
+.admin {
+    box-shadow: $shadow;
+    border-radius: $radius;
+    display: flex;
+    margin: 2rem auto;
+    width: 100%;
+    height: $height;
+}
+
+.adminDetails {
+    width: 100%;
+    padding: 1rem;
+}
+
+.admin img {
+    width: $width;
+    height: $height;
+    object-fit: cover;
+}

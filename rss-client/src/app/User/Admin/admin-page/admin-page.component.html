@@ -11,64 +11,37 @@
         </ng-template>
         <!--default case when there are no matches -->
         <ng-template [ngSwitchDefault]>
-            <!-- <div class="container">
-      <!- quizzes 
-      <div class="border container">
-        <button (click)="navigateTo('quiz')">go here</button>
-        some info about admin quiz stuff
-      </div>
-
-      <!- inventory 
-      <div class="border container">
-        <button (click)="navigateTo('inventory')">go here</button>
-        some info about admin inventory stuff
-      </div>
-    </div>
-  </ng-template>
-</div> -->
             <div class="row justify-content-center">
-                <div class="col-4">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGOq8zcxHug0hBzXDNHOyUGQB9FJOHZsFiWw&usqp=CAU" alt="Quiz card image" />
-                        <div class="card-body">
-                            <h5 class="card-title">Quizzes</h5>
-                            <p class="card-text">
-                                Here you can create new quizzes or edit existing ones.
-                            </p>
-                            <button class="btn btn-primary" (click)="navigateTo('quiz')">
-                Quizzes
-              </button>
+                <section>
+                    <div class="admin">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGOq8zcxHug0hBzXDNHOyUGQB9FJOHZsFiWw&usqp=CAU" alt="Quiz card image" />
+                        <div class="adminDetails">
+                            <h1>Quizzes</h1>
+                            <p>Here you can create new quizzes or edit existing ones.</p>
+                            <a class="btn btn-info" (click)="navigateTo('quiz')"> Quizzes</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhzeyvx6pAutBvjbdmTnzuRK9K6cDFyHqHNQ&usqp=CAU" alt="Inventory card image" />
-                        <div class="card-body">
-                            <h5 class="card-title">Inventory</h5>
-                            <p class="card-text">
-                                Here you can manage Swagg Shop product inventory
-                            </p>
-                            <button class="btn btn-primary" routerLink="/inventory">
-                Inventory
-              </button>
+                </section>
+                <section>
+                    <div class="admin">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhzeyvx6pAutBvjbdmTnzuRK9K6cDFyHqHNQ&usqp=CAU" alt="Inventory card image" />
+                        <div class="adminDetails">
+                            <h1>Inventory</h1>
+                            <p>Here you can manage Swagg Shop product inventory</p>
+                            <a class="btn btn-info" routerLink="/inventory">Inventory</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem;">
-
-                        <div class="card-body">
-                            <h5 class="card-title">Discounts</h5>
-                            <p class="card-text">
-                                Here you can create new discounts or edit existing ones.
-                            </p>
-                            <button class="btn btn-primary" routerLink="/discounts">
-                Discounts
-              </button>
+                </section>
+                <section>
+                    <div class="admin">
+                        <img src="" alt="discount_image">
+                        <div class="adminDetails">
+                            <h1>Discounts</h1>
+                            <p>Here you can create new discounts or edit existing ones. </p>
+                            <a class="btn btn-info" routerLink="/discounts">Discounts</a>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </ng-template>
     </div>

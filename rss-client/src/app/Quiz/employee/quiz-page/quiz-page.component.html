@@ -1,25 +1,28 @@
 <!-- Below is the search function that you can search through the list of quiz names to limit the ngFor to displaying only what you search for -->
 <div *ngIf="evalAccount">
-  <div class="container">
+  <div class="container w-75">
     <div class="input-group justify-content-center">
-      <input id="search-box" class="col-8 my-2 form-control" [(ngModel)]="searchText"
-        placeholder="Type in the topic..." />
-
+      <input id="search-box" class="form-control" [(ngModel)]="searchText" placeholder="Type in the topic..." />
     </div>
     <!--This is the list of quizzes -->
     <ng-container>
       <section *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText" class="quiz">
         <img src="assets/Images/orangeQuizLogo.jpg">
-        <div class="quizDetails">
-          <h1>{{ quizdata.subject.subjectName | titlecase }}</h1>
-          <h2>{{ quizdata.quizTopic | titlecase }}</h2>
-          <p>{{ quizdata.quizDescription }}</p>
-          <p>
-            <strong>Points:</strong> {{quizdata.quizTotalPoints}}<br>
-            <strong>Difficulty:</strong> {{quizdata.quizDifficulty}}<br>
-            <strong>Quiz Attempts:</strong> {{ quizdata.quizAttempt }} <br>
-          </p>
-          <a class="btn btn-info" routerLink="/quizzes/{{ quizdata.quizId }}">Details</a>
+        <div class="w-100">
+          <div class="quizInfo">
+            <h2>{{ quizdata.subject.subjectName | titlecase }}</h2>
+            <h4>{{ quizdata.quizTopic | titlecase }}</h4>
+            <p>{{ quizdata.quizDescription }}</p>
+            <p>
+              <strong>Points:</strong> {{quizdata.quizTotalPoints}}<br>
+            </p>
+          </div>
+          <div class="quizDetails">
+            <!-- <p class="btn difficulty">{{quizdata.quizDifficulty | uppercase }} </p> -->
+            <h6 class="text-white difficulty">MEDIUM</h6> 
+            <p class="text-center">{{ quizdata.quizAttempt }}3 Attempts Remaining</p>
+            <a class="btn btn-info button" routerLink="/quizzes/{{ quizdata.quizId }}">Details</a>
+          </div>
         </div>
       </section>
     </ng-container>

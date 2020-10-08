@@ -2,6 +2,9 @@
   <section class="row my-5">
 
     <div class="col-8">
+
+      <p><i class="fas fa-question"></i> Questions <span class="question">{{ index + 1 }}</span> out of <span class="question">{{ config.questions.length }}</span></p>
+
       <!-- Current question -->
       <h4>{{ config.questions[index].question }}</h4>
 
@@ -50,21 +53,31 @@
         Last
         <i class="fas fa-fast-forward"></i>
       </button>
-
     </div>
-
-    <aside class="col-4">
-      <!-- numbered buttons coorisponding to questions -->
-      <ul class="list-group list-group-horizontal my-4" *ngFor="let question of config.questions; let i = index">
-        <button class="mx-1 btn btn-light list-group-item" [class.blue]="isMarkedOff(i)" (click)="onFocus(i)">
-          {{ i + 1 }}
-        </button>
-      </ul>
-      <div class="text-center">
-        <button class="btn submit btn-lg" (click)="open(content)">
-          Submit
-        </button>
-      </div>
+    <aside class="col-4 p-0">
+      <div class="details-box">
+        <div class="details">
+          <p>Questions</p>
+        </div>
+        <!-- numbered buttons coorisponding to questions -->
+        <div class="details">
+          <ng-container *ngFor="let question of config.questions; let i = index">
+            <p class="px-3 py-2 mt-3 mx-3 mb-4 btn btn-dark text-white" [class.answer]="isMarkedOff(i)" (click)="onFocus(i)">
+              {{ i + 1 }}
+            </p>
+          </ng-container>
+        </div>
+        <div class="details">
+          <h4>Legend</h4>
+          <p>
+            <i class="fas fa-square answered"></i>Answered Question<br>
+            <i class="fas fa-square unanswered"></i>Unanswered Question
+          </p>
+        </div>
+      </div>          
+      <button class="btn submit my-3" (click)="open(content)">
+            Submit
+      </button>
     </aside>
 
   </section>
@@ -86,7 +99,7 @@
       </button>
     </div>
   </ng-template>
-
+<!-- 
   <app-cheater-warning></app-cheater-warning>
-  <app-invalid-quiz></app-invalid-quiz>
+  <app-invalid-quiz></app-invalid-quiz> -->
 </div>
