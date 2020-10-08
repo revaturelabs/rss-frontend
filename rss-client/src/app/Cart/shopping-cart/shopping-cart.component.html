@@ -3,7 +3,7 @@
     <p class="card-text" *ngIf="currentUser.admin">Admin users cannot buy items.</p>
     <div class="container main-cart-container" *ngIf="!currentUser.admin">
         <div *ngIf="currentUser.userDiscounted">
-            you have a discount of {{currentUser.userDiscount}}% off all items!!!
+            you have a discount of {{currentUser.userDiscount}}
         </div>
         <div class="row">
 
@@ -64,7 +64,7 @@
                                         <h2>{{product.name}}</h2>
                                         <h5>{{product.quantity}} left</h5>
                                         <h3 [ngStyle]="{'text-decoration':product.discounted? 'line-through':'null'}">{{product.unitPrice}} Points</h3>
-                                        <h3 *ngIf="product.discounted">Discounted Price: {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}} Points</h3>
+                                        <h3 *ngIf="product.discounted">Discounted Price: {{product.unitPrice - product.discountedAmount}} Points</h3>
                                     </td>
 
                                     <td class="align-bottom quantity-large">
@@ -103,7 +103,7 @@
                                 </td>
                                 <td class="align-bottom"><b>{{product.name}}</b></td>
                                 <td class="align-bottom" [ngStyle]="{'text-decoration':product.discounted == true?'line-through':'null'}">{{product.unitPrice}} Points</td>
-                                <td class="align-bottom" *ngIf="product.discounted">{{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}} Points</td>
+                                <td class="align-bottom" *ngIf="product.discounted">{{product.unitPrice - product.discountedAmount}} Points</td>
 
                             </tr>
                         </table>

@@ -5,7 +5,7 @@ import { CheaterService } from 'src/app/Quiz/service/cheater.service';
 @Component({
   selector: 'app-invalid-quiz',
   templateUrl: './invalid-quiz.component.html',
-  styleUrls: ['./invalid-quiz.component.scss']
+  styleUrls: ['./invalid-quiz.component.css']
 })
 export class InvalidQuizComponent implements OnInit {
 
@@ -15,11 +15,20 @@ export class InvalidQuizComponent implements OnInit {
   
   ngOnInit(): void {
     this.cheaterService.invalidated.subscribe(e => {
-      
+      // if (e) {
+      //   if (!this.open)
+      //   this.openDialog()
+      // }
     })
   }
 
-  
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(InvalidQuizDialogContent);
+  //   this.open = true
+  //   dialogRef.close().subscribe(() => {
+  //     this.open = false
+  //   });
+  // }
 
 }
 
