@@ -69,26 +69,27 @@ export class UserService{
   }
 
   updateInfo(user: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/info', user);
+    return this.httpclient.put<any>(this.url + '/info', user);
   }
 
   updatePassword(u): Observable<User> {
     this.user.password = u;
     this.user.userId = this.userPersistance().userId;
-    return this.httpclient.post<any>(this.url + '/cred', this.user);
+    return this.httpclient.put<any>(this.url + '/cred', this.user);
   }
 
   updateProfilePic(u: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/pic', u);
+    return this.httpclient.put<any>(this.url + '/pic', u);
   }
 
   updateIsAdmin(user: User): Observable<User> {
-    return this.httpclient.post<any>(this.url + '/master', user);
+    return this.httpclient.put<any>(this.url + '/master', user);
   }
 
   isLoggedIn = false;
   
   user: User;
+
   
   changeUser(user: User) {
     this.isLoggedIn = true;

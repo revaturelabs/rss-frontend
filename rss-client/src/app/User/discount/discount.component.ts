@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
   selector: 'app-discount',
   templateUrl: './discount.component.html',
   styleUrls: ['./discount.component.scss']
+
 })
 export class DiscountComponent implements OnInit {
 
@@ -85,6 +86,7 @@ export class DiscountComponent implements OnInit {
 		setTimeout(() => {
 			this.parent.breadcrumbs = ['Admin', 'Discount'];
 			this.parent.routerCrumbs = ['admin', 'discount'];
+
 		});
 	}
 

@@ -40,6 +40,7 @@ export class InventoryItemComponent implements OnInit {
 	get discounted(){return this.updateProduct.get('discounted')}
 	get color(){return this.updateProduct.get('color')}
 
+
 	constructor(
 		private modalService: NgbModal,
 		public service: SortService,
@@ -68,11 +69,11 @@ export class InventoryItemComponent implements OnInit {
 			category: new FormControl({ value: this.product.category, disabled: this.admin }),
 			image: new FormControl({ value: this.product.image, disabled: this.admin }),
 			quantity: new FormControl({value: this.product.quantity, disabled: this.admin}, [Validators.required]),
+
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin}, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
 			discountedAmount: new FormControl({ value: this.product.discountedAmount, disabled: this.admin }),
-			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin }),
-			//currentPrice: new FormControl({value: this.product.unitPrice - this.product.discountedAmount, disabled: true })
+			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin })
 		});
 
 		
@@ -218,6 +219,18 @@ export class InventoryItemComponent implements OnInit {
 				});
 		} else {
 			alert("Update Invalid.");
+		}
+
+	}
+
+
+	private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'by clicking on a backdrop';
+		} else {
+			return `with: ${reason}`;
 		}
 	}
 }

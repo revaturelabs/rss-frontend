@@ -14,6 +14,7 @@
                     </div>
                     <div class="col text-right" *ngIf="userType === 'admin'">
                         <button class="btn btn-primary mt-4" routerLink="/inventory/add-item">New Item
+
                             <em class="fas fa-plus"></em></button>
                     </div>
                     <span class="px-4" *ngIf="service.loading$ | async">Loading...</span>
@@ -24,12 +25,13 @@
         <div class="col-12">
             <section class="row">
                 <div class="col-md-4" *ngFor="let product of products$ | async; let idx = index">
+
                     <article class="card">
                         <img class="card-img-top" src="{{product.image}}" alt="product_img">
                         <div class="card-body">
                             <h4 class="card-title">{{product.name}}</h4>
-                            <!-- <p class="card-text">{{product.description}}</p> -->
                             <p class="card-text">{{product.brand}}</p>
+
                             <aside class="container-fluid">
                                 <div class="row">
                                     <div class="col-6">
@@ -37,11 +39,13 @@
                                             {{product.unitPrice | number}}</span><br />
                                         <span *ngIf="product.discounted === true" style="color:#FF0000">{{product.discountedAmount | number}}% OFF!!!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
 
+
                                     </div>
                                     <div class="col-6">
                                         <!-- SHOW IF ADMIN -->
                                         <div *ngIf="userType==='admin'">
                                             <button class="btn btn-primary" (click)="open(product)">
+
                                                 Update
                                                 <em class="fas fa-pencil-alt"></em>
                                             </button>
@@ -49,6 +53,7 @@
                                         <!-- SHOW IF CUSTOMER -->
                                         <div *ngIf="userType==='customer'">
                                             <button class="btn btn-primary" (click)="open(product)">
+
                                                 Detail
                                                 <em class="fas fa-cart-plus"></em>
                                             </button>

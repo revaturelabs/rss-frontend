@@ -130,6 +130,7 @@ export class ShoppingCartComponent implements OnInit {
 
     console.log(selectItem);
     if (selectItem.quantity > 0) {
+
       let ciToUpdate;
       let emptyCartCopy: Cart = {
         cartId: this.activeCart.cartId,
@@ -269,6 +270,7 @@ export class ShoppingCartComponent implements OnInit {
               let tempProduct : number = product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01));
               console.log(cItem.quantity)
               this.totalPointCost += Math.round(tempProduct * cItem.quantity);
+
             } else {
               this.totalPointCost += (product.unitPrice) * cItem.quantity;
             }
@@ -279,6 +281,7 @@ export class ShoppingCartComponent implements OnInit {
         let tempUserCost : number = 1 - (this.currentUser.userDiscount * 0.01);
         this.totalPointCost *= tempUserCost;
         this.totalPointCost = Math.round(this.totalPointCost);
+
       }
       if (this.totalPointCost<0) {
         this.totalPointCost=0;

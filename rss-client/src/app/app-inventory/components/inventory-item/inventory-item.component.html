@@ -51,6 +51,7 @@
                     <strong>Quantity</strong> is required
                 </p>
 
+
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="negativeQ">
                     <strong>Sorry!</strong> Try adding fewer items to your cart.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -82,6 +83,7 @@
                 <strong>Percent Off:</strong>
                 <input type="number" class="form-control form-control-sm" id="discountedAmount" name="discountedAmount" formControlName="discountedAmount" pattern="([0-9]+)">
             </div>
+
         </div>
         <div class="mb-2">Color:
             <input type="text" class="form-control form-control-sm" id="inputColor" name="color" formControlName="color">
