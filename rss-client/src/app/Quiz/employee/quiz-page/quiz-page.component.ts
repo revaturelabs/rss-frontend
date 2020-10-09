@@ -14,7 +14,7 @@ import { QuizSubmit } from '../../models/quizSubmit';
 @Component({
   selector: 'quiz-page',
   templateUrl: './quiz-page.component.html',
-  styleUrls: ['./quiz-page.component.css'],
+  styleUrls: ['./quiz-page.component.scss'],
 })
 export class QuizPageComponent implements OnInit {
   evalAccount: Account;

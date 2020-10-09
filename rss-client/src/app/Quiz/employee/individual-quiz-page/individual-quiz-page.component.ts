@@ -8,7 +8,7 @@ import { LowerCasePipe, TitleCasePipe } from '@angular/common';
 @Component({
   selector: 'individual-quiz-page',
   templateUrl: './individual-quiz-page.component.html',
-  styleUrls: ['./individual-quiz-page.component.css'],
+  styleUrls: ['./individual-quiz-page.component.scss'],
 })
 export class IndividualQuizPageComponent implements OnInit {
   @Input() config = {

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-select-cart',
   templateUrl: './select-cart.component.html',
-  styleUrls: ['./select-cart.component.css']
+  styleUrls: ['./select-cart.component.scss']
 })
 export class SelectCartComponent implements OnInit, OnDestroy {
 

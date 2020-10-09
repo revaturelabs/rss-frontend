@@ -11,7 +11,8 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-discount',
   templateUrl: './discount.component.html',
-  styleUrls: ['./discount.component.css']
+  styleUrls: ['./discount.component.scss']
+
 })
 export class DiscountComponent implements OnInit {
 
@@ -83,8 +84,9 @@ export class DiscountComponent implements OnInit {
 
 	ngAfterViewInit() {
 		setTimeout(() => {
-			this.parent.breadcrumbs = ['Admin', 'Inventory'];
-			this.parent.routerCrumbs = ['admin', 'inventory'];
+			this.parent.breadcrumbs = ['Admin', 'Discount'];
+			this.parent.routerCrumbs = ['admin', 'discount'];
+
 		});
 	}
 
