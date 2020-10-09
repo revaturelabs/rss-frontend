@@ -82,7 +82,7 @@
                           <div *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer == a.userAnswer)">
                             CORRECT
                           </div>
-                          <span *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer !== a.userAnswer)">
+                          <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
                               <span class="fa fa-close"> INCORRECT
                               </span>
@@ -96,9 +96,9 @@
                           <div *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer == a.userAnswer)">
                             CORRECT
                           </div>
-                          <span *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer !== a.userAnswer)">
+                          <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> 
+                              <span class="fa fa-close"> INCORRECT
                               </span>
                             </div>
                           </span>
@@ -110,9 +110,9 @@
                           <div *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer == a.userAnswer)">
                             CORRECT
                           </div>
-                          <span *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer !== a.userAnswer)">
+                          <span class = "incorrect fa fa-close" *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> 
+                              <span class="fa fa-close"> X
                               </span>
                             </div>
                           </span>
@@ -124,9 +124,9 @@
                           <div *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer == a.userAnswer)">
                             CORRECT
                           </div>
-                          <span *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer !== a.userAnswer)">
+                          <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> 
+                              <span class="fa fa-close"> INCORRECT
                               </span>
                             </div>
                           </span>
@@ -138,10 +138,10 @@
                           <div *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer == a.userAnswer)">
                             CORRECT
                           </div>
-                          <span *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer !== a.userAnswer)">
+                          <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> 
-                              </span>
+                              <i class="fa fa-close"> INCORRECT
+                              </i>
                             </div>
                           </span>
                         </div>
