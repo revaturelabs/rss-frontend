@@ -166,8 +166,6 @@ export class QuizService {
     );
   }
 
-
-
   //UserQuizScore Controller
   getUserScores(email): Observable<any[]> {
     this.quizSubmit.userEmail = email;

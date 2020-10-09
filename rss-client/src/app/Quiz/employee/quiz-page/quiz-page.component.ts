@@ -89,14 +89,6 @@ export class QuizPageComponent implements OnInit {
     }
   }
 
-  // getQuestions(quizId) {
-  //   this.quizservice.getQuestionsById(quizId).subscribe(
-  //     (data) => (
-  //       this.questions = data
-  //     )
-  //   )
-  // }
-
   getAttemptAnswers(attemptId) {
     //get answers by the attempt
     this.quizservice.getAnswersByAttemptId(attemptId).subscribe(

@@ -122,7 +122,6 @@ export class TestInProgressComponent implements OnInit {
           this.account.points = res.totalPoints;
           this.parentaluntil.results = res;
           this.accountservice.updatePoints(this.account).subscribe();
-          
         });
       }
     }
