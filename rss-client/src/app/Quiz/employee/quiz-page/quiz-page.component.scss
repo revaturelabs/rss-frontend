@@ -70,9 +70,13 @@
 }
 
 .correct {
-    display: inline-block;
-    height: var(--height);
-    width: var(--width);
-    border-bottom: var(--borderWidth) solid var(--borderColor);
-    border-right: var(--borderWidth) solid var(--borderColor);
-  }
+    color: #82c91e;
+}
+
+.incorrect {
+    color: red;
+}
+
+.btnlink {
+     color: #72A4C2;
+}

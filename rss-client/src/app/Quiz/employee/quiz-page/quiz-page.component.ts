@@ -65,14 +65,22 @@ export class QuizPageComponent implements OnInit {
   }
 
   showReview(quizId) {
-    const reviewElement = document.getElementById("review" + quizId);
+    
     const all: Element[] = Array.from(document.getElementsByClassName("small-text"));
+    //close everything
     for (let o of all) {
       if (!o.classList.contains("hide")) {
         o.classList.add("hide")
       }
     }
     console.log(quizId + " " + this.user.email);
+
+    //show dropdown for chosen quiz
+    this.dropdown(quizId);
+  }
+
+  dropdown(quizId) {
+    const reviewElement = document.getElementById("review" + quizId);
     if (reviewElement.classList.contains("hide")) {
       reviewElement.classList.remove("hide");
 
@@ -100,8 +108,15 @@ export class QuizPageComponent implements OnInit {
 
   //Selects the user-selected option from attempt
   isChecked(answer, option) {
-
     if (answer == option) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isAnswer(answerKey, option) {
+    if (answerKey == option) {
       return true;
     } else {
       return false;
