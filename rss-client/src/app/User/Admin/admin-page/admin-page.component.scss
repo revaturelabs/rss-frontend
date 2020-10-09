@@ -4,11 +4,11 @@ section{
     display: flex;
     box-shadow: $shadow;
     position: relative;
-    height: $height;
-    margin: 2rem 0;
+    height: 200px;
+    margin: 1.5rem 0;
     
     div{
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.75rem;
     }
     
     p{
@@ -16,8 +16,8 @@ section{
     }
 
     img{
-        width: $width;
-        height: $height;
+        width: 200px;
+        height: 200px;
         object-fit: cover;
     }
     
@@ -26,5 +26,9 @@ section{
         bottom: 15px;
         right: 15px;
         padding: 0.5rem;
+    }
+
+    #inventory{
+        background-color: $warning;
     }
 }

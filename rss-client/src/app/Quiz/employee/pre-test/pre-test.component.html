@@ -1,6 +1,6 @@
 <div class="container">
   <section class="row">
-    <div class="col-8">
+    <main class="col-8">
       <div class="my-2 p-2">
         <h2>Topic -- {{ config.quizTopic | titlecase }}</h2>
       </div>
@@ -10,19 +10,20 @@
         <p class="description">{{ config.quizDescription }}</p>
       </div>
       <!-- Quiz Instruction from an array of instructions-->
-      <div class="my-2 p-2">
+      <summary class="my-2 p-2">
         <h2>Instructions</h2>
         <div class="instructions">
           <div class="details">
             <p><i class="fas fa-pencil-alt"></i> 
               You will need to complete these questions in an amount of time alloted by your instructor. 
-          </p></div>
+            </p>
+          </div>
           <div class="details">
             <p><i class="fas fa-pencil-alt"></i> <strong>NO CHEATING.</strong></p>
           </div>
         </div>
-      </div>
-    </div>
+      </summary>
+    </main>
 
     <aside class="col-4 p-0">
       <div class="details">

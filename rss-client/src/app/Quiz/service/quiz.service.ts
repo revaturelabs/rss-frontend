@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../models/subject';
 import { Quiz } from '../models/quiz';
@@ -176,8 +176,11 @@ export class QuizService {
   }
 
   //sends request to UserQuizScoreController - create this method +useremail
-  getAttemptsByQuizId(quizId) {
-    return this.httpclient.get<QuizSubmit[]>(this.url + '/userscore/quiz/'+quizId);
+  getAttemptsByQuizId(quizId, userEmail) {
+    let params = new HttpParams();
+    params = params.append('userEmail', userEmail);
+    params = params.append('quizId', quizId);
+    return this.httpclient.get<QuizSubmit[]>(this.url + '/userscore/attempts', {params:params});
   }
 
   //sends request to AnswersBankController - create this method based on userscoreid
@@ -205,3 +208,4 @@ export class QuizService {
     return this.httpclient.put<any>(this.url + '/userscore/quizzes', userScoreId);
   }
 }
+

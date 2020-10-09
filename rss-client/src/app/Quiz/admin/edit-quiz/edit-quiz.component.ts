@@ -78,7 +78,7 @@ export class EditQuizComponent implements OnInit {
     // this.focusedQuiz.quizTotalPoints = this.focusedQuiz.quizTotalPoints; this works too.
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
-    this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
+    this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {console.log(this.quizData.quizTotalPoints);
       this.focusedQuiz.quizId = res.quizId;
 
       this.focusedQuiz.questions.forEach((x) => {
