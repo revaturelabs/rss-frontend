@@ -25,6 +25,7 @@ export class QuizPageComponent implements OnInit {
   attempts: QuizSubmit[];
   questions: Questions[] = [];
   answers: any[];
+  checked: boolean = false;
 
   @Input() config;
   searchText: string;
@@ -66,6 +67,12 @@ export class QuizPageComponent implements OnInit {
 
   showReview(quizId) {
     const reviewElement = document.getElementById("review" + quizId);
+    const all: Element[] = Array.from(document.getElementsByClassName("small-text"));
+    for (let o of all) {
+      if (!o.classList.contains("hide")) {
+        o.classList.add("hide")
+      }
+    }
     console.log(quizId + " " + this.user.email);
     if (reviewElement.classList.contains("hide")) {
       reviewElement.classList.remove("hide");
@@ -82,13 +89,13 @@ export class QuizPageComponent implements OnInit {
     }
   }
 
-  getQuestions(quizId) {
-    this.quizservice.getQuestionsById(quizId).subscribe(
-      (data) => (
-        this.questions = data
-      )
-    )
-  }
+  // getQuestions(quizId) {
+  //   this.quizservice.getQuestionsById(quizId).subscribe(
+  //     (data) => (
+  //       this.questions = data
+  //     )
+  //   )
+  // }
 
   getAttemptAnswers(attemptId) {
     //get answers by the attempt
@@ -98,5 +105,10 @@ export class QuizPageComponent implements OnInit {
         this.answers = data //array of answers -create class (AnswersBank)
       }
     )
+  }
+
+  //Selects the user-selected option from attempt
+  isChecked(answer, option) {
+    this.checked = (answer == option) ? true : false;
   }
 }
