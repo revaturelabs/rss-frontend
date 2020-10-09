@@ -79,12 +79,12 @@
                           <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 1)"
                             disabled="disabled" id="item1" />
                           <label class="form-check-label" for="item1">{{q.question.option1}}</label>
-                          <div *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer == a.userAnswer)">
-                            CORRECT
+                          <div class = "correct" *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer == a.userAnswer)">
+                            &#9989;
                           </div>
                           <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> INCORRECT
+                              <span class="fa fa-close"> &#x274C;
                               </span>
                             </div>
                           </span>
@@ -93,12 +93,12 @@
                           <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 2)"
                             disabled="disabled" id="item2" />
                           <label class="form-check-label" for="item2">{{q.question.option2}}</label>
-                          <div *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer == a.userAnswer)">
-                            CORRECT
+                          <div class = "correct" *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer == a.userAnswer)">
+                            &#9989;
                           </div>
                           <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> INCORRECT
+                              <span class="fa fa-close"> &#x274C;
                               </span>
                             </div>
                           </span>
@@ -107,12 +107,12 @@
                           <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 3)"
                             disabled="disabled" id="item3" />
                           <label class="form-check-label" for="item3">{{q.question.option3}}</label>
-                          <div *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer == a.userAnswer)">
-                            CORRECT
+                          <div class = "correct" *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer == a.userAnswer)">
+                            &#9989;
                           </div>
                           <span class = "incorrect fa fa-close" *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> X
+                              <span class="fa fa-close"> &#x274C;
                               </span>
                             </div>
                           </span>
@@ -121,12 +121,12 @@
                           <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 4)"
                             disabled="disabled" id="item4" />
                           <label class="form-check-label" for="item4">{{q.question.option4}}</label>
-                          <div *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer == a.userAnswer)">
-                            CORRECT
+                          <div class = "correct" *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer == a.userAnswer)">
+                            &#9989;
                           </div>
                           <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <span class="fa fa-close"> INCORRECT
+                              <span class="fa fa-close"> &#x274C;
                               </span>
                             </div>
                           </span>
@@ -135,12 +135,12 @@
                           <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 5)"
                             disabled="disabled" id="item5" />
                           <label class="form-check-label" for="item5">{{q.question.option5}}</label>
-                          <div *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer == a.userAnswer)">
-                            CORRECT
+                          <div class = "correct" *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer == a.userAnswer)">
+                            &#9989;
                           </div>
                           <span class = "incorrect" *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer !== a.userAnswer)">
                             <div>
-                              <i class="fa fa-close"> INCORRECT
+                              <i class="fa fa-close"> &#x274C;
                               </i>
                             </div>
                           </span>

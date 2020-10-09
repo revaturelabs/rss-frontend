@@ -64,15 +64,13 @@
     display:none;
 }
 
-.incorrect {
-    background-color: red;
+.incorrect, .correct{
     float: right;
     font-size: 30px;
 }
 
 .correct {
     display: inline-block;
-    transform: rotate(45deg);
     height: var(--height);
     width: var(--width);
     border-bottom: var(--borderWidth) solid var(--borderColor);
