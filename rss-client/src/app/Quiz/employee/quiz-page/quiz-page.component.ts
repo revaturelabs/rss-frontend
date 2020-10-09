@@ -25,7 +25,6 @@ export class QuizPageComponent implements OnInit {
   attempts: QuizSubmit[];
   questions: Questions[] = [];
   answers: any[];
-  checked: boolean = false;
 
   @Input() config;
   searchText: string;
@@ -101,6 +100,11 @@ export class QuizPageComponent implements OnInit {
 
   //Selects the user-selected option from attempt
   isChecked(answer, option) {
-    this.checked = (answer == option) ? true : false;
+
+    if (answer == option) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
