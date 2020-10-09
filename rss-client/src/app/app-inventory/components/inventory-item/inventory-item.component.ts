@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router'
 import { Product } from '../../models/product.model';
-import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
-import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cart } from 'src/app/Cart/models/cart.model';
 import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
-import { CartService } from 'src/app/Cart/services/cart.service';
 import { CartItemService } from 'src/app/Cart/services/cart-item.service';
 import { CartItem } from 'src/app/Cart/models/cart-item.model';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
 	selector: 'app-inventory-item',
@@ -96,9 +96,6 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	reduceInventory() {
-		//defaulting purchase quantity to 1 instead of stock value
-		this.quantity.setValue(1);
-		//console.log(this.quantity.value);
 		let quantityLeft = this.localQuantity - this.quantity.value;
 		console.log(quantityLeft);
 		if (quantityLeft >= 0 && this.quantity.value >= 0) {
@@ -219,5 +216,14 @@ export class InventoryItemComponent implements OnInit {
 		} else {
 			alert("Update Invalid.");
 		}
+	}
+
+	deleteItem(product: Product) {
+		const modalRef = this.modalService.open(ConfirmationModalComponent);
+		modalRef.componentInstance.product = product;
+	}
+
+	receiveDelete($event) {
+		this.deleteItem($event);
 	}
 }

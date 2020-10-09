@@ -62,11 +62,6 @@ export class InventoryListComponent implements OnInit {
 		console.log(product);
 	}
 
-	deleteItem(product: Product) {
-		const modalRef = this.modalService.open(ConfirmationModalComponent);
-		modalRef.componentInstance.product = product;
-	}
-
 	getAllProducts() {
 		this.inventoryService.getAllProducts()
 			.subscribe(result => {
@@ -78,10 +73,6 @@ export class InventoryListComponent implements OnInit {
 
 	receiveUpdate($event) {
 		this.updateItem($event);
-	}
-
-	receiveDelete($event) {
-		this.deleteItem($event);
 	}
 
 	ngAfterViewInit() {

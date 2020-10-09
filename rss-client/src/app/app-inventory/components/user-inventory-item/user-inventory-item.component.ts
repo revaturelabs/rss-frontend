@@ -47,10 +47,7 @@ export class UserInventoryItemComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.localQuantity = this.product.quantity;
-		if (this.userType === 'admin') {
-			this.admin = false;
-		}
+		this.localQuantity = 1;
 
 		this.updateProduct = new FormGroup({
 			id: new FormControl(this.product.id),
@@ -60,15 +57,13 @@ export class UserInventoryItemComponent implements OnInit {
 			model: new FormControl({ value: this.product.model, disabled: this.admin }),
 			category: new FormControl({ value: this.product.category, disabled: this.admin }),
 			image: new FormControl({ value: this.product.image, disabled: this.admin }),
-			quantity: new FormControl({value: this.product.quantity, disabled: this.admin}, [Validators.required]),
+			quantity: new FormControl({value: 1, disabled: !this.admin}, [Validators.required]),
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin}, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
 			discountedAmount: new FormControl({ value: this.product.discountedAmount, disabled: this.admin }),
 			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin }),
 			//currentPrice: new FormControl({value: this.product.unitPrice - this.product.discountedAmount, disabled: true })
 		});
-
-		
 
 		this.currentUser = this.userService.getCurrentUser();
 
@@ -89,9 +84,7 @@ export class UserInventoryItemComponent implements OnInit {
 	}
 
 	reduceInventory() {
-		//defaulting purchase quantity to 1 instead of stock value
-		this.quantity.setValue(1);
-		//console.log(this.quantity.value);
+		this.localQuantity = this.updateProduct.get("quantity").value;
 		let quantityLeft = this.localQuantity - this.quantity.value;
 		console.log(quantityLeft);
 		if (quantityLeft >= 0 && this.quantity.value >= 0) {

@@ -1,57 +1,54 @@
 <div *ngIf="userType === 'admin'">
 	<div class="container col-12 col-md-8 md-auto shadow my-4 p-4">
 		<p class="display-4 text-center title">Add Product</p>
-		<p class="text-danger text-sm mb-1">* These fields are required.</p>
+		<p class="text-danger text-center mb-1"><b>* These fields are required.</b></p>
 		<form #f="ngForm" (submit)="addItem()">
 			<div class="row">
 				<div class="form-group col-12 col-md-6">
-					<label for="inputName"><span class="text-danger">* </span>Name</label>
+					<label for="inputName"><span class="text-danger">* </span>Name:</label>
 					<input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name" #name="ngModel" required minlength="3">
 					<p class="text-danger small-text" [hidden]="name.valid || name.pristine">Name is required</p>
 				</div>
 				<div class="form-group col-12 col-md-6">
-					<label for="inputDescription">Description</label>
-					<input type="text" class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description">
+					<label for="category">Category:</label>
+					<input type="text" class="form-control" id="category" name="category" [(ngModel)]="product.category">
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-12 col-md-6">
-					<label for="brand">Brand</label>
+				<div class="form-group col-12 col-md-4">
+					<label for="brand">Brand:</label>
 					<input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="product.brand">
 				</div>
-				<div class="form-group col-12 col-md-6">
-					<label for="inputModel">Model</label>
+				<div class="form-group col-12 col-md-4">
+					<label for="inputModel">Model:</label>
 					<input type="text" class="form-control" id="inputModel" name="model" [(ngModel)]="product.model">
 				</div>
+				<div class="form-group col-12 col-md-4">
+					<label for="inputColor">Color:</label>
+					<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
+				</div>
+			</div>
+			<div class="form-group"><label for="description">Description:</label>
+				<textarea class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description" rows="2"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="inputImage">Image</label>
+				<label for="inputImage">Image URL:</label>
 				<input type="text" class="form-control" id="inputImage" name="image" [(ngModel)]="product.image">
 			</div>
 			<div class="row">
 				<div class="form-group col-12 col-md-6">
-					<label for="category">Category</label>
-					<input type="text" class="form-control" id="category" name="category" [(ngModel)]="product.category">
-				</div>
-				<div class="form-group col-12 col-md-6">
-					<label for="inputQuantity"><span class="text-danger">* </span>Quantity</label>
+					<label for="inputQuantity"><span class="text-danger">* </span>Quantity:</label>
 					<input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="product.quantity" #quantity="ngModel" required min="0" pattern="([0-9]+)">
 					<p class="text-danger small-text" [hidden]="quantity.valid || quantity.pristine">Quantity is
 						required
 					</p>
 				</div>
-			</div>
-			<div class="row">
 				<div class="form-group col-12 col-md-6">
-					<label for="inputUnitPrice"><span class="text-danger">* </span>Unit Price</label>
+					<label for="inputUnitPrice"><span class="text-danger">* </span>Unit Price:</label>
 					<input type="number" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice" required min="0" #unitPrice="ngModel" pattern="([0-9]+)">
 					<p class="text-danger small-text" [hidden]="unitPrice.valid || unitPrice.pristine">Unit price is
 						required
 					</p>
-				</div>
-				<div class="form-group col-12 col-md-6">
-					<label for="inputColor">Color</label>
-					<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
 				</div>
 			</div>
 			<!-- BUTTONS -->

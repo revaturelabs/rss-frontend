@@ -28,14 +28,13 @@
                         <img class="card-img-top" src="{{product.image}}" alt="product_img">
                         <div class="card-body">
                             <h4 class="card-title">{{product.name}}</h4>
-                            <!-- <p class="card-text">{{product.description}}</p> -->
-                            <p class="card-text">{{product.brand}}</p>
+                            <p class="card-text">x{{product.quantity}} left in stock!</p>
                             <aside class="container-fluid">
-                                <div class="row">
+                                <div class="row text-center">
                                     <div class="col-6">
                                         <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
-                                            {{product.unitPrice | number}}</span><br />
-                                        <span *ngIf="product.discounted === true" style="color:#FF0000">{{product.discountedAmount | number}}% OFF!!!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
+                                            {{product.unitPrice | number}}</span><span *ngIf="product.discounted === true" style="color:#FF0000"> {{product.discountedAmount | number}}% OFF!!!!!<br />
+                                        {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
 
                                     </div>
                                     <div class="col-6">
