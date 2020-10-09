@@ -25,7 +25,7 @@ export class QuizService {
     quizId: 0,
     quizTopic: '',
     quizDescription: '',
-    quizTotalPoints: 0,
+    quizTotalPoints:0,
     quizDifficulty: '',
     quizAttempt: 0,
     creatorEmail: '',
@@ -207,5 +207,6 @@ export class QuizService {
   updateQuizAttempt(userScoreId): Observable<QuizSubmit> {
     return this.httpclient.put<any>(this.url + '/userscore/quizzes', userScoreId);
   }
+
 }
 

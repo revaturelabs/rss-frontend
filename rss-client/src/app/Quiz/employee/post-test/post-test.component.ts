@@ -19,9 +19,7 @@ export class PostTestComponent implements OnInit {
     //TODO: Navigate back to quiz summary page
   }
   constructor(public parentalunit: IndividualQuizPageComponent, public quizservice: QuizService) {}
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   //quiz: Quiz;
 
@@ -29,6 +27,4 @@ export class PostTestComponent implements OnInit {
   // attempt() {
   //   this.quizservice.subtractAttempt(this.quiz.quizAttempt);
   // }
-  
-
 }

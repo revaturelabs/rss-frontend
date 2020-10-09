@@ -1,12 +1,21 @@
 <div class="text-center">
 <p>You have scored</p>
-<!--Group 2 change Percentage earned from attempt-->
-<div class="percentage rounded-circle">
-  <h2 class="text-white">{{ parentalunit.results.correctAnswers / parentalunit.results.totalQuestions | percent }}</h2>
-</div>
-<!--Group2 - TODO: adding a quote with ngIf for pass and fail -->
+  <!--Group 2 change Percentage earned from attempt TODO: adding a quote with ngIf for pass and fail -->
+  <div *ngIf="parentalunit.results.correctAnswers / parentalunit.results.totalQuestions > 0.7; then passed else failed"></div>
+  <ng-template #passed>
+    <div class="pass rounded-circle" >
+      <h2 class="text-white">{{ parentalunit.results.correctAnswers / parentalunit.results.totalQuestions | percent }}</h2>
+    </div>
+    <p>Congratulations! You passed.</p>
+  </ng-template> 
+  <ng-template #failed>
+    <div class="fail rounded-circle" >
+      <h2 class="text-white">{{ parentalunit.results.correctAnswers / parentalunit.results.totalQuestions | percent }}</h2>
+    </div>
+    <p>We're sorry but you did not pass the quiz in this attempt</p>
+  </ng-template> 
 
-<!-- Number correctly answered -->
+<!-- Number correctly answered-->
 <h2>Total Correct: {{ parentalunit.results.correctAnswers }}</h2>
 <!-- Total questions in test for  correct / possible -->
 <h2>
