@@ -8,10 +8,10 @@
         </ng-template>
         <ng-template [ngSwitchCase]="'inventory'">
             <admin-inventory (navigateEvent)="navigateTo($event)"></admin-inventory>
-        </ng-template>
-        <!--default case when there are no matches -->
-        <ng-template [ngSwitchDefault]>
-            <!-- <div class="container">
+    </ng-template>
+    <!--default case when there are no matches -->
+    <ng-template [ngSwitchDefault]>
+    <!-- <div class="container">
       <!- quizzes 
       <div class="border container">
         <button (click)="navigateTo('quiz')">go here</button>
