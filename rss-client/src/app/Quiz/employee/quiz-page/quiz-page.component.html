@@ -31,7 +31,7 @@
           </div>
           <!-- show only if the quiz has been taken at least once -->
           <!-- add *ngIf="attempts" -->
-          <div> 
+          <div>
             <div class="row align-items-center row-2">
               <div class="col-9">
                 <span class="panel-title">Recent Score:&nbsp;</span><span>attempts[-1].userScore%</span>
@@ -44,73 +44,122 @@
       </div>
       <!-- review details and options -->
       <div class="small-text hide" id="review{{quizdata.quizId}}">
-          <div class="row justify-content-around align-items-center skinny-row">
-            <div class="col-1">S.No.</div>
-            <div class="col-2">Submitted On</div>
-            <div class="col-2">Status</div>
-            <div class="col-2">Score (%)</div>
-            <div class="col-3">Action</div>
-          </div>
-          <div>
-            <div class="row justify-content-around align-items-center skinny-row" *ngFor="let a of attempts">
-              <div class="col-1">{{a.userScoreId}}</div>
-              <div class="col-2">{{a.submitDate}}</div>
-              <div class="col-2">{{a.status}}</div>
-              <div class="col-2">{{a.userScore}}%</div>
-              <div class="col-1">
-                <!-- add (click)="getAttemptAnswers(a.userScoreId)" -->
-                <a data-toggle="modal" data-target="#exampleModalLong" (click)="getAttemptAnswers(a.userScoreId)">Review</a>
-                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Review Quiz</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <!-- populate modal with questions and answers -->
-                        <div *ngFor="let q of questions; let a of answers; let i = index">
-                          <h4><span>{{i+1}}. &nbsp;</span>{{q.question.question}}</h4>
-                          <div class="m-3" *ngIf="q.option1"> 
-                            <input class="form-check-input" type="radio" [checked]="isChecked(a.answer, 1)" disabled="disabled" id="item1"/>
-                            <label class="form-check-label" for="item1">{{q.question.option1}}</label>
+        <div class="row justify-content-around align-items-center skinny-row">
+          <div class="col-1">S.No.</div>
+          <div class="col-2">Submitted On</div>
+          <div class="col-2">Status</div>
+          <div class="col-2">Score (%)</div>
+          <div class="col-3">Action</div>
+        </div>
+        <div>
+          <div class="row justify-content-around align-items-center skinny-row" *ngFor="let a of attempts">
+            <div class="col-1">{{a.userScoreId}}</div>
+            <div class="col-2">{{a.submitDate}}</div>
+            <div class="col-2">{{a.status}}</div>
+            <div class="col-2">{{a.userScore}}%</div>
+            <div class="col-1">
+              <!-- add (click)="getAttemptAnswers(a.userScoreId)" -->
+              <a data-toggle="modal" data-target="#exampleModalLong"
+                (click)="getAttemptAnswers(a.userScoreId)">Review</a>
+              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Review Quiz</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- populate modal with questions and answers -->
+                      <div *ngFor="let q of questions; let a of answers; let i = index">
+                        <h4><span>{{i+1}}. &nbsp;</span>{{q.question.question}}</h4>
+                        <div class="m-3" *ngIf="q.question.option1">
+                          <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 1)"
+                            disabled="disabled" id="item1" />
+                          <label class="form-check-label" for="item1">{{q.question.option1}}</label>
+                          <div *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer == a.userAnswer)">
+                            CORRECT
                           </div>
-                          <div class="m-3" *ngIf="q.option2">
-                            <input class="form-check-input" type="radio" [checked]="isChecked(a.answer, 2)" disabled="disabled" id="item2"/>
-                            <label class="form-check-label" for="item2">{{q.question.option2}}</label>
-                          </div>
-                          <div class="m-3" *ngIf="q.option3">
-                            <input class="form-check-input" type="radio"  [checked]="isChecked(a.answer, 3)" disabled="disabled"
-                              id="item3"/>
-                            <label class="form-check-label" for="item3">{{q.question.option3}}</label>
-                          </div>
-                          <div class="m-3" *ngIf="q.option4">
-                            <input class="form-check-input" type="radio" [checked]="isChecked(a.answer, 4)" disabled="disabled"
-                              id="item4"/>
-                            <label class="form-check-label" for="item4">{{q.question.option4}}</label>
-                          </div>
-                          <div class="m-3" *ngIf="q.option5">
-                            <input class="form-check-input" type="radio"  [checked]="isChecked(a.answer, 5)" disabled="disabled"
-                              id="item5"/>
-                            <label class="form-check-label" for="item5">{{q.question.option5}}</label>
-                          </div>
+                          <span *ngIf="isChecked(a.userAnswer, 1) && (q.question.correctAnswer !== a.userAnswer)">
+                            <div>
+                              <span class="fa fa-close"> INCORRECT
+                              </span>
+                            </div>
+                          </span>
                         </div>
-                        
+                        <div class="m-3" *ngIf="q.question.option2">
+                          <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 2)"
+                            disabled="disabled" id="item2" />
+                          <label class="form-check-label" for="item2">{{q.question.option2}}</label>
+                          <div *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer == a.userAnswer)">
+                            CORRECT
+                          </div>
+                          <span *ngIf="isChecked(a.userAnswer, 2) && (q.question.correctAnswer !== a.userAnswer)">
+                            <div>
+                              <span class="fa fa-close"> 
+                              </span>
+                            </div>
+                          </span>
+                        </div>
+                        <div class="m-3" *ngIf="q.question.option3">
+                          <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 3)"
+                            disabled="disabled" id="item3" />
+                          <label class="form-check-label" for="item3">{{q.question.option3}}</label>
+                          <div *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer == a.userAnswer)">
+                            CORRECT
+                          </div>
+                          <span *ngIf="isChecked(a.userAnswer, 3) && (q.question.correctAnswer !== a.userAnswer)">
+                            <div>
+                              <span class="fa fa-close"> 
+                              </span>
+                            </div>
+                          </span>
+                        </div>
+                        <div class="m-3" *ngIf="q.question.option4">
+                          <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 4)"
+                            disabled="disabled" id="item4" />
+                          <label class="form-check-label" for="item4">{{q.question.option4}}</label>
+                          <div *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer == a.userAnswer)">
+                            CORRECT
+                          </div>
+                          <span *ngIf="isChecked(a.userAnswer, 4) && (q.question.correctAnswer !== a.userAnswer)">
+                            <div>
+                              <span class="fa fa-close"> 
+                              </span>
+                            </div>
+                          </span>
+                        </div>
+                        <div class="m-3" *ngIf="q.question.option5">
+                          <input class="form-check-input" type="radio" [checked]="isChecked(a.userAnswer, 5)"
+                            disabled="disabled" id="item5" />
+                          <label class="form-check-label" for="item5">{{q.question.option5}}</label>
+                          <div *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer == a.userAnswer)">
+                            CORRECT
+                          </div>
+                          <span *ngIf="isChecked(a.userAnswer, 5) && (q.question.correctAnswer !== a.userAnswer)">
+                            <div>
+                              <span class="fa fa-close"> 
+                              </span>
+                            </div>
+                          </span>
+                        </div>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-2">
-                <a>View Answers</a>
-              </div>
+            </div>
+            <div class="col-2">
+              <a>View Answers</a>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
