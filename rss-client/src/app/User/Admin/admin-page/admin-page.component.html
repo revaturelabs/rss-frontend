@@ -1,22 +1,31 @@
 <!-- admin check -->
 <div *ngIf="user.admin">
-  <!-- main container -->
-  <div [ngSwitch]="view">
-    <!-- the same view can be shown in more than one case -->
-    <ng-template [ngSwitchCase]="'quiz'">
-      <admin-quiz (navigateEvent)="navigateTo($event)"></admin-quiz>
-    </ng-template>
-    <ng-template [ngSwitchCase]="'inventory'">
-      <admin-inventory (navigateEvent)="navigateTo($event)"></admin-inventory>
+    <!-- main container -->
+    <div [ngSwitch]="view">
+        <!-- the same view can be shown in more than one case -->
+        <ng-template [ngSwitchCase]="'quiz'">
+            <admin-quiz (navigateEvent)="navigateTo($event)"></admin-quiz>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'inventory'">
+            <admin-inventory (navigateEvent)="navigateTo($event)"></admin-inventory>
     </ng-template>
     <!--default case when there are no matches -->
     <ng-template [ngSwitchDefault]>
-      <!-- <div class="container">
+    <!-- <div class="container">
       <!- quizzes 
       <div class="border container">
         <button (click)="navigateTo('quiz')">go here</button>
         some info about admin quiz stuff
       </div>
+
+      <!- inventory 
+      <div class="border container">
+        <button (click)="navigateTo('inventory')">go here</button>
+        some info about admin inventory stuff
+      </div>
+    </div>
+  </ng-template>
+</div> -->
 
       <!- inventory 
       <div class="border container">
