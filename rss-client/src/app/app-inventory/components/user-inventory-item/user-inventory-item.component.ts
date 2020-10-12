@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router'
 import { Product } from '../../models/product.model';
-import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SortService } from '../../service/sort.service';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryService } from '../../service/inventory.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cart } from 'src/app/Cart/models/cart.model';
@@ -10,15 +9,13 @@ import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
 import { CartItemService } from 'src/app/Cart/services/cart-item.service';
 import { CartItem } from 'src/app/Cart/models/cart-item.model';
-import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
-	selector: 'app-inventory-item',
-	templateUrl: './inventory-item.component.html',
-	styleUrls: ['./inventory-item.component.scss'],
+  selector: 'app-user-inventory-item',
+  templateUrl: './user-inventory-item.component.html',
+  styleUrls: ['./user-inventory-item.component.scss']
 })
-export class InventoryItemComponent implements OnInit {
-
+export class UserInventoryItemComponent implements OnInit {
 	@Input() product: Product;
 	@Input() userType: string;
 	admin: boolean = true;
@@ -40,10 +37,8 @@ export class InventoryItemComponent implements OnInit {
 	get discounted(){return this.updateProduct.get('discounted')}
 	get color(){return this.updateProduct.get('color')}
 
-
 	constructor(
 		private modalService: NgbModal,
-		public service: SortService,
 		public activeModal: NgbActiveModal,
 		private inventoryService: InventoryService,
 		private userService: UserService,
@@ -52,13 +47,7 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.localQuantity = this.product.quantity;
-		if (this.userService.userPersistance().admin){
-			this.userType = 'admin';
-		}
-		if (this.userType === 'admin') {
-			this.admin = false;
-		}
+		this.localQuantity = 1;
 
 		this.updateProduct = new FormGroup({
 			id: new FormControl(this.product.id),
@@ -68,15 +57,13 @@ export class InventoryItemComponent implements OnInit {
 			model: new FormControl({ value: this.product.model, disabled: this.admin }),
 			category: new FormControl({ value: this.product.category, disabled: this.admin }),
 			image: new FormControl({ value: this.product.image, disabled: this.admin }),
-			quantity: new FormControl({value: this.product.quantity, disabled: this.admin}, [Validators.required]),
-
+			quantity: new FormControl({value: 1, disabled: !this.admin}, [Validators.required]),
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin}, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
 			discountedAmount: new FormControl({ value: this.product.discountedAmount, disabled: this.admin }),
-			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin })
+			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin }),
+			//currentPrice: new FormControl({value: this.product.unitPrice - this.product.discountedAmount, disabled: true })
 		});
-
-		
 
 		this.currentUser = this.userService.getCurrentUser();
 
@@ -97,6 +84,7 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	reduceInventory() {
+		this.localQuantity = this.updateProduct.get("quantity").value;
 		let quantityLeft = this.localQuantity - this.quantity.value;
 		console.log(quantityLeft);
 		if (quantityLeft >= 0 && this.quantity.value >= 0) {
@@ -208,7 +196,6 @@ export class InventoryItemComponent implements OnInit {
 									this.router.navigateByUrl('/inventory/inventory-list');
 									console.log("'Refreshed'");
 								}); 
-								this.service.setInventory(inventory);
 								this.modalService.dismissAll();
 								console.log("Dismissing modal");
 							})
@@ -217,26 +204,5 @@ export class InventoryItemComponent implements OnInit {
 		} else {
 			alert("Update Invalid.");
 		}
-
-	}
-
-
-	private getDismissReason(reason: any): string {
-		if (reason === ModalDismissReasons.ESC) {
-			return 'by pressing ESC';
-		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-			return 'by clicking on a backdrop';
-		} else {
-			return `with: ${reason}`;
-		}
-	}
-
-	deleteItem(product: Product) {
-		const modalRef = this.modalService.open(ConfirmationModalComponent);
-		modalRef.componentInstance.product = product;
-	}
-
-	receiveDelete($event) {
-		this.deleteItem($event);
 	}
 }

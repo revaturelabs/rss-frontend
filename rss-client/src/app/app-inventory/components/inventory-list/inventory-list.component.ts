@@ -8,6 +8,7 @@ import { SortService } from '../../service/sort.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
+import { UserInventoryItemComponent } from '../user-inventory-item/user-inventory-item.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import { UserService } from 'src/app/User/services/user.service';
 import { AppComponent } from 'src/app/app.component';
@@ -44,28 +45,21 @@ export class InventoryListComponent implements OnInit {
 		this.user = this.userService.getCurrentUser();
 	}
 
-	// FOR ADMIN
 	open(product) {
-		const modalRef = this.modalService.open(InventoryItemComponent);
-		modalRef.componentInstance.product = product;
-		modalRef.componentInstance.userType = this.userType;
-	}
-
-	// FOR CUSTOMER
-	addToCart(product) {
-		console.log("addToCart() called.");
-		console.log(product);
-		// TODO: ADD TO CART, SOMEHOW
+		if(this.userType == "admin") {
+			const modalRef = this.modalService.open(InventoryItemComponent);
+			modalRef.componentInstance.product = product;
+			modalRef.componentInstance.userType = this.userType;
+		} else {
+			const modalRef = this.modalService.open(UserInventoryItemComponent);
+			modalRef.componentInstance.product = product;
+			modalRef.componentInstance.userType = this.userType;
+		}
 	}
 
 	updateItem(product: Product) {
 		console.log("updateItem() called.");
 		console.log(product);
-	}
-
-	deleteItem(product: Product) {
-		const modalRef = this.modalService.open(ConfirmationModalComponent);
-		modalRef.componentInstance.product = product;
 	}
 
 	getAllProducts() {
@@ -77,24 +71,8 @@ export class InventoryListComponent implements OnInit {
 			})
 	}
 
-	onSort({ column, direction }: SortEvent) {
-		// Resetting other headers
-		this.headers.forEach(header => {
-			if (header.sortable !== column) {
-				header.direction = '';
-			}
-		});
-
-		this.service.sortColumn = column;
-		this.service.sortDirection = direction;
-	}
-
 	receiveUpdate($event) {
 		this.updateItem($event);
-	}
-
-	receiveDelete($event) {
-		this.deleteItem($event);
 	}
 
 	ngAfterViewInit() {
