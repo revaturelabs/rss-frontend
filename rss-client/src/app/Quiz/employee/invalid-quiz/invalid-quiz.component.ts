@@ -5,7 +5,7 @@ import { CheaterService } from 'src/app/Quiz/service/cheater.service';
 @Component({
   selector: 'app-invalid-quiz',
   templateUrl: './invalid-quiz.component.html',
-  styleUrls: ['./invalid-quiz.component.css']
+  styleUrls: ['./invalid-quiz.component.scss']
 })
 export class InvalidQuizComponent implements OnInit {
 

@@ -122,10 +122,15 @@ export class ShoppingCartComponent implements OnInit {
 
   updateQuantity(itemId: number) {
 
-    let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
+    // let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
 
+    let selectItem = this.activeCart.cartItems.find(item=>{
+      return item.cartItemId === itemId;
+    })
 
-    if (newQuantity > 0) {
+    console.log(selectItem);
+    if (selectItem.quantity > 0) {
+
       let ciToUpdate;
       let emptyCartCopy: Cart = {
         cartId: this.activeCart.cartId,
@@ -136,7 +141,7 @@ export class ShoppingCartComponent implements OnInit {
       for (let i = 0; i < this.activeCart.cartItems.length; i++) {
         let cItem = this.activeCart.cartItems[i];
         if (cItem.cartItemId == itemId) {
-          this.activeCart.cartItems[i].quantity = newQuantity;
+          this.activeCart.cartItems[i].quantity = selectItem.quantity;
           ciToUpdate = {
             cartItemId: cItem.cartItemId,
             cart: emptyCartCopy,
@@ -262,7 +267,10 @@ export class ShoppingCartComponent implements OnInit {
         for (let product of this.products) {
           if (product.id == cItem.productId) {
             if (product.discountedAmount>0) {
-              this.totalPointCost += (product.unitPrice - product.discountedAmount) * cItem.quantity;
+              let tempProduct : number = product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01));
+              console.log(cItem.quantity)
+              this.totalPointCost += Math.round(tempProduct * cItem.quantity);
+
             } else {
               this.totalPointCost += (product.unitPrice) * cItem.quantity;
             }
@@ -270,7 +278,10 @@ export class ShoppingCartComponent implements OnInit {
         } 
       }     
       if (this.currentUser.userDiscounted) {
-        this.totalPointCost -= this.currentUser.userDiscount;
+        let tempUserCost : number = 1 - (this.currentUser.userDiscount * 0.01);
+        this.totalPointCost *= tempUserCost;
+        this.totalPointCost = Math.round(this.totalPointCost);
+
       }
       if (this.totalPointCost<0) {
         this.totalPointCost=0;

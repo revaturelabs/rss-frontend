@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { inventoryRoutes } from "../app-inventory/app-inventory.routes";
 
 import { AddItemComponent } from '../app-inventory/components/add-item/add-item.component';
@@ -13,6 +13,7 @@ import { SortableDirective } from '../app-inventory/directives/sortable.directiv
 import { DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { UserInventoryItemComponent } from './components/user-inventory-item/user-inventory-item.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AppRoutingModule } from '../app-routing.module';
     InventoryItemComponent,
     SortableDirective,
     ConfirmationModalComponent,
+    UserInventoryItemComponent,
   ],
   imports: [
     CommonModule,

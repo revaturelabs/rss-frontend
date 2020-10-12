@@ -4,13 +4,13 @@ import { Product } from '../../models/product.model';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
-import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cart } from 'src/app/Cart/models/cart.model';
 import { User } from 'src/app/User/models/user';
 import { UserService } from 'src/app/User/services/user.service';
-import { CartService } from 'src/app/Cart/services/cart.service';
 import { CartItemService } from 'src/app/Cart/services/cart-item.service';
 import { CartItem } from 'src/app/Cart/models/cart-item.model';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
 	selector: 'app-inventory-item',
@@ -38,6 +38,8 @@ export class InventoryItemComponent implements OnInit {
 	get unitPrice() { return this.updateProduct.get('unitPrice') }
 	get discountedAmount(){return this.updateProduct.get('discountAmount')}
 	get discounted(){return this.updateProduct.get('discounted')}
+	get color(){return this.updateProduct.get('color')}
+
 
 	constructor(
 		private modalService: NgbModal,
@@ -51,6 +53,9 @@ export class InventoryItemComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.localQuantity = this.product.quantity;
+		if (this.userService.userPersistance().admin){
+			this.userType = 'admin';
+		}
 		if (this.userType === 'admin') {
 			this.admin = false;
 		}
@@ -63,12 +68,12 @@ export class InventoryItemComponent implements OnInit {
 			model: new FormControl({ value: this.product.model, disabled: this.admin }),
 			category: new FormControl({ value: this.product.category, disabled: this.admin }),
 			image: new FormControl({ value: this.product.image, disabled: this.admin }),
-			quantity: new FormControl(this.product.quantity, [Validators.required]),
+			quantity: new FormControl({value: this.product.quantity, disabled: this.admin}, [Validators.required]),
+
 			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin}, [Validators.required]),
 			color: new FormControl({ value: this.product.color, disabled: this.admin }),
 			discountedAmount: new FormControl({ value: this.product.discountedAmount, disabled: this.admin }),
-			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin }),
-			currentPrice: new FormControl({value: this.product.unitPrice - this.product.discountedAmount, disabled: true })
+			discounted: new FormControl({ value: this.product.discounted, disabled: this.admin })
 		});
 
 		
@@ -212,6 +217,7 @@ export class InventoryItemComponent implements OnInit {
 		} else {
 			alert("Update Invalid.");
 		}
+
 	}
 
 
@@ -223,5 +229,14 @@ export class InventoryItemComponent implements OnInit {
 		} else {
 			return `with: ${reason}`;
 		}
+	}
+
+	deleteItem(product: Product) {
+		const modalRef = this.modalService.open(ConfirmationModalComponent);
+		modalRef.componentInstance.product = product;
+	}
+
+	receiveDelete($event) {
+		this.deleteItem($event);
 	}
 }
