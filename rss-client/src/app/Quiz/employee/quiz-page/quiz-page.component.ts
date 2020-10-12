@@ -30,7 +30,7 @@ export class QuizPageComponent implements OnInit {
   searchText: string;
   searchSubject: string;
   quizData;
-  
+
 
   constructor(
     private quizservice: QuizService,
@@ -38,7 +38,7 @@ export class QuizPageComponent implements OnInit {
     private parent: AppComponent,
     private userservice: UserService,
     private accountService: AccountService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
@@ -55,7 +55,7 @@ export class QuizPageComponent implements OnInit {
         this.quizzesTaken = res;
       }
     });
-    this.quizservice.getAllQuizzes().subscribe((res) =>(this.quizData = res));
+    this.quizservice.getAllQuizzes().subscribe((res) => (this.quizData = res));
   }
   ngAfterViewInit() {
     setTimeout(() => {
@@ -65,25 +65,23 @@ export class QuizPageComponent implements OnInit {
   }
 
   showReview(quizId) {
-    
-    const all: Element[] = Array.from(document.getElementsByClassName("small-text"));
-    //close everything
-    for (let o of all) {
-      if (!o.classList.contains("hide")) {
-        o.classList.add("hide")
-      }
-    }
-    console.log(quizId + " " + this.user.email);
 
-    //show dropdown for chosen quiz
-    this.dropdown(quizId);
-  }
-
-  dropdown(quizId) {
     const reviewElement = document.getElementById("review" + quizId);
-    if (reviewElement.classList.contains("hide")) {
-      reviewElement.classList.remove("hide");
+    //if dropdown is already showing, hide it
+    if (!reviewElement.classList.contains("hide")) {
+      reviewElement.classList.add("hide");
+    } else {
+      const all: Element[] = Array.from(document.getElementsByClassName("small-text"));
+      //close dropdown on all other quizzes
+      for (let o of all) {
+        if (!o.classList.contains("hide")) {
+          o.classList.add("hide")
+        }
+      }
+      console.log(quizId + " " + this.user.email);
 
+      //show dropdown for chosen quiz
+      reviewElement.classList.remove("hide");
       //make a request to get attempts for the quiz
       this.quizservice.getAttemptsByQuizId(quizId, this.user.email).subscribe(
         (data) => {
@@ -91,8 +89,6 @@ export class QuizPageComponent implements OnInit {
           this.attempts = data;
         }
       )
-    } else {
-      reviewElement.classList.add("hide");
     }
   }
 

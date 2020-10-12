@@ -55,8 +55,9 @@
           <div class="row justify-content-around align-items-center skinny-row" *ngFor="let a of attempts">
             <div class="col-1">{{a.userScoreId}}</div>
             <div class="col-4">{{a.submitDate | date:'medium'}}</div>
-            <div class="col-2">{{a.status}}</div>
-            <div class="col-2">{{a.userScore}}%</div>
+            <div class="col-2" *ngIf="a.userScore/quizdata.quizTotalPoints >= 0.7">Pass</div>
+            <div class="col-2" *ngIf="a.userScore/quizdata.quizTotalPoints < 0.7">Fail</div>
+            <div class="col-2">{{a.userScore/quizdata.quizTotalPoints*100 | number:'1.0-0'}}%</div>
             <div class="col-1">
               <a class="btnlink" data-toggle="modal" data-target="#reviewModal"
                 (click)="getAttemptAnswers(a.userScoreId)">Review</a>
