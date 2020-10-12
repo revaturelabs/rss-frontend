@@ -10,7 +10,6 @@ export interface Quiz {
   quizTotalPoints: number;
   //Group 2 change
   quizDifficulty: string;
-  quizAttempt: number;
   creatorEmail: string;
   subjectId: number;
   subject: {

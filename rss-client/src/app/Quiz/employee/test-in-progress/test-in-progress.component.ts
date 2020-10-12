@@ -9,6 +9,7 @@ import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-
 import { CheaterService } from '../../service/cheater.service';
 import { Observer } from 'rxjs';
 import { Quiz } from '../../models/quiz';
+import { QuizSubmit } from '../../models/quizSubmit';
 
 
 @Component({
@@ -23,10 +24,9 @@ export class TestInProgressComponent implements OnInit {
   index;
   max;
   answers = {};
-  quizzesTaken: any[] = [0];
+  quizzesTaken: any[] = [];
   //group 2 addition
-  quizAttempt: Quiz;
-  attempt: number;
+  attempts: number; 
 
   isADirtyCheater: boolean;
 
@@ -81,7 +81,6 @@ export class TestInProgressComponent implements OnInit {
 
   //Submits the form and
   onSubmit() {
-    console.log('in submit')
     //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
     let answersArr = [];
@@ -98,6 +97,7 @@ export class TestInProgressComponent implements OnInit {
     var theQuiz = this.quizzesTaken.filter((x) => {
       return x == this.config.quizId;
     });
+
     for (let i = 0; i < theQuiz.length; i++) {
       if (theQuiz[i] == this.config.quizId) {
         var theOne = true;
@@ -105,27 +105,52 @@ export class TestInProgressComponent implements OnInit {
       }
     }
 
-    if (theOne == true) {
-      this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-        this.account.points = res.totalPoints;
-        this.parentaluntil.results = res;
-        this.parentaluntil.results.totalPoints = 0;
-      });
-    } else {
-      if (this.isADirtyCheater) {
-        this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-          this.parentaluntil.results = res;
-          this.parentaluntil.results.totalPoints = 0;
-        });
-      } else {
+    //GROUP 2 CHANGE - ATTEMPT WITHOUT BACKEND
+    //TODO - ADD FUNCTION TO DISABLE BUTTON AT LAST ATTEMPT 
+    //TODO - MAKE SURE ATTEMPT IS DISPLAYED TO THE RIGHT QUIZ ID(RIGHT NOW IT ONLY REDUCED BY ORDER OF QUIZ FIRST TAKEN BUT WILL STILL NOT ALLOW MORE THAN 3 ATTEMPTS)
+    /*QUIZTAKEN
+      - retrieves the information about quiz taken from the backend of userquizscore - can use that to see the amount of time quizzes was taken (so technically is it being persisted to the database)
+      - use MAP to narrow down to the amount of times for a specific quiz - "attempts"
+      -  
+    */
+    const map = theQuiz.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    console.log("Keys");
+    console.log([...map.keys()]);
+    console.log("Values");
+    console.log([...map.values()]);
+    this.attempts = map.values().next().value;
+
+    if(this.attempts >= 3){
+      var attempts = false;
+    } else{
+      attempts = true;
+    }
+
+    if(attempts){
+      console.log(map);  
+      console.log(attempts);
+      if (theOne == true) {
         this.quizservice.submitQuiz(answersArr).subscribe((res) => {
           this.account.points = res.totalPoints;
           this.parentaluntil.results = res;
-          this.accountservice.updatePoints(this.account).subscribe();
+          this.parentaluntil.results.totalPoints = 0;
           
         });
+      } else {
+        if (this.isADirtyCheater) {
+          this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+            this.parentaluntil.results = res;
+            this.parentaluntil.results.totalPoints = 0;
+          });
+        } else {
+          this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+            this.account.points = res.totalPoints;
+            this.parentaluntil.results = res;
+            this.accountservice.updatePoints(this.account).subscribe();
+          });
+        }
       }
-    }
+    } else{alert("cannot do another attempt")}
     this.cheaterService.resetValidity()
   }
 

@@ -21,8 +21,7 @@ import { Questions } from '../../models/questions';
 export class QuizPageComponent implements OnInit {
   evalAccount: Account;
   user: User = this.userservice.userPersistance();
-  quizzesTaken: any[] = [0];
-  attempts: QuizSubmit[];
+  quizzesTaken: any[] = [];
   questions: Questions[] = [];
   answers: any[];
 
@@ -30,6 +29,10 @@ export class QuizPageComponent implements OnInit {
   searchText: string;
   searchSubject: string;
   quizData;
+
+  //GROUP 2
+  attempts: number[] =[]; 
+  getValues: any;
 
   constructor(
     private quizservice: QuizService,
@@ -40,6 +43,22 @@ export class QuizPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //GROUP 2 CHANGE
+    this.quizservice
+    .getUserScores(this.user.email)
+    .subscribe((res) => {
+        this.quizzesTaken = res;
+        console.log(this.quizzesTaken);
+        const map = this.quizzesTaken.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+        console.log(map.values());
+        console.log(map.keys()); 
+        console.log(this.attempts); 
+        for(let x of map.values()){
+          this.attempts.push(x);
+        }
+        console.log(this.attempts);
+    });
+    console.log(this.attempts);
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
       res.forEach((x) => {
         if (x.accTypeId == 2) {
@@ -67,14 +86,6 @@ export class QuizPageComponent implements OnInit {
     const reviewElement = document.getElementById("review" + quizId);
     if (reviewElement.classList.contains("hide")) {
       reviewElement.classList.remove("hide");
-
-      //make a request to get attempts for the quiz
-      this.quizservice.getAttemptsByQuizId(quizId, this.user.email).subscribe(
-        (data) => {
-          console.log(data);
-          this.attempts = data;
-        }
-      )
     } else {
       reviewElement.classList.add("hide");
     }
@@ -88,12 +99,4 @@ export class QuizPageComponent implements OnInit {
     )
   }
 
-  getAttemptAnswers(attemptId) {
-    //get answers by the attempt
-    this.quizservice.getAnswersByAttemptId(attemptId).subscribe(
-      (data) => (
-        this.answers = data //array of answers -create class (AnswersBank)
-      )
-    )
-  }
 }
