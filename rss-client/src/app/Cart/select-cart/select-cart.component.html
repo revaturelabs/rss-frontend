@@ -1,10 +1,8 @@
 <!-- <p *ngFor="let cart of userCarts">{{ cart.name }}</p> -->
 
 <div class="container main-container">
-
     <div class="row">
-        <div class="col-sm-2" style="border-right: 4px solid #474C55"></div>
-        <div class="col-sm-8">
+        <div class="col-12">
             <p class="card-text" *ngIf="currentUser.admin">Admin users cannot buy items.</p>
             <div class="container" *ngIf="!currentUser.admin">
                 <h1 class="text-center">{{currentUser.firstName | titlecase}}'s Carts</h1>
@@ -33,17 +31,17 @@
                                 <table class="table">
                                     <tr *ngFor="let cItem of cart.cartItems"
                                         class="d-flex justify-content-between align-items-end small-row">
-                                        <td class="align-bottom img-frame">
+                                        <td class="align-middle img-frame">
                                             <img class="img-small"
                                                 src="{{getProductById(cItem.productId) ? product.image : noProduct.image}}" />
                                         </td>
-                                        <td class="align-bottom">
+                                        <td class="align-middle">
                                             <b>{{product ? product.name : noProduct.name | titlecase}}</b>
                                         </td>
-                                        <td class="align-bottom">
+                                        <td class="align-middle">
                                             {{product ? product.unitPrice : noProduct.unitPrice}} Points
                                         </td>
-                                        <td class="align-bottom">x{{cItem.quantity}}</td>
+                                        <td class="align-middle">x{{cItem.quantity}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -52,6 +50,5 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-2" style="border-left: 4px solid #474C55"></div>
     </div>
 </div>

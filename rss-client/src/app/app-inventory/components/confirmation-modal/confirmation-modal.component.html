@@ -1,23 +1,20 @@
 <div *ngIf="product" class="modal-dialog modal-dialog-centered m-0" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title"><strong>{{title}} Confirmation</strong></h4>
+            <h4 class="modal-title" id="modal-basic-title"><strong>Delete Confirmation</strong></h4>
             <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body">
-            <h4 class="text-center mt-0 mb-0">Are you sure to delete the product
-                <strong>{{product.id}}</strong>?</h4>
-            <p class="text-danger text-center mb-1">This operation can not be undone</p>
-            <p class="mb-0"><strong>Name:</strong> {{product.name}}</p>
-            <p class="mb-0"><strong>Description:</strong> {{product.description}}</p>
-            <p class="mb-0"><strong>Quantity:</strong> {{product.quantity}}</p>
+        <div class="modal-body text-center">
+            <h4 class="mt-0">Are you sure to delete <strong>{{product.name}}</strong>?</h4>
+            <p class="mb-0">There are currently <strong>{{product.quantity}}</strong> left in stock.</p>
+            <p class="text-danger mb-1">This operation can not be undone!</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger"
+            <button type="button" class="btn btn-danger"
                 (click)="activeModal.dismiss('Cross click')">Cancel</button>
-            <button type="button" class="btn btn-outline-orange" (click)="delete()">Accept</button>
+            <button type="button" class="btn btn-primary" (click)="delete()">Accept</button>
         </div>
     </div>
 </div>
