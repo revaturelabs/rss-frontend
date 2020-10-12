@@ -13,6 +13,7 @@ import { SortableDirective } from '../app-inventory/directives/sortable.directiv
 import { DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { UserInventoryItemComponent } from './components/user-inventory-item/user-inventory-item.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AppRoutingModule } from '../app-routing.module';
     InventoryItemComponent,
     SortableDirective,
     ConfirmationModalComponent,
+    UserInventoryItemComponent,
   ],
   imports: [
     CommonModule,

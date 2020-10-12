@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h4 class="modal-title italic" id="modal-basic-title">{{product.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+    <form [formGroup]="updateProduct">
+        <div class="row">
+            <div class="col-12 col-md-6 mb-2">
+                <b>Name:</b> {{product.name}}
+            </div>
+            <div class="col-12 col-md-6 mb-2">
+                <b>Category:</b> {{product.category}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mb-2">
+                <b>Brand:</b> {{product.brand}}
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <b>Model:</b> {{product.model}}
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <b>Color:</b> {{product.color}}
+            </div>
+        </div>
+        <div class="mb-2">
+            <b>Description:</b> {{product.description}}
+        </div>
+        <div class="mb-2">
+            <img [src]="image.value" id="product-img" alt="product_img" class="rounded mx-auto d-block mt-4 mb-4">
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mb-2">
+                <b>Quantity:</b>
+                <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
+                <p class="text-danger text-sm" [hidden]="quantity.valid || quantity.pristine">
+                    <strong>Quantity</strong> is required
+                </p>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="negativeQ">
+                    <strong>Sorry!</strong> Try adding fewer items to your cart.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <b>Points: </b><span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">{{product.unitPrice}}</span>
+                <span *ngIf="product.discounted === true" style="color:#FF0000">{{product.discountedAmount | number}}% OFF!!!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-danger btn-block" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary btn-block" (click)="reduceInventory()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
