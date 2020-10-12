@@ -188,11 +188,6 @@ export class QuizService {
     return this.httpclient.get<any[]>(this.url+'/answer/'+id);
   }
 
-  //userId: User;
-  // accId: Account;
- // quizId: Quiz;
-  // userScoreId: number;
-
   //subtracting away attempts
   subtractAttempt(attempt) {
     this.quiz.quizAttempt = attempt;

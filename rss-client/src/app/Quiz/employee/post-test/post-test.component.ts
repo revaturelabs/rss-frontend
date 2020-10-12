@@ -22,13 +22,4 @@ export class PostTestComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
-  //quiz: Quiz;
-
-  //test this lol
-  // attempt() {
-  //   this.quizservice.subtractAttempt(this.quiz.quizAttempt);
-  // }
-  
-
 }
