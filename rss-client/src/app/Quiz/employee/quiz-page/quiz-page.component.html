@@ -16,12 +16,10 @@
             </p>
           </div>
           <div class="quizDetails">
-            <h6 class="text-white difficulty">{{quizdata.quizDifficulty | uppercase }}</h6>
-            <!-- <p class="text-center">{{ 3 - attempts[i] }} Attempts Remaining</p> -->
+            <h6 class="text-white difficulty">{{ quizdata.quizDifficulty | uppercase }}</h6>
             <div *ngIf="attempts[i] == undefined; then new else taken"></div>
-              <ng-template #taken><p class="text-center">{{ 3 - attempts[i] }} Attempts Remaining</p> </ng-template>
+              <ng-template #taken><p class="text-center">{{ 3 - attempts[i] }} Attempts Remaining</p></ng-template>
               <ng-template #new><p class="text-center">3 Attempts Remaining</p></ng-template>
-            
             <a class="btn btn-info button" routerLink="/quizzes/{{ quizdata.quizId }}">Details</a>
           </div> 
         </div>

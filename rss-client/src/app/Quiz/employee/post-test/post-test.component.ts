@@ -20,11 +20,4 @@ export class PostTestComponent implements OnInit {
   }
   constructor(public parentalunit: IndividualQuizPageComponent, public quizservice: QuizService) {}
   ngOnInit(): void {}
-
-  //quiz: Quiz;
-
-  //test this lol
-  // attempt() {
-  //   this.quizservice.subtractAttempt(this.quiz.quizAttempt);
-  // }
 }

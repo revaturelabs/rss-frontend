@@ -105,20 +105,10 @@ export class TestInProgressComponent implements OnInit {
       }
     }
 
-    //GROUP 2 CHANGE - ATTEMPT WITHOUT BACKEND
-    //TODO - ADD FUNCTION TO DISABLE BUTTON AT LAST ATTEMPT 
-    //TODO - MAKE SURE ATTEMPT IS DISPLAYED TO THE RIGHT QUIZ ID(RIGHT NOW IT ONLY REDUCED BY ORDER OF QUIZ FIRST TAKEN BUT WILL STILL NOT ALLOW MORE THAN 3 ATTEMPTS)
-    /*QUIZTAKEN
-      - retrieves the information about quiz taken from the backend of userquizscore - can use that to see the amount of time quizzes was taken (so technically is it being persisted to the database)
-      - use MAP to narrow down to the amount of times for a specific quiz - "attempts"
-      -  
-    */
     const map = theQuiz.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
-    console.log("Keys");
-    console.log([...map.keys()]);
-    console.log("Values");
-    console.log([...map.values()]);
     this.attempts = map.values().next().value;
+    // console.log([...map.keys()]);
+    // console.log([...map.values()]);
 
     if(this.attempts >= 3){
       var attempts = false;
@@ -127,7 +117,6 @@ export class TestInProgressComponent implements OnInit {
     }
 
     if(attempts){
-      console.log(map);  
       console.log(attempts);
       if (theOne == true) {
         this.quizservice.submitQuiz(answersArr).subscribe((res) => {
