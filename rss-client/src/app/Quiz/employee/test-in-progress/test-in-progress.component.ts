@@ -107,8 +107,6 @@ export class TestInProgressComponent implements OnInit {
 
     const map = theQuiz.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
     this.attempts = map.values().next().value;
-    // console.log([...map.keys()]);
-    // console.log([...map.values()]);
 
     if(this.attempts >= 3){
       var attempts = false;
