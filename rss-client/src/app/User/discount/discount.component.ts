@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
   selector: 'app-discount',
   templateUrl: './discount.component.html',
   styleUrls: ['./discount.component.scss']
-  
+
 })
 export class DiscountComponent implements OnInit {
 
