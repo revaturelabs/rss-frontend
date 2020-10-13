@@ -1,5 +1,4 @@
 import { HostListener, Component, OnInit } from '@angular/core';
-// temporary fake products
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 
 import { Router } from '@angular/router';
@@ -121,9 +120,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   updateQuantity(itemId: number) {
-
-    // let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
-
     let selectItem = this.activeCart.cartItems.find(item=>{
       return item.cartItemId === itemId;
     })
@@ -379,7 +375,5 @@ export class ShoppingCartComponent implements OnInit {
           }
       }
     }
-    
   }
-
 }
