@@ -1,7 +1,6 @@
 @import '../../../../styles';
 
 section{
-    display: flex;
     box-shadow: $shadow;
     height: $height;
     margin: 2rem 0;
@@ -70,14 +69,6 @@ section{
     width: 85%;
 }
 
-.small-text {
-    font-size: 11pt;
-}
-
-.skinny-row {
-    height: auto;
-    display: block;
-}
 
 .btn {
     background-color: #72A4C2;
