@@ -89,9 +89,9 @@ export class AccountService {
     return this.httpclient.post<any>(this.url + '/new', account);
   }
   updatePoints(account: Account): Observable<Account> {
-    return this.httpclient.post<any>(this.url + '/points/a', account);
+    return this.httpclient.put<any>(this.url + '/points/a', account);
   }
   setPoints(account: Account): Observable<Account> {
-    return this.httpclient.post<any>(this.url + '/points', account);
+    return this.httpclient.put<any>(this.url + '/points', account);
   }
 }
