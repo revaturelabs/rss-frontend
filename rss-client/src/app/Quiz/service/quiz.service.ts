@@ -27,7 +27,6 @@ export class QuizService {
     quizDescription: '',
     quizTotalPoints:0,
     quizDifficulty: '',
-    quizAttempt: 0,
     creatorEmail: '',
     subjectId: 0,
     subject: {
@@ -188,25 +187,7 @@ export class QuizService {
     return this.httpclient.get<any[]>(this.url+'/answer/'+id);
   }
 
-  //userId: User;
-  // accId: Account;
- // quizId: Quiz;
-  // userScoreId: number;
-
-  //subtracting away attempts
-  subtractAttempt(attempt) {
-    this.quiz.quizAttempt = attempt;
-    if(attempt > 0) {
-      --attempt;
-      this.updateQuizAttempt(this.quizSubmit.userScoreId);
-    } 
-    console.log("ATTEMPT: ", attempt);
-    return attempt;
-  }
-  //GROUP 2 - need updating method...user or account?
-  updateQuizAttempt(userScoreId): Observable<QuizSubmit> {
-    return this.httpclient.put<any>(this.url + '/userscore/quizzes', userScoreId);
-  }
+  
 
 }
 

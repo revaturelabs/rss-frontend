@@ -24,9 +24,7 @@ export class TestInProgressComponent implements OnInit {
   max;
   answers = {};
   quizzesTaken: any[] = [0];
-  //group 2 addition
-  quizAttempt: Quiz;
-  attempt: number;
+  attempts: number;
 
   isADirtyCheater: boolean;
 
@@ -104,7 +102,15 @@ export class TestInProgressComponent implements OnInit {
         break;
       }
     }
+    const map = theQuiz.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    this.attempts = map.values().next().value;
 
+    if(this.attempts >= 3){
+      var attempts = false;
+    } else{
+      attempts = true;
+    }
+    if (attempts) {
     if (theOne == true) {
       this.quizservice.submitQuiz(answersArr).subscribe((res) => {
         this.account.points = res.totalPoints;
@@ -126,6 +132,7 @@ export class TestInProgressComponent implements OnInit {
         });
       }
     }
+  }
     this.cheaterService.resetValidity()
   }
 
