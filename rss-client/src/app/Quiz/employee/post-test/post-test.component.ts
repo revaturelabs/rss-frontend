@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
+import { QuizService } from '../../service/quiz.service';
+import { Quiz } from '../../models/quiz';
 
 @Component({
   selector: 'post-test',
@@ -16,6 +18,8 @@ export class PostTestComponent implements OnInit {
   onBack() {
     //TODO: Navigate back to quiz summary page
   }
-  constructor(public parentalunit: IndividualQuizPageComponent) {}
-  ngOnInit(): void {}
+  constructor(public parentalunit: IndividualQuizPageComponent, public quizservice: QuizService) {}
+  ngOnInit(): void {
+    
+  }
 }

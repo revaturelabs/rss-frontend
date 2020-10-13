@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router'
 import { Product } from '../../models/product.model';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
