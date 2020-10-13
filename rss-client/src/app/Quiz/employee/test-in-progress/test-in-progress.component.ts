@@ -9,6 +9,7 @@ import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-
 import { CheaterService } from '../../service/cheater.service';
 import { Observer } from 'rxjs';
 import { Quiz } from '../../models/quiz';
+import { QuizSubmit } from '../../models/quizSubmit';
 
 
 @Component({
@@ -79,7 +80,6 @@ export class TestInProgressComponent implements OnInit {
 
   //Submits the form and
   onSubmit() {
-    console.log('in submit')
     //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
     let answersArr = [];
@@ -96,6 +96,7 @@ export class TestInProgressComponent implements OnInit {
     var theQuiz = this.quizzesTaken.filter((x) => {
       return x == this.config.quizId;
     });
+
     for (let i = 0; i < theQuiz.length; i++) {
       if (theQuiz[i] == this.config.quizId) {
         var theOne = true;
@@ -110,29 +111,31 @@ export class TestInProgressComponent implements OnInit {
     } else{
       attempts = true;
     }
-    if (attempts) {
-    if (theOne == true) {
-      this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-        this.account.points = res.totalPoints;
-        this.parentaluntil.results = res;
-        this.parentaluntil.results.totalPoints = 0;
-      });
-    } else {
-      if (this.isADirtyCheater) {
-        this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-          this.parentaluntil.results = res;
-          this.parentaluntil.results.totalPoints = 0;
-        });
-      } else {
+
+    if(attempts){
+      console.log(attempts);
+      if (theOne == true) {
         this.quizservice.submitQuiz(answersArr).subscribe((res) => {
           this.account.points = res.totalPoints;
           this.parentaluntil.results = res;
-          this.accountservice.updatePoints(this.account).subscribe();
+          this.parentaluntil.results.totalPoints = 0;
           
         });
+      } else {
+        if (this.isADirtyCheater) {
+          this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+            this.parentaluntil.results = res;
+            this.parentaluntil.results.totalPoints = 0;
+          });
+        } else {
+          this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+            this.account.points = res.totalPoints;
+            this.parentaluntil.results = res;
+            this.accountservice.updatePoints(this.account).subscribe();
+          });
+        }
       }
-    }
-  }
+    } else{alert("cannot do another attempt")}
     this.cheaterService.resetValidity()
   }
 

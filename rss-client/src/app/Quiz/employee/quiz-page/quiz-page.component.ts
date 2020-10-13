@@ -21,8 +21,7 @@ import { Questions } from '../../models/questions';
 export class QuizPageComponent implements OnInit {
   evalAccount: Account;
   user: User = this.userservice.userPersistance();
-  quizzesTaken: any[] = [0];
-  attempts: QuizSubmit[];
+  quizzesTaken: any[] = [];
   questions: Questions[] = [];
   answers: any[];
 
@@ -30,7 +29,9 @@ export class QuizPageComponent implements OnInit {
   searchText: string;
   searchSubject: string;
   quizData;
-
+  attempts: number[] =[]; 
+  attempts2: QuizSubmit[];
+  getValues: any;
 
   constructor(
     private quizservice: QuizService,
@@ -41,6 +42,15 @@ export class QuizPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.quizservice
+    .getUserScores(this.user.email)
+    .subscribe((res) => {
+        this.quizzesTaken = res;
+        const map = this.quizzesTaken.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+        for(let x of map.values()){
+          this.attempts.push(x);
+        }
+    });
     this.accountService.getAccountByUserId(this.user).subscribe((res) => {
       res.forEach((x) => {
         if (x.accTypeId == 2) {
@@ -86,7 +96,7 @@ export class QuizPageComponent implements OnInit {
       this.quizservice.getAttemptsByQuizId(quizId, this.user.email).subscribe(
         (data) => {
           console.log(data);
-          this.attempts = data;
+          this.attempts2 = data;
         }
       )
     }

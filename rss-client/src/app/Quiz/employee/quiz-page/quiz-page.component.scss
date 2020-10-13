@@ -1,3 +1,68 @@
+@import '../../../../styles';
+
+section{
+    display: flex;
+    box-shadow: $shadow;
+    height: $height;
+    margin: 2rem 0;
+    
+    img{
+        width: $width;
+        height: $height;
+        object-fit: cover;
+    }
+
+    .quizInfo{
+        border-bottom: $border;
+        width: 100%;
+        padding: 1rem 2rem 0;
+    }
+    .quizDetails{
+        width: 100%;
+        display: flex;
+        justify-content:space-between;
+        align-content: center;
+        flex-direction: row;
+        padding: 1rem 2rem 0;
+
+        .button{
+            padding: 0.5rem;
+        }
+        
+        .difficulty{
+            padding: 0.25rem 1rem;
+            font-size: small;
+            background-color: $warning;
+            border-radius: 2px;
+        }
+    }
+}
+
+.btn {
+    background-color: #72A4C2;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    float: right;
+}
+
+.panel-title {
+    font-weight: bold;
+}
+
+.row-1 {
+    height: auto;
+}
+
+.row-2 {
+    margin: 0.5rem;
+}
+
+.row-1 img {
+    height:auto;
+    width: 95%;
+}
+
 .quiz {
     box-shadow: 0 0 10px 5px rgba(0,0,0,0.25);
     border-radius: 5px;
@@ -5,8 +70,11 @@
     width: 85%;
 }
 
-.quiz img {
-    width: 350px;
+.small-text {
+    font-size: 11pt;
+}
+
+.skinny-row {
     height: auto;
     display: block;
 }

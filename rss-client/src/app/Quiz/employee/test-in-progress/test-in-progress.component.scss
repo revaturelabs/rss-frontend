@@ -1,14 +1,49 @@
+@import '../../../../styles';
+
 .submit {
-    background-color: #f26925;
+    background-color: $primary;
     color: #fff;
 }
 
-.blue {
-    background-color: #72A4C2;
-    color: #fff;
+.blue{
+    background-color: $info;
+    color: white;
 }
 
-aside {
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+.details-box {
+    box-shadow: $shadow;
+    border-radius: $radius;
+    //height: 300px;
+
+    .details{
+        padding: 1rem 1rem 0;
+        border-bottom: $border;
+    }
+
+    .answer {
+        background-color: $primary;
+        border: 1px solid $primary;
+    }
+
+    .answered {
+        color: $primary;
+        margin-right: 1rem;
+    }
+
+    .unanswered {
+        color: $dark;
+        margin-right: 1rem;
+    }
+}
+
+.fa-question{
+    background-color: $primary;
+    padding: 0.75rem 1rem;
+    color: white;
+    margin-right: 0.5rem;
+}
+
+.question{
+    font-size: x-large;
+    color: $info;
 }
