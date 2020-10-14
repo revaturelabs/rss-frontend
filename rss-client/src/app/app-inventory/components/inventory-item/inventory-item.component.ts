@@ -197,14 +197,11 @@ export class InventoryItemComponent implements OnInit {
 		} else {
 			alert("Update Invalid.");
 		}
+
 	}
 
 	deleteItem(product: Product) {
 		const modalRef = this.modalService.open(ConfirmationModalComponent);
 		modalRef.componentInstance.product = product;
-	}
-
-	receiveDelete($event) {
-		this.deleteItem($event);
 	}
 }

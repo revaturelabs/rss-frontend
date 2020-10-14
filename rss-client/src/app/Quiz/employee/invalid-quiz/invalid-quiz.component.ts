@@ -15,12 +15,8 @@ export class InvalidQuizComponent implements OnInit {
   
   ngOnInit(): void {
     this.cheaterService.invalidated.subscribe(e => {
-      
     })
   }
-
-  
-
 }
 
 @Component({

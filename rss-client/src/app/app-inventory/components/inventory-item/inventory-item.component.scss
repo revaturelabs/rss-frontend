@@ -1,13 +1,13 @@
-#product-img {
-    width: 250px;
-    object-fit: contain;
+.btn-outline-orange{
+    color: #F26925 !important;
+    border-color: #F26925 !important;
 }
-
-.modal-footer {
-    display: block !important;
+.btn-outline-orange:hover{
+    color: #fff !important;
+    background-color: #F26925 !important;
+    border-color: #F26925 !important;
 }
-
-label {
-    font-weight: bold;
-    margin-bottom: 3px !important;
+.text-sm{
+    font-size: 12px;
+    margin-top: 3px;
 }

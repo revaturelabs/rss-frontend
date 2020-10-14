@@ -8,6 +8,7 @@ import { AppComponent } from 'src/app/app.component';
 import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-quiz-page.component';
 import { CheaterService } from '../../service/cheater.service';
 import { Observer } from 'rxjs';
+import { Quiz } from '../../models/quiz';
 
 
 @Component({
@@ -23,6 +24,9 @@ export class TestInProgressComponent implements OnInit {
   max;
   answers = {};
   quizzesTaken: any[] = [0];
+  //group 2 addition
+  quizAttempt: Quiz;
+  attempt: number;
 
   isADirtyCheater: boolean;
 
@@ -38,6 +42,37 @@ export class TestInProgressComponent implements OnInit {
     this.cheaterService.invalidated.subscribe(e => {
       this.isADirtyCheater = e
     })
+  }
+  
+  accId;
+  account = {
+    accId: 0,
+    userId: 0,
+    accTypeId: 0,
+    points: 0,
+  };
+  //sets up answer form and test layout
+  ngOnInit(): void {
+    this.index = 0;
+    this.max = this.config.questions.length - 1;
+    this.accountservice
+      .getAllUserAccounts(this.userService.userPersistance().userId)
+      .subscribe((res1) =>
+        res1.forEach((x) => {
+          if (x.accTypeId == 2) {
+            this.account = x;
+          }
+        })
+      );
+    this.quizservice
+      .getUserScores(this.userService.userPersistance().email)
+      .subscribe((res) => {
+        if (res.length == 0) {
+          this.quizzesTaken.push(0);
+        } else {
+          this.quizzesTaken = res;
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -56,7 +91,7 @@ export class TestInProgressComponent implements OnInit {
         selectedAnswer: value,
         userEmail: this.userService.userPersistance().email,
         userId: this.userService.userPersistance().userId,
-        quizId: this.config.quizId,
+        quizId: this.config.quizId
       };
       answersArr.push(obj);
     }
@@ -169,34 +204,4 @@ export class TestInProgressComponent implements OnInit {
     }
   }
 
-  accId;
-  account = {
-    accId: 0,
-    userId: 0,
-    accTypeId: 0,
-    points: 0,
-  };
-  //sets up answer form and test layout
-  ngOnInit(): void {
-    this.index = 0;
-    this.max = this.config.questions.length - 1;
-    this.accountservice
-      .getAllUserAccounts(this.userService.userPersistance().userId)
-      .subscribe((res1) =>
-        res1.forEach((x) => {
-          if (x.accTypeId == 2) {
-            this.account = x;
-          }
-        })
-      );
-    this.quizservice
-      .getUserScores(this.userService.userPersistance().email)
-      .subscribe((res) => {
-        if (res.length == 0) {
-          this.quizzesTaken.push(0);
-        } else {
-          this.quizzesTaken = res;
-        }
-      });
-  }
 }

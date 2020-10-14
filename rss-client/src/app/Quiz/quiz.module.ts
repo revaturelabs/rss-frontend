@@ -53,7 +53,7 @@ import { QuizService } from './service/quiz.service';
     NgbModule,
     NgbModalModule,
     HttpClientModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers:[
     CheaterService,

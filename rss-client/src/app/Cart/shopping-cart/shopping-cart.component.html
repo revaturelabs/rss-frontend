@@ -41,6 +41,11 @@
                                             </div>
                                         </div>
                                     </tr>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
                                 </tbody>
                             </table>
                         </ng-container>
@@ -62,12 +67,23 @@
                                         <span>Qty: <input style = "width:50px" [(ngModel)] = "cItem.quantity" type = "number" (change) = "updateQuantity(cItem.cartItemId)"></span>
                                        <br/>
                                        <span *ngIf="product.discounted">Discounted Price: {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}} Points</span>
+<<<<<<< HEAD
 
                                     </td>
                                     <td class="align-middle text-center">
                                         <h4 [ngStyle]="{'text-decoration':product.discounted? 'line-through':'null'}">{{product.unitPrice}} Points</h4>
                                        <button type = "button" class = "btn-danger btn" (click)="deleteItem(cItem)">Delete</button>
+=======
+
                                     </td>
+                                    <td class="align-middle text-center">
+                                        <h4 [ngStyle]="{'text-decoration':product.discounted? 'line-through':'null'}">{{product.unitPrice}} Points</h4>
+                                       <button type = "button" class = "btn-danger btn" (click)="deleteItem(cItem)">Delete</button>
+
+>>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
+                                    </td>
+
+                                   
                                 </tr>
                             </tbody>
                         </table>
@@ -78,6 +94,26 @@
             <!-- Checkout, on the right or underneath, with small item summary -->
             <div class="col-md-4 col-sm-12">
                 <div class="container">
+<<<<<<< HEAD
+=======
+
+                    <!-- <div class="row">
+                        <table class="table" *ngIf="activeCart">
+
+                            <tr *ngFor="let cItem of activeCart.cartItems" class="d-flex justify-content-between align-items-end small-row">
+                                <td class="align-bottom img-frame">
+                                    <img class="img-small" src="{{getProductById(cItem.productId).image}}" />
+                                </td>
+                                <td class="align-bottom"><b>{{product.name}}</b></td>
+                                <td class="align-bottom" [ngStyle]="{'text-decoration':product.discounted == true?'line-through':'null'}">{{product.unitPrice}} Points</td>
+                                <td class="align-bottom" *ngIf="product.discounted">{{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}} Points</td>
+
+                            </tr>
+                        </table>
+                    </div> -->
+
+
+>>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
                     <div class="row card d-flex checkout-box">
                         <div class="card-title cart-total text-center">
                             <h2>Order Summary</h2>
@@ -98,6 +134,7 @@
                         </div>
 
                         <div class="container">
+
                             <button class="btn btn-secondary btn-lg btn-block" href="#pointSource" data-toggle="collapse">
                                 Pick Points
                             </button>
@@ -120,6 +157,12 @@
                                 Need {{displayTotalPoints}} Total Points</button>
                             </div>
                             <div>
+<<<<<<< HEAD
+=======
+                                <!-- <button class="btn btn-block btn-outline-success" href="#savingcart" data-toggle="collapse">
+                                Save For Later
+                            </button> -->
+>>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
                                 <div class="collapse points-div" id="savingcart">
                                     <div class="card d-flex flex-column" id="pointsCard" *ngIf="activeCart">
                                         <h4 class="card-text">Name your cart to save it for later!</h4>
@@ -131,6 +174,14 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
+=======
+                            <div>
+                                <!-- <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete
+                                Cart</button> -->
+
+                            </div>
+>>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
                         </div>
                     </div>
                 </div>

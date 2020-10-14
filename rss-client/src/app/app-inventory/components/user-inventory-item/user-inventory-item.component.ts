@@ -104,7 +104,7 @@ export class UserInventoryItemComponent implements OnInit {
 				}
 			}
 			if (existingCartItem) {
-				// udpate the cart item if there's one to update
+				// update the cart item if there's one to update
 				if (this.activeCart.cartId == 0) {
 					sessionStorage.setItem('defaultcart', JSON.stringify(this.activeCart));
 					sessionStorage.setItem('myactivecart', JSON.stringify(this.activeCart));

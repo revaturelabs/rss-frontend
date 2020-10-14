@@ -33,7 +33,11 @@
             <img [src]="image.value" id="product-img" alt="product_img" class="rounded mx-auto d-block mt-4 mb-4">
         </div>
         <div class="row">
+<<<<<<< HEAD
             <div class="col-12 col-md-6 mb-2">
+=======
+            <div class="col-12 col-md-4 mb-2">
+>>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
                 <b>Quantity:</b>
                 <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" formControlName="quantity" required min="0" pattern="([0-9]+)">
                 <p class="text-danger text-sm" [hidden]="quantity.valid || quantity.pristine">
@@ -46,9 +50,15 @@
 					</button>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="col-12 col-md-6 mb-2">
                 <b>Points: </b><span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">{{product.unitPrice}}</span>
                 <span *ngIf="product.discounted === true" style="color:#FF0000"> {{product.discountedAmount | number}}% OFF!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
+=======
+            <div class="col-12 col-md-4 mb-2">
+                <b>Points: </b><span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">{{product.unitPrice}}</span>
+                <span *ngIf="product.discounted === true" style="color:#FF0000">{{product.discountedAmount | number}}% OFF!!!!! {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
+>>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
             </div>
         </div>
         <div class="modal-footer">
