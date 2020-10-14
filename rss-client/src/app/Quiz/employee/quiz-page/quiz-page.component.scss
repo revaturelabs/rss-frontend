@@ -31,7 +31,7 @@ section{
         .difficulty{
             padding: 0.25rem 1rem;
             font-size: small;
-            background-color: $warning;
+            background-color: $warning !important; 
             border-radius: 2px;
         }
     }

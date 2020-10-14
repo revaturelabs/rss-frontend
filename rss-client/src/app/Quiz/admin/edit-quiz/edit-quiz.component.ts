@@ -73,9 +73,7 @@ export class EditQuizComponent implements OnInit {
  * add the questions from that quiz to the add many questions service method
 * */
   submitChanges() {
-    //Group 2 Change
     //make sure the points that are being submitted match to the total points
-    // this.focusedQuiz.quizTotalPoints = this.focusedQuiz.quizTotalPoints; this works too.
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {console.log(this.quizData.quizTotalPoints);
@@ -163,7 +161,6 @@ export class EditQuizComponent implements OnInit {
             // updates the total points available in this quiz
             this.updateTotal();
             this.validate();
-            //Group 2 change
             // sets quizTotalPoints to availablePoints (which is all the added questions points added together)
             this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
           } else if (result.type == 'delete') {
@@ -173,7 +170,6 @@ export class EditQuizComponent implements OnInit {
             );
             this.updateTotal();
             this.validate();
-            //Group 2 change
             // sets quizTotalPoints to self 
             //subtracting the point value of the question that is being deleted
             this.focusedQuiz.quizTotalPoints = this.focusedQuiz.quizTotalPoints  - result.value.questionValue;

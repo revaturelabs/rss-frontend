@@ -1,6 +1,5 @@
 <div class="text-center">
 <p>You have scored</p>
-  <!--Group 2 change Percentage earned from attempt TODO: adding a quote with ngIf for pass and fail -->
   <div *ngIf="parentalunit.results.correctAnswers / parentalunit.results.totalQuestions > 0.7; then passed else failed"></div>
   <ng-template #passed>
     <div class="pass rounded-circle" >

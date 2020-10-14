@@ -78,9 +78,8 @@ export class TestInProgressComponent implements OnInit {
     this.cheaterService.resetValidity()
   }
 
-  //Submits the form and
+  //Submits the form 
   onSubmit() {
-    //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
     let answersArr = [];
     for (let [key, value] of Object.entries(this.answers)) {
@@ -113,7 +112,6 @@ export class TestInProgressComponent implements OnInit {
     }
 
     if(attempts){
-      console.log(attempts);
       if (theOne == true) {
         this.quizservice.submitQuiz(answersArr).subscribe((res) => {
           this.account.points = res.totalPoints;

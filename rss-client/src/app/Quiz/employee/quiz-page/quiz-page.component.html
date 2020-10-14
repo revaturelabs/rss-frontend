@@ -5,7 +5,7 @@
         placeholder="Type in the topic..." />
     </div>
 
-    <div class="quiz" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText">
+    <div class="quiz" *ngFor="let quizdata of quizData | filter: 'quizTopic':searchText; let i = index">
       <div class="row row-1 align-items-center">
         <div class="col-5">
           <img src="assets/Images/orangeQuizLogoCrop.jpg">
@@ -24,20 +24,21 @@
             <div class="col-4">
               <b>Points: </b>{{quizdata.quizTotalPoints}}
             </div>
-            <div class="col-4">
-              <strong><em>Difficulty: </em></strong>{{quizdata.quizDifficulty}}
-            </div>
-            <div class="col-5">
-              <span>{{quizdata.quizAttempt}}</span>&nbsp;attempt(s) remaining
+            <div class="quizDetails">
+              <h6 class="difficulty">{{quizdata.quizDifficulty | uppercase }}</h6>
+              <div *ngIf="attempts[i] == undefined; then new else taken"></div>
+              <ng-template #taken>
+                <p class="text-center">{{ 3 - attempts[i] }} Attempts Remaining</p>
+              </ng-template>
+              <ng-template #new>
+                <p class="text-center">3 Attempts Remaining</p>
+              </ng-template>
             </div>
             <a class="btn" id="detailsBtn" routerLink="/quizzes/{{ quizdata.quizId }}">Enter</a>
           </div>
-          <!-- show only if the quiz has been taken at least once -->
-          <!-- add *ngIf="attempts" -->
           <div>
             <div class="row align-items-center row-2">
               <div class="col-9">
-                <!-- <span class="panel-title">Recent Score:&nbsp;</span><span>attempts[-1].userScore%</span> -->
               </div>
               <button class="btn" (click)="showReview(quizdata.quizId)">Review</button>
             </div>

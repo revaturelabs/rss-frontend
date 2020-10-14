@@ -75,7 +75,6 @@ export class QuizService {
         subjectName: '',
       },
     },
-    //Group 1 change (Oct.6)
     status: '',
     answers: []
   };
