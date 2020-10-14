@@ -1,0 +1,30 @@
+@import '../../../../styles';
+
+section{
+    display: flex;
+    box-shadow: $shadow;
+    position: relative;
+    height: 200px;
+    margin: 1.5rem 0;
+    
+    div{
+        padding: 1rem 1.75rem;
+    }
+    
+    p{
+        padding-bottom: 0.5rem;
+    }
+
+    img{
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .button{
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        padding: 0.5rem;
+    }
+}

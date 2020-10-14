@@ -19,7 +19,5 @@ export class PostTestComponent implements OnInit {
     //TODO: Navigate back to quiz summary page
   }
   constructor(public parentalunit: IndividualQuizPageComponent, public quizservice: QuizService) {}
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 }

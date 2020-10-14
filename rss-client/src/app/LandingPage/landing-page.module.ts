@@ -33,4 +33,3 @@ import { reducer } from 'src/app/LandingPage/Auth/reducers/user.reducer';
   ]
 })
 export class LandingPageModule { }
-

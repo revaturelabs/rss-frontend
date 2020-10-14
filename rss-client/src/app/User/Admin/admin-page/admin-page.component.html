@@ -8,63 +8,35 @@
         </ng-template>
         <ng-template [ngSwitchCase]="'inventory'">
             <admin-inventory (navigateEvent)="navigateTo($event)"></admin-inventory>
-    </ng-template>
-    <!--default case when there are no matches -->
+        </ng-template>
+        <!--default case when there are no matches -->
     <ng-template [ngSwitchDefault]>
-    <!-- <div class="container">
-      <!- quizzes 
-      <div class="border container">
-        <button (click)="navigateTo('quiz')">go here</button>
-        some info about admin quiz stuff
-      </div>
-
-      <!- inventory 
-      <div class="border container">
-        <button (click)="navigateTo('inventory')">go here</button>
-        some info about admin inventory stuff
-      </div>
-    </div>
-  </ng-template>
-</div> -->
-
-      <div class="row justify-content-center">
-        <div class="col-4">
-          <div class="card" style="width: 18rem;">
-            <img
-              class="card-img-top"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGOq8zcxHug0hBzXDNHOyUGQB9FJOHZsFiWw&usqp=CAU"
-              alt="Quiz card image"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Quizzes</h5>
-              <p class="card-text">
-                Here you can create new quizzes or edit existing ones.
-              </p>
-              <button class="btn btn-primary" (click)="navigateTo('quiz')">
-                Quizzes
-              </button>
-            </div>
-          </div>
+        <div class="row justify-content-center">
+            <section>
+                <img src="assets/Images/quizzes.jpg" alt="Quiz card image" />
+                <div>
+                    <h1>Quizzes</h1>
+                    <p>Here you can create new quizzes or edit existing ones.</p>
+                </div>
+                <a class="btn btn-info button" (click)="navigateTo('quiz')"> Quizzes</a>
+            </section>
+            <section>
+                <img src="assets/Images/inventory.jpg" alt="Inventory card image" />
+                <div>
+                    <h1>Inventory</h1>
+                    <p>Here you can manage Swagg Shop product inventory</p>                           
+                </div>
+                <a class="btn btn-info button" routerLink="/inventory">Inventory</a>
+            </section>
+            <section>
+                <img src="assets/Images/discount.jpg" alt="discount_image">
+                <div>
+                    <h1>Discounts</h1>
+                    <p>Here you can create new discounts or edit existing ones.</p>   
+                </div>
+                <a class="btn btn-info button" routerLink="/discounts">Discounts</a>
+            </section>
         </div>
-        <div class="col-4">
-          <div class="card" style="width: 18rem;">
-            <img
-              class="card-img-top"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhzeyvx6pAutBvjbdmTnzuRK9K6cDFyHqHNQ&usqp=CAU"
-              alt="Inventory card image"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Inventory</h5>
-              <p class="card-text">
-                Here you can manage Swagg Shop product inventory
-              </p>
-              <button class="btn btn-primary" routerLink="/inventory">
-                Inventory
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </ng-template>
   </div>
 </div>

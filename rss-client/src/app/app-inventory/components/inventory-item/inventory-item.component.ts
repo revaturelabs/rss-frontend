@@ -220,17 +220,6 @@ export class InventoryItemComponent implements OnInit {
 
 	}
 
-
-	private getDismissReason(reason: any): string {
-		if (reason === ModalDismissReasons.ESC) {
-			return 'by pressing ESC';
-		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-			return 'by clicking on a backdrop';
-		} else {
-			return `with: ${reason}`;
-		}
-	}
-
 	deleteItem(product: Product) {
 		const modalRef = this.modalService.open(ConfirmationModalComponent);
 		modalRef.componentInstance.product = product;
