@@ -50,7 +50,7 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     this.currentUser = this.userService.getCurrentUser();
 
     // set the default cart to be selected
-    // console.log(this.cartService.isCartSelected());
+    
 
     if (sessionStorage.getItem('activecartId')) {
       this.activeCartId = JSON.parse(sessionStorage.getItem('activecartId'));
@@ -89,7 +89,7 @@ export class SelectCartComponent implements OnInit, OnDestroy {
   }
 
   setActiveCart(cart: Cart) {
-    //   
+       
     this.cartService.setActiveCart(cart);
     // active cart id is determined by which you click on to send the id forward
     this.activeCartId = cart.cartId;

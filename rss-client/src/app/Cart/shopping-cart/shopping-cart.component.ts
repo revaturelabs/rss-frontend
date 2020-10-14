@@ -58,7 +58,7 @@ export class ShoppingCartComponent implements OnInit {
   ) {
     this.currentUser = this.userService.userPersistance();
 
-    console.log(this.currentUser);
+    
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
     if (actCartId) {

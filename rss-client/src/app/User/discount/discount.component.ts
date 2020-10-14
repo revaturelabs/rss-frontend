@@ -47,10 +47,7 @@ export class DiscountComponent implements OnInit {
       this.user = result;
     })
     this.success()
-    //ui ux team
-    // please tell the admin that they have successfully
-    // updated the discount
-
+    
   }
 
   success() {
@@ -71,16 +68,10 @@ export class DiscountComponent implements OnInit {
 	addToCart(product) {
 		console.log("addToCart() called.");
 		console.log(product);
-		// TODO: ADD TO CART, SOMEHOW
+		
 	}
 
-	// receiveUpdate($event) {
-	// 	this.updateItem($event);
-	// }
 
-	// receiveDelete($event) {
-	// 	this.deleteItem($event);
-	// }
 
 	ngAfterViewInit() {
 		setTimeout(() => {
