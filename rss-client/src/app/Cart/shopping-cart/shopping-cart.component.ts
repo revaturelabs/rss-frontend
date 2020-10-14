@@ -124,21 +124,7 @@ export class ShoppingCartComponent implements OnInit {
       return item.cartItemId === itemId;
     })
 
-<<<<<<< HEAD
-    console.log(selectItem);
     if (selectItem.quantity > 0) {
-
-=======
-    // let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
-
-    let selectItem = this.activeCart.cartItems.find(item=>{
-      return item.cartItemId === itemId;
-    })
-
-    console.log(selectItem);
-    if (selectItem.quantity > 0) {
-
->>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
       let ciToUpdate;
       let emptyCartCopy: Cart = {
         cartId: this.activeCart.cartId,

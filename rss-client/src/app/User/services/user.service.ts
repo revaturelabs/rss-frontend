@@ -32,14 +32,6 @@ export class UserService{
     @Inject(SESSION_STORAGE) private storage: WebStorageService
   ) {
     this.user = JSON.parse(sessionStorage.getItem(STORAGE_KEY));
-<<<<<<< HEAD
-
-    // if(!this.user){
-    //   router.navigate(['login'])
-    // }
-    // console.log(window.location.host);
-=======
->>>>>>> f24bf39f991933a29eb4cdadb922c347abf9b5e8
   }
 
   httpOptions = {
