@@ -9,6 +9,7 @@ import { IndividualQuizPageComponent } from '../individual-quiz-page/individual-
 import { CheaterService } from '../../service/cheater.service';
 import { Observer } from 'rxjs';
 import { Quiz } from '../../models/quiz';
+import { QuizSubmit } from '../../models/quizSubmit';
 
 
 @Component({
@@ -24,9 +25,7 @@ export class TestInProgressComponent implements OnInit {
   max;
   answers = {};
   quizzesTaken: any[] = [0];
-  //group 2 addition
-  quizAttempt: Quiz;
-  attempt: number;
+  attempts: number;
 
   isADirtyCheater: boolean;
 
@@ -79,10 +78,8 @@ export class TestInProgressComponent implements OnInit {
     this.cheaterService.resetValidity()
   }
 
-  //Submits the form and
+  //Submits the form 
   onSubmit() {
-    console.log('in submit')
-    //TODO:finish submitting the quiz
     this.pushProgress.emit('post-test');
     let answersArr = [];
     for (let [key, value] of Object.entries(this.answers)) {
@@ -98,33 +95,45 @@ export class TestInProgressComponent implements OnInit {
     var theQuiz = this.quizzesTaken.filter((x) => {
       return x == this.config.quizId;
     });
+
     for (let i = 0; i < theQuiz.length; i++) {
       if (theQuiz[i] == this.config.quizId) {
         var theOne = true;
         break;
       }
     }
+    const map = theQuiz.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    this.attempts = map.values().next().value;
 
-    if (theOne == true) {
-      this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-        this.account.points = res.totalPoints;
-        this.parentaluntil.results = res;
-        this.parentaluntil.results.totalPoints = 0;
-      });
-    } else {
-      if (this.isADirtyCheater) {
-        this.quizservice.submitQuiz(answersArr).subscribe((res) => {
-          this.parentaluntil.results = res;
-          this.parentaluntil.results.totalPoints = 0;
-        });
-      } else {
+    if(this.attempts >= 3){
+      var attempts = false;
+    } else{
+      attempts = true;
+    }
+
+    if(attempts){
+      if (theOne == true) {
         this.quizservice.submitQuiz(answersArr).subscribe((res) => {
           this.account.points = res.totalPoints;
           this.parentaluntil.results = res;
-          this.accountservice.updatePoints(this.account).subscribe();
+          this.parentaluntil.results.totalPoints = 0;
+          
         });
+      } else {
+        if (this.isADirtyCheater) {
+          this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+            this.parentaluntil.results = res;
+            this.parentaluntil.results.totalPoints = 0;
+          });
+        } else {
+          this.quizservice.submitQuiz(answersArr).subscribe((res) => {
+            this.account.points = res.totalPoints;
+            this.parentaluntil.results = res;
+            this.accountservice.updatePoints(this.account).subscribe();
+          });
+        }
       }
-    }
+    } else{alert("cannot do another attempt")}
     this.cheaterService.resetValidity()
   }
 

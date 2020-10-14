@@ -14,9 +14,8 @@ export class InvalidQuizComponent implements OnInit {
   constructor(public dialog: NgbModal, private cheaterService: CheaterService) {}
   
   ngOnInit(): void {
-    this.cheaterService.invalidated.subscribe(e => {
-    })
   }
+
 }
 
 @Component({

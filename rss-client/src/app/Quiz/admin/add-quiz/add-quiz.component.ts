@@ -94,13 +94,8 @@ export class AddQuizComponent implements OnInit {
 * add the questions from that quiz to the add many questions service method
 * */
   submitChanges() {
-    //TODO: save focused quiz to the database
-    //Group 2 change --> the real winner and what we need to change
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
-    //this.focusedQuiz.quizTotalPoints = Number(sessionStorage.getItem('points'));
-    this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
-    //This will set the amount of attempts for the quiz.
-    this.focusedQuiz.quizAttempt = 3; 
+    this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId; 
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
       this.focusedQuiz.quizId = res.quizId;
       this.focusedQuiz.questions.forEach((x) => {
@@ -146,8 +141,6 @@ export class AddQuizComponent implements OnInit {
         (result) => {
           // when modal is manually closed, it sends a type and value.
           if (result.type == 'update') {
-            // Addstuff here to change what each question contains
-            
             let newQuestion = {
               questionId: this.focusedQuestion.questionId,
               question: result.value.question,
@@ -179,7 +172,6 @@ export class AddQuizComponent implements OnInit {
             // updates the total points available in this quiz
             this.updateTotal();
             this.validate();
-            //group 2 change
             // sets quizTotalPoints to availablePoints (which is all the added questions points added together)
             this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
           } else if (result.type == 'delete') {
@@ -188,7 +180,6 @@ export class AddQuizComponent implements OnInit {
             );
             this.updateTotal();
             this.validate();
-            //Group 2 change
             // sets quizTotalPoints to self 
             //subtracting the point value of the question that is being deleted
             this.focusedQuiz.quizTotalPoints = this.focusedQuiz.quizTotalPoints - result.value.questionValue;

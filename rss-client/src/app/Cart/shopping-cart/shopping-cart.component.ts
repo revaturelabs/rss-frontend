@@ -58,6 +58,7 @@ export class ShoppingCartComponent implements OnInit {
   ) {
     this.currentUser = this.userService.userPersistance();
 
+    console.log(this.currentUser);
 
     let actCartId: number = JSON.parse(sessionStorage.getItem('activecartId'));
     if (actCartId) {
@@ -353,8 +354,6 @@ export class ShoppingCartComponent implements OnInit {
 
   // Do in the near future. Show product details when clicking image.
   productDetails(id: number): any {
-    // ask max for url to product details
-
     // let detailsURL: string = "http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/product/" + id;
 
     // console.log(id);
