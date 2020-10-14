@@ -113,7 +113,6 @@ export class TestInProgressComponent implements OnInit {
     }
 
     if(attempts){
-      console.log(attempts);
       if (theOne == true) {
         this.quizservice.submitQuiz(answersArr).subscribe((res) => {
           this.account.points = res.totalPoints;
