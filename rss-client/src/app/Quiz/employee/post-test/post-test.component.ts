@@ -16,7 +16,7 @@ export class PostTestComponent implements OnInit {
     this.pushProgress.emit('pre-test');
   }
   onBack() {
-    //TODO: Navigate back to quiz summary page
+    
   }
   constructor(public parentalunit: IndividualQuizPageComponent, public quizservice: QuizService) {}
   ngOnInit(): void {}
