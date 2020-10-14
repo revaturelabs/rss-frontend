@@ -186,8 +186,6 @@ export class QuizService {
   getAnswersByAttemptId(id) {
     return this.httpclient.get<any[]>(this.url+'/answer/'+id);
   }
-
   
-
 }
 
