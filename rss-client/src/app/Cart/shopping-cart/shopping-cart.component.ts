@@ -1,5 +1,4 @@
 import { HostListener, Component, OnInit } from '@angular/core';
-// temporary fake products
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 
 import { Router } from '@angular/router';
@@ -122,16 +121,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   updateQuantity(itemId: number) {
-
-    // let newQuantity = parseInt((<HTMLInputElement>document.getElementById(`quantity-${itemId}`)).value);
-
     let selectItem = this.activeCart.cartItems.find(item=>{
       return item.cartItemId === itemId;
     })
 
-    console.log(selectItem);
     if (selectItem.quantity > 0) {
-
       let ciToUpdate;
       let emptyCartCopy: Cart = {
         cartId: this.activeCart.cartId,
@@ -360,8 +354,6 @@ export class ShoppingCartComponent implements OnInit {
 
   // Do in the near future. Show product details when clicking image.
   productDetails(id: number): any {
-    // ask max for url to product details
-
     // let detailsURL: string = "http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/product/" + id;
 
     // console.log(id);
@@ -380,7 +372,5 @@ export class ShoppingCartComponent implements OnInit {
           }
       }
     }
-    
   }
-
 }

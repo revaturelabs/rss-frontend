@@ -35,16 +35,14 @@
                                 <div class="row text-center">
                                     <div class="col-6">
                                         <span [style.text-decoration]="product.discounted ? 'line-through' : 'none'">
-                                            {{product.unitPrice | number}}</span><span *ngIf="product.discounted === true" style="color:#FF0000"> {{product.discountedAmount | number}}% OFF!!!!!<br />
-                                        {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}</span>
-
-
+                                            {{product.unitPrice | number}}</span><span *ngIf="product.discounted === true" style="color:#FF0000"> {{product.discountedAmount | number}}% OFF!!!<br />
+                                            {{product.unitPrice - (product.unitPrice * (product.discountedAmount*0.01))}}
+                                        </span>
                                     </div>
                                     <div class="col-6">
                                         <!-- SHOW IF ADMIN -->
                                         <div *ngIf="userType==='admin'">
                                             <button class="btn btn-primary" (click)="open(product)">
-
                                                 Update
                                                 <em class="fas fa-pencil-alt"></em>
                                             </button>
@@ -52,7 +50,6 @@
                                         <!-- SHOW IF CUSTOMER -->
                                         <div *ngIf="userType==='customer'">
                                             <button class="btn btn-primary" (click)="open(product)">
-
                                                 Detail
                                                 <em class="fas fa-cart-plus"></em>
                                             </button>

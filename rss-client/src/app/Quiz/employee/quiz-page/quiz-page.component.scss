@@ -65,10 +65,21 @@ section{
 .quiz {
     box-shadow: 0 0 10px 5px rgba(0,0,0,0.25);
     border-radius: 5px;
+    display: flex;
     margin: 2rem auto;
-    width: 85%;
+    width: 67%;
 }
 
+.quizDetails {
+    width: 100%;
+    padding: 1rem;
+}
+
+.quiz img {
+    width: 350px;
+    height: auto;
+    display: block;
+}
 
 .btn {
     background-color: #72A4C2;

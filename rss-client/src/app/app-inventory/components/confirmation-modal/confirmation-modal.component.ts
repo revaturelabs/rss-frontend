@@ -12,7 +12,6 @@ import { SortService } from '../../service/sort.service';
 export class ConfirmationModalComponent implements OnInit {
 
   @Input() product: Product;
-  title: string = 'Delete';
 
   constructor(
     private modalService: NgbModal,

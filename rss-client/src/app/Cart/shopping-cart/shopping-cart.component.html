@@ -1,5 +1,4 @@
 <div *ngIf="currentUser">
-    <!-- wrap it all in a container, then it can fit under their header no problem -->
     <p class="card-text" *ngIf="currentUser.admin">Admin users cannot buy items.</p>
     <div class="container main-cart-container" *ngIf="!currentUser.admin">
         <div *ngIf="currentUser.userDiscounted">
@@ -42,11 +41,8 @@
                                             </div>
                                         </div>
                                     </tr>
-
-
                                 </tbody>
                             </table>
-
                         </ng-container>
                     </ng-container>
 
@@ -71,22 +67,16 @@
                                     <td class="align-middle text-center">
                                         <h4 [ngStyle]="{'text-decoration':product.discounted? 'line-through':'null'}">{{product.unitPrice}} Points</h4>
                                        <button type = "button" class = "btn-danger btn" (click)="deleteItem(cItem)">Delete</button>
-
                                     </td>
-
-                                   
                                 </tr>
                             </tbody>
                         </table>
                     </ng-container>
-
                 </div>
-
             </div>
 
             <!-- Checkout, on the right or underneath, with small item summary -->
             <div class="col-md-4 col-sm-12">
-
                 <div class="container">
 
                     <div class="row">
@@ -106,7 +96,6 @@
 
 
                     <div class="row card d-flex checkout-box">
-
                         <div class="card-title cart-total text-center">
                             <h2>Order Summary</h2>
                         </div>
@@ -128,8 +117,8 @@
                         <div class="container">
 
                             <button class="btn btn-secondary btn-lg btn-block" href="#pointSource" data-toggle="collapse">
-                            Pick Points
-                        </button>
+                                Pick Points
+                            </button>
                             <div class="collapse points-div" id="pointSource">
                                 <div *ngIf="pointPicker" class="card d-flex flex-column" id="pointsCard">
                                     <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">Choose Sources
@@ -149,14 +138,8 @@
                                 Need {{displayTotalPoints}} Total Points</button>
                             </div>
                             <div>
-                                <!-- <button class="btn btn-block btn-outline-success" href="#savingcart" data-toggle="collapse">
-                                Save For Later
-                            </button> -->
                                 <div class="collapse points-div" id="savingcart">
                                     <div class="card d-flex flex-column" id="pointsCard" *ngIf="activeCart">
-                                        <!-- <h3 class="card-title text-center" style="border-bottom: 2px solid #474C55">
-                                        Name Your Cart
-                                    </h3> -->
                                         <h4 class="card-text">Name your cart to save it for later!</h4>
                                         <input class="form-control" [(ngModel)]="activeCart.name" type="text" placeholder="Enter Cart Name">
                                         <div *ngIf="activeCart.name=='(default)'">Cannot save cart with name (default). Please try another name.</div>
@@ -166,16 +149,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <!-- <button class="btn btn-block btn-danger" (click)="deleteCart('selectcart')">Delete
-                                Cart</button> -->
-
-                            </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
