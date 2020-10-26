@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../class/product/product';
+import { Product } from '../../models/product.model';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryService } from '../../service/inventory.service';
 import { SortService } from '../../service/sort.service';
@@ -7,12 +7,11 @@ import { SortService } from '../../service/sort.service';
 @Component({
   selector: 'app-confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
-  styleUrls: ['./confirmation-modal.component.css']
+  styleUrls: ['./confirmation-modal.component.scss']
 })
 export class ConfirmationModalComponent implements OnInit {
 
   @Input() product: Product;
-  title: string = 'Delete';
 
   constructor(
     private modalService: NgbModal,

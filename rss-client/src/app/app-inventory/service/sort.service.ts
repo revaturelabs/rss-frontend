@@ -1,6 +1,6 @@
 import { Injectable, PipeTransform } from '@angular/core';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
-import { Product } from '../class/product/product';
+import { Product } from '../models/product.model';
 import { DecimalPipe } from '@angular/common';
 import { tap, debounceTime, switchMap, delay } from "rxjs/operators";
 import { SortColumn, SortDirection } from '../directives/sortable.directive';
@@ -43,7 +43,9 @@ function matches(product: Product, term: string, pipe: PipeTransform) {
 		image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
 		quantity: NaN,
 		unitPrice: NaN,
-		color: "N/A"
+		color: "N/A",
+		discounted : false,
+    	discountedAmount : NaN
 	}
 	for (let key in product) {
 		if (!product[key]) {

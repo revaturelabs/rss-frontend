@@ -1,0 +1,43 @@
+<div class="container">
+  <section class="row">
+    <main class="col-8">
+      <div class="my-2 p-2">
+        <h2>{{ config.subject.subjectName | titlecase }} -- {{ config.quizTopic | titlecase }}</h2>
+      </div>
+      <!-- Quiz description -->
+      <div class="my-2 p-2">
+        <h2>Description</h2>
+        <p class="description">{{ config.quizDescription }}</p>
+      </div>
+      <!-- Quiz Instruction from an array of instructions-->
+      <summary class="my-2 p-2">
+        <h2>Instructions</h2>
+        <div class="instructions">
+          <div class="details">
+            <p><i class="fas fa-pencil-alt"></i> 
+              You will need to complete these questions in an amount of time alloted by your instructor. 
+            </p>
+          </div>
+          <div class="details">
+            <p><i class="fas fa-pencil-alt"></i> <strong>NO CHEATING.</strong></p>
+          </div>
+        </div>
+      </summary>
+    </main>
+
+    <aside class="col-4 p-0">
+      <div class="details">
+        <h3>Details</h3>
+      </div>
+      <div class="details">
+        <p><i class="fas fa-graduation-cap"></i> No. of Attempts: </p>
+        <p><i class="fas fa-check"></i> Pass Percentage: 70%</p>
+      </div>
+      <div class="details text-center">
+        <button class="btn mb-2" id="startBtn" (click)="onEvent()">RESUME</button>
+        <p>browse more <a routerLink="/quizzes">Quizzes</a></p>
+      </div>
+    </aside>
+  </section>
+
+</div>

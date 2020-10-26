@@ -1,0 +1,27 @@
+a {
+    font-family: futura-pt, arial;
+    color: #000000;
+    text-decoration: none;
+    padding: 0 25px;
+}
+
+a:active {
+    color: #72A4C2;
+}
+
+a.not-current {
+    color: #000000;
+}
+
+a.current {
+    color: #72A4C2;
+}
+
+.btn:focus {
+    box-shadow: none;
+  }
+
+.settings {
+    color: #72A4C2 !important;
+    background-color: #FFFFFF;
+}

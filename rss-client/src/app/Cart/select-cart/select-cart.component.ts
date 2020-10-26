@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
-import { User } from 'src/app/interfaces/user';
-import { Cart } from 'src/app/interfaces/cart.model';
-import { UserService } from 'src/app/services/user.service';
-import { Product } from '../../app-inventory/class/product/product';
+import { CartService } from 'src/app/Cart/services/cart.service';
+import { User } from 'src/app/User/models/user';
+import { Cart } from 'src/app/Cart/models/cart.model';
+import { UserService } from 'src/app/User/services/user.service';
+import { Product } from 'src/app/app-inventory/models/product.model';
 import { InventoryService } from '../../app-inventory/service/inventory.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-cart',
   templateUrl: './select-cart.component.html',
-  styleUrls: ['./select-cart.component.css']
+  styleUrls: ['./select-cart.component.scss']
 })
 export class SelectCartComponent implements OnInit, OnDestroy {
 
@@ -28,7 +28,9 @@ export class SelectCartComponent implements OnInit, OnDestroy {
     image: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
     quantity: NaN,
     unitPrice: NaN,
-    color: "N/A"
+    color: "N/A",
+    discounted: false,
+    discountedAmount : NaN
   }
   tempCarts: Cart[] = [];
   activeCartId: number;

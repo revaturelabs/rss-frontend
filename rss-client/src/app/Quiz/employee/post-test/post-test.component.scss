@@ -1,0 +1,29 @@
+@import '../../../../styles';
+
+.pass, .fail{
+    width: 150px;
+    height: 150px;
+    margin: 1rem auto;
+    display: table; 
+    
+    h2{
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+.pass{
+    background-image: radial-gradient(circle, red, orange, yellow, green, darkgreen);
+}
+
+.fail{
+    background-image: radial-gradient(circle, green, yellow, orange, red, darkred);
+}
+
+button{
+    background-color:$info;
+    color: white;
+}
+
+a{
+    color: $info;
+}

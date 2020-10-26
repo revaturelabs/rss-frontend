@@ -1,0 +1,102 @@
+<div class="container">
+  <section class="row my-5">
+
+    <div class="col-8">
+
+      <p><i class="fas fa-question"></i> Questions <span class="question">{{ index + 1 }}</span> out of <span class="question">{{ config.questions.length }}</span></p>
+
+      <!-- Current question -->
+      <h4>{{ config.questions[index].question }}</h4>
+
+      <!-- Current multiple choice question options -->
+      <!-- Option 1 -->
+      <div class="m-3" *ngIf="config.questions[index].option1">
+        <input class="form-check-input" (change)="onChange(index, 1)" [checked]="isChecked(index, 1)" type="radio"
+          id="item1" [name]="index" />
+        <label class="form-check-label" for="item1"> {{ config.questions[index].option1 }}</label>
+      </div>
+      <div class="m-3" *ngIf="config.questions[index].option2">
+        <input class="form-check-input" (change)="onChange(index, 2)" [checked]="isChecked(index, 2)" type="radio"
+          id="item2" [name]="index" />
+        <label class="form-check-label" for="item2"> {{ config.questions[index].option2 }}</label>
+      </div>
+      <div class="m-3" *ngIf="config.questions[index].option3">
+        <input class="form-check-input" (change)="onChange(index, 3)" [checked]="isChecked(index, 3)" type="radio"
+          id="item3" [name]="index" />
+        <label class="form-check-label" for="item3"> {{ config.questions[index].option3 }}</label>
+      </div>
+      <div class="m-3" *ngIf="config.questions[index].option4">
+        <input class="form-check-input" (change)="onChange(index, 4)" [checked]="isChecked(index, 4)" type="radio"
+          id="item4" [name]="index" />
+        <label class="form-check-label" for="item4"> {{ config.questions[index].option4 }}</label>
+      </div>
+      <div class="m-3" *ngIf="config.questions[index].option5">
+        <input class="form-check-input" (change)="onChange(index, 5)" [checked]="isChecked(index, 5)" type="radio"
+          id="item5" [name]="index" />
+        <label class="form-check-label" for="item5"> {{ config.questions[index].option5 }}</label>
+      </div>
+
+      <!-- Navigating buttons between questions -->
+      <button class="btn blue mx-2" (click)="navigate('first')">
+        <i class="fas fa-fast-backward"></i>
+        First
+      </button>
+      <button class="btn blue mx-2" (click)="navigate('previous')">
+        <i class="fas fa-step-backward"></i>
+        Previous
+      </button>
+      <button class="btn blue mx-2" (click)="navigate('next')">
+        Next
+        <i class="fas fa-step-forward"></i>
+      </button>
+      <button class="btn blue mx-2" (click)="navigate('last')">
+        Last
+        <i class="fas fa-fast-forward"></i>
+      </button>
+    </div>
+    <aside class="col-4 p-0">
+      <div class="details-box">
+        <div class="details">
+          <p>Questions</p>
+        </div>
+        <!-- numbered buttons coorisponding to questions -->
+        <div class="details">
+          <ng-container *ngFor="let question of config.questions; let i = index">
+            <p class="px-3 py-2 mt-3 mx-3 mb-4 btn btn-dark text-white" [class.answer]="isMarkedOff(i)" (click)="onFocus(i)">
+              {{ i + 1 }}
+            </p>
+          </ng-container>
+        </div>
+        <div class="details">
+          <h4>Legend</h4>
+          <p>
+            <i class="fas fa-square answered"></i>Answered Question<br>
+            <i class="fas fa-square unanswered"></i>Unanswered Question
+          </p>
+        </div>
+      </div>          
+      <button class="btn submit my-3" (click)="open(content)">
+            Submit
+      </button>
+    </aside>
+
+  </section>
+
+  <!-- Confirmation windows -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Are you sure?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <button class="btn btn-success m-1" (click)="modal.close('Save click')">
+        Submit
+      </button>
+      <button class="btn btn-danger m-1" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Cancel
+      </button>
+    </div>
+  </ng-template>
+</div>

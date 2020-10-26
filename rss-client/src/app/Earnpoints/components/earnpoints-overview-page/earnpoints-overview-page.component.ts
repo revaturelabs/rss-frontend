@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
+import { BreadcrumbService } from 'src/app/Common/services/breadcrumb.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-earnpoints-overview-page',
   templateUrl: './earnpoints-overview-page.component.html',
-  styleUrls: ['./earnpoints-overview-page.component.css'],
+  styleUrls: ['./earnpoints-overview-page.component.scss'],
 })
 export class EarnpointsOverviewPageComponent implements OnInit {
   constructor(

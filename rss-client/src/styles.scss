@@ -1,0 +1,31 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.btn-info {
+    color: #FFFFFF !important;
+}
+
+.text-sm{
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+html {
+    height: 98vh;
+}
+
+body {
+    height: 98vh;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+

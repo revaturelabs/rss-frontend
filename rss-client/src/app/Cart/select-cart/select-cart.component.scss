@@ -1,0 +1,110 @@
+/* ...............generics................. */
+
+/* get rid of some default gray lines on table rows from bootstrap */
+.table>tr>td,
+.table>tr,th,
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    border-top: 0
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.btn {
+    margin: 2px;
+    margin-bottom: 4px;
+    margin-top: 6px;
+}
+
+/* .................general layout....................... */
+
+.main-container {
+    min-height: 100vh;
+    /* border: 1px solid red; */
+}
+
+.cart-card {
+    /* width: 100%; */
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 4px black;
+}
+
+.cart-title {
+    border-bottom: 2px solid #474C55;
+    padding: 6px;
+    margin: 6px;
+}
+
+.downarrow {
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+    color: #F26925;
+}
+
+.downarrow:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    font-size: 40px;
+    filter: brightness(0%);
+}
+
+.uparrow {
+    transform: rotate(180deg);
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+    color: #F26925;
+}
+
+.uparrow:hover {
+    transform: scale(1.05) rotate(180deg);
+    cursor: pointer;
+    font-size: 40px;
+    filter: brightness(0%);
+}
+
+.cart-button-holder {
+    background-color: #aab1bd;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.img-small {
+    width: 40px;
+    object-fit: cover;
+}
+
+.small-row {
+    border-bottom: 1px solid #474C55;
+    margin-top: 4px;
+}
+
+/* determine what cart is selected */
+
+.selectedCart {
+    color: white;
+    background-color: #474C55;
+}
+
+.selectedCart tr {
+    background-color: white;
+}
+
+.selectedCart .cart-button-holder {
+    background-color: white;
+}
+
+.selectedCart .small-row {
+    border-bottom: 1px solid black;
+}
+
+.selectedCart .cart-title {
+    border-bottom: 2px solid white;
+}
