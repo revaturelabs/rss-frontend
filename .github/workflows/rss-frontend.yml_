@@ -1,0 +1,30 @@
+name: Deploy to Amazon ECS
+on: push
+jobs:
+  deploy:
+    name: rss-front-deploy
+    runs-on: ubuntu-latest
+    env:
+      ECR_REPOSITORY: matt-oberlies-00000916-${{ secrets.APP_NAME }}
+      IMAGE_TAG: ${{ github.sha }}
+    steps:
+   # Build the Docker image
+    - name: Checkout
+      uses: actions/checkout@v2		# downloads the github repo and downloads it to the runner, then open for testing
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./rss-client
+    - name: Push image to ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

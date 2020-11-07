@@ -1,18 +1,31 @@
-### Employ the builder pattern
-FROM node:alpine as angular
+# FROM nginx:alpine as node
+# WORKDIR /app
 
-## Install Angular CLI once, use cached layer for future builds
-RUN npm install -g @angular/cli@9.1.7
+# COPY . .
+# RUN npm i yarn
+# RUN yarn global add @angular/cli@latest
+# RUN npm install # install dependencies
+# RUN ng build --configuration=staging # build application 
+# CD /app/dist/rss-client
+# RUN ng build #--prod
 
-COPY package.json package-lock.json ./
+# STAGE 2
+# Deploy APP
 
-## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN npm ci && mkdir /app && mv ./node_modules /app
+# In this stage, we are going to take the build artefacts from stage one and build a deployment docker image
+# We are using nginx:alpine as the base image of our deployment image
+
+FROM nginx:alpine as node
 WORKDIR /app
-COPY . .
-RUN ng build --prod --aot
 
-FROM nginx:alpine
+COPY . .
+RUN echo "YOU ARE HERE:"
+RUN pwd
+RUN echo "With folder contents thus:"
+RUN ls
+COPY . /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/nginx.conf
-WORKDIR /usr/share/nginx/html
-COPY --from=angular /app/dist/rss-client .
+# COPY --from=node /app/dist/rss-client/nginx.conf /etc/nginx/conf.d/default.conf
+# COPY --from=node /app/.docker/nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80

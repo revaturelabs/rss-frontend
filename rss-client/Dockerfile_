@@ -1,0 +1,31 @@
+### Employ the builder pattern
+FROM node:alpine as angular
+WORKDIR /test
+#
+COPY package.json .
+COPY package-lock.json .
+
+## Install Angular CLI once, use cached layer for future builds
+RUN npm install -g npm@7.0.9 
+RUN npm install -g @angular/cli@9.1.7
+RUN ng new test-app
+
+# ng deploy 
+#docker build --rm -f .docker\staging.dockerfile -t webapp:latest .
+
+
+## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
+# RUN npm ci && 
+# FROM node:alpine
+# WORKDIR /app
+COPY ./node_modules --from=angular /test/test-app/node_modules/
+# && mv ./node_modules /app
+ 
+
+# COPY . .
+RUN ng build --prod --aot
+
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+WORKDIR /usr/share/nginx/html
+COPY --from=angular /app/dist/rss-client .

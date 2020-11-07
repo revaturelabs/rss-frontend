@@ -1,0 +1,20 @@
+      name: Deploy to Amazon ECS
+on: push
+jobs:
+  deploy:
+    name: rss-front-deploy
+    runs-on: ubuntu-latest # Build the Docker image
+      - name: Build
+        run: |-
+          docker build \
+            --tag "855430746673.dkr.ecr.us-east-1.amazonaws.com/matt-oberlies-00000916-/${{ secret.APP_NAME }}:test" \
+            .
+        # Configure Docker to use the gcloud command-line tool as a credential
+        # helper for authentication
+      - name: AWS Configure Docker
+        run: |-
+          AWS_ACCESS_KEY=${{ secrets.ECR_ACCESS_KEY }} AWS_SECRET_KEY=${{ secrets.ECR_SECRET_ACCESS_KEY }} aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 855430746673.dkr.ecr.us-east-1.amazonaws.com
+        # Push the Docker image to ECR
+      - name: Publish
+        run: |-
+          docker push "855430746673.dkr.ecr.us-east-1.amazonaws.com/matt-oberlies-00000916-/${{ env.APP_NAME }}:[[ WHATEVER YOU WANT TO TAG ]]"
