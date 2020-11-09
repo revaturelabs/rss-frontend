@@ -184,6 +184,23 @@
       </div>
       <div class="form-group">
         <div class="input-group">
+          <label for="correctAnswerNumber">Number of Correct Options</label>
+          <div class="input-group">
+            <input
+              id="correctAnswerNumber"
+              class="form-control"
+              min="1"
+              type="number"
+              required
+              name="correctAnswerNumber"
+              [ngModel]="focusedQuestion.correctAnswerNumber"
+              #correctAnswerNumber="ngModel"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
           <label for="correctAnswer">Correct Option</label>
           <div class="input-group">
             <input
