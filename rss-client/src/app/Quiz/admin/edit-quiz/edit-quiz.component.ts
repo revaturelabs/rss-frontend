@@ -177,9 +177,13 @@ export class EditQuizComponent implements OnInit {
               question: result.value.question,
               questionValue: result.value.questionValue,
               correctAnswer: result.value.correctAnswer,
+<<<<<<< HEAD
               correctAnswers: this.focusedQuestion.correctAnswers,
               correctAnswerNumber: result.value.correctAnswerNumber,
               ATP: this.isATP,
+=======
+              correctAnswerNumber: result.value.correctAnswerNumber,
+>>>>>>> c0b5123... Add label for choosing correct options in edit
             };
             // Adds only options with not null values
             let i = 1;
