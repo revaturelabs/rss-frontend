@@ -17,6 +17,8 @@ import { UserService } from 'src/app/User/services/user.service';
 export class AddQuizComponent implements OnInit {
   view = 'select';
   subjects;
+  newOption:String;
+  options:String [] = []; 
 
   focusedQuiz = {
     quizId: 0,
@@ -36,6 +38,11 @@ export class AddQuizComponent implements OnInit {
 * validates that the quiz topic exists and that the questions also exist
 * if it does not than the save button does not appear/is faded so it cannot be submitted
 * */
+  addOption(){
+    this.options.push(this.newOption);
+    this.newOption = '';
+  }
+
   validate() {
     if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
       this.isValid = true;
@@ -125,11 +132,12 @@ export class AddQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
-        option1: null,
-        option2: null,
-        option3: null,
-        option4: null,
-        option5: null,
+        options: null,
+        // option1: null,
+        // option2: null,
+        // option3: null,
+        // option4: null,
+        // option5: null,
         quiz: {},
       };
     } else {
