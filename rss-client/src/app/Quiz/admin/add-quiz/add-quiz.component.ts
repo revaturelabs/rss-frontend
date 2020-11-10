@@ -20,6 +20,7 @@ export class AddQuizComponent implements OnInit {
 
   view = 'select';
   subjects;
+<<<<<<< HEAD
   options:string [] = [];
 
   correctAnswers: number[] = [];
@@ -28,6 +29,10 @@ export class AddQuizComponent implements OnInit {
   looper = [1]
   isATP = 0;
   newOption:String;
+=======
+  foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  looper = [1, 2]
+>>>>>>> d900125... added update button and loop to match correct options
 
   focusedQuiz = {
     quizId: 0,
@@ -198,11 +203,17 @@ export class AddQuizComponent implements OnInit {
               questionId: this.focusedQuestion.questionId,
               question: result.value.question,
               questionValue: result.value.questionValue,
+<<<<<<< HEAD
               options : newOptions
             };
 
             console.log(newQuestion.options);
                 
+=======
+              correctAnswer: result.value.correctAnswer,
+              correctAnswerNumber: result.value.correctAnswerNumber,
+            };    
+>>>>>>> d900125... added update button and loop to match correct options
             // Adds only options with not null values       
             let i = 1;
             for (let [key, value] of Object.entries(result.value)) {
@@ -252,6 +263,7 @@ export class AddQuizComponent implements OnInit {
     );
   }
 
+<<<<<<< HEAD
   doesInclude(ansArray:number[], m_number:number){
     let ret = false;
     //let temp : string = "" + m_number;
@@ -297,6 +309,17 @@ export class AddQuizComponent implements OnInit {
   updateCorrectArray(correct: number, index: number) {
     this.correctAnswers[index-1] = <number>correct;
   }
+=======
+  /**updateCorrect
+  * @param correctNumber
+  * Takes the number of Correct Answers inputted and updates the number of inputs that can take.
+  */
+ updateCorrect(correctNumber: number) {
+  //Creates the looping array with the size of the correctAnswerNumber
+  this.looper = this.foo.slice(0, correctNumber)
+  
+}
+>>>>>>> d900125... added update button and loop to match correct options
 /**
  * getDismissReason()
  * @param reason

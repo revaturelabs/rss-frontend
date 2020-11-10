@@ -202,6 +202,7 @@
               id="correctAnswerNumber"
               class="form-control"
               min="1"
+              max="20"
               type="number"
               required
               name="correctAnswerNumber"
@@ -212,8 +213,10 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="input-group">
-          <label for="correctAnswer">Correct Option</label>
+        <button type="button" class="btn btn-outline-dark" (click)="updateCorrect(3)">Update</button>
+      </div>
+      <div *ngFor="let loops of looper">
+        <div class="form-group">
           <div class="input-group">
             <label for="correctAnswerNumber">Number of Correct Options</label>
             <div class="input-group">
@@ -225,9 +228,7 @@
                 type="number"
                 required
                 name="correctAnswerNumber"
-                (change)="updateCorrect($event.target.value)"
-              />
-            </div>
+                (change)="updateCorrect($event.target.value)" />
           </div>
         </div>
       </div>
