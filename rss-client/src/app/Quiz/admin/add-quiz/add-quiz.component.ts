@@ -29,6 +29,7 @@ export class AddQuizComponent implements OnInit {
   isATP = 0;
   newOption:String;
 
+
   focusedQuiz = {
     quizId: 0,
     subject: null,
@@ -202,6 +203,7 @@ export class AddQuizComponent implements OnInit {
             };
 
             console.log(newQuestion.options);
+
             // Searches question array to see if this question exists
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion
@@ -239,6 +241,7 @@ export class AddQuizComponent implements OnInit {
         }
     );
   }
+
 
   doesInclude(ansArray:number[], m_number:number){
     let ret = false;
