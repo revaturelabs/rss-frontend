@@ -24,6 +24,7 @@ export class EditQuizComponent implements OnInit {
   focusedQuiz;
   focusedQuestion;
   isValid = false;
+<<<<<<< HEAD
 
   newOption:string;
   options:Option [] = []; 
@@ -56,6 +57,10 @@ export class EditQuizComponent implements OnInit {
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   looper = [1]
   isATP: boolean;
+=======
+  foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  looper = [1, 2]
+>>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well
   /** validate ()
    * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted
@@ -236,6 +241,7 @@ export class EditQuizComponent implements OnInit {
   */
  updateCorrect(correctNumber: number) {
   //Creates the looping array with the size of the correctAnswerNumber
+<<<<<<< HEAD
     this.looper = this.foo.slice(0, correctNumber)
     if (this.looper.length > this.focusedQuestion.correctAnswers.length) {
       let k = this.looper.length - this.focusedQuestion.correctAnswers.length;
@@ -257,6 +263,11 @@ export class EditQuizComponent implements OnInit {
   updateCorrectArray(correct: number, index: number) {
     this.focusedQuestion.correctAnswers[index-1] = correct;
   }
+=======
+  this.looper = this.foo.slice(0, correctNumber)
+  
+}
+>>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well
 
   /**
    * getDismissReason()
