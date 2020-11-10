@@ -255,6 +255,16 @@
       <div class="modal-footer">
         <button class="btn btn-success" type="button" (click) = "addOption()">Add</button>
         <button class="btn btn-danger" type="button" (click) = "removeOption()">Remove</button>
+      <div *ngFor = "let option of options" class="form-group">
+        <label for="options">Options</label>
+        <div class="input-group"></div>
+        <input type="text" id="options" 
+          class="form-control"
+          [ngModel] = "focusedQuestion.options"
+          placeholder="Enter new option here">
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click) = "addOption()">Add option</button>
       </div>
 
         <!-- <div class="input-group">
