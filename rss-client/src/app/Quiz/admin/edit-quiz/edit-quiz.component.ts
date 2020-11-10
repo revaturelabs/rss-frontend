@@ -52,6 +52,8 @@ export class EditQuizComponent implements OnInit {
   }
 
 
+  foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  looper = [1, 2]
   /** validate ()
    * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted
@@ -208,6 +210,17 @@ export class EditQuizComponent implements OnInit {
         }
       );
   }
+
+  /**updateCorrect
+  * @param correctNumber
+  * Takes the number of Correct Answers inputted and updates the number of inputs that can take.
+  */
+ updateCorrect(correctNumber: number) {
+  //Creates the looping array with the size of the correctAnswerNumber
+  this.looper = this.foo.slice(0, correctNumber)
+  
+}
+
   /**
    * getDismissReason()
    * @param reason

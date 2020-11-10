@@ -185,21 +185,26 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="input-group">
-          <label for="correctAnswer">Correct Option</label>
+        <button type="button" class="btn btn-outline-dark" (click)="updateCorrect(3)">Update</button>
+      </div>
+      <div *ngFor="let loops of looper">
+        <div class="form-group">
           <div class="input-group">
-            <input
-              id="correctAnswer"
-              required
-              class="form-control"
-              min="1"
-              max="4"
-              type="number"
-              name="correctAnswer"
-              value="1"
-              [ngModel]="focusedQuestion.correctAnswer"
-              #correctAnswer="ngModel"
-            />
+            <label for="correctAnswer">Correct Option</label>
+            <div class="input-group">
+              <input
+                id="correctAnswer"
+                required
+                class="form-control"
+                min="1"
+                max="4"
+                type="number"
+                name="correctAnswer"
+                value="1"
+                [ngModel]="focusedQuestion.correctAnswer"
+                #correctAnswer="ngModel"
+              />
+            </div>
           </div>
         </div>
       </div>
