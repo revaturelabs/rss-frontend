@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CartItemService {
-  baseURL = `${environment.cartServiceUrlWithZuul}/cartitem/`;
+  baseURL = `${environment.cartServiceUrl}/cartitem/`;
 
   constructor(private http: HttpClient) { }
 

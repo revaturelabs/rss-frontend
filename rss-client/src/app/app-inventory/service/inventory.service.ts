@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class InventoryService {
 
-	baseUrl = `${environment.inventoryServiceUrlWithZuul}/`;
+	baseUrl = `${environment.inventoryServiceUrl}/`;
 
 	constructor(private http: HttpClient) { }
 

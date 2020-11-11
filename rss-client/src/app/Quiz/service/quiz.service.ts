@@ -15,7 +15,7 @@ import { Account } from 'src/app/User/models/account';
 })
 export class QuizService {
 
-  url = `${environment.evaluationServiceUrlWithZuul}`;
+  url = `${environment.evaluationServiceUrl}`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
