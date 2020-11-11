@@ -59,8 +59,13 @@ export class EditQuizComponent implements OnInit {
   isATP: boolean;
 =======
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+<<<<<<< HEAD
   looper = [1, 2]
 >>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well
+=======
+  looper = [1]
+  isATP: boolean;
+>>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
   /** validate ()
    * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted

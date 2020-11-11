@@ -179,22 +179,29 @@
         </div>
       </div>
       <div *ngIf="isATP">
+<<<<<<< HEAD
       <div class="form-group">
         <div class="input-group">
           <label for="correctAnswerNumber">Number of Correct Options</label>
+=======
+        <div class="form-group">
+>>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
           <div class="input-group">
-            <input
-              id="correctAnswerNumber"
-              class="form-control"
-              min="1"
-              max="20"
-              type="number"
-              required
-              name="correctAnswerNumber"
-              (change)="updateCorrect($event.target.value)"
-              [ngModel]="focusedQuestion.correctAnswerNumber"
-              #correctAnswerNumber="ngModel"
-            />
+            <label for="correctAnswerNumber">Number of Correct Options</label>
+            <div class="input-group">
+              <input
+                id="correctAnswerNumber"
+                class="form-control"
+                min="1"
+                max="20"
+                type="number"
+                required
+                name="correctAnswerNumber"
+                (change)="updateCorrect($event.target.value)"
+                [ngModel]="focusedQuestion.correctAnswerNumber"
+                #correctAnswerNumber="ngModel"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -226,7 +233,7 @@
                 required
                 class="form-control"
                 min="1"
-                max="4"
+                max="5"
                 type="number"
                 name="correctAnswer"
                 value="1"

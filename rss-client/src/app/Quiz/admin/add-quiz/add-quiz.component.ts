@@ -31,8 +31,13 @@ export class AddQuizComponent implements OnInit {
   newOption:String;
 =======
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+<<<<<<< HEAD
   looper = [1, 2]
 >>>>>>> d900125... added update button and loop to match correct options
+=======
+  looper = [1]
+  isATP: boolean;
+>>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
 
   focusedQuiz = {
     quizId: 0,
@@ -72,9 +77,15 @@ export class AddQuizComponent implements OnInit {
    * @param : whether the box is checked or not
    * Sets the question to be a multiple answer question or not
    */
+<<<<<<< HEAD
   yesATP(value:number) {
     this.isATP = value;
     if (this.isATP == 0) {
+=======
+  yesATP(value:boolean) {
+    this.isATP = value;
+    if (this.isATP == false) {
+>>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
       this.looper = [1]
     }
   }
