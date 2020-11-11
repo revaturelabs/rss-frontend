@@ -318,8 +318,12 @@ export class AddQuizComponent implements OnInit {
   //Creates the looping array with the size of the correctAnswerNumber
   this.looper = this.foo.slice(0, correctNumber)
   
+<<<<<<< HEAD
 }
 >>>>>>> d900125... added update button and loop to match correct options
+=======
+  }
+>>>>>>> a0765ed... Deleted the button and changed to event binding for More Answers
 /**
  * getDismissReason()
  * @param reason
