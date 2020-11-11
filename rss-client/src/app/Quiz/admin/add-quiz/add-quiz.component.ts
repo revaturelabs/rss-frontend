@@ -242,7 +242,7 @@ export class AddQuizComponent implements OnInit {
   //Creates the looping array with the size of the correctAnswerNumber
   this.looper = this.foo.slice(0, correctNumber)
   
-}
+  }
 /**
  * getDismissReason()
  * @param reason
