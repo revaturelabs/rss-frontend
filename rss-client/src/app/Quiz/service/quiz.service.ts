@@ -34,16 +34,12 @@ export class QuizService {
       subjectName: '',
     },
   };
+
   questions: Questions = {
     questionId: 0,
     questionValue: 0,
     question: '',
-    options: '',
-    // option1: '',
-    // option2: '',
-    // option3: '',
-    // option4: '',
-    // option5: '',
+    options: [],
     correctAnswer: '',
     quizId: 0,
     quiz: {
@@ -150,11 +146,12 @@ export class QuizService {
     );
   }
 
-  addManyQuestions(questions): Observable<Questions> {
-    this.questions = questions;
+  addManyQuestions(questions): Observable<Questions[]> {
+    let m_questions : Questions[] = [];
+    m_questions = questions;
     return this.httpclient.post<any>(
       this.url + '/question/admin/addall',
-      this.questions
+      m_questions
     );
   }
   deleteQuestion(id) {

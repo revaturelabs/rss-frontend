@@ -2,6 +2,7 @@ import { QuizService } from '../../service/quiz.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/User/services/user.service';
+import { Option } from './../../models/option';
 
 @Component({
   selector: 'add-quiz',
@@ -17,9 +18,8 @@ import { UserService } from 'src/app/User/services/user.service';
 export class AddQuizComponent implements OnInit {
   view = 'select';
   subjects;
-  newOption:String;
-  options:String [] = []; 
-
+  options:string [] = []; 
+  
   focusedQuiz = {
     quizId: 0,
     subject: null,
@@ -34,13 +34,17 @@ export class AddQuizComponent implements OnInit {
     availablePoints: null,
   };
   isValid = false;
+  m_option :Option;
 /** validate ()
 * validates that the quiz topic exists and that the questions also exist
 * if it does not than the save button does not appear/is faded so it cannot be submitted
 * */
   addOption(){
-    this.options.push(this.newOption);
-    this.newOption = '';
+    this.options.push(null);
+  }
+
+  removeOption(){
+    this.options.pop();
   }
 
   validate() {
@@ -86,6 +90,7 @@ export class AddQuizComponent implements OnInit {
   }
   reducer = (accumulator, currentValue) =>
     accumulator + currentValue.questionValue;
+
   updateTotal() {
     let total = this.focusedQuiz.questions.reduce(this.reducer, 0);
     this.focusedQuiz.availablePoints = total || 0;
@@ -101,6 +106,7 @@ export class AddQuizComponent implements OnInit {
 * add the questions from that quiz to the add many questions service method
 * */
   submitChanges() {
+    this.focusedQuestion.options = this.options;
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId; 
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {
@@ -133,11 +139,6 @@ export class AddQuizComponent implements OnInit {
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
         options: null,
-        // option1: null,
-        // option2: null,
-        // option3: null,
-        // option4: null,
-        // option5: null,
         quiz: {},
       };
     } else {
@@ -148,24 +149,34 @@ export class AddQuizComponent implements OnInit {
       .result.then(
         (result) => {
           // when modal is manually closed, it sends a type and value.
+            // Adds only options with not null values
+          
+
           if (result.type == 'update') {
+              
+            let newOptions: Option[] = [];
+
+            for (let i in this.options) {
+              
+              this.m_option = {
+                optid: 0,
+                description: this.options[i],
+                qb: null
+              }
+
+              newOptions.push(this.m_option);
+
+            }
+
             let newQuestion = {
               questionId: this.focusedQuestion.questionId,
               question: result.value.question,
               questionValue: result.value.questionValue,
               correctAnswer: result.value.correctAnswer,
+              options : newOptions
             };
-            // Adds only options with not null values
-            let i = 1;
-            for (let [key, value] of Object.entries(result.value)) {
-              if (key[0] == 'o') {
-                if (value != null) {
-                  let thisOption = 'option' + i;
-                  newQuestion[thisOption] = value;
-                  i++;
-                }
-              }
-            }
+
+            console.log(newQuestion.options);
             // Searches question array to see if this question exists
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion
@@ -173,9 +184,11 @@ export class AddQuizComponent implements OnInit {
             // if it doesn't exist, push it to the end of the quesion array
             if (index == -1) {
               this.focusedQuiz.questions.push(newQuestion);
+              console.log("condition 1");
             } else {
               // if it does exists, update the question
               this.focusedQuiz.questions[index] = newQuestion;
+              console.log("condition 2");
             }
             // updates the total points available in this quiz
             this.updateTotal();
@@ -188,6 +201,7 @@ export class AddQuizComponent implements OnInit {
             );
             this.updateTotal();
             this.validate();
+
             // sets quizTotalPoints to self 
             //subtracting the point value of the question that is being deleted
             this.focusedQuiz.quizTotalPoints = this.focusedQuiz.quizTotalPoints - result.value.questionValue;
@@ -215,11 +229,15 @@ export class AddQuizComponent implements OnInit {
     }
   }
 
+  indexTracker(index: number, value: any) {
+    return index;
+  }
+
   constructor(
     private modalService: NgbModal,
     private quizService: QuizService,
     private userservice: UserService
-  ) { }
+  ) {}
 /** on init of page:
  * GetRequest from quiz service to get all  Subject of quizes of type Subject[]
  *

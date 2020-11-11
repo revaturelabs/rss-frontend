@@ -1,13 +1,11 @@
+import { Option } from './option';
+import { Quiz } from './quiz';
+
 export interface Questions {
   questionId: number;
   questionValue: number;
   question: string;
-  options: string;
-  // option1: string;
-  // option2: string;
-  // option3: string;
-  // option4: string;
-  // option5: string;
+  options: Option[];
   correctAnswer: string;
   quizId: number;
   quiz: {
