@@ -200,6 +200,7 @@
         </div>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <!-- <div class="form-group">
         <button type="button" class="btn btn-outline-dark" (click)="updateCorrect(3)">Update</button>
       </div> -->
@@ -241,6 +242,20 @@
       <div class="form-group">
         <div class="input-group"></div>
 >>>>>>> 06f4b3b... edited the modals and added a button to allow admin to add more options to questions
+=======
+      <label>Options: </label>
+      <div *ngFor = "let option of options" class="form-group">
+        
+        <div class="input-group"></div>
+        <input type="text" id="options" 
+          class="form-control"
+          [(ngModel)] = "focusedQuestion.options"
+          placeholder="Enter new option here">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" type="button" (click) = "addOption()">Add</button>
+        <button class="btn btn-danger" type="button" (click) = "removeOption()">Remove</button>
+>>>>>>> 653b0d4... implemented an add and remove button for options on the add-quiz and edit-quiz html
       </div>
       <!-- <div class="form-group">
         <label for="option1">Options</label>

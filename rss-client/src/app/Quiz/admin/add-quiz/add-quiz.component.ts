@@ -56,7 +56,6 @@ export class AddQuizComponent implements OnInit {
     this.options.pop();
   }
 
-
   validate() {
     if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
       this.isValid = true;
