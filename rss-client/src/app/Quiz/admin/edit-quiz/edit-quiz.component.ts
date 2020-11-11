@@ -53,7 +53,8 @@ export class EditQuizComponent implements OnInit {
 
 
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-  looper = [1, 2]
+  looper = [1]
+  isATP: boolean;
   /** validate ()
    * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted
@@ -63,6 +64,16 @@ export class EditQuizComponent implements OnInit {
       this.isValid = true;
     } else {
       this.isValid = false;
+    }
+  }
+    /** yesATP ()
+   * @param : whether the box is checked or not
+   * Sets the question to be a multiple answer question or not
+   */
+  yesATP(value:boolean) {
+    this.isATP = value;
+    if (this.isATP == false) {
+      this.looper = [1]
     }
   }
 /** reducer ()
