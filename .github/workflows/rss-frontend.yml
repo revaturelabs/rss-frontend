@@ -1,10 +1,10 @@
-name: ECR/EKS
+name: CI/CD
 on: push
 env:
+  ECR_REPOSITORY_PREFIX: ${{ secrets.ECR_REPOSITORY_PREFIX }}
   ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-  ECR_REPOSITORY: matt-oberlies-00000916-${{ secrets.APP_NAME }}
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_PREFIX }}-${{ secrets.APP_NAME }}
   IMAGE_TAG: ${{ github.sha }}
-  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
 jobs:
   build:
     name: Build Image
@@ -16,7 +16,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.ECR_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.ECR_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ${{ secrets.AWS_REGION }}
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -44,6 +44,11 @@ jobs:
           cd ./rss-client 
           npm ci
           # npm run test
+      - name: Upload Code Coverage Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: rss-client/coverage/
   analyze:
     name: Analyze Code Quality
     needs: [test]
@@ -52,6 +57,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Download Code Coverage Report
+        uses: actions/download-artifact@v2
+        with:
+          name: code-coverage-report
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -63,21 +72,11 @@ jobs:
     name: Deploy on EKS
     runs-on: ubuntu-latest
     steps:
-      - name: Configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.EKS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.EKS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
       - name: Deploy to EKS
-        uses: Consensys/kubernetes-action@master
-        env:
-          KUBE_CONFIG_DATA: $KUBE_CONFIG_DATA
-        with:
-          args: set image deployment/rss-frontend-deployment frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      - name: Verify Deployment
-        uses: Consensys/kubernetes-action@master
-        env:
-          KUBE_CONFIG_DATA: $KUBE_CONFIG_DATA
-        with:
-          args: rollout status deployment/rss-frontend-deployment
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.EKS_ACCESS_KEY_ID }} --profile p3
+          aws configure set aws_secret_access_key ${{ secrets.EKS_SECRET_ACCESS_KEY }} --profile p3
+          aws configure set default.region ${{ secrets.AWS_REGION }} --profile p3
+          aws eks --region us-east-1 update-kubeconfig --profile p3 --name $ECR_REPOSITORY_PREFIX
+          kubectl --namespace default set image deploy/rss-frontend-deployment frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          kubectl --namespace default rollout status deploy/rss-frontend-deployment
