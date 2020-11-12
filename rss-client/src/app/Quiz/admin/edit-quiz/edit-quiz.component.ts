@@ -175,6 +175,7 @@ export class EditQuizComponent implements OnInit {
               question: result.value.question,
               questionValue: result.value.questionValue,
               correctAnswer: result.value.correctAnswer,
+              correctAnswers: this.focusedQuestion.correctAnswers,
               correctAnswerNumber: result.value.correctAnswerNumber,
             };
             // Adds only options with not null values
@@ -228,9 +229,27 @@ export class EditQuizComponent implements OnInit {
   */
  updateCorrect(correctNumber: number) {
   //Creates the looping array with the size of the correctAnswerNumber
-  this.looper = this.foo.slice(0, correctNumber)
+    this.looper = this.foo.slice(0, correctNumber)
+    if (this.looper.length > this.focusedQuestion.correctAnswers.length) {
+      let k = this.looper.length - this.focusedQuestion.correctAnswers.length;
+      for (let i = 0; i < k; i++) {
+        this.focusedQuestion.correctAnswers.push(0);
+      }
+    }
+    else {
+      let temp = this.focusedQuestion.correctAnswers.slice(0, correctNumber);
+      this.focusedQuestion.correctAnswers = temp;
+    }
   
-}
+  }
+  /**updateCorrectArray
+   * @param correct
+   * @param index
+   * Inputs the correct answer into the CorrectAnswerArray at the listed index
+   */
+  updateCorrectArray(correct: number, index: number) {
+    this.focusedQuestion.correctAnswers[index] = correct;
+  }
 
   /**
    * getDismissReason()

@@ -217,7 +217,7 @@
       <!-- <div class="form-group">
         <button type="button" class="btn btn-outline-dark" (click)="updateCorrect(3)">Update</button>
       </div> -->
-      <div *ngFor="let loops of looper">
+      <div *ngFor="let loops of looper; let i of index">
         <div class="form-group">
           <div class="input-group">
             <label for="correctAnswer">Correct Option</label>
@@ -229,6 +229,7 @@
                 max="5"
                 type="number"
                 required
+                (change)="updateCorrectArray($event.target.value, i)"
                 name="correctAnswer"
                 [ngModel]="focusedQuestion.correctAnswer"
                 #correctAnswer="ngModel"
