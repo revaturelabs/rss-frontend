@@ -167,8 +167,17 @@ export class EditQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
+<<<<<<< HEAD
         correctAnswers: [],
         options: null,
+=======
+        option1: null,
+        option2: null,
+        option3: null,
+        option4: null,
+        option5: null,
+        correctAnswers: [0],
+>>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
         quiz: {},
       };
     } else {
@@ -188,10 +197,14 @@ export class EditQuizComponent implements OnInit {
               questionValue: result.value.questionValue,
               correctAnswer: result.value.correctAnswer,
 <<<<<<< HEAD
+<<<<<<< HEAD
               correctAnswers: this.focusedQuestion.correctAnswers,
               correctAnswerNumber: result.value.correctAnswerNumber,
               ATP: this.isATP,
 =======
+=======
+              correctAnswers: this.focusedQuestion.correctAnswers,
+>>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
               correctAnswerNumber: result.value.correctAnswerNumber,
 >>>>>>> c0b5123... Add label for choosing correct options in edit
             };
@@ -247,6 +260,9 @@ export class EditQuizComponent implements OnInit {
  updateCorrect(correctNumber: number) {
   //Creates the looping array with the size of the correctAnswerNumber
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
     this.looper = this.foo.slice(0, correctNumber)
     if (this.looper.length > this.focusedQuestion.correctAnswers.length) {
       let k = this.looper.length - this.focusedQuestion.correctAnswers.length;
@@ -258,6 +274,7 @@ export class EditQuizComponent implements OnInit {
       let temp = this.focusedQuestion.correctAnswers.slice(0, correctNumber);
       this.focusedQuestion.correctAnswers = temp;
     }
+<<<<<<< HEAD
   
   }
   /**updateCorrectArray
@@ -273,6 +290,18 @@ export class EditQuizComponent implements OnInit {
   
 }
 >>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well
+=======
+  
+  }
+  /**updateCorrectArray
+   * @param correct
+   * @param index
+   * Inputs the correct answer into the CorrectAnswerArray at the listed index
+   */
+  updateCorrectArray(correct: number, index: number) {
+    this.focusedQuestion.correctAnswers[index] = correct;
+  }
+>>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
 
   /**
    * getDismissReason()

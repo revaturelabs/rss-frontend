@@ -208,7 +208,7 @@
       <!-- <div class="form-group">
         <button type="button" class="btn btn-outline-dark" (click)="updateCorrect(3)">Update</button>
       </div> -->
-      <div *ngFor="let loops of looper">
+      <div *ngFor="let loops of looper; let i of index">
         <div class="form-group">
           <div class="input-group">
 <<<<<<< HEAD
@@ -237,6 +237,7 @@
                 type="number"
                 name="correctAnswer"
                 value="1"
+                (change)="updateCorrectArray($event.target.value, i)"
                 [ngModel]="focusedQuestion.correctAnswer"
                 #correctAnswer="ngModel"
 >>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well

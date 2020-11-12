@@ -175,7 +175,16 @@ export class AddQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
+<<<<<<< HEAD
         options: null,
+=======
+        option1: null,
+        option2: null,
+        option3: null,
+        option4: null,
+        option5: null,
+        correctAnswers: [0],
+>>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
         quiz: {},
       };
     } else {
@@ -222,6 +231,7 @@ export class AddQuizComponent implements OnInit {
                 
 =======
               correctAnswer: result.value.correctAnswer,
+              correctAnswers: this.focusedQuestion.correctAnswers,
               correctAnswerNumber: result.value.correctAnswerNumber,
             };    
 >>>>>>> d900125... added update button and loop to match correct options
@@ -324,17 +334,39 @@ export class AddQuizComponent implements OnInit {
   /**updateCorrect
   * @param correctNumber
   * Takes the number of Correct Answers inputted and updates the number of inputs that can take.
+  * Also updating the array of Correct Answers to have the correct size
   */
- updateCorrect(correctNumber: number) {
+  updateCorrect(correctNumber: number) {
   //Creates the looping array with the size of the correctAnswerNumber
-  this.looper = this.foo.slice(0, correctNumber)
+    this.looper = this.foo.slice(0, correctNumber)
+    if (this.looper.length > this.focusedQuestion.correctAnswers.length) {
+      let k = this.looper.length - this.focusedQuestion.correctAnswers.length;
+      for (let i = 0; i < k; i++) {
+        this.focusedQuestion.correctAnswers.push(0);
+      }
+    }
+    else {
+      let temp = this.focusedQuestion.correctAnswers.slice(0, correctNumber);
+      this.focusedQuestion.correctAnswers = temp;
+    }
   
 <<<<<<< HEAD
 }
 >>>>>>> d900125... added update button and loop to match correct options
 =======
   }
+<<<<<<< HEAD
 >>>>>>> a0765ed... Deleted the button and changed to event binding for More Answers
+=======
+  /**updateCorrectArray
+   * @param correct
+   * @param index
+   * Inputs the correct answer into the CorrectAnswerArray at the listed index
+   */
+  updateCorrectArray(correct: number, index: number) {
+    this.focusedQuestion.correctAnswers[index] = correct;
+  }
+>>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
 /**
  * getDismissReason()
  * @param reason
