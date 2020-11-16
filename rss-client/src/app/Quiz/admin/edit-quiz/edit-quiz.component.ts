@@ -176,8 +176,12 @@ export class EditQuizComponent implements OnInit {
         option3: null,
         option4: null,
         option5: null,
+<<<<<<< HEAD
         correctAnswers: [0],
 >>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
+=======
+        correctAnswers: [],
+>>>>>>> 695b4e8... Fixed minor bugs in frontend
         quiz: {},
       };
     } else {
@@ -299,7 +303,7 @@ export class EditQuizComponent implements OnInit {
    * Inputs the correct answer into the CorrectAnswerArray at the listed index
    */
   updateCorrectArray(correct: number, index: number) {
-    this.focusedQuestion.correctAnswers[index] = correct;
+    this.focusedQuestion.correctAnswers[index-1] = correct;
   }
 >>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
 

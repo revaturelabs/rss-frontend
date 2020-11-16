@@ -28,6 +28,7 @@ export class AddQuizComponent implements OnInit {
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   looper = [1]
   isATP = 0;
+<<<<<<< HEAD
   newOption:String;
 =======
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
@@ -38,6 +39,8 @@ export class AddQuizComponent implements OnInit {
   looper = [1]
   isATP: boolean;
 >>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
+=======
+>>>>>>> c5323ea... changed the boolean ATP into a binary variable instead for ease in SQL
 
   focusedQuiz = {
     quizId: 0,
@@ -78,6 +81,7 @@ export class AddQuizComponent implements OnInit {
    * Sets the question to be a multiple answer question or not
    */
 <<<<<<< HEAD
+<<<<<<< HEAD
   yesATP(value:number) {
     this.isATP = value;
     if (this.isATP == 0) {
@@ -86,6 +90,11 @@ export class AddQuizComponent implements OnInit {
     this.isATP = value;
     if (this.isATP == false) {
 >>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
+=======
+  yesATP(value:number) {
+    this.isATP = value;
+    if (this.isATP == 0) {
+>>>>>>> c5323ea... changed the boolean ATP into a binary variable instead for ease in SQL
       this.looper = [1]
     }
   }
@@ -183,8 +192,12 @@ export class AddQuizComponent implements OnInit {
         option3: null,
         option4: null,
         option5: null,
+<<<<<<< HEAD
         correctAnswers: [0],
 >>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
+=======
+        correctAnswers: [],
+>>>>>>> 695b4e8... Fixed minor bugs in frontend
         quiz: {},
       };
     } else {
@@ -233,6 +246,7 @@ export class AddQuizComponent implements OnInit {
               correctAnswer: result.value.correctAnswer,
               correctAnswers: this.focusedQuestion.correctAnswers,
               correctAnswerNumber: result.value.correctAnswerNumber,
+              ATP: this.isATP,
             };    
 >>>>>>> d900125... added update button and loop to match correct options
             // Adds only options with not null values       
@@ -364,7 +378,7 @@ export class AddQuizComponent implements OnInit {
    * Inputs the correct answer into the CorrectAnswerArray at the listed index
    */
   updateCorrectArray(correct: number, index: number) {
-    this.focusedQuestion.correctAnswers[index] = correct;
+    this.focusedQuestion.correctAnswers[index-1] = correct;
   }
 >>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
 /**
