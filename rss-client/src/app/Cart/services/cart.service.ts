@@ -11,8 +11,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CartService {
-  baseURL = `${environment.cartServiceUrlWithZuul}/cart/`;
-  baseURLplural = `${environment.cartServiceUrlWithZuul}/carts/`;
+  baseURL = `${environment.cartServiceUrl}/cart/`;
+  baseURLplural = `${environment.cartServiceUrl}/carts/`;
   private ActiveCart = new Subject<Cart>();
 
   constructor(private http: HttpClient) { }

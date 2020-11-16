@@ -23,7 +23,7 @@ export const USER_SERVICE_STORAGE = new InjectionToken<StorageService>(
   providedIn: 'root',
 })
 export class UserService{
-  url = `${environment.accountServiceUrlWithZuul}/user`;
+  url = `${environment.accountServiceUrl}/user`;
 
   constructor(
     private httpclient: HttpClient,
