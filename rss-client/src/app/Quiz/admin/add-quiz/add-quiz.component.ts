@@ -56,10 +56,6 @@ export class AddQuizComponent implements OnInit {
     this.options.pop();
   }
 
-  removeOption(){
-    this.options.pop();
-  }
-
   validate() {
     if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
       this.isValid = true;
@@ -206,18 +202,6 @@ export class AddQuizComponent implements OnInit {
             };
 
             console.log(newQuestion.options);
-                
-            // Adds only options with not null values       
-            let i = 1;
-            for (let [key, value] of Object.entries(result.value)) {
-              if (key[0] == 'o') {
-                if (value != null) {
-                  let thisOption = 'option' + i;
-                  newQuestion[thisOption] = value;
-                  i++;
-                }
-              }
-            }
             // Searches question array to see if this question exists
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion

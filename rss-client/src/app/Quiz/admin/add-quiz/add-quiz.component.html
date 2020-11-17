@@ -275,24 +275,6 @@
       <div class="modal-footer">
         <button class="btn btn-success" type="button" (click) = "addOption()">Add</button>
         <button class="btn btn-danger" type="button" (click) = "removeOption()">Remove</button>
-      <div *ngFor = "let option of options" class="form-group">
-        
-        <div  *ngFor = "let option of options; trackBy:indexTracker; let i=index" class="form-group" >
-          <label>
-            {{options[i]}}
-          </label>
-          <input type="text" id="options" 
-              class="form-control"
-              [(ngModel)] = "options[i]"
-              placeholder="Enter new option here"
-              [ngModelOptions]="{standalone: true}"
-              />
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-success" type="button" (click) = "addOption()">Add</button>
-        <button class="btn btn-danger" type="button" (click) = "removeOption()">Remove</button>
       </div>
 
         <!-- <div class="input-group">
