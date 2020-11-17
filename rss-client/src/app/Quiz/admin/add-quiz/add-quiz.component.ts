@@ -16,6 +16,8 @@ import { Option } from './../../models/option';
 * @focusedQuiz is type quiz (interfaces --> quiz.ts)
 */
 export class AddQuizComponent implements OnInit {
+
+
   view = 'select';
   subjects;
   options:string [] = []; 
@@ -50,6 +52,7 @@ export class AddQuizComponent implements OnInit {
   removeOption(){
     this.options.pop();
   }
+
 
   validate() {
     if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
@@ -154,6 +157,7 @@ export class AddQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
+        correctAnswers: [],
         options: null,
         quiz: {},
       };
@@ -178,7 +182,8 @@ export class AddQuizComponent implements OnInit {
               this.m_option = {
                 optid: 0,
                 description: this.options[i],
-                qb: null
+                qb: null,
+                isCorrect: false
               }
 
               newOptions.push(this.m_option);
@@ -190,14 +195,17 @@ export class AddQuizComponent implements OnInit {
               question: result.value.question,
               questionValue: result.value.questionValue,
               correctAnswer: result.value.correctAnswer,
+              correctAnswers: this.focusedQuestion.correctAnswers,
+              correctAnswerNumber: result.value.correctAnswerNumber,
+              ATP: this.isATP,
               options : newOptions
             };
 
             console.log(newQuestion.options);
-              correctAnswers: this.focusedQuestion.correctAnswers,
-              correctAnswerNumber: result.value.correctAnswerNumber,
-              ATP: this.isATP,
-            };    
+              correctAnswers: this.focusedQuestion.correctAnswers;
+              correctAnswerNumber: result.value.correctAnswerNumber;
+              ATP: this.isATP;
+                
             // Adds only options with not null values       
             let i = 1;
             for (let [key, value] of Object.entries(result.value)) {
@@ -273,7 +281,7 @@ export class AddQuizComponent implements OnInit {
    * Inputs the correct answer into the CorrectAnswerArray at the listed index
    */
   updateCorrectArray(correct: number, index: number) {
-    this.focusedQuestion.correctAnswers[index-1] = correct;
+    this.focusedQuestion.correctAnswers[index] = correct;
   }
 /**
  * getDismissReason()

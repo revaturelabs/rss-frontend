@@ -39,7 +39,8 @@ export class EditQuizComponent implements OnInit {
     let m_option = {
       optid: 0,
       description: this.newOption,
-      qb: this.focusedQuestion
+      qb: this.focusedQuestion,
+      isCorrect: false
     }
     
     this.options.push(m_option);
@@ -156,6 +157,7 @@ export class EditQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
+        correctAnswers: [],
         options: null,
         quiz: {},
       };
@@ -177,6 +179,7 @@ export class EditQuizComponent implements OnInit {
               correctAnswer: result.value.correctAnswer,
               correctAnswers: this.focusedQuestion.correctAnswers,
               correctAnswerNumber: result.value.correctAnswerNumber,
+              ATP: this.isATP,
             };
             // Adds only options with not null values
             let i = 1;
