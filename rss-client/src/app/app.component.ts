@@ -1,15 +1,19 @@
 import { QuizService } from 'src/app/Quiz/service/quiz.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, NgModule } from '@angular/core';
 import { User } from './User/models/user';
 import { Subscription } from 'rxjs';
 import { UserService } from './User/services/user.service';
 import { CheaterService } from 'src/app/Quiz/service/cheater.service';
+import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
+
+@Injectable({providedIn: 'root'})
+ 
 export class AppComponent implements OnInit {
   user: User;
   isLoggedIn = false;

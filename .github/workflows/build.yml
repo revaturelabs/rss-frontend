@@ -25,52 +25,55 @@ jobs:
       - name: Build the image
         id: docker_build
         run: |
+          pwd
+          ls
+          # cd ./rss-client
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./rss-client
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup test environment
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-          check-latest: true
-      - name: Downloads package to runner machine
-        uses: actions/checkout@v2
-      - name: Run NPM tests
-        run: |
+# test:
+#   name: Run Tests
+#   runs-on: ubuntu-latest
+#   steps:
+#     - name: Setup test environment
+#       uses: actions/setup-node@v1
+#        with:
+#          node-version: '12'
+#          check-latest: true
+#      - name: Downloads package to runner machine
+#        uses: actions/checkout@v2
+#      - name: Run NPM tests
+#        run: |
           # Changing directories works only within the scope of the current step
-          cd ./rss-client 
-          npm ci
-          npm run test
-      - name: Upload Code Coverage Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: code-coverage-report
-          path: rss-client/coverage/
-  analyze:
-    name: Analyze Code Quality
-    needs: [test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Download Code Coverage Report
-        uses: actions/download-artifact@v2
-        with:
-          name: code-coverage-report
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          cd ./rss-client 
+#          npm ci
+#           npm run test
+#      - name: Upload Code Coverage Report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: code-coverage-report
+#          path: rss-client/coverage/
+#  analyze:
+#    name: Analyze Code Quality
+#    needs: [test]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+#      - name: Download Code Coverage Report
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: code-coverage-report
+#      - name: SonarCloud Scan
+#        uses: SonarSource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy: 
     # ---[ Use docker image from the build step and deploy on EKS ]---
-    needs: [build, analyze]
+    needs: [build]
     name: Deploy on EKS
     runs-on: ubuntu-latest
     steps:

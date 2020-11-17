@@ -4,7 +4,7 @@ import { SelectCartComponent } from './select-cart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('SelectCartComponent', () => {
+xdescribe('SelectCartComponent', () => {
   let component: SelectCartComponent;
   let fixture: ComponentFixture<SelectCartComponent>;
 
@@ -22,7 +22,7 @@ describe('SelectCartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  xit('should create', () => {
     expect(component).toBeTruthy();
   });
 });

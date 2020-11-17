@@ -1,0 +1,85 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    labels:
+      app: rss-client
+    name: rss-frontend-deployment
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: rss-client
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: rss-client
+      spec:
+        containers:
+        - image: 855430746673.dkr.ecr.us-east-1.amazonaws.com/matt-oberlies-00000916-rss-frontend:latest
+          imagePullPolicy: Always
+          name: rss-client
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /var/log/rss-frontend-termination-log
+          terminationMessagePolicy: File
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 80
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 80
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+kind: List
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: rss-client
+    name: rss-frontend-service
+    namespace: default
+  spec:
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: rss-client
+    type: ClusterIP
+kind: List
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: rss-frontend-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ngnix.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /rss(.+)
+        backend:
+          serviceName: rss-frontend-service
+          servicePort: 80
