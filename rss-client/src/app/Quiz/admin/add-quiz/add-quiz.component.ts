@@ -55,6 +55,7 @@ export class AddQuizComponent implements OnInit {
     this.options.pop();
   }
 
+
   validate() {
     if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
       this.isValid = true;
@@ -158,6 +159,7 @@ export class AddQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
+        correctAnswers: [],
         options: null,
         quiz: {},
       };
