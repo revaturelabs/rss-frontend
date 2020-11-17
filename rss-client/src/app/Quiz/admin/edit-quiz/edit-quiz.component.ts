@@ -41,7 +41,11 @@ export class EditQuizComponent implements OnInit {
       optid: 0,
       description: this.newOption,
       qb: this.focusedQuestion,
+<<<<<<< HEAD
       correct: false
+=======
+      isCorrect: false
+>>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
     }
     
     this.options.push(m_option);
@@ -168,6 +172,9 @@ export class EditQuizComponent implements OnInit {
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
         correctAnswers: [],
         options: null,
 =======
@@ -210,7 +217,11 @@ export class EditQuizComponent implements OnInit {
               correctAnswers: this.focusedQuestion.correctAnswers,
 >>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
               correctAnswerNumber: result.value.correctAnswerNumber,
+<<<<<<< HEAD
 >>>>>>> c0b5123... Add label for choosing correct options in edit
+=======
+              ATP: this.isATP,
+>>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
             };
             // Adds only options with not null values
             let i = 1;

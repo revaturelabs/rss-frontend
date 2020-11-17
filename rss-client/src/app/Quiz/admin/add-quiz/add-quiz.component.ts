@@ -69,6 +69,7 @@ export class AddQuizComponent implements OnInit {
     this.options.pop();
   }
 
+
   validate() {
     if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
       this.isValid = true;
@@ -185,6 +186,10 @@ export class AddQuizComponent implements OnInit {
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        correctAnswers: [],
+>>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
         options: null,
 =======
         option1: null,
@@ -224,9 +229,15 @@ export class AddQuizComponent implements OnInit {
 
               this.m_option = {
                 optid: 0,
+<<<<<<< HEAD
                 description: i,
                 qb: null,
                 correct: this.doesInclude(this.correctAnswers, j)
+=======
+                description: this.options[i],
+                qb: null,
+                isCorrect: false
+>>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
               }
               newOptions.push(this.m_option);
               j++;
@@ -237,10 +248,18 @@ export class AddQuizComponent implements OnInit {
               question: result.value.question,
               questionValue: result.value.questionValue,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+              correctAnswer: result.value.correctAnswer,
+              correctAnswers: this.focusedQuestion.correctAnswers,
+              correctAnswerNumber: result.value.correctAnswerNumber,
+              ATP: this.isATP,
+>>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
               options : newOptions
             };
 
             console.log(newQuestion.options);
+<<<<<<< HEAD
                 
 =======
               correctAnswer: result.value.correctAnswer,
@@ -249,6 +268,12 @@ export class AddQuizComponent implements OnInit {
               ATP: this.isATP,
             };    
 >>>>>>> d900125... added update button and loop to match correct options
+=======
+              correctAnswers: this.focusedQuestion.correctAnswers;
+              correctAnswerNumber: result.value.correctAnswerNumber;
+              ATP: this.isATP;
+                
+>>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
             // Adds only options with not null values       
             let i = 1;
             for (let [key, value] of Object.entries(result.value)) {
@@ -378,7 +403,7 @@ export class AddQuizComponent implements OnInit {
    * Inputs the correct answer into the CorrectAnswerArray at the listed index
    */
   updateCorrectArray(correct: number, index: number) {
-    this.focusedQuestion.correctAnswers[index-1] = correct;
+    this.focusedQuestion.correctAnswers[index] = correct;
   }
 >>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
 /**
