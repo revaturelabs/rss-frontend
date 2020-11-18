@@ -159,7 +159,6 @@ export class AddQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
-        correctAnswers: [],
         options: null,
         quiz: {},
       };
@@ -179,20 +178,21 @@ export class AddQuizComponent implements OnInit {
               
             let newOptions: Option[] = [];
             
-            let j = 1;
-
             console.log(this.correctAnswers);
 
-            for (let i in this.options) {
+            for (let i of this.options) {
 
               this.m_option = {
                 optid: 0,
                 description: i,
                 qb: null,
-                correct: this.doesInclude(this.correctAnswers, j)
+                correct: false
               }
               newOptions.push(this.m_option);
-              j++;
+            }
+
+            for(let ele of this.correctAnswers){
+              newOptions[<number>ele-1]['correct'] = true;
             }
 
             let newQuestion = {
@@ -203,6 +203,7 @@ export class AddQuizComponent implements OnInit {
             };
 
             console.log(newQuestion.options);
+                
             // Searches question array to see if this question exists
             let index = this.focusedQuiz.questions.indexOf(
               this.focusedQuestion
@@ -239,24 +240,6 @@ export class AddQuizComponent implements OnInit {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
     );
-  }
-
-
-  doesInclude(ansArray:number[], m_number:number){
-    let ret = false;
-    //let temp : string = "" + m_number;
-
-    //let len = ansArray.length;
-
-    for(let i  of ansArray){
-
-      ret = ret || (<number>i == m_number);
-
-      console.log(i + " " + m_number + ret);
-
-    }
-
-    return ret;
   }
 
   /**updateCorrect

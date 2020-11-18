@@ -40,10 +40,6 @@ export class QuizService {
     questionValue: 0,
     question: '',
     options: [],
-<<<<<<< HEAD
-=======
-    correctAnswer: '',
->>>>>>> c5198b9 (multiple questions)
     quizId: 0,
     quiz: {
       quizId: 0,

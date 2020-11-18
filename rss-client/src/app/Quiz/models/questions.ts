@@ -6,10 +6,6 @@ export interface Questions {
   questionValue: number;
   question: string;
   options: Option[];
-<<<<<<< HEAD
-=======
-  correctAnswer: string;
->>>>>>> c5198b9 (multiple questions)
   quizId: number;
   quiz: {
     quizId: number;

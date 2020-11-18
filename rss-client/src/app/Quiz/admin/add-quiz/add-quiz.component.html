@@ -258,9 +258,6 @@
       <div class="input-group">
         
         <div  *ngFor = "let option of options; trackBy:indexTracker; let i=index" class="form-group" >
-          <label>
-            {{options[i]}}
-          </label>
           <input type="text" id="options" 
               class="form-control"
               [(ngModel)] = "options[i]"
