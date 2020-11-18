@@ -13,10 +13,7 @@ COPY . .
 RUN ng build --prod --aot --deploy-url /rss/ --base-href /rss/
 
 FROM nginx:alpine as node
-WORKDIR /app
 
-COPY . .
-COPY . /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/nginx.conf
-COPY --from=angular /app/dist/rss-client .
+COPY --from=angular /app/dist/rss-client /usr/share/nginx/html/
 EXPOSE 80
