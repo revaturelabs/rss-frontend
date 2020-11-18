@@ -40,7 +40,7 @@ export class EditQuizComponent implements OnInit {
       optid: 0,
       description: this.newOption,
       qb: this.focusedQuestion,
-      isCorrect: false
+      correct: false
     }
     
     this.options.push(m_option);
