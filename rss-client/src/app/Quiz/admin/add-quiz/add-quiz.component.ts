@@ -20,7 +20,9 @@ export class AddQuizComponent implements OnInit {
 
   view = 'select';
   subjects;
-  options:string [] = []; 
+  options:string [] = [];
+
+  correctAnswers: number[] = [];
   
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   looper = [1]
@@ -157,7 +159,6 @@ export class AddQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
-        correctAnswers: [],
         options: null,
         quiz: {},
       };
@@ -176,35 +177,31 @@ export class AddQuizComponent implements OnInit {
           if (result.type == 'update') {
               
             let newOptions: Option[] = [];
+            
+            let j = 1;
+
+            console.log(this.correctAnswers);
 
             for (let i in this.options) {
-              
+
               this.m_option = {
                 optid: 0,
-                description: this.options[i],
+                description: i,
                 qb: null,
-                isCorrect: false
+                correct: this.doesInclude(this.correctAnswers, j)
               }
-
               newOptions.push(this.m_option);
-
+              j++;
             }
 
             let newQuestion = {
               questionId: this.focusedQuestion.questionId,
               question: result.value.question,
               questionValue: result.value.questionValue,
-              correctAnswer: result.value.correctAnswer,
-              correctAnswers: this.focusedQuestion.correctAnswers,
-              correctAnswerNumber: result.value.correctAnswerNumber,
-              ATP: this.isATP,
               options : newOptions
             };
 
             console.log(newQuestion.options);
-              correctAnswers: this.focusedQuestion.correctAnswers;
-              correctAnswerNumber: result.value.correctAnswerNumber;
-              ATP: this.isATP;
                 
             // Adds only options with not null values       
             let i = 1;
@@ -226,7 +223,7 @@ export class AddQuizComponent implements OnInit {
               this.focusedQuiz.questions.push(newQuestion);
               console.log("condition 1");
             } else {
-              // if it does exists, update the question
+              // if it does  exists, update the question
               this.focusedQuiz.questions[index] = newQuestion;
               console.log("condition 2");
             }
@@ -255,6 +252,23 @@ export class AddQuizComponent implements OnInit {
     );
   }
 
+  doesInclude(ansArray:number[], m_number:number){
+    let ret = false;
+    //let temp : string = "" + m_number;
+
+    //let len = ansArray.length;
+
+    for(let i  of ansArray){
+
+      ret = ret || (<number>i == m_number);
+
+      console.log(i + " " + m_number + ret);
+
+    }
+
+    return ret;
+  }
+
   /**updateCorrect
   * @param correctNumber
   * Takes the number of Correct Answers inputted and updates the number of inputs that can take.
@@ -262,16 +276,16 @@ export class AddQuizComponent implements OnInit {
   */
   updateCorrect(correctNumber: number) {
   //Creates the looping array with the size of the correctAnswerNumber
+
     this.looper = this.foo.slice(0, correctNumber)
-    if (this.looper.length > this.focusedQuestion.correctAnswers.length) {
-      let k = this.looper.length - this.focusedQuestion.correctAnswers.length;
+    if (this.looper.length > this.correctAnswers.length) {
+      let k = this.looper.length - this.correctAnswers.length;
       for (let i = 0; i < k; i++) {
-        this.focusedQuestion.correctAnswers.push(0);
+        this.correctAnswers.push(0);
       }
     }
     else {
-      let temp = this.focusedQuestion.correctAnswers.slice(0, correctNumber);
-      this.focusedQuestion.correctAnswers = temp;
+      this.correctAnswers = this.correctAnswers.slice(0, correctNumber);
     }
   
   }
@@ -281,7 +295,7 @@ export class AddQuizComponent implements OnInit {
    * Inputs the correct answer into the CorrectAnswerArray at the listed index
    */
   updateCorrectArray(correct: number, index: number) {
-    this.focusedQuestion.correctAnswers[index] = correct;
+    this.correctAnswers[index-1] = <number>correct;
   }
 /**
  * getDismissReason()

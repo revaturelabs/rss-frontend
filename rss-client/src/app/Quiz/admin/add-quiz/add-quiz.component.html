@@ -157,7 +157,7 @@
       type="checkbox" 
       id="atp" 
       style="width: 1.25em; height: 1.25em;"
-      [checked]="isATP" 
+      [checked]="isATP"
       (change)="yesATP(atp.checked)">
     </div>
     <form #questionForm="ngForm">
@@ -207,8 +207,6 @@
                 required
                 name="correctAnswerNumber"
                 (change)="updateCorrect($event.target.value)"
-                [ngModel]="focusedQuestion.correctAnswerNumber"
-                #correctAnswerNumber="ngModel"
               />
             </div>
           </div>
