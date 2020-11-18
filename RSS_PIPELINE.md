@@ -1,5 +1,5 @@
 
-#  Revature Swag Shop Pipeline Build =
+#  Revature Swag Shop Pipeline Build
 
 
 

@@ -83,5 +83,5 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.EKS_SECRET_ACCESS_KEY }} --profile p3
           aws configure set default.region ${{ secrets.AWS_REGION }} --profile p3
           aws eks --region us-east-1 update-kubeconfig --profile p3 --name $ECR_REPOSITORY_PREFIX
-          kubectl --namespace default set image deploy/rss-frontend-deployment frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          kubectl --namespace default set image deploy/rss-frontend-deployment rss-frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           kubectl --namespace default rollout status deploy/rss-frontend-deployment
