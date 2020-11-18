@@ -179,39 +179,29 @@
         </div>
       </div>
       <div *ngIf="isATP">
-<<<<<<< HEAD
       <div class="form-group">
         <div class="input-group">
           <label for="correctAnswerNumber">Number of Correct Options</label>
-=======
-        <div class="form-group">
->>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
           <div class="input-group">
-            <label for="correctAnswerNumber">Number of Correct Options</label>
-            <div class="input-group">
-              <input
-                id="correctAnswerNumber"
-                class="form-control"
-                min="1"
-                max="20"
-                type="number"
-                required
-                name="correctAnswerNumber"
-                (change)="updateCorrect($event.target.value)"
-                [ngModel]="focusedQuestion.correctAnswerNumber"
-                #correctAnswerNumber="ngModel"
-              />
-            </div>
+            <input
+              id="correctAnswerNumber"
+              class="form-control"
+              min="1"
+              type="number"
+              required
+              name="correctAnswerNumber"
+              [ngModel]="focusedQuestion.correctAnswerNumber"
+              #correctAnswerNumber="ngModel"
+            />
           </div>
         </div>
       </div>
-      <!-- <div class="form-group">
+      <div class="form-group">
         <button type="button" class="btn btn-outline-dark" (click)="updateCorrect(3)">Update</button>
-      </div> -->
-      <div *ngFor="let loops of looper; let i of index">
+      </div>
+      <div *ngFor="let loops of looper">
         <div class="form-group">
           <div class="input-group">
-<<<<<<< HEAD
             <label for="correctAnswerNumber">Number of Correct Options</label>
             <div class="input-group">
               <input
@@ -225,22 +215,6 @@
                 (change)="updateCorrect($event.target.value)"
                 [ngModel]="focusedQuestion.correctAnswerNumber"
                 #correctAnswerNumber="ngModel"
-=======
-            <label for="correctAnswer">Correct Option</label>
-            <div class="input-group">
-              <input
-                id="correctAnswer"
-                required
-                class="form-control"
-                min="1"
-                max="5"
-                type="number"
-                name="correctAnswer"
-                value="1"
-                (change)="updateCorrectArray($event.target.value, i)"
-                [ngModel]="focusedQuestion.correctAnswer"
-                #correctAnswer="ngModel"
->>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well
               />
             </div>
           </div>

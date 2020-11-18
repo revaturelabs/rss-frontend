@@ -24,7 +24,6 @@ export class EditQuizComponent implements OnInit {
   focusedQuiz;
   focusedQuestion;
   isValid = false;
-<<<<<<< HEAD
 
   newOption:string;
   options:Option [] = []; 
@@ -41,11 +40,7 @@ export class EditQuizComponent implements OnInit {
       optid: 0,
       description: this.newOption,
       qb: this.focusedQuestion,
-<<<<<<< HEAD
       correct: false
-=======
-      isCorrect: false
->>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
     }
     
     this.options.push(m_option);
@@ -61,15 +56,6 @@ export class EditQuizComponent implements OnInit {
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   looper = [1]
   isATP: boolean;
-=======
-  foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-<<<<<<< HEAD
-  looper = [1, 2]
->>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well
-=======
-  looper = [1]
-  isATP: boolean;
->>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
   /** validate ()
    * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted
@@ -171,24 +157,8 @@ export class EditQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
         correctAnswers: [],
         options: null,
-=======
-        option1: null,
-        option2: null,
-        option3: null,
-        option4: null,
-        option5: null,
-<<<<<<< HEAD
-        correctAnswers: [0],
->>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
-=======
-        correctAnswers: [],
->>>>>>> 695b4e8... Fixed minor bugs in frontend
         quiz: {},
       };
     } else {
@@ -207,21 +177,9 @@ export class EditQuizComponent implements OnInit {
               question: result.value.question,
               questionValue: result.value.questionValue,
               correctAnswer: result.value.correctAnswer,
-<<<<<<< HEAD
-<<<<<<< HEAD
               correctAnswers: this.focusedQuestion.correctAnswers,
               correctAnswerNumber: result.value.correctAnswerNumber,
               ATP: this.isATP,
-=======
-=======
-              correctAnswers: this.focusedQuestion.correctAnswers,
->>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
-              correctAnswerNumber: result.value.correctAnswerNumber,
-<<<<<<< HEAD
->>>>>>> c0b5123... Add label for choosing correct options in edit
-=======
-              ATP: this.isATP,
->>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
             };
             // Adds only options with not null values
             let i = 1;
@@ -274,10 +232,6 @@ export class EditQuizComponent implements OnInit {
   */
  updateCorrect(correctNumber: number) {
   //Creates the looping array with the size of the correctAnswerNumber
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
     this.looper = this.foo.slice(0, correctNumber)
     if (this.looper.length > this.focusedQuestion.correctAnswers.length) {
       let k = this.looper.length - this.focusedQuestion.correctAnswers.length;
@@ -289,7 +243,6 @@ export class EditQuizComponent implements OnInit {
       let temp = this.focusedQuestion.correctAnswers.slice(0, correctNumber);
       this.focusedQuestion.correctAnswers = temp;
     }
-<<<<<<< HEAD
   
   }
   /**updateCorrectArray
@@ -300,23 +253,6 @@ export class EditQuizComponent implements OnInit {
   updateCorrectArray(correct: number, index: number) {
     this.focusedQuestion.correctAnswers[index-1] = correct;
   }
-=======
-  this.looper = this.foo.slice(0, correctNumber)
-  
-}
->>>>>>> c4bbfcc... added the buttons in the edit quiz portion as well
-=======
-  
-  }
-  /**updateCorrectArray
-   * @param correct
-   * @param index
-   * Inputs the correct answer into the CorrectAnswerArray at the listed index
-   */
-  updateCorrectArray(correct: number, index: number) {
-    this.focusedQuestion.correctAnswers[index-1] = correct;
-  }
->>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
 
   /**
    * getDismissReason()

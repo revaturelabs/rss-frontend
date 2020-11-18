@@ -20,10 +20,6 @@ export class AddQuizComponent implements OnInit {
 
   view = 'select';
   subjects;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2eb34ef... multiple ans and options completed
   options:string [] = [];
 
   correctAnswers: number[] = [];
@@ -31,19 +27,7 @@ export class AddQuizComponent implements OnInit {
   foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   looper = [1]
   isATP = 0;
-<<<<<<< HEAD
   newOption:String;
-=======
-  foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-<<<<<<< HEAD
-  looper = [1, 2]
->>>>>>> d900125... added update button and loop to match correct options
-=======
-  looper = [1]
-  isATP: boolean;
->>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
-=======
->>>>>>> c5323ea... changed the boolean ATP into a binary variable instead for ease in SQL
 
   focusedQuiz = {
     quizId: 0,
@@ -72,7 +56,6 @@ export class AddQuizComponent implements OnInit {
     this.options.pop();
   }
 
-
   validate() {
     if (this.focusedQuiz.quizTopic && this.focusedQuiz.questions.length > 0) {
       this.isValid = true;
@@ -84,21 +67,9 @@ export class AddQuizComponent implements OnInit {
    * @param : whether the box is checked or not
    * Sets the question to be a multiple answer question or not
    */
-<<<<<<< HEAD
-<<<<<<< HEAD
   yesATP(value:number) {
     this.isATP = value;
     if (this.isATP == 0) {
-=======
-  yesATP(value:boolean) {
-    this.isATP = value;
-    if (this.isATP == false) {
->>>>>>> 890cd2a... Added a All The Above option that determines if more than one answer
-=======
-  yesATP(value:number) {
-    this.isATP = value;
-    if (this.isATP == 0) {
->>>>>>> c5323ea... changed the boolean ATP into a binary variable instead for ease in SQL
       this.looper = [1]
     }
   }
@@ -188,27 +159,7 @@ export class AddQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        correctAnswers: [],
->>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
-=======
->>>>>>> 2eb34ef... multiple ans and options completed
         options: null,
-=======
-        option1: null,
-        option2: null,
-        option3: null,
-        option4: null,
-        option5: null,
-<<<<<<< HEAD
-        correctAnswers: [0],
->>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
-=======
-        correctAnswers: [],
->>>>>>> 695b4e8... Fixed minor bugs in frontend
         quiz: {},
       };
     } else {
@@ -235,21 +186,9 @@ export class AddQuizComponent implements OnInit {
 
               this.m_option = {
                 optid: 0,
-<<<<<<< HEAD
-<<<<<<< HEAD
                 description: i,
                 qb: null,
                 correct: this.doesInclude(this.correctAnswers, j)
-=======
-                description: this.options[i],
-                qb: null,
-                isCorrect: false
->>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
-=======
-                description: i,
-                qb: null,
-                correct: this.doesInclude(this.correctAnswers, j)
->>>>>>> 2eb34ef... multiple ans and options completed
               }
               newOptions.push(this.m_option);
               j++;
@@ -259,39 +198,11 @@ export class AddQuizComponent implements OnInit {
               questionId: this.focusedQuestion.questionId,
               question: result.value.question,
               questionValue: result.value.questionValue,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-              correctAnswer: result.value.correctAnswer,
-              correctAnswers: this.focusedQuestion.correctAnswers,
-              correctAnswerNumber: result.value.correctAnswerNumber,
-              ATP: this.isATP,
->>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
-=======
->>>>>>> 2eb34ef... multiple ans and options completed
               options : newOptions
             };
 
             console.log(newQuestion.options);
-<<<<<<< HEAD
-<<<<<<< HEAD
                 
-=======
-              correctAnswer: result.value.correctAnswer,
-              correctAnswers: this.focusedQuestion.correctAnswers,
-              correctAnswerNumber: result.value.correctAnswerNumber,
-              ATP: this.isATP,
-            };    
->>>>>>> d900125... added update button and loop to match correct options
-=======
-              correctAnswers: this.focusedQuestion.correctAnswers;
-              correctAnswerNumber: result.value.correctAnswerNumber;
-              ATP: this.isATP;
-=======
->>>>>>> 2eb34ef... multiple ans and options completed
-                
->>>>>>> f1cf4f7... added isCorrect boolean to Options and cleaned up some merge errors
             // Adds only options with not null values       
             let i = 1;
             for (let [key, value] of Object.entries(result.value)) {
@@ -341,10 +252,6 @@ export class AddQuizComponent implements OnInit {
     );
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2eb34ef... multiple ans and options completed
   doesInclude(ansArray:number[], m_number:number){
     let ret = false;
     //let temp : string = "" + m_number;
@@ -362,7 +269,6 @@ export class AddQuizComponent implements OnInit {
     return ret;
   }
 
-<<<<<<< HEAD
   /**updateCorrect
   * @param correctNumber
   * Takes the number of Correct Answers inputted and updates the number of inputs that can take.
@@ -391,45 +297,6 @@ export class AddQuizComponent implements OnInit {
   updateCorrectArray(correct: number, index: number) {
     this.correctAnswers[index-1] = <number>correct;
   }
-=======
-=======
->>>>>>> 2eb34ef... multiple ans and options completed
-  /**updateCorrect
-  * @param correctNumber
-  * Takes the number of Correct Answers inputted and updates the number of inputs that can take.
-  * Also updating the array of Correct Answers to have the correct size
-  */
-  updateCorrect(correctNumber: number) {
-  //Creates the looping array with the size of the correctAnswerNumber
-
-    this.looper = this.foo.slice(0, correctNumber)
-    if (this.looper.length > this.correctAnswers.length) {
-      let k = this.looper.length - this.correctAnswers.length;
-      for (let i = 0; i < k; i++) {
-        this.correctAnswers.push(0);
-      }
-    }
-    else {
-      this.correctAnswers = this.correctAnswers.slice(0, correctNumber);
-    }
-  
-<<<<<<< HEAD
-}
->>>>>>> d900125... added update button and loop to match correct options
-=======
-  }
-<<<<<<< HEAD
->>>>>>> a0765ed... Deleted the button and changed to event binding for More Answers
-=======
-  /**updateCorrectArray
-   * @param correct
-   * @param index
-   * Inputs the correct answer into the CorrectAnswerArray at the listed index
-   */
-  updateCorrectArray(correct: number, index: number) {
-    this.correctAnswers[index-1] = <number>correct;
-  }
->>>>>>> 8f07ceb... Added an array for correct answers so that there can be more than one
 /**
  * getDismissReason()
  * @param reason
