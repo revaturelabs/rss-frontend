@@ -218,26 +218,6 @@
       <div *ngFor="let loops of looper; let i of index">
         <div class="form-group">
           <div class="input-group">
-            <label for="correctAnswerNumber">Number of Correct Options</label>
-            <div class="input-group">
-              <input
-                id="correctAnswerNumber"
-                class="form-control"
-                min="1"
-                max="20"
-                type="number"
-                required
-                name="correctAnswerNumber"
-                (change)="updateCorrect($event.target.value)" />
-          </div>
-        </div>
-      </div>
-      <!-- <div class="form-group">
-        <button type="button" class="btn btn-outline-dark" (click)="updateCorrect(3)">Update</button>
-      </div> -->
-      <div *ngFor="let loops of looper; let i of index">
-        <div class="form-group">
-          <div class="input-group">
             <label for="correctAnswer">Correct Option</label>
             <div class="input-group">
               <input
@@ -272,67 +252,6 @@
         <button class="btn btn-danger" type="button" (click) = "removeOption()">Remove</button>
       </div>
 
-        <!-- <div class="input-group">
-          <input
-            id="option1"
-            class="form-control"
-            required
-            placeholder="Enter new option here"
-            name="option1"
-            [ngModel]="focusedQuestion.option1"
-            #option1="ngModel"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group">
-          <input
-            id="option2"
-            required
-            class="form-control"
-            placeholder="Enter new option here"
-            name="option2"
-            [ngModel]="focusedQuestion.option2"
-            #option2="ngModel"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group">
-          <input
-            id="option3"
-            class="form-control"
-            placeholder="Enter new option here"
-            name="option3"
-            [ngModel]="focusedQuestion.option3"
-            #option3="ngModel"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group">
-          <input
-            id="option4"
-            class="form-control"
-            placeholder="Enter new option here"
-            name="option4"
-            [ngModel]="focusedQuestion.option4"
-            #option4="ngModel"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group">
-          <input
-            id="option5"
-            class="form-control"
-            placeholder="Enter new option here"
-            name="option5"
-            [ngModel]="focusedQuestion.option5"
-            #option5="ngModel"
-          />
-        </div>
-      </div> -->
     </form>
   </div>
   <div class="modal-footer">
