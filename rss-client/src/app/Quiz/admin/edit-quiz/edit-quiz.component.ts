@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/User/services/user.service';
 import { User } from 'src/app/User/models/user';
+import { Option } from './../../models/option';
 
 @Component({
   selector: 'edit-quiz',
@@ -23,6 +24,39 @@ export class EditQuizComponent implements OnInit {
   focusedQuiz;
   focusedQuestion;
   isValid = false;
+
+  newOption:string;
+  options:Option [] = []; 
+
+  addOption(){
+    if(this.newOption == null){
+      return;
+    }
+
+    console.log("add option");
+    console.log(this.newOption);
+
+    let m_option = {
+      optid: 0,
+      description: this.newOption,
+      qb: this.focusedQuestion,
+      correct: false
+    }
+    
+    this.options.push(m_option);
+
+    this.newOption = '';
+  }
+
+  removeOption(){
+    this.options.pop();
+  }
+
+
+
+  foo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  looper = [1]
+  isATP: boolean;
   /** validate ()
    * validates that the quiz topic and the questions exist and the difficulty has been changed
    * if it does not than the save button does not appear/is faded so it cannot be submitted
@@ -32,6 +66,16 @@ export class EditQuizComponent implements OnInit {
       this.isValid = true;
     } else {
       this.isValid = false;
+    }
+  }
+    /** yesATP ()
+   * @param : whether the box is checked or not
+   * Sets the question to be a multiple answer question or not
+   */
+  yesATP(value:boolean) {
+    this.isATP = value;
+    if (this.isATP == false) {
+      this.looper = [1]
     }
   }
 /** reducer ()
@@ -74,6 +118,8 @@ export class EditQuizComponent implements OnInit {
 * */
   submitChanges() {
     //make sure the points that are being submitted match to the total points
+    this.focusedQuestion.options = this.options;
+    this.options = [];
     this.focusedQuiz.quizTotalPoints = this.focusedQuiz.availablePoints;
     this.focusedQuiz.subjectId = this.focusedQuiz.subject.subjectId;
     this.quizService.addQuiz(this.focusedQuiz).subscribe((res) => {console.log(this.quizData.quizTotalPoints);
@@ -112,11 +158,8 @@ export class EditQuizComponent implements OnInit {
         question: null,
         quizId: this.focusedQuiz.quizId,
         questionValue: null,
-        option1: null,
-        option2: null,
-        option3: null,
-        option4: null,
-        option5: null,
+        correctAnswers: [],
+        options: null,
         quiz: {},
       };
     } else {
@@ -135,6 +178,9 @@ export class EditQuizComponent implements OnInit {
               question: result.value.question,
               questionValue: result.value.questionValue,
               correctAnswer: result.value.correctAnswer,
+              correctAnswers: this.focusedQuestion.correctAnswers,
+              correctAnswerNumber: result.value.correctAnswerNumber,
+              ATP: this.isATP,
             };
             // Adds only options with not null values
             let i = 1;
@@ -180,6 +226,35 @@ export class EditQuizComponent implements OnInit {
         }
       );
   }
+
+  /**updateCorrect
+  * @param correctNumber
+  * Takes the number of Correct Answers inputted and updates the number of inputs that can take.
+  */
+ updateCorrect(correctNumber: number) {
+  //Creates the looping array with the size of the correctAnswerNumber
+    this.looper = this.foo.slice(0, correctNumber)
+    if (this.looper.length > this.focusedQuestion.correctAnswers.length) {
+      let k = this.looper.length - this.focusedQuestion.correctAnswers.length;
+      for (let i = 0; i < k; i++) {
+        this.focusedQuestion.correctAnswers.push(0);
+      }
+    }
+    else {
+      let temp = this.focusedQuestion.correctAnswers.slice(0, correctNumber);
+      this.focusedQuestion.correctAnswers = temp;
+    }
+  
+  }
+  /**updateCorrectArray
+   * @param correct
+   * @param index
+   * Inputs the correct answer into the CorrectAnswerArray at the listed index
+   */
+  updateCorrectArray(correct: number, index: number) {
+    this.focusedQuestion.correctAnswers[index-1] = correct;
+  }
+
   /**
    * getDismissReason()
    * @param reason

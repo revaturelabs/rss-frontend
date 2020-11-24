@@ -90,3 +90,6 @@ The app-inventory module includes:
 - an inventory item component
 - an inventory list component
 - an user inventory item component
+
+
+# ADDED DIR ./.github to accommodate github actions, at testing stage as of 05 NOV (mpp)

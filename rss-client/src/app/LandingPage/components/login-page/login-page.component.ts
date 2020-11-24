@@ -47,6 +47,22 @@ export class LoginPageComponent implements OnInit {
   }
 
   async submitForm() {
+    this.user = {
+      userId: 1,
+      email: 'ehj@asdsd.com',
+      password: 'asdafasf',
+      profilePic: null,
+      firstName: 'asdsa',
+      lastName: 'ssdsa',
+      admin: true,
+      userDiscounted: true,
+      userDiscount: 1
+    }
+    this.userService.isLoggedIn = true;
+    this.isLoggedIn.emit(true);
+    this.userLogin.emit(this.user);
+    this.userService.changeUser(this.user);
+    /*
     const formValue = this.loginForm.value;
     this.userService.login(formValue).subscribe((res) => {
       if (res == null) {
@@ -58,9 +74,11 @@ export class LoginPageComponent implements OnInit {
         this.userService.changeUser(res);
       }
     });
+    */
   }
 
   changeStatus() {
     this.userService.isLoggedIn = true;
   }
+  
 }

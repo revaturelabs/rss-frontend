@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AccountService {
-  url = `${environment.accountServiceUrlWithZuul}/account`;
+  url = `${environment.accountServiceUrl}/account`;
   mockAccounts: Account[];
 
   generateMockAccounts(userId): Account[] {
@@ -62,7 +62,7 @@ export class AccountService {
   }
 
   getAllAccounts(): Observable<any> {
-    const separateAccountTypeUrl = `${environment.accountServiceUrlWithZuul}/acctype/all`;
+    const separateAccountTypeUrl = `${environment.accountServiceUrl}/acctype/all`;
     return this.httpclient.get<any>(
       separateAccountTypeUrl
     );

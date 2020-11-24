@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl = `${environment.inventoryServiceUrlWithZuul}/product`;
+  baseUrl = `${environment.inventoryServiceUrl}/product`;
 
   constructor(private http: HttpClient) { }
 

@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ImageService {
-  url = `${environment.accountServiceUrlWithZuul}`;
+  url = `${environment.accountServiceUrl}`;
 
   constructor(private httpClient: HttpClient) { }
 

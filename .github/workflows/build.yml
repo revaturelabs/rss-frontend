@@ -1,0 +1,93 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - master
+      - github-actions
+  pull_request:
+    types: [opened, synchronize, reopened]
+env:
+  ECR_REPOSITORY_PREFIX: ${{ secrets.ECR_REPOSITORY_PREFIX }}
+  ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_PREFIX }}-${{ secrets.APP_NAME }}
+  IMAGE_TAG: ${{ github.sha }}
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+      # ---[ Configuring AWS credentials and Logging in to ECR ]---
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ECR_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECR_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build the image
+        id: docker_build
+        run: |
+          cd ./rss-client
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . 
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+# test:
+#   name: Run Tests
+#   runs-on: ubuntu-latest
+#   steps:
+#     - name: Setup test environment
+#       uses: actions/setup-node@v1
+#        with:
+#          node-version: '12'
+#          check-latest: true
+#      - name: Downloads package to runner machine
+#        uses: actions/checkout@v2
+#      - name: Run NPM tests
+#        run: |
+          # Changing directories works only within the scope of the current step 
+#          cd ./rss-client 
+#          npm ci
+#           npm run test
+#      - name: Upload Code Coverage Report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: code-coverage-report
+#          path: rss-client/coverage/
+#  analyze:
+#    name: Analyze Code Quality
+#    needs: [test]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+#      - name: Download Code Coverage Report
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: code-coverage-report
+#      - name: SonarCloud Scan
+#        uses: SonarSource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  deploy: 
+    # ---[ Use docker image from the build step and deploy on EKS ]---
+    needs: [build]
+    name: Deploy on EKS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EKS
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.EKS_ACCESS_KEY_ID }} --profile p3
+          aws configure set aws_secret_access_key ${{ secrets.EKS_SECRET_ACCESS_KEY }} --profile p3
+          aws configure set default.region ${{ secrets.AWS_REGION }} --profile p3
+          aws eks --region us-east-1 update-kubeconfig --profile p3 --name $ECR_REPOSITORY_PREFIX
+          kubectl --namespace default set image deploy/rss-frontend-deployment rss-frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          kubectl --namespace default rollout status deploy/rss-frontend-deployment

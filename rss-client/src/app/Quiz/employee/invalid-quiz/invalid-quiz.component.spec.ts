@@ -1,9 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InvalidQuizComponent } from './invalid-quiz.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { CheaterService } from 'src/app/services/cheater.service';
-import { Subject } from 'rxjs';
+import { CheaterService } from 'src/app/Quiz/service/cheater.service';
 
 describe('InvalidQuizComponent', () => {
   let component: InvalidQuizComponent;
@@ -12,7 +10,7 @@ describe('InvalidQuizComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ InvalidQuizComponent ],
-      imports: [MatDialogModule],
+      imports: [],
       providers: [
         CheaterService
       ]
